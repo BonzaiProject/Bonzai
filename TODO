@@ -1,0 +1,130 @@
+Creazione team (min 15 persone):
+    3 sviluppatori (Conoscenze approfondite: HTML, PHP 4 e 5, C, CVS)
+    3 tester (Conoscenze standard: HTML, PHP 4 e 5, C, CVS)
+    5 traduttori (1 inglese, 1 francese, 1 tedesco, 1 spagnolo, 1 italiano)
+    1 grafico (Conoscenze: Illustrator, Photoshop, GIMP, Inkscape)
+    3 amministratori (1 per wiki, 1 per forum, 1 per sito)
+
+TODO LIST:
+[ ]    completare la documentazione online nel wiki
+[ ]        tradurre la base, data da google translator, piano piano in inglese (ben)
+[ ]    creare i pacchetti .zip & .tar.gz
+[ ]    committare tutto su sourceforge.net
+
+phpg-checker
+phpg-profiler
+phpg-key-decoder
+
+[ ] rimuovere eccezioni S_SPLINT_S
+[X] rimuovere casting espliciti
+[ ] rimuovere inibizioni splint
+[ ] dare nomi significativi alle variabili
+[/] Enable support for Windows
+[ ] Enhance CLI with ncurses (or qt)
+[ ] Speed up the encoding process
+[ ] Create a GUI for the CLI -> Java
+[ ] Enhance security of private key
+[ ] Enhance security of encoder algorithm
+[ ] Implement the source obfuscation
+[ ] Add more test case to unittest
+[ ] Use valgrind to memory checks
+[ ] Use cachegrind to profiling
+[ ] Use helgrind to thread error checks
+[ ] Use Massif to heap profiling
+[X] Create the execution benchmark report
+
+DIPENDENZE:
+	perfezionamento gettext cli (ben)
+	perfezionamento commenti cli, ext, class e server (ben)
+	traduzione e perfezionamento dello script di config (ben)
+	controllo grammatica italiana documentazione (natascia)
+	traduzione e perfezionamento della documentazione (ben)
+
+---
+
+DEVEL
+[ ] creare versioni codificate (wordpress*, phpmyadmin*, joomla*, phpbb*, egroupware, mapgpierss, nusoap)
+[ ] creare report (bechmark, dimensioni, velocità, ...) delle versioni codificate (wordpress*, phpmyadmin*, joomla*, phpbb*, egroupware, mapgpierss, nusoap)
+[ ] preparare il pannello di amministrazione
+    [ ] lettura da db
+    [ ] modifica tpl
+    [ ] controllo scrittura su db da ext e class
+    [ ] rimuovere codifica
+    [ ] rimuovere decodifica
+    [ ] controllare impostazioni
+        [ ] controllo automatico versione
+        [ ] caricamento template
+        [ ] caricamento lingua
+
+DOCS
+[ ] sistemare tutta la documentazione inline
+[ ] scrivere documentazione
+
+WEB
+[ ] creare il sito web (o utilizzare wordpress e prevedere un migrazione)
+[ ] creare form contatti
+[ ] creare forum phpbb
+[ ] creare wiki
+
+----
+CLASS
+- recuperare la chiave da un altro vostro server (magari di un'altro provider) tramite una verifica addizionale (es: verifica referer, verifica ip) o una trasmissione codificata (es: ssl, oppure codificando o offuscando il file)
+- salvare il file su filesystem fuori dalla document root del web server rendendo vano l'accesso diretto al file da web.
+
+EXT
+- salvare il file su filesystem fuori dalla document root del web server rendendo vano l'accesso diretto al file da web.
+---
+
+CLI -> General -> Compile Project for WIN
+	install visual c++ express edition
+	create project file
+	compile
+	testing
+---
+CLI -> Encode -> pg_convert
+	optimizing (remove tabulation, comments, line breaks)
+CLI -> Encode -> pg_encode_file
+	set decodable bytes
+        N: if set a cli param -> enabled by default
+---
+CLI -> Decode -> pg_is_decodable
+	testing
+---
+Script Class -> Decode -> Administration
+Script Class -> Decode -> Administration -> Logger
+
+
+NOTES
+------
+CLI
+    ./configure
+    make
+    make install
+PHP Ext
+    install php with debug options
+    ini_params
+
+KEY TROUBLES
+    general
+        reverse order & mixed chars
+        eg:
+            ORIG      -> ABCDEF
+            FOR CLASS -> FEDCBA -> FDBECA
+    EXT
+        key_file from php.ini (global)
+            else
+        key_file from path (for each project)
+
+        file phpg.ini in the same path of module (.so or .dll)
+            phpg_ini (opt) - to get option
+    CLASS
+        set path via php (insecure!)
+
+First release
+    no obfuscator
+    i18n -> IT, EN
+    docs -> IT, EN
+
+php class
+    clean/dirty version (with the tool to obfuscate)
+    mod phpinfo()...if possible

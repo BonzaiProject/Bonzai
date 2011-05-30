@@ -1,0 +1,13 @@
+vim Makefile.am
+autoscan
+mv configure.scan configure.in
+libtoolize --automake
+touch NEWS README AUTHORS ChangeLog
+automake --add-missing -Wno-portability
+-
+aclocal
+autoconf
+chmod u+x configure
+./configure
+make
+make install

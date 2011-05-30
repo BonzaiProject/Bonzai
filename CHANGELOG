@@ -1,0 +1,122 @@
+        _            ____                     _ _             ____  
+  _ __ | |__  _ __  / ___|_   _  __ _ _ __ __| (_) __ _ _ __ |___ \ 
+ | '_ \| '_ \| '_ \| |  _| | | |/ _` | '__/ _` | |/ _` | '_ \  __) |
+ | |_) | | | | |_) | |_| | |_| | (_| | | | (_| | | (_| | | | |/ __/ 
+ | .__/|_| |_| .__/ \____|\__,_|\__,_|_|  \__,_|_|\__,_|_| |_|_____|
+ |_|         |_|
+
+====== [ CHANGELOG ] ======
+
+*** v4.0
+    * changed name to phpGuardian2 (new branch) but kept the history of versioning
+    * created the CLI
+    * created the PHP Extension
+    * created the PHP Library (as alternative to PHP Extension)
+    * enabled gettext support (it, de, en, es and fr)
+    * written documentation in multiple languages
+    * available the benchmark of tools
+    * opened a CVS Server at sourceforge.net
+    * created a new logo for the product
+
+*** v3.1
+    * added 4 missing files
+    * fix error in logger.php
+
+*** v3.0
+
+    * modified the parse_file_* for better recursive parsing
+    * translated all the script in italian and english
+    * fixed E_ALL errors
+    * added the exporting of report in csv, txt formats
+    * refreshed the obfuscator lists (variables, constants, functions)
+    * improved the security of _GET and _POST varibles
+    * added the percentual of access (related to the global traffic)
+    * added site's priority for logger module
+    * added ping ip for logger module
+    * added whois host for logger module
+    * added an admin panel to configure all options
+    * translated all text in italian and english
+    * separated the layout from the code
+    * restyling of layout
+    * added logout button
+    * added delete function of site for logger module
+    * carried out several improvements
+    * resolved several bug
+
+*** v2.0dev
+
+    * added the obfuscator
+    * added the database astraction
+    * added the re-encode script
+    * added the re-obfuscate script
+    * added the documentation
+    * added more functionality to server.php
+    * carried out several improvements
+    * resolved several bug
+
+*** v1.5dev3
+
+    * resolved several bug
+
+*** v1.5dev2
+
+    * improve the admin panel
+    * resolved several bug
+
+*** v1.5dev
+
+    * improved the encoder algorithm
+    * improve the admin panel
+    * resolved several bug
+
+*** v1.0
+
+    * added the support for the off-line encoding
+    * improved the admin panel
+    * improved the encoder algorithm
+    * resolved several bug
+
+*** v0.7
+
+    * improved the log management
+    * improved the encoder algorithm
+
+*** v0.6
+
+    * logging of the path of the monitorized scripts
+    * visualization of the path of the monitorized scripts
+    * resolved several bug
+    * modified database structure
+
+*** v0.5.2
+
+    * resolved several bug
+
+*** v0.5
+
+    * added crypter
+
+*** v0.4
+
+    * added the login form to admin panel
+    * visualization of user informations
+
+*** v0.3
+
+    * added the admin panel
+    * visualization of user list
+    * modified user state
+    * checking of last script version
+    * modified database structure
+
+*** v0.2
+
+    * improved the internal management
+    * resolved bug #2 (Error of general overwriting into database)
+    * resolved bug #1 (Notice: Undefined variable: value) THANKS TO: nickang
+
+*** v0.1B
+
+    * logging ip and host of last user
+    * logging of global var $_SERVER
+    * executing of additional code into the script

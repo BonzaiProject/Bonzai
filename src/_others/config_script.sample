@@ -1,0 +1,164 @@
+;
+;           _            ____                     _ _             ____  
+;     _ __ | |__  _ __  / ___|_   _  __ _ _ __ __| (_) __ _ _ __ |___ \ 
+;    | '_ \| '_ \| '_ \| |  _| | | |/ _` | '__/ _` | |/ _` | '_ \  __) |
+;    | |_) | | | | |_) | |_| | |_| | (_| | | | (_| | | (_| | | | |/ __/ 
+;    | .__/|_| |_| .__/ \____|\__,_|\__,_|_|  \__,_|_|\__,_|_| |_|_____|
+;    |_|         |_| phpGuardian CLI v1.0
+;
+;
+; PHPGUARDIAN2 CLI SCRIPT
+; generated on YY-MM-DD H:i:s+z
+;
+
+[SETUP]
+;
+; Set the action to take.
+;
+; Value: ENCODE|DECODE
+;   ENCODE  encode a list of paths or / and files (default)
+;   DECODE  decode a list of paths or / and files
+ACTION = "ENCODE"
+
+;
+; Set the verbose mode of the CLI.
+; Each message are more detailed for more informations on the execution.
+;
+; Value: YES|NO
+;   YES
+;   NO (default)
+VERBOSE = "NO"
+
+;
+; Set the silent mode of the CLI.
+; Each message will be suppressed.
+;
+; Value: YES|NO
+;   YES
+;   NO  (default)
+SILENT = "NO"
+
+;
+; Use the PHP Extension instead thee PHP Class.
+; This is useful to insert into encoded source some additional instructions to ensure the correct decoding & execution.
+;
+; Value: YES|NO
+;   YES (default)
+;   NO
+USE_PHP_EXTENSION = "YES"
+
+;
+; Convert the project source that use the ASP tags instead of PHP tags.
+;
+; Value: YES|NO
+;   YES (default)
+;   NO
+USE_ASP_TAGS = "NO"
+
+[CONFIGURATION]
+;
+; Set the header text that will be saved into encoded file before the encoded block.
+;
+; Value: ... (default "# phpGuardian ###########")
+HEADER = "# phpGuardian ###########"
+
+;
+; Set the footer text that will be saved into encoded file after the encoded block.
+;
+; Value: ... (default "# phpGuardian ###########")
+FOOTER = "# phpGuardian ###########"
+
+;
+; Saving the original source code (during ENCODE action) or encoded code (during DECODE action) as new file with extension `.bak'.
+;
+; Value: YES|NO
+;   YES (default)
+;   NO
+SAVE_ORIGINAL_AS_BAK = "YES"
+
+;
+; Saving the encoded code as new file.
+;
+; Value: YES|NO
+;   YES
+;   NO  (default)
+SAVE_ENCODED_AS_NEW = "NO"
+
+;
+; Saving the decoded code as new file.
+;
+; Value: YES|NO
+;   YES
+;   NO  (default)
+SAVE_DECODED_AS_NEW = "NO"
+
+[PHP_EXTENSION]
+;
+; The absolute path to extension module (.so or .dll)
+;
+; Value: ... (default "")
+EXTENSION_MODULE_PATH = ""
+
+[PHP_CLASS]
+;
+; Set the path to the PHP Class.
+;
+; Value: ... (default "")
+BASE_LIB_PATH = ""
+
+[KEY]
+;
+; Auto generate the Private Key file from the `KEY' option.
+;
+; Value: YES|NO
+;   YES (default)
+;   NO
+AUTO_GENERATE_KEYFILE = "YES"
+
+;
+; Set the private key for ENCODE / DECODE action.
+;
+; Value: ... (default "")
+KEY = ""
+
+;
+; Set the path and the filename of the private key file.
+;
+; Value: ... (default "")
+KEY_FILE = ""
+
+[PATHS]
+;
+; Pattern (applied on the all paths) that will be excluded from the ENCODE / DECODE action.
+;
+; Value: ... (default "")
+EXCLUDE_PATH_PATTERN = ""
+
+;
+; List of the directories to elaborate.
+; Additional options for each directory are: HEADER, FOOTER, OPTIMIZE_CODE and DISABLE_RESTORING. For informations see above.
+;
+; Value: ...
+PATH = ""
+HEADER = ""
+FOOTER = ""
+OPTIMIZE_CODE = ""
+DISABLE_RESTORING = ""
+
+[FILES]
+;
+; Pattern (applied on the all files) that will be excluded from the ENCODE / DECODE action.
+;
+; Value: ... (default "")
+EXCLUDE_FILE_PATTERN = ""
+
+;
+; List of the files to elaborate.
+; Additional options for each file are: HEADER, FOOTER, OPTIMIZE_CODE and DISABLE_RESTORING. For informations see above.
+;
+; Value: ...
+FILE = ""
+HEADER = ""
+FOOTER = ""
+OPTIMIZE_CODE = ""
+DISABLE_RESTORING = ""
