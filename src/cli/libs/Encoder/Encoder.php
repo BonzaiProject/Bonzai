@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -46,9 +46,9 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Encoder {      
+class PG_Encoder {
     /**
-     * 
+     *
      * @access public
      * @param  array $element
      */
@@ -56,16 +56,16 @@ class PG_Encoder {
         if (!is_array($element) || empty($element)) {
             throw new PG_Exception('The element is invalid'); // TODO: NON BLOCKER
         }
-        
+
         // Get the filename
         $filename = $element['FILE'];
-        
+
         // Print a message
         PG_Utils::pg_message("Start encoding file `%s'.", false, filename);
-        
+
         // Get the content
         $file_content = PG_Utils::getFileContent($filename);
-        
+
         // Convert the content
         $converted_content = PG_Converter::convert($file_content, PG_Script_Parser::$config['SETUP']['USE_ASP_TAGS']);
 
@@ -79,7 +79,7 @@ class PG_Encoder {
             PG_Utils::pg_message("ERROR: The encoded data is empty.", false);
             return;
         }
-        
+
         PG_Utils::rename_file($filename);
         $encoded_filename = $this->get_encoded_filename($filename);
 
@@ -89,16 +89,15 @@ class PG_Encoder {
         // Save the file
         PG_Utils::putFileContent($encoded_filename, $encoded_content . get_header($element, get_inner()) . get_footer($element));
     }
-    
+
     protected function pg_code_crypt($data) {
         if (empty($data)) {
-            // Set the file as skipped
-            PG_Registry::getInstance()->append('skipped_files', $filename, PG_Registry::ARRAY_APPEND);
-
             // Print a message
             PG_Utils::pg_message("ERROR: The converted data is empty.", false);
+
+            return null;
         }
-        
+
         $data_len = strlen($data);
         $key_len  = strlen(PG_Script_Parser::$config['KEY']['KEY_HASH']);
 
@@ -130,7 +129,7 @@ class PG_Encoder {
         if (empty($string)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
-        
+
         // Init the container string
         $crdata = '';
 
@@ -141,20 +140,24 @@ class PG_Encoder {
 
         return $crdata;
     }
-    
+
     protected function encode_char($character, $key) {
         return int2hex(ord($character) ^ ord($key));
     }
-    
+
     protected function get_inner() {
-        $inner = $PHPG_LIBRARY_STRING . $PG_S_BASE_LIB_PATH; // TODO: MISSING STRINGS
+        $PHPG_LIBRARY_STRING        = ''; // TODO: need include this from .h
+        $PG_S_BASE_LIB_PATH         = ''; // TODO: need include this from .h
+        $PHPG_EXTENSION_STRING      = ''; // TODO: need include this from .h
+        $PG_S_EXTENSION_MODULE_PATH = ''; // TODO: need include this from .h
+
         if (PG_Script_Parser::$config['SETUP']['USE_PHP_EXTENSION']) {
-            $inner = $PHPG_EXTENSION_STRING . $PG_S_EXTENSION_MODULE_PATH . $PG_S_EXTENSION_MODULE_PATH; // TODO: MISSING STRINGS
+            return $PHPG_EXTENSION_STRING . $PG_S_EXTENSION_MODULE_PATH; // TODO: MISSING STRINGS
         }
 
-        return $inner;
+        return $PHPG_LIBRARY_STRING . $PG_S_BASE_LIB_PATH; // TODO: MISSING STRINGS
     }
-    
+
     protected function get_header($element, $inner) {
         $header = "<?php\n\n" . $element['HEADER'] . $inner;
         if ($element['HEADER'] == PG_Script_Parser::$config['CONFIGURATION']['HEADER']) {
@@ -163,7 +166,7 @@ class PG_Encoder {
 
         return $header;
     }
-    
+
     protected function get_footer($element) {
         $footer = "');\n" . $element['FOOTER'] . "\n?>";
         if ($element['FOOTER'] == PG_Script_Parser::$config['CONFIGURATION']['FOOTER']) {
@@ -172,16 +175,15 @@ class PG_Encoder {
 
         return $footer;
     }
-    
+
     protected function get_encoded_filename($filename) {
-        $encoded_filename = $filename;
         if (PG_Script_Parser::$config['CONFIGURATION']['SAVE_ENCODED_AS_NEW']) {
-            $encoded_filename .= ".encoded";
+            return $filename . ".encoded";
         }
 
-        return $encoded_filename;
+        return $filename;
     }
-    
+
     protected function pg_create_file_key() {
         if (empty(PG_Script_Parser::$config['KEY']['KEY_FILE'])) {
             PG_Script_Parser::$config['KEY']['KEY_FILE'] = "key.pgk";
@@ -191,7 +193,7 @@ class PG_Encoder {
 
         @unlink(PG_Script_Parser::$config['KEY']['KEY_FILE']);
         //file_put_content(PG_S_KEY_FILE, PG_S_KEY_HASH, PHPG_HEADER_KEY, PHPG_FOOTER_KEY);
-        
+
         if (!is_writable(PG_Script_Parser::$config['KEY']['KEY_FILE'])) {
             throw new PG_Exception('The file `' . PG_Script_Parser::$config['KEY']['KEY_FILE'] . '` cannot be written'); // TODO: BLOCKER ?
         }

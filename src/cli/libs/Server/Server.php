@@ -131,19 +131,19 @@ class PG_Server {
 
         $param_arr = @unserialize($param);
 
-        $placeholder['%i']  = !empty($param_arr['REMOTE_ADDR'])      ? $param_arr['REMOTE_ADDR']                 : 'N/A';
-        $placeholder['%h']  = !empty($param_arr['REMOTE_ADDR'])      ? @gethostbyaddr($param_arr['REMOTE_ADDR']) : 'N/A';
-        $placeholder['%d']  = !empty($param_arr['HTTP_HOST'])        ? $param_arr['HTTP_HOST']                   : 'N/A';
+        $placeholder['%i']  = $this->getValue('REMOTE_ADDR');
+        $placeholder['%h']  = !empty($param_arr['REMOTE_ADDR']) ? @gethostbyaddr($param_arr['REMOTE_ADDR']) : 'N/A';
+        $placeholder['%d']  = $this->getValue('HTTP_HOST');
         $placeholder['%t']  = @strftime($this->date_format);
-        $placeholder['%s']  = !empty($param_arr['SCRIPT_FILENAME'])  ? $param_arr['SCRIPT_FILENAME']             : 'N/A';
-        $placeholder['%r']  = !empty($param_arr['HTTP_REFERER'])     ? $param_arr['HTTP_REFERER']                : 'N/A';
-        $placeholder['%ua'] = !empty($param_arr['HTTP_USER_AGENT'])  ? $param_arr['HTTP_USER_AGENT']             : 'N/A';
-        $placeholder['%se'] = !empty($param_arr['SERVER_SIGNATURE']) ? $param_arr['SERVER_SIGNATURE']            : 'N/A';
-        $placeholder['%so'] = !empty($param_arr['SERVER_SOFTWARE'])  ? $param_arr['SERVER_SOFTWARE']             : 'N/A';
-        $placeholder['%a']  = !empty($param_arr['SERVER_ADDR'])      ? $param_arr['SERVER_ADDR']                 : 'N/A';
-        $placeholder['%p']  = !empty($param_arr['SERVER_PORT'])      ? $param_arr['SERVER_PORT']                 : 'N/A';
-        $placeholder['%dr'] = !empty($param_arr['DOCUMENT_ROOT'])    ? $param_arr['DOCUMENT_ROOT']               : 'N/A';
-        $placeholder['%e']  = !empty($param_arr['SERVER_ADMIN'])     ? $param_arr['SERVER_ADMIN']                : 'N/A';
+        $placeholder['%s']  = $this->getValue('SCRIPT_FILENAME');
+        $placeholder['%r']  = $this->getValue('HTTP_REFERER');
+        $placeholder['%ua'] = $this->getValue('HTTP_USER_AGENT');
+        $placeholder['%se'] = $this->getValue('SERVER_SIGNATURE');
+        $placeholder['%so'] = $this->getValue('SERVER_SOFTWARE');
+        $placeholder['%a']  = $this->getValue('SERVER_ADDR');
+        $placeholder['%p']  = $this->getValue('SERVER_PORT');
+        $placeholder['%dr'] = $this->getValue('DOCUMENT_ROOT');
+        $placeholder['%e']  = $this->getValue('SERVER_ADMIN');
 
         $string = $this->log_format;
         foreach($placeholder as $key => $value) $string = str_replace($key, $value, $string);
@@ -156,6 +156,10 @@ class PG_Server {
     }
     // }}}
     // }}}
+
+    protected function getValue($key) {
+        return !empty($param_arr[$key]) ? $param_arr[$key] : 'N/A';
+    }
 }
 
 /**

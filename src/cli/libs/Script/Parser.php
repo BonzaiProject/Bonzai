@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -53,20 +53,20 @@ class PG_Script_Parser {
      * @var    array $config
      */
     public static $config = array();
-    
+
     /**
      *
      * @access public
-     * @param  string $file 
+     * @param  string $file
      */
-    public function elaborate($file) {     
+    public function elaborate($file) {
         $this->loadConfig($file);
-        
+
         $action = strtolower($this->config['SETUP']['ACTION']);
         $class  = "PG_" . ucfirst($action) . 'r';
-        
+
         $obj = new $class();
-        
+
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         foreach($this->config['PATHS']['LIST'] as $path) {
             $files = PG_Utils::rscandir($path['PATH']);
@@ -74,7 +74,7 @@ class PG_Script_Parser {
             foreach($this->config['PATHS']['EXCLUDE_PATH_PATTERN'] as $pattern) {
                 $files = preg_grep('/' . $pattern . '/', $files, PREG_GREP_INVERT);
             }
-            
+
             foreach($files as $file) {
                 $elem = $path;
                 $elem['FILE'] = $file;
@@ -82,7 +82,7 @@ class PG_Script_Parser {
                 $this->config['FILES']['LIST'][] = $elem;
             }
         }
-        
+
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         foreach($this->config['FILES']['LIST'] as $file) {
             foreach($this->config['FILES']['EXCLUDE_PATH_PATTERN'] as $pattern) {
@@ -90,67 +90,73 @@ class PG_Script_Parser {
                     continue 2;
                 }
             }
-            
+
             $obj->elaborate($file);
         }
     }
-    
+
     /**
      *
      * @access protected
-     * @param  string $file 
+     * @param  string $file
      */
     protected function loadConfig($file) {
         if (empty($file) || !is_readable($file)) {
             throw new PG_Exception('The file `' . $file . '` cannot be opened'); // TODO: BLOCKER ?
         }
-        
+
         PG_Utils::pg_message("Loading configuration options...", false);
-        
+
         $file         = PG_Utils::getFilePath($file);
         $this->config = parse_ini_file($file, true);
 
         $this->parseList(&$this->config['PATHS'], 'PATHS');
         $this->parseList(&$this->config['FILES'], 'FILES');
-        
+
         $this->elaborateConfig();
     }
-    
+
     /**
      *
      * @access public
-     * @return array 
+     * @return array
      */
     public function elaborateConfig() {
-        foreach($this->config as $key => $value) {
-            $this->config[$key] = array_map(array($this, 'convertToBoolean'), $value);
+        $this->analyzeOptions();
 
-            if ($key == 'PATHS' || $key == 'FILES') {
-                $exclude = 'EXCLUDE_' . substr($key, 0, -1) . '_PATTERN';
-                $this->config[$key][$exclude] = split(',\s*', $this->config[$key][$exclude]);
+        $this->handleConfigFiles('PATHS');
+        $this->handleConfigFiles('FILES');
 
-                foreach($this->config[$key]['LIST'] as $k => $v) {
-                    if (!isset($v['HEADER'])) {
-                        $this->config[$key]['LIST'][$k]['HEADER'] = $this->config['HEADER'];
-                    }
-
-                    if (!isset($v['FOOTER'])) {
-                        $this->config[$key]['LIST'][$k]['FOOTER'] = $this->config['FOOTER'];
-                    }
-                }
-            } elseif ($key == 'KEY') {
-                if ($value['KEY']) {
-                    $this->config['KEY']['KEY_HASH'] = PG_Hash::hash($value);
-                } elseif ($value['KEY_FILE']) {
-                    $this->config['KEY']['KEY']      = PG_Utils::getFileContent($value);
-                    $this->config['KEY']['KEY_HASH'] = PG_Hash::hash($this->config['KEY']);
-                }
-            }
+        if (!empty($this->config['KEY']['KEY_FILE'])) {
+            $this->config['KEY']['KEY'] = PG_Utils::getFileContent($this->config['KEY']['KEY_FILE']);
         }
+        $this->config['KEY']['KEY_HASH'] = PG_Hash::hash($this->config['KEY']['KEY']);
 
         return $this->config;
     }
-    
+
+    protected function handleConfigFiles($key) {
+        $exclude = 'EXCLUDE_' . substr($key, 0, -1) . '_PATTERN';
+        $this->config[$key][$exclude] = split(',\s*', $this->config[$key][$exclude]);
+
+        foreach($this->config[$key]['LIST'] as $k => $v) {
+            $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'HEADER');
+            $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'FOOTER');
+        }
+    }
+
+    protected function setInputInfoField($param, $field) {
+        if (!isset($param[$field])) {
+            $param[$field] = $this->config[$field];
+        }
+    }
+
+    protected function analyzeOptions() {
+        foreach($this->config as $key => $value) {
+            $this->config[$key] = array_map(array($this, 'convertToBoolean'), $value);
+        }
+    }
+
     /**
      *
      * @access protected
@@ -168,11 +174,11 @@ class PG_Script_Parser {
 
         return $value;
     }
-    
+
     /**
      *
      * @access protected
-     * @param  string $config 
+     * @param  string $config
      * @param  string $prefix
      */
     protected function parseList($config, $prefix) {

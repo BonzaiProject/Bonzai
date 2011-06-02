@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -46,9 +46,9 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Decoder {   
+class PG_Decoder {
     /**
-     * 
+     *
      * @access public
      * @param  array $element
      */
@@ -56,7 +56,7 @@ class PG_Decoder {
         if (!is_array($element) || empty($element)) {
             throw new PG_Exception('The element is invalid'); // TODO: NON BLOCKER
         }
-        
+
         // Get the filename
         $filename = $element['FILE'];
 
@@ -81,7 +81,7 @@ class PG_Decoder {
             PG_Utils::pg_message("ERROR: The decoded data is empty.", false);
             return;
         }
-        
+
         rename_file($filename);
 
         $decoded_filename = $this->get_decoded_filename($filename);
@@ -92,12 +92,12 @@ class PG_Decoder {
         // Save the file
         file_put_content($decoded_filename, $decoded_content, "", "");
     }
-    
+
     protected function pg_code_decrypt($data) {
         if (empty($data)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
-        
+
         $data_len = strlen($data);
         $key_len  = strlen(PG_Script_Parser::$config['KEY']['KEY_HASH']);
 
@@ -140,12 +140,12 @@ class PG_Decoder {
 
         return $crdata;
     }
-    
-    protected function pg_cycle_decrypt($string, $key_len, $data_len) {   
+
+    protected function pg_cycle_decrypt($string, $key_len, $data_len) {
         if (empty($string)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
-        
+
         // Init the container string
         $crdata = '';
 
@@ -157,11 +157,11 @@ class PG_Decoder {
 
         return $crdata;
     }
-    
+
     protected function decode_char($characters, $key) {
         return chr(hex2int($characters) ^ ord($key));
     }
-    
+
     protected function get_decoded_filename($filename) {
         $decoded_filename = $filename;
         if (PG_Script_Parser::$config['CONFIGURATION']['SAVE_DECODED_AS_NEW']) {

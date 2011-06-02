@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -52,53 +52,53 @@ class PG_Utils {
      * @access public
      * @static
      * @param  string $file
-     * @return string 
+     * @return string
      */
     public static function getFilePath($file) {
         if (!file_exists(dirname($file)) || dirname($file) == '.') {
             $file = getcwd() . '/' . $file;
         }
-        
+
         if (!is_readable($file)) {
             throw new PG_Exception('The file `' . $file . '` cannot be opened'); // TODO: BLOCKER ?
         } else {
             return $file;
         }
     }
-    
+
     /**
      *
      * @access public
      * @static
      * @param  string $filename
-     * @param  boolean $backup 
+     * @param  boolean $backup
      * @return void
      */
-    public static function rename_file($filename, $backup = true) {      
+    public static function rename_file($filename, $backup = true) {
         if ($backup) {
             $backup_filename = $filename . '.orig';
-            
+
             if (!is_writable($backup_filename)) {
                 throw new PG_Exception('The file `' . $backup_filename . '` cannot be written'); // TODO: BLOCKER ?
             }
-            
+
             file_put_contents($backup_filename, self::getFileContent($filename));
         }
     }
-    
+
     /**
      *
      * @access public
      * @static
      * @param  string $base
      * @param  array $data
-     * @return array 
+     * @return array
      */
     public static function rscandir($base = '', &$data = array()) {
         if (!is_readable($base)) {
             throw new PG_Exception('The directory `' . $base . '` cannot be opened'); // TODO: BLOCKER ?
         }
-        
+
         $array = array_diff(scandir($base), array('.', '..'));
 
         foreach($array as $value) {
@@ -113,25 +113,25 @@ class PG_Utils {
 
         return $data;
     }
-    
+
     public static function getFileContent($filename) {
         if (!is_readable($filename)) {
             throw new PG_Exception('The file `' . $filename . '` cannot be opened'); // TODO: NON BLOCKER
         }
-        
+
         return file_get_contents($filename);
     }
-        
+
     public static function putFileContent($filename, $content) {
         if (!is_writable($encoded_filename)) {
             throw new PG_Exception('The file `' . $encoded_filename . '` cannot be written'); // TODO: BLOCKER ?
         }
-        
+
         return file_get_contents($filename);
     }
-      
+
     /**
-     * 
+     *
      * @access public
      * @static
      * @return void
@@ -140,14 +140,14 @@ class PG_Utils {
         $args    = func_get_args();
         $text    = array_shift($args);
         $verbose = isset($args[1]) ? array_shif($args) : true;
-        
+
         if (!PG_Script_Parser::$config['SETUP']['SILENT'] || ($verbose && PG_Script_Parser::$config['SETUP']['PG_S_VERBOSE'])) {
             $gettext_text = _($text);
-            
-            foreach($args as $arg) {
+
+            //foreach($args as $arg) {
                 //$gettext_text = str_replace('%s', $arg, $gettext_text, 1); //TODO: FIX THIS
-            }
-            
+            //}
+
             printf("[%d] %s\n", time(), $gettext_text);
         }
     }
