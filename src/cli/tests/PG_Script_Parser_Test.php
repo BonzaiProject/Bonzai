@@ -36,7 +36,11 @@
  * $Id: $
  **/
 
+require_once 'PHPUnit/Framework/TestCase.php';
+require_once __DIR__ . '/../libs/Script/Parser.php';
+
 /**
+ *
  *
  * @category  Security
  * @package   phpGuardian
@@ -46,53 +50,48 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Registry {
-    public static $elements = array();
-    public static $instance = null;
+class PG_Script_Parser_Test extends PHPUnit_Framework_TestCase {
+    protected $object;
 
-    const ARRAY_APPEND   = 0;
-    const INTEGER_APPEND = 1;
+    protected function setUp() {
+        parent::setUp();
 
-    public static function getInstance() {
-        if (is_null(self::$instance)) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
+        $this->object = new PG_Script_Parser;
     }
 
-    public function add($key, $value, $type = null) {
-        if ($type == self::ARRAY_APPEND) {
-            $value = array($value);
-        }
-        $this->elements[$key] = $value;
+    protected function tearDown() {
+        parent::tearDown();
     }
 
-    public function get($key) {
-        if (isset($this->elements[$key])) {
-            return $this->elements[$key];
-        }
-
-        return null;
+    public function testElaborate() {
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function remove($key) {
-        if (isset($this->elements[$key])) {
-            unset($this->elements[$key]);
-        }
+    protected function testLoadConfig() {
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function append($key, $value, $type = null) {
-        if (isset($this->elements[$key])) {
-            if (is_array($value)) {
-                $this->elements[$key][] = $value;
-            } elseif (is_string($this->elements[$key])) {
-                $this->elements[$key] .= $value;
-            } elseif (is_numeric($this->elements[$key]) && type == self::INTEGER_APPEND) {
-                $this->elements[$key] += $value;
-            }
-        } else {
-            $this->add($key, $value, $type);
-        }
+    public function testElaborateConfig() {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    protected function testHandleConfigFiles() {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    protected function testSetInputInfoField() {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    protected function testAnalyzeOptions() {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    protected function testConvertToBoolean() {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    protected function testParseList() {
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

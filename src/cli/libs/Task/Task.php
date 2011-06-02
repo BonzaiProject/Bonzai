@@ -38,7 +38,7 @@
 
 /**
  * Handle the all global behaviours
- * 
+ *
  * @license GPL 3+
  * @author  Fabio Cicerchia
  * @version 4.0
@@ -47,32 +47,25 @@
 class PG_Task {
     /**
      *
-     * @var string $task 
+     * @var string $task
      */
     protected $task = null;
-    
+
     /**
      *
      * @var mixed $parameters
      */
     protected $parameters = null;
-    
-    /**
-     * 
-     * @access public
-     */
-    public function __construct() {
-    }
 
     /**
      *
      * @access public
      * @param  PG_Utils_Options $options
      */
-    public function load(PG_Utils_Options $options) {      
+    public function load(PG_Utils_Options $options) {
         $this->task       = "PG_Help";
         $this->parameters = $options;
-            
+
         if (!is_null($options->getOption('generate'))) {
             $this->task       = "PG_Script_Generator";
             $this->parameters = $this->options->getOption('generate');
@@ -81,7 +74,7 @@ class PG_Task {
             $this->parameters = array_shift($options->getParameters());
         }
     }
-    
+
     /**
      *
      * @access public
@@ -90,22 +83,22 @@ class PG_Task {
     public function execute() {
         $class = $this->task;
         $class = new $class();
-        
+
         if (!method_exists($class, 'elaborate')) {
             throw new PG_Exception('Cannot launch the task `' . $this->task . '`'); // TODO: BLOCKER
         } else {
             return call_user_method('elaborate', $class, $this->parameters);
         }
     }
-    
+
     /**
-     * 
+     *
      * @access public
      * @param  PG_Utils_Options $options
      * @return mixed
      */
     public function loadAndExecute(PG_Utils_Options $options) {
         $this->load($options);
-        return $this->execute();        
+        return $this->execute();
     }
 }

@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -46,9 +46,9 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Utils_Help { 
+class PG_Utils_Help {
     /**
-     * 
+     *
      * @param  PG_Utils_Options $options
      * @access public
      */

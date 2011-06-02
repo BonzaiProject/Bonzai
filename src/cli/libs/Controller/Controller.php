@@ -38,7 +38,7 @@
 
 /**
  * Handle the all global behaviours
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -54,9 +54,9 @@ class PG_Controller {
      * @var    array $options
      */
     protected $options = array();
-    
+
     /**
-     * 
+     *
      * @access public
      */
     public function __construct() {
@@ -65,20 +65,20 @@ class PG_Controller {
 
         // Get the Script Options
         $this->options = new PG_Utils_Options($_SERVER['argv']);
-        
+
         // Switch to Selected Task
         $this->handleTask();
     }
-    
+
     /**
-     * 
+     *
      * @access public
      */
     public function handleTask()
     {
         // Load the Task Handler
         $task = new PG_Task();
-        
+
         // load and excute task
         $task->loadAndExecute($this->options);
     }
@@ -86,23 +86,23 @@ class PG_Controller {
     /**
      *
      * @access public
-     * @param  string $name 
+     * @param  string $name
      */
     public function __autoload($name) {
         // Get the class filename
         $name     = preg_replace('/^PG_/', '', $name);
         $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
-        
+
         $full_filename = __DIR__ . '/../' . $filename . '.php';
-        var_dump($full_filename);
         if (!file_exists($full_filename) && ($name == $filename)) {
             $filename     .= DIRECTORY_SEPARATOR . $name;
             $full_filename = __DIR__ . '/../' . $filename . '.php';
         }
-        
+
         if (!file_exists($full_filename)) {
             throw new PG_Exception('The class `' . $name . '` cannot be loaded'); // TODO: BLOCKER
         }
+
         require_once $full_filename;
     }
 }

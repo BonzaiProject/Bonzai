@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0

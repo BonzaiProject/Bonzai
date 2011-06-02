@@ -36,8 +36,25 @@
  * $Id: $
  **/
 
+require_once 'PHPUnit/Framework/TestSuite.php';
+
+require_once __DIR__ . '/PG_Controller_Test.php';
+require_once __DIR__ . '/PG_Converter_Test.php';
+require_once __DIR__ . '/PG_Decoder_Test.php';
+require_once __DIR__ . '/PG_Encoder_Test.php';
+require_once __DIR__ . '/PG_Exception_Test.php';
+require_once __DIR__ . '/PG_Hash_Test.php';
+require_once __DIR__ . '/PG_Registry_Test.php';
+require_once __DIR__ . '/PG_Script_Generator_Test.php';
+require_once __DIR__ . '/PG_Script_Parser_Test.php';
+require_once __DIR__ . '/PG_Task_Test.php';
+require_once __DIR__ . '/PG_Utils_Help_Test.php';
+require_once __DIR__ . '/PG_Utils_Options_Test.php';
+require_once __DIR__ . '/PG_Utils_Test.php';
+
 /**
- *
+ * 
+ *  
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -46,53 +63,30 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Registry {
-    public static $elements = array();
-    public static $instance = null;
-
-    const ARRAY_APPEND   = 0;
-    const INTEGER_APPEND = 1;
-
-    public static function getInstance() {
-        if (is_null(self::$instance)) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-    public function add($key, $value, $type = null) {
-        if ($type == self::ARRAY_APPEND) {
-            $value = array($value);
-        }
-        $this->elements[$key] = $value;
-    }
-
-    public function get($key) {
-        if (isset($this->elements[$key])) {
-            return $this->elements[$key];
-        }
-
-        return null;
-    }
-
-    public function remove($key) {
-        if (isset($this->elements[$key])) {
-            unset($this->elements[$key]);
-        }
-    }
-
-    public function append($key, $value, $type = null) {
-        if (isset($this->elements[$key])) {
-            if (is_array($value)) {
-                $this->elements[$key][] = $value;
-            } elseif (is_string($this->elements[$key])) {
-                $this->elements[$key] .= $value;
-            } elseif (is_numeric($this->elements[$key]) && type == self::INTEGER_APPEND) {
-                $this->elements[$key] += $value;
-            }
-        } else {
-            $this->add($key, $value, $type);
-        }
-    }
+class cliSuite extends PHPUnit_Framework_TestSuite {
+	public function __construct() {
+		$this->setName('cliSuite');
+		
+		$this->addTestSuite('PG_Controller_Test');
+		$this->addTestSuite('PG_Converter_Test');		
+		$this->addTestSuite('PG_Decoder_Test');		
+		$this->addTestSuite('PG_Encoder_Test');		
+		$this->addTestSuite('PG_Exception_Test');		
+		$this->addTestSuite('PG_Hash_Test');		
+		$this->addTestSuite('PG_Registry_Test');		
+		$this->addTestSuite('PG_Script_Generator_Test');		
+		$this->addTestSuite('PG_Script_Parser_Test');		
+		$this->addTestSuite('PG_Task_Test');		
+		$this->addTestSuite('PG_Utils_Help_Test');		
+		$this->addTestSuite('PG_Utils_Options_Test');		
+		$this->addTestSuite('PG_Utils_Test');	
+	}
+	
+	/**
+	 * Creates the suite.
+	 */
+	public static function suite() {
+		return new self ();
+	}
 }
+

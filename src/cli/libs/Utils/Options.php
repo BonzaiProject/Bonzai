@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -76,7 +76,7 @@ class PG_Utils_Options {
         if (!is_array($argv) || empty($argv)) {
             throw new PG_Exception('Missing the script arguments'); // TODO: BLOCKER
         }
-        
+
         $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters);
         $this->non_options = array_slice($argv, 1);
 
@@ -86,13 +86,13 @@ class PG_Utils_Options {
     /**
      *
      * @param array $options
-     * @param array $non_options 
+     * @param array $non_options
      */
     protected function parseOptions(&$options, &$non_options) {
         if (!is_array($options) || !is_array($non_options)) {
             throw new PG_Exception('Invalid parameters to be parsed'); // TODO: NON BLOCKER
         }
-        
+
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         foreach($options as $key => $value) {
             unset($non_options[array_search('-' . $key, $non_options)]);
@@ -131,7 +131,7 @@ class PG_Utils_Options {
      *
      * @access public
      * @param  string $key
-     * @return string | null 
+     * @return string | null
      */
     public function getOption($key) {
         if (isset($this->options[$key])) {

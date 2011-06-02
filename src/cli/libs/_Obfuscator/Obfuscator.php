@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -48,11 +48,9 @@
  */
 class PG_Obfuscator {
     /**
-     * 
+     *
      * @access public
      */
     public function __construct() {
     }
-    
-
 }

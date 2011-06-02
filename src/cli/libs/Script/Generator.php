@@ -37,7 +37,7 @@
  **/
 
 /**
- * 
+ *
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
@@ -61,16 +61,16 @@ class PG_Script_Generator {
     public function __construct() {
         $this->script = PG_Utils::getFileContent(__DIR__ . '/Script.dist');
     }
-    
+
     /**
      *
      * @access public
-     * @param  string $file 
+     * @param  string $file
      * @return boolean
      */
     public function elaborate($file) {
         $file = PG_Utils::getFilePath($file);
-        
+
         return PG_Utils::putFileContent($file, $this->script);
     }
 }
