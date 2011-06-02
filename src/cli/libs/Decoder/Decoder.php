@@ -82,7 +82,7 @@ class PG_Decoder {
             return;
         }
 
-        rename_file($filename);
+        PG_Utils::rename_file($filename);
 
         $decoded_filename = $this->getDecodedFilename($filename);
 
@@ -90,7 +90,7 @@ class PG_Decoder {
         PG_Utils::pg_message("Saving %s bytes...", true, strlen($decoded_content));
 
         // Save the file
-        file_put_content($decoded_filename, $decoded_content, "", "");
+        PG_Utils::putFileContent($decoded_filename, $decoded_content);
     }
 
     protected function pgCodeDecrypt($data) {
@@ -159,7 +159,7 @@ class PG_Decoder {
     }
 
     protected function decodeChar($characters, $key) {
-        return chr(hex2int($characters) ^ ord($key));
+        return chr(hexdec($characters) ^ ord($key));
     }
 
     protected function getDecodedFilename($filename) {

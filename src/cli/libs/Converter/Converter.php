@@ -150,7 +150,7 @@ class PG_Converter {
     }
 
     protected function analyzeBlock($data, $pos, $php, $opened) {
-    global $pt_close, $pt_open_short, $pt_open_long;
+    global $pt_close, $pt_open_short, $pt_open_long, $pt_size_long, $count; // TODO: remove these global vars
 
         $tag_long  = substr($data, $pos, $pt_size_long);
         $tag_short = substr($data, $pos, 2);
@@ -160,12 +160,12 @@ class PG_Converter {
 
         if (!$opened && $is_long_tag || $is_short_tag) {
             $len  = $is_long_tag ? $pt_size_long : 2;
-            $next = substr($data, $j + $len, 1);
+            $next = substr($data, $pos + $len, 1);
             $this->setBlock(&$php, $count + 1, 'size', $len);
 
-            $opened = $this->isOpened(&$php, $next);
+            $opened = $this->isOpened(&$php, $next, $pos);
         } else if ($tag_short == $pt_close) {
-            $this->setBlock(&$php, $count, 'close', $j);
+            $this->setBlock(&$php, $count, 'close', $pos);
             PG_Utils::pg_message("Found php close #%s: %s", true, $count, $php[$count]['close']);
             $opened = false;
         }
@@ -173,9 +173,12 @@ class PG_Converter {
         return $opened;
     }
 
-    protected function isOpened($php, $next) {
-        if ($opened = in_array($next, array("\n", "=", " ")) {
-            $this->setBlock(&$php, ++$count, 'open', $j);
+    protected function isOpened($php, $next, $pos) {
+   	global $count;
+   	
+    	$opened = in_array($next, array("\n", "=", " "));
+        if ($opened) {
+            $this->setBlock(&$php, ++$count, 'open', $pos);
             PG_Utils::pg_message("Found php start #%s: %s", true, $count, $php[$count]['open']);
         }
 

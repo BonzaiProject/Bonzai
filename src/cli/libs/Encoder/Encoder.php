@@ -87,7 +87,7 @@ class PG_Encoder {
         PG_Utils::pg_message("Saving %s bytes...", true, strlen($encoded_content));
 
         // Save the file
-        PG_Utils::putFileContent($encoded_filename, $encoded_content . get_header($element, get_inner()) . getFooter($element));
+        PG_Utils::putFileContent($encoded_filename, $encoded_content . $this->getHeader($element, $this->getInner()) . $this->getFooter($element));
     }
 
     protected function pgCodeCrypt($data) {
@@ -142,7 +142,7 @@ class PG_Encoder {
     }
 
     protected function encodeChar($character, $key) {
-        return int2hex(ord($character) ^ ord($key));
+        return dechex(ord($character) ^ ord($key));
     }
 
     protected function getInner() {
@@ -197,6 +197,6 @@ class PG_Encoder {
         if (!is_writable(PG_Script_Parser::$config['KEY']['KEY_FILE'])) {
             throw new PG_Exception('The file `' . PG_Script_Parser::$config['KEY']['KEY_FILE'] . '` cannot be written'); // TODO: BLOCKER ?
         }
-        file_put_content(PG_Script_Parser::$config['KEY']['KEY_FILE'], PG_Script_Parser::$config['KEY']['KEY_HASH'], "", "");
+        PG_Utils::putFileContent(PG_Script_Parser::$config['KEY']['KEY_FILE'], PG_Script_Parser::$config['KEY']['KEY_HASH']);
     }
 }

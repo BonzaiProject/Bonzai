@@ -123,8 +123,8 @@ class PG_Utils {
     }
 
     public static function putFileContent($filename, $content) {
-        if (!is_writable($encoded_filename)) {
-            throw new PG_Exception('The file `' . $encoded_filename . '` cannot be written'); // TODO: BLOCKER ?
+        if (!is_writable($filename)) {
+            throw new PG_Exception('The file `' . $filename . '` cannot be written'); // TODO: BLOCKER ?
         }
 
         return file_get_contents($filename);
@@ -139,7 +139,7 @@ class PG_Utils {
     public static function pg_message() {
         $args    = func_get_args();
         $text    = array_shift($args);
-        $verbose = isset($args[1]) ? array_shif($args) : true;
+        $verbose = isset($args[1]) ? array_shift($args) : true;
 
         if (!PG_Script_Parser::$config['SETUP']['SILENT'] || ($verbose && PG_Script_Parser::$config['SETUP']['PG_S_VERBOSE'])) {
             $gettext_text = _($text);

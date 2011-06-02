@@ -131,19 +131,19 @@ class PG_Server {
 
         $param_arr = @unserialize($param);
 
-        $placeholder['%i']  = $this->getValue('REMOTE_ADDR');
+        $placeholder['%i']  = $this->getValue($param_arr, 'REMOTE_ADDR');
         $placeholder['%h']  = !empty($param_arr['REMOTE_ADDR']) ? @gethostbyaddr($param_arr['REMOTE_ADDR']) : 'N/A';
-        $placeholder['%d']  = $this->getValue('HTTP_HOST');
+        $placeholder['%d']  = $this->getValue($param_arr, 'HTTP_HOST');
         $placeholder['%t']  = @strftime($this->date_format);
-        $placeholder['%s']  = $this->getValue('SCRIPT_FILENAME');
-        $placeholder['%r']  = $this->getValue('HTTP_REFERER');
-        $placeholder['%ua'] = $this->getValue('HTTP_USER_AGENT');
-        $placeholder['%se'] = $this->getValue('SERVER_SIGNATURE');
-        $placeholder['%so'] = $this->getValue('SERVER_SOFTWARE');
-        $placeholder['%a']  = $this->getValue('SERVER_ADDR');
-        $placeholder['%p']  = $this->getValue('SERVER_PORT');
-        $placeholder['%dr'] = $this->getValue('DOCUMENT_ROOT');
-        $placeholder['%e']  = $this->getValue('SERVER_ADMIN');
+        $placeholder['%s']  = $this->getValue($param_arr, 'SCRIPT_FILENAME');
+        $placeholder['%r']  = $this->getValue($param_arr, 'HTTP_REFERER');
+        $placeholder['%ua'] = $this->getValue($param_arr, 'HTTP_USER_AGENT');
+        $placeholder['%se'] = $this->getValue($param_arr, 'SERVER_SIGNATURE');
+        $placeholder['%so'] = $this->getValue($param_arr, 'SERVER_SOFTWARE');
+        $placeholder['%a']  = $this->getValue($param_arr, 'SERVER_ADDR');
+        $placeholder['%p']  = $this->getValue($param_arr, 'SERVER_PORT');
+        $placeholder['%dr'] = $this->getValue($param_arr, 'DOCUMENT_ROOT');
+        $placeholder['%e']  = $this->getValue($param_arr, 'SERVER_ADMIN');
 
         $string = $this->log_format;
         foreach($placeholder as $key => $value) $string = str_replace($key, $value, $string);
@@ -157,7 +157,7 @@ class PG_Server {
     // }}}
     // }}}
 
-    protected function getValue($key) {
+    protected function getValue($param_arr, $key) {
         return !empty($param_arr[$key]) ? $param_arr[$key] : 'N/A';
     }
 }
