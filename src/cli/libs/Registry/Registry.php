@@ -166,4 +166,5 @@ class PG_Registry {
         }
     }
     // }}}
+    // }}}
 }

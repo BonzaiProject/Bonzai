@@ -123,38 +123,38 @@ class PG_Controller {
         }
     }
     // }}}
-    
+
     // {{{ function getClassFileName
     // TODO: add to test
     /**
-     * 
+     *
      * @access protected
      * @param  string    $name
      * @return string
      */
     protected function getClassFileName($name) {
-    	$name     = preg_replace('/^PG_/', '', $name);
+        $name     = preg_replace('/^PG_/', '', $name);
         $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
 
         if ($this->checkFile($filename) && ($name == $filename)) {
             $filename .= DIRECTORY_SEPARATOR . $name;
         }
-        
+
         return $filename;
-    } 
-    
+    }
+
     // {{{ function checkFile
     // TODO: add to test
     /**
-     * 
+     *
      * @access protected
      * @param  string    $filename
      * @return boolean
      */
     protected function checkFile($filename) {
-    	$full_filename = __DIR__ . '/../' . $filename . '.php';
-    	
-    	return file_exists($full_filename);
+        $full_filename = __DIR__ . '/../' . $filename . '.php';
+
+        return file_exists($full_filename);
     }
     // }}}
 }

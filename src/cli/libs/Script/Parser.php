@@ -74,7 +74,7 @@ class PG_Script_Parser {
         $obj = new $class();
 
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
-		$this->expandPathsToFiles();
+        $this->expandPathsToFiles();
 
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         foreach($this->config['FILES']['LIST'] as $file) {
@@ -88,11 +88,11 @@ class PG_Script_Parser {
         }
     }
     // }}}
-    
+
     // {{{ function expandPathsToFiles
     // TODO: add to test
     /**
-     * 
+     *
      * @access protected
      * @return void
      */

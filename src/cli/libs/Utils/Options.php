@@ -74,7 +74,7 @@ class PG_Utils_Options {
     /**
      *
      * @access public
-     * @param  array  $argv
+     * @param  array        $argv
      * @throws PG_Exception
      * @return void
      */
