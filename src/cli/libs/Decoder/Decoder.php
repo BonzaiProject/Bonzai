@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,10 +47,14 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Decoder {
+    // {{{ METHODS
+    // {{{ function elaborate
     /**
      *
      * @access public
      * @param  array $element
+     * @throws PG_Exception
+     * @return void
      */
     public function elaborate($element) {
         if (!is_array($element) || empty($element)) {
@@ -92,7 +96,16 @@ class PG_Decoder {
         // Save the file
         PG_Utils::putFileContent($decoded_filename, $decoded_content);
     }
+    // }}}
 
+    // {{{ function pgCodeDecrypt
+    /**
+     *
+     * @access protected
+     * @param  string $data
+     * @throws PG_Exception
+     * @return string
+     */
     protected function pgCodeDecrypt($data) {
         if (empty($data)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
@@ -140,7 +153,18 @@ class PG_Decoder {
 
         return $crdata;
     }
+    // }}}
 
+    // {{{ function pgCycleDecrypt
+    /**
+     *
+     * @access protected
+     * @param  string       $string
+     * @param  integer      $key_len
+     * @param  integer      $data_len
+     * @throws PG_Exception
+     * @return string
+     */
     protected function pgCycleDecrypt($string, $key_len, $data_len) {
         if (empty($string)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
@@ -157,17 +181,35 @@ class PG_Decoder {
 
         return $crdata;
     }
+    // }}}
 
+    // {{{ function decodeChar
+    /**
+     *
+     * @access protected
+     * @param  string    $characters
+     * @param  string    $key
+     * @return string
+     */
     protected function decodeChar($characters, $key) {
         return chr(hexdec($characters) ^ ord($key));
     }
+    // }}}
 
+    // {{{ function getDecodedFilename
+    /**
+     *
+     * @access protected
+     * @param  string    $filename
+     * @return string
+     */
     protected function getDecodedFilename($filename) {
-        $decoded_filename = $filename;
         if (PG_Script_Parser::$config['CONFIGURATION']['SAVE_DECODED_AS_NEW']) {
-            $decoded_filename .= ".decoded";
+            return $filename . ".decoded";
         }
 
-        return $decoded_filename;
+        return $filename;
     }
+    // }}}
+    // }}}
 }

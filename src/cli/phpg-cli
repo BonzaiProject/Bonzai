@@ -34,9 +34,10 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 // Just launch the global controller
 require_once __DIR__ . '/libs/Controller/Controller.php';
-new PG_Controller();
+$controller = new PG_Controller();
+$controller->elaborate();

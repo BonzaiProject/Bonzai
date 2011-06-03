@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -64,38 +64,47 @@ class PG_Encoder_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function testElaborate() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testPgCodeCrypt() {
+        // TODO: $this->object->pgCodeCrypt($data);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testPgCycleEncrypt() {
+        // TODO: $this->object->pgCycleEncrypt($string, $key_len, $data_len);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testEncodeChar() {
+        // TODO: $this->object->encodeChar($character, $key);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetInner() {
+        // TODO: $this->object->getInner();
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetHeader() {
+        // TODO: $this->object->getHeader($element, $inner);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetFooter() {
+        // TODO: $this->object->getFooter($element);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetEncodedFilename() {
+        // TODO: $this->object->getEncodedFilename($filename);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testPgCreateFileKey() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

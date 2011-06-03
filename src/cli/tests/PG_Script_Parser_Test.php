@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -64,34 +64,42 @@ class PG_Script_Parser_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function testElaborate() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    protected function testLoadConfig() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+    public function testLoadConfig() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testElaborateConfig() {
+        // TODO: $this->object->elaborateConfig();
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    protected function testHandleConfigFiles() {
+    public function testHandleConfigFiles() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    public function testSetInputInfoField() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    public function testAnalyzeOptions() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    public function testConvertToBoolean() {
+        // TODO: $this->object->convertToBoolean($value);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    protected function testSetInputInfoField() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    protected function testAnalyzeOptions() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    protected function testConvertToBoolean() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    protected function testParseList() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+    public function testParseList() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

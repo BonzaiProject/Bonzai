@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,17 +47,23 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Script_Parser {
+    // {{{ PROPERTIES
     /**
      *
+     * @static
      * @access public
      * @var    array $config
      */
     public static $config = array();
+    // }}}
 
+    // {{{ METHODS
+    // {{{ function elaborate
     /**
      *
      * @access public
      * @param  string $file
+     * @return void
      */
     public function elaborate($file) {
         $this->loadConfig($file);
@@ -94,11 +100,15 @@ class PG_Script_Parser {
             $obj->elaborate($file);
         }
     }
+    // }}}
 
+    // {{{ function loadConfig
     /**
      *
      * @access protected
-     * @param  string $file
+     * @param  string    $file
+     * @throws PG_Exception
+     * @return void
      */
     protected function loadConfig($file) {
         if (empty($file) || !is_readable($file)) {
@@ -115,7 +125,9 @@ class PG_Script_Parser {
 
         $this->elaborateConfig();
     }
+    // }}}
 
+    // {{{ function elaborateConfig
     /**
      *
      * @access public
@@ -134,7 +146,15 @@ class PG_Script_Parser {
 
         return $this->config;
     }
+    // }}}
 
+    // {{{ function handleConfigFiles
+    /**
+     *
+     * @access protected
+     * @param  string    $key
+     * @return void
+     */
     protected function handleConfigFiles($key) {
         $exclude = 'EXCLUDE_' . substr($key, 0, -1) . '_PATTERN';
         $this->config[$key][$exclude] = split(',\s*', $this->config[$key][$exclude]);
@@ -144,23 +164,41 @@ class PG_Script_Parser {
             $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'FOOTER');
         }
     }
+    // }}}
 
+    // {{{ function setInputInfoField
+    /**
+     *
+     * @access protected
+     * @param  array     $param
+     * @param  string    $field
+     * @return void
+     */
     protected function setInputInfoField($param, $field) {
         if (!isset($param[$field])) {
             $param[$field] = $this->config[$field];
         }
     }
+    // }}}
 
+    // {{{ function analyzeOptions
+    /**
+     *
+     * @access protected
+     * @return void
+     */
     protected function analyzeOptions() {
         foreach($this->config as $key => $value) {
             $this->config[$key] = array_map(array($this, 'convertToBoolean'), $value);
         }
     }
+    // }}}
 
+    // {{{ function convertToBoolean
     /**
      *
      * @access protected
-     * @param  mixed $value
+     * @param  mixed           $value
      * @return boolean | mixed
      */
     protected function convertToBoolean($value) {
@@ -174,12 +212,15 @@ class PG_Script_Parser {
 
         return $value;
     }
+    // }}}
 
+    // {{{ function parseList
     /**
      *
      * @access protected
-     * @param  string $config
-     * @param  string $prefix
+     * @param  string    $config
+     * @param  string    $prefix
+     * @return void
      */
     protected function parseList($config, $prefix) {
         $new = array();
@@ -193,4 +234,6 @@ class PG_Script_Parser {
         }
         $config['LIST'] = $new;
     }
+    // }}}
+    // }}}
 }

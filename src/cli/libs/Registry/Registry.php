@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,12 +47,46 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Registry {
+    // {{{ PROPERTIES
+    /**
+     *
+     * @static
+     * @access public
+     * @var    array
+     */
     public static $elements = array();
+
+    /**
+     *
+     * @static
+     * @access public
+     * @var    PG_Registry
+     */
     public static $instance = null;
 
-    const ARRAY_APPEND   = 0;
-    const INTEGER_APPEND = 1;
+    /**
+     *
+     * @static
+     * @var integer
+     */
+    const ARRAY_APPEND = 0;
 
+    /**
+     *
+     * @static
+     * @var integer
+     */
+    const INTEGER_APPEND = 1;
+    // }}}
+
+    // {{{ METHODS
+    // {{{ function getInstance
+    /**
+     *
+     * @static
+     * @access public
+     * @return PG_Registry
+     */
     public static function getInstance() {
         if (is_null(self::$instance)) {
             self::$instance = new self();
@@ -60,14 +94,32 @@ class PG_Registry {
 
         return self::$instance;
     }
+    // }}}
 
+    // {{{ function add
+    /**
+     *
+     * @access public
+     * @param  string  $key
+     * @param  mixed   $value
+     * @param  integer $type
+     * @return void
+     */
     public function add($key, $value, $type = null) {
         if ($type == self::ARRAY_APPEND) {
             $value = array($value);
         }
         $this->elements[$key] = $value;
     }
+    // }}}
 
+    // {{{ function get
+    /**
+     *
+     * @access public
+     * @param  string       $key
+     * @return mixed | null
+     */
     public function get($key) {
         if (isset($this->elements[$key])) {
             return $this->elements[$key];
@@ -75,13 +127,31 @@ class PG_Registry {
 
         return null;
     }
+    // }}}
 
+    // {{{ function remove
+    /**
+     *
+     * @access public
+     * @param  string $key
+     * @return void
+     */
     public function remove($key) {
         if (isset($this->elements[$key])) {
             unset($this->elements[$key]);
         }
     }
+    // }}}
 
+    // {{{ function append
+    /**
+     *
+     * @access public
+     * @param  string  $key
+     * @param  mixed   $value
+     * @param  integer $type
+     * @return void
+     */
     public function append($key, $value, $type = null) {
         if (isset($this->elements[$key])) {
             if (is_array($value)) {
@@ -95,4 +165,5 @@ class PG_Registry {
             $this->add($key, $value, $type);
         }
     }
+    // }}}
 }

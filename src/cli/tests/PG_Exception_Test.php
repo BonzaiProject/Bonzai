@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -61,5 +61,9 @@ class PG_Exception_Test extends PHPUnit_Framework_TestCase {
 
     protected function tearDown() {
         parent::tearDown();
+    }
+
+    public function testNothing() {
+        $this->markTestSkipped('There\'s nothing to be tested in this Exception class.');
     }
 }

@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -48,31 +48,49 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Controller {
+    // {{{ PROPERTIES
     /**
      *
      * @access protected
-     * @var    array $options
+     * @var    array
      */
     protected $options = array();
+    // }}}
 
+    // {{{ METHODS
+    // {{{ function __construct
     /**
      *
      * @access public
+     * @return void
      */
     public function __construct() {
         // Register the custom autoloader
         spl_autoload_register('PG_Controller::__autoload');
+    }
+    // }}}
 
+    // {{{ function elaborate
+    /**
+     *
+     * @access public
+     * @return void
+     */
+    public function elaborate() {
         // Get the Script Options
-        $this->options = new PG_Utils_Options($_SERVER['argv']);
+        $this->options = new PG_Utils_Options();
+        $this->options->init($_SERVER['argv']);
 
         // Switch to Selected Task
         $this->handleTask();
     }
+    // }}}
 
+    // {{{ function handleTask
     /**
      *
      * @access public
+     * @return void
      */
     public function handleTask()
     {
@@ -82,27 +100,35 @@ class PG_Controller {
         // load and excute task
         $task->loadAndExecute($this->options);
     }
+    // }}}
 
+    // {{{ function __autoload
     /**
      *
      * @access public
-     * @param  string $name
+     * @param  string       $name
+     * @throws PG_Exception
+     * @return void
      */
     public function __autoload($name) {
-        // Get the class filename
-        $name     = preg_replace('/^PG_/', '', $name);
-        $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
+        if (substr($name, 0, 3) == 'PG_') {
+            // Get the class filename
+            $name     = preg_replace('/^PG_/', '', $name);
+            $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
 
-        $full_filename = __DIR__ . '/../' . $filename . '.php';
-        if (!file_exists($full_filename) && ($name == $filename)) {
-            $filename     .= DIRECTORY_SEPARATOR . $name;
             $full_filename = __DIR__ . '/../' . $filename . '.php';
-        }
+            if (!file_exists($full_filename) && ($name == $filename)) {
+                $filename     .= DIRECTORY_SEPARATOR . $name;
+                $full_filename = __DIR__ . '/../' . $filename . '.php';
+            }
 
-        if (!file_exists($full_filename)) {
-            throw new PG_Exception('The class `' . $name . '` cannot be loaded'); // TODO: BLOCKER
-        }
+            if (!file_exists($full_filename)) {
+                throw new PG_Exception('The class `' . $name . '` cannot be loaded'); // TODO: BLOCKER
+            }
 
-        require_once $full_filename;
+            require_once $full_filename;
+        }
     }
+    // }}}
+    // }}}
 }

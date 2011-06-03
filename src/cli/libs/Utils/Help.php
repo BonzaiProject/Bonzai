@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,10 +47,13 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Utils_Help {
+    // {{{ METHODS
+    // {{{ function eleborate
     /**
      *
-     * @param  PG_Utils_Options $options
      * @access public
+     * @param  PG_Utils_Options $options
+     * @return void
      */
     public function eleborate(PG_Utils_Options $options) {
         printf("       _            ____                     _ _             ____\n");
@@ -80,4 +83,6 @@ class PG_Utils_Help {
             printf("\n%s\n\n", _("Report bugs to bugs@phpguardian.org"));
         }
     }
+    // }}}
+    // }}}
 }

@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -63,31 +63,38 @@ class PG_Utils_Options_Test extends PHPUnit_Framework_TestCase {
         parent::tearDown();
     }
 
-    public function test__construct() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+    public function testInit() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    protected function testParseOptions() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+    public function testParseOptions() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetParameters() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: The getter need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetOptions() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: The getter need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetOption($key) {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+    public function testGetOption() {
+        // TODO: The getter need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetScriptParameters() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: The getter need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetLabelParameter($key) {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+    public function testGetLabelParameter() {
+        // TODO: The getter need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

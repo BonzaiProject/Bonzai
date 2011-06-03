@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -64,15 +64,22 @@ class PG_Controller_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function test__construct() {
+        // TODO: The constructor need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    public function testElaborate() {
+        // TODO: $this->object->elaborate();
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testHandleTask()
-    {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+    public function testHandleTask() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function test__autoload() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

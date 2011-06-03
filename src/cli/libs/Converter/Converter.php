@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,6 +47,15 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Converter {
+    // {{{ METHODS
+    // {{{ function convert
+    /**
+     *
+     * @access protected
+     * @param  string    $filename
+     * @param  boolean   $asptag
+     * @return string
+     */
     protected function convert($filename, $asptag = false) {
         $content = PG_Utils::getFileContent($filename);
 
@@ -63,7 +72,17 @@ class PG_Converter {
 
         return $source;
     }
+    // }}}
 
+    // {{{ function process
+    /**
+     *
+     * @access protected
+     * @param  string       $data
+     * @param  boolean      $asptag
+     * @throws PG_Exception
+     * @return string
+     */
     protected function process($data, $asptag = false) {
         if (empty($data)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
@@ -104,11 +123,13 @@ class PG_Converter {
 
         return $final_data;
     }
+    // }}}
 
+    // function getTags
     /**
      *
      * @access protected
-     * @param  boolean $asptag
+     * @param  boolean   $asptag
      * @return array
      */
     protected function getTags($asptag) {
@@ -124,7 +145,17 @@ class PG_Converter {
 
         return array($pt_open_long, $pt_open_short, $pt_close);
     }
+    // }}}
 
+    // {{{ function finder
+    /**
+     *
+     * @access protected
+     * @param  string       $data
+     * @param  boolean      $asptag
+     * @throws PG_Exception
+     * @return array
+     */
     protected function finder($data, $asptag = false) {
         if (empty($data)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
@@ -148,7 +179,18 @@ class PG_Converter {
 
         return $php;
     }
+    // }}}
 
+    // {{{ function analyzeBlock
+    /**
+     *
+     * @access protected
+     * @param  string $data
+     * @param  integer $pos
+     * @param  array $php
+     * @param  boolean $opened
+     * @return boolean
+     */
     protected function analyzeBlock($data, $pos, $php, $opened) {
     global $pt_close, $pt_open_short, $pt_open_long, $pt_size_long, $count; // TODO: remove these global vars
 
@@ -172,11 +214,21 @@ class PG_Converter {
 
         return $opened;
     }
+    // }}}
 
+    // {{{ function isOpened
+    /**
+     *
+     * @access protected
+     * @param  array     $php
+     * @param  string    $next
+     * @param  integer   $pos
+     * @return boolean
+     */
     protected function isOpened($php, $next, $pos) {
-   	global $count;
-   	
-    	$opened = in_array($next, array("\n", "=", " "));
+       global $count;
+
+        $opened = in_array($next, array("\n", "=", " "));
         if ($opened) {
             $this->setBlock(&$php, ++$count, 'open', $pos);
             PG_Utils::pg_message("Found php start #%s: %s", true, $count, $php[$count]['open']);
@@ -184,7 +236,18 @@ class PG_Converter {
 
         return $opened;
     }
+    // }}}
 
+    // {{{ function setBlock
+    /**
+     *
+     * @access protected
+     * @param  string    $container
+     * @param  integer   $pos
+     * @param  string    $key
+     * @param  array     $value
+     * @return void
+     */
     protected function setBlock($container, $pos, $key, $value) {
       if (empty($container[$pos])) {
           $container[$pos] = array('open' => 0, 'close' => 0, 'size' => 0);
@@ -192,4 +255,6 @@ class PG_Converter {
 
       $container[$pos][$key] = $value;
     }
+    // }}}
+    // }}}
 }

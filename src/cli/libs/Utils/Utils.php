@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,11 +47,14 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Utils {
+    // {{{ METHODS
+    // {{{ function getFilePath
     /**
      *
-     * @access public
      * @static
+     * @access public
      * @param  string $file
+     * @throws PG_Exception
      * @return string
      */
     public static function getFilePath($file) {
@@ -65,13 +68,16 @@ class PG_Utils {
             return $file;
         }
     }
+    // }}}
 
+    // {{{ function rename_file
     /**
      *
-     * @access public
      * @static
-     * @param  string $filename
+     * @access public
+     * @param  string  $filename
      * @param  boolean $backup
+     * @throws PG_Exception
      * @return void
      */
     public static function rename_file($filename, $backup = true) {
@@ -85,13 +91,16 @@ class PG_Utils {
             file_put_contents($backup_filename, self::getFileContent($filename));
         }
     }
+    // }}}
 
+    // {{{ function rscandir
     /**
      *
-     * @access public
      * @static
-     * @param  string $base
-     * @param  array $data
+     * @access public
+     * @param  string       $base
+     * @param  array        $data
+     * @throws PG_Exception
      * @return array
      */
     public static function rscandir($base = '', &$data = array()) {
@@ -113,7 +122,17 @@ class PG_Utils {
 
         return $data;
     }
+    // }}}
 
+    // {{{ function getFileContent
+    /**
+     *
+     * @static
+     * @access public
+     * @param  string       $filename
+     * @throws PG_Exception
+     * @return string
+     */
     public static function getFileContent($filename) {
         if (!is_readable($filename)) {
             throw new PG_Exception('The file `' . $filename . '` cannot be opened'); // TODO: NON BLOCKER
@@ -121,7 +140,18 @@ class PG_Utils {
 
         return file_get_contents($filename);
     }
+    // }}}
 
+    // {{{ function putFileContent
+    /**
+     *
+     * @static
+     * @access public
+     * @param  string       $filename
+     * @param  string       $content
+     * @throws PG_Exception
+     * @return string
+     */
     public static function putFileContent($filename, $content) {
         if (!is_writable($filename)) {
             throw new PG_Exception('The file `' . $filename . '` cannot be written'); // TODO: BLOCKER ?
@@ -129,11 +159,13 @@ class PG_Utils {
 
         return file_get_contents($filename);
     }
+    // }}}
 
+    // {{{ function pg_message
     /**
      *
-     * @access public
      * @static
+     * @access public
      * @return void
      */
     public static function pg_message() {
@@ -151,4 +183,6 @@ class PG_Utils {
             printf("[%d] %s\n", time(), $gettext_text);
         }
     }
+    // }}}
+    // }}}
 }

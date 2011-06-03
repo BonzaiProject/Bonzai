@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -46,47 +46,46 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Server {
-
     // {{{ PROPERTIES
     /**
      * The content data
      * @access private
-     * @type string
+     * @var    string
      */
     private $_data;
 
     /**
      * String format for log
      * @access public
-     * @type string
+     * @var    string
      *
-	 * %i  REMOTE_ADDR
-	 * %h  gethostbyaddr(REMOTE_ADDR)
-	 * %d  HTTP_HOST
-	 * %t  strftime(date_format)
-	 * %s  SCRIPT_FILENAME
-	 * %r  HTTP_REFERER
-	 * %ua HTTP_USER_AGENT
-	 * %se SERVER_SIGNATURE
-	 * %so SERVER_SOFTWARE
-	 * %a  SERVER_ADDR
-	 * %p  SERVER_PORT
-	 * %dr DOCUMENT_ROOT
-	 * %e  SERVER_ADMIN
+     * %i  REMOTE_ADDR
+     * %h  gethostbyaddr(REMOTE_ADDR)
+     * %d  HTTP_HOST
+     * %t  strftime(date_format)
+     * %s  SCRIPT_FILENAME
+     * %r  HTTP_REFERER
+     * %ua HTTP_USER_AGENT
+     * %se SERVER_SIGNATURE
+     * %so SERVER_SOFTWARE
+     * %a  SERVER_ADDR
+     * %p  SERVER_PORT
+     * %dr DOCUMENT_ROOT
+     * %e  SERVER_ADMIN
      */
     public $log_format = "[%t] %i %h %d:%s";
 
     /**
      * Log file
      * @access public
-     * @type string
+     * @type   string
      */
     public $log_file = "/home/fabio/www/phpg.log";
 
     /**
      * Date format into log_format
      * @access public
-     * @type string
+     * @var    string
      * see php docs for strftime syntax (http://www.php.net/strftime)
      */
     public $date_format = "%a %d %b %Y %H:%M:%S";
@@ -94,14 +93,14 @@ class PG_Server {
     /**
      * Script for execution on remote servers
      * @access public
-     * @type string
+     * @var    string
      */
     public $exec_file = "/home/fabio/www/phpg.exec";
 
     /**
      * Content of execution script
      * @access private
-     * @type sting
+     * @var    sting
      */
     private $_exec_file_content;
     // }}}
@@ -112,8 +111,9 @@ class PG_Server {
      * Constructor (PHP5)
      * @access public
      * @param  string $data
+     * @return void
      */
-    public function __construct($data = '') {
+    public function __construct($data = "") {
         $this->_data = $data;
 
         if (file_exists($this->exec_file)) $this->_exec_file_content = file_get_contents($this->exec_file);
@@ -155,11 +155,20 @@ class PG_Server {
         return $this->_exec_file_content;
     }
     // }}}
-    // }}}
 
+    // {{{ function getValue
+    /**
+     *
+     * @access protected
+     * @param  array     $param_arr
+     * @param  array     $key
+     * @return mixed
+     */
     protected function getValue($param_arr, $key) {
         return !empty($param_arr[$key]) ? $param_arr[$key] : 'N/A';
     }
+    // }}}
+    // }}}
 }
 
 /**
@@ -176,4 +185,3 @@ if (isset($_GET['pc'])) {
         }
     }
 }
-exit;

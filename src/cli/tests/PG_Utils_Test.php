@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -63,27 +63,33 @@ class PG_Utils_Test extends PHPUnit_Framework_TestCase {
         parent::tearDown();
     }
 
-    public function getFilePath() {
+    public function testGetFilePath() {
+        // TODO: $this->object->getFilePath($file);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function rename_file() {
+    public function testRename_file() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    public function testRscandir() {
+        // TODO: $this->object->rscandir($base = '', &$data = array());
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function rscandir() {
+    public function testGetFileContent() {
+        // TODO: $this->object->getFileContent($filename);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function getFileContent() {
+    public function testPutFileContent() {
+        // TODO: $this->object->putFileContent($filename, $content);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function putFileContent() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function pg_message() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+    public function testPg_message() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

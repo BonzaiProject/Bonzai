@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -45,22 +45,29 @@
  * @package phpGuardian
  */
 class PG_Task {
+    // {{{ PROPERTIES
     /**
      *
-     * @var string $task
+     * @access protected
+     * @var    string    $task
      */
     protected $task = null;
 
     /**
      *
-     * @var mixed $parameters
+     * @access protected
+     * @var    mixed     $parameters
      */
     protected $parameters = null;
+    // }}}
 
+    // {{{ METHODS
+    // {{{ function load
     /**
      *
      * @access public
      * @param  PG_Utils_Options $options
+     * @return void
      */
     public function load(PG_Utils_Options $options) {
         $this->task       = "PG_Help";
@@ -74,10 +81,13 @@ class PG_Task {
             $this->parameters = array_shift($options->getParameters());
         }
     }
+    // }}}
 
+    // {{{ function execute
     /**
      *
      * @access public
+     * @throws PG_Exception
      * @return mixed
      */
     public function execute() {
@@ -90,7 +100,9 @@ class PG_Task {
             return call_user_method('elaborate', $class, $this->parameters);
         }
     }
+    // }}}
 
+    // {{{ function loadAndExecute
     /**
      *
      * @access public
@@ -101,4 +113,6 @@ class PG_Task {
         $this->load($options);
         return $this->execute();
     }
+    // }}}
+    // }}}
 }

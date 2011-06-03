@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,25 +47,32 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Script_Generator {
+    // {{{ PROPERTIES
     /**
      *
      * @access protected
      * @var    string
      */
     protected $script = null;
+    // }}}
 
+    // {{{ METHODS
+    // {{{ function __construct
     /**
      *
      * @access public
+     * @return void
      */
     public function __construct() {
         $this->script = PG_Utils::getFileContent(__DIR__ . '/Script.dist');
     }
+    // }}}
 
+    // {{{ function elaborate
     /**
      *
      * @access public
-     * @param  string $file
+     * @param  string  $file
      * @return boolean
      */
     public function elaborate($file) {
@@ -73,4 +80,6 @@ class PG_Script_Generator {
 
         return PG_Utils::putFileContent($file, $this->script);
     }
+    // }}}
+    // }}}
 }

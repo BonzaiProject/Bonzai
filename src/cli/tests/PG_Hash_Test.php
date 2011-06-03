@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -64,6 +64,7 @@ class PG_Hash_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function testHash() {
+        // TODO: $this->object->hash($text);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

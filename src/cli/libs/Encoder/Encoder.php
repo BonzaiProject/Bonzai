@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,10 +47,14 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Encoder {
+    // {{{ METHODS
+    // {{{ function elaborate
     /**
      *
      * @access public
-     * @param  array $element
+     * @param  array        $element
+     * @throws PG_Exception
+     * @return void
      */
     public function elaborate($element) {
         if (!is_array($element) || empty($element)) {
@@ -89,7 +93,15 @@ class PG_Encoder {
         // Save the file
         PG_Utils::putFileContent($encoded_filename, $encoded_content . $this->getHeader($element, $this->getInner()) . $this->getFooter($element));
     }
+    // }}}
 
+    // {{{ function pgCodeCrypt
+    /**
+     *
+     * @access protected
+     * @param  string        $data
+     * @return string | null
+     */
     protected function pgCodeCrypt($data) {
         if (empty($data)) {
             // Print a message
@@ -124,7 +136,18 @@ class PG_Encoder {
 
         return $crdata;
     }
+    // }}}
 
+    // {{{ function pgCycleEncrypt
+    /**
+     *
+     * @access protected
+     * @param  string        $string
+     * @param  integer       $key_len
+     * @param  integer       $data_len
+     * @throws PG_Exception
+     * @return string | null
+     */
     protected function pgCycleEncrypt($string, $key_len, $data_len) {
         if (empty($string)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
@@ -140,11 +163,27 @@ class PG_Encoder {
 
         return $crdata;
     }
+    // }}}
 
+    // {{{ function encodeChar
+    /**
+     *
+     * @access protected
+     * @param  string    $character
+     * @param  string    $key
+     * @return string
+     */
     protected function encodeChar($character, $key) {
         return dechex(ord($character) ^ ord($key));
     }
+    // }}}
 
+    // {{{ function getInner
+    /**
+     *
+     * @access protected
+     * @return string
+     */
     protected function getInner() {
         $PHPG_LIBRARY_STRING        = ''; // TODO: need include this from .h
         $PG_S_BASE_LIB_PATH         = ''; // TODO: need include this from .h
@@ -157,25 +196,48 @@ class PG_Encoder {
 
         return $PHPG_LIBRARY_STRING . $PG_S_BASE_LIB_PATH; // TODO: MISSING STRINGS
     }
+    // }}}
 
+    // {{{ function getHeader
+    /**
+     *
+     * @access protected
+     * @param  array     $element
+     * @param  string    $inner
+     * @return string
+     */
     protected function getHeader($element, $inner) {
-        $header = "<" . "?php\n\n" . $element['HEADER'] . $inner;
         if ($element['HEADER'] == PG_Script_Parser::$config['CONFIGURATION']['HEADER']) {
-            $header = "<" . "?php\n\n" . PG_Script_Parser::$config['CONFIGURATION']['HEADER'] . $inner;
+            return "<" . "?php\n\n" . PG_Script_Parser::$config['CONFIGURATION']['HEADER'] . $inner;
         }
 
-        return $header;
+        return "<" . "?php\n\n" . $element['HEADER'] . $inner;
     }
+    // }}}
 
+    // {{{ function getFooter
+    /**
+     *
+     * @access protected
+     * @param  array     $element
+     * @return string
+     */
     protected function getFooter($element) {
-        $footer = "');\n" . $element['FOOTER'] . "\n?" . ">";
         if ($element['FOOTER'] == PG_Script_Parser::$config['CONFIGURATION']['FOOTER']) {
-            $footer = "');\n" . PG_Script_Parser::$config['CONFIGURATION']['FOOTER'] . "\n?" . ">";
+            return "');\n" . PG_Script_Parser::$config['CONFIGURATION']['FOOTER'] . "\n?" . ">";
         }
 
-        return $footer;
+        return "');\n" . $element['FOOTER'] . "\n?" . ">";
     }
+    // }}}
 
+    // {{{ function getEncodedFilename
+    /**
+     *
+     * @access protected
+     * @param  string    $filename
+     * @return string
+     */
     protected function getEncodedFilename($filename) {
         if (PG_Script_Parser::$config['CONFIGURATION']['SAVE_ENCODED_AS_NEW']) {
             return $filename . ".encoded";
@@ -183,7 +245,15 @@ class PG_Encoder {
 
         return $filename;
     }
+    // }}}
 
+    // {{{ function pgCreateFileKey
+    /**
+     *
+     * @access protected
+     * @throws PG_Exception
+     * @return void
+     */
     protected function pgCreateFileKey() {
         if (empty(PG_Script_Parser::$config['KEY']['KEY_FILE'])) {
             PG_Script_Parser::$config['KEY']['KEY_FILE'] = "key.pgk";
@@ -199,4 +269,6 @@ class PG_Encoder {
         }
         PG_Utils::putFileContent(PG_Script_Parser::$config['KEY']['KEY_FILE'], PG_Script_Parser::$config['KEY']['KEY_HASH']);
     }
+    // }}}
+    // }}}
 }

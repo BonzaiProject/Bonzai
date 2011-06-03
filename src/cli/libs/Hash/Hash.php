@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,6 +47,16 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Hash {
+    // {{{ METHODS
+    // {{{ function hash
+    /**
+     *
+     * @static
+     * @access public
+     * @param  string       $text
+     * @throws PG_Exception
+     * @return string
+     */
     public static function hash($text) {
         if (!empty($text)) {
             throw new PG_Exception('Cannot generate an hash from blank string'); // TODO: BLOCKER ?
@@ -68,4 +78,6 @@ class PG_Hash {
 
         return $hash;
     }
+    // }}}
+    // }}}
 }

@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -47,10 +47,11 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Utils_Options {
+    // {{{ PROPERTIES
     /**
      *
      * @access protected
-     * @var    array $parameters
+     * @var    array     $parameters
      */
     protected $parameters = array(
         'g:' => 'generate:',
@@ -60,19 +61,24 @@ class PG_Utils_Options {
     /**
      *
      * @access protected
-     * @var    array $labels
+     * @var    array     $labels
      */
     protected $labels = array(
         'generate' => 'Generate a new script file',
         'help'     => 'Show the help',
         'version'  => 'Show the version');
+    // }}}
 
+    // {{{ METHODS
+    // {{{ function init
     /**
      *
      * @access public
-     * @param  array $argv
+     * @param  array  $argv
+     * @throws PG_Exception
+     * @return void
      */
-    public function __construct($argv = array()) {
+    public function init($argv = array()) {
         if (!is_array($argv) || empty($argv)) {
             throw new PG_Exception('Missing the script arguments'); // TODO: BLOCKER
         }
@@ -82,11 +88,16 @@ class PG_Utils_Options {
 
         $this->parseOptions($this->options, $this->non_options);
     }
+    // }}}
 
+    // {{{ function parseOptions
     /**
      *
-     * @param array $options
-     * @param array $non_options
+     * @access protected
+     * @param  array     $options
+     * @param  array     $non_options
+     * @throws PG_Exception
+     * @return void
      */
     protected function parseOptions(&$options, &$non_options) {
         if (!is_array($options) || !is_array($non_options)) {
@@ -108,7 +119,9 @@ class PG_Utils_Options {
             }
         }
     }
+    // }}}
 
+    // {{{ function getParameters
     /**
      *
      * @access public
@@ -117,7 +130,9 @@ class PG_Utils_Options {
     public function getParameters() {
         return $this->non_options;
     }
+    // }}}
 
+    // {{{ function getOptions
     /**
      *
      * @access public
@@ -126,11 +141,13 @@ class PG_Utils_Options {
     public function getOptions() {
         return $this->options;
     }
+    // }}}
 
+    // {{{ function getOption
     /**
      *
      * @access public
-     * @param  string $key
+     * @param  string        $key
      * @return string | null
      */
     public function getOption($key) {
@@ -140,7 +157,9 @@ class PG_Utils_Options {
 
         return null;
     }
+    // }}}
 
+    // {{{ function getScriptParameters
     /**
      *
      * @access public
@@ -149,11 +168,13 @@ class PG_Utils_Options {
     public function getScriptParameters() {
         return $this->parameters;
     }
+    // }}}
 
+    // {{{ function getLabelParameter
     /**
      *
      * @access public
-     * @param  string $key
+     * @param  string        $key
      * @return string | null
      */
     public function getLabelParameter($key) {
@@ -163,4 +184,6 @@ class PG_Utils_Options {
 
         return null;
     }
+    // }}}
+    // }}}
 }

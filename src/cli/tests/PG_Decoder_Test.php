@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -64,22 +64,27 @@ class PG_Decoder_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function testElaborate() {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testPgCodeDecrypt() {
+        // TODO: $this->object->pgCodeDecrypt($data);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testPgCycleDecrypt() {
+        // TODO: $this->object->pgCycleDecrypt($string, $key_len, $data_len);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testDecodeChar() {
+        // TODO: $this->object->decodeChar($characters, $key);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetDecodedFilename() {
+        // TODO: $this->object->getDecodedFilename($filename);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }
