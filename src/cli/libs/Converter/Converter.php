@@ -90,7 +90,7 @@ class PG_Converter {
      *
      */
     public function __construct() {
-        list($this->pt_open_long, $this->pt_open_short, $this->pt_close) = $this->getTags();
+        list($this->pt_open_long, $this->pt_open_short, $this->pt_close) = $this->getTags(false);
         $this->pt_size_long = strlen($this->pt_open_long);
     }
     // }}}
