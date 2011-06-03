@@ -78,7 +78,7 @@ class PG_Utils_Options {
      * @throws PG_Exception
      * @return void
      */
-    public function init($argv = array()) {
+    public function init($argv) {
         if (!is_array($argv) || empty($argv)) {
             throw new PG_Exception('Missing the script arguments'); // TODO: BLOCKER
         }

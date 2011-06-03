@@ -47,7 +47,47 @@
  * @link      http://www.phpguardian.org
  */
 class PG_Converter {
+	// {{{ PROPERTIES
+	/**
+	 * 
+	 * @access protected
+	 * @var    string
+	 */
+	protected $pt_open_long;
+	
+	/**
+	 * 
+	 * @access protected
+	 * @var    string
+	 */
+	protected $pt_open_short;
+	
+	/**
+	 * 
+	 * @access protected
+	 * @var    string
+	 */
+	protected $pt_close;
+	
+	/**
+	 * 
+	 * @access protected
+	 * @var    integer
+	 */
+	protected $pt_size_long;
+	// }}}
+	
     // {{{ METHODS
+    // {{{ function __construct
+    /**
+     *
+     */
+    public function __construct() {
+    	list($this->pt_open_long, $this->pt_open_short, $this->pt_close) = $this->getTags();
+        $this->pt_size_long = strlen($this->pt_open_long);
+    }
+    // }}}
+    
     // {{{ function convert
     /**
      *
@@ -88,41 +128,62 @@ class PG_Converter {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
 
-        $count = -1;
-
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
-        list($pt_open_long, $pt_open_short, $pt_close) = $this->getTags($asptag);
+        list($this->pt_open_long, $this->pt_open_short, $this->pt_close) = $this->getTags($asptag);
 
-        $data = str_replace($pt_close, ";" . $pt_close, $data);
+        $data = str_replace($this->pt_close, ";" . $this->pt_close, $data);
         $php = $this->finder($data, $asptag);
 
-        $max = substr_count($data, $pt_open_short);
+        $max = substr_count($data, $this->pt_open_short);
 
         $start = $count = 0;
         $end   = $php[0]['open'];
 
         $data_len = strlen($data);
-        $final_data = $pt_open_long . "\n";
+        $final_data = $this->pt_open_long . "\n";
 
         for($i = 0; $i < $data_len; $i++) {
-            $elem = $php[$count];
-            if ($count < $max && $i >= $elem['open'] && $i <= $elem['close']) {
-                $final_data .= substr($data, $elem['open'] + $elem['size'], $elem['close'] - $elem['open'] - $elem['size']);
-                $start       = $i = (int)$elem['close'] + 2;
-                $end         = ($count + 1 >= $max) ? $data_len : $php[$count + 1]['open'];
-                $count++;
-            } else if ($i >= $start && $i <= $end) {
-                $final_data .= "\necho <<<PHPG_HD\n" . substr($data, $start, $end - $start) . "\nPHPG_HD;\n";
-                $i = $end;
-            } else {
-                $final_data .= "\necho <<<PHPG_HD\n" . substr($data, $i, $data_len - $i) . "\nPHPG_HD;\n";
-                $i = $data_len;
-            }
+            $final_data .= $this->analyzeProcessBlock($data, $php[$count], &$count, $max, &$i, &$start, &$end, $data_len);
         }
-        $final_data .= $pt_close;
+        $final_data .= $this->pt_close;
 
         return $final_data;
     }
+    // }}}
+    
+    // {{{ function analyzeProcessBlock
+    // TODO: add to test
+    /**
+     * 
+     * @access protected
+     * @param  array     $data
+     * @param  array     $elem
+     * @param  integer   $count
+     * @param  integer   $max
+     * @param  integer   $i
+     * @param  integer   $start
+     * @param  integer   $end
+     * @param  integer   $data_len
+     * @return string
+     */
+    protected function analyzeProcessBlock($data, $elem, $count, $max, $i, $start, $end, $data_len) {
+    	$final_data = '';
+    	
+    	if ($count < $max && $i >= $elem['open'] && $i <= $elem['close']) {
+        	$final_data .= substr($data, $elem['open'] + $elem['size'], $elem['close'] - $elem['open'] - $elem['size']);
+            $start       = $i = (int)$elem['close'] + 2;
+            $end         = ($count + 1 >= $max) ? $data_len : $php[$count + 1]['open'];
+            $count++;
+        } else if ($i >= $start && $i <= $end) {
+            $final_data .= "\necho <<<PHPG_HD\n" . substr($data, $start, $end - $start) . "\nPHPG_HD;\n";
+            $i = $end;
+        } else {
+            $final_data .= "\necho <<<PHPG_HD\n" . substr($data, $i, $data_len - $i) . "\nPHPG_HD;\n";
+            $i = $data_len;
+        }
+        
+        return $final_data;
+    } 
     // }}}
 
     // function getTags
@@ -169,12 +230,12 @@ class PG_Converter {
 
         $php = array();
 
-        $max = substr_count($data, $pt_open_short);
+        //$max = substr_count($data, $pt_open_short);
 
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         $data_len = strlen($data);
         for ($j = 0; $j < $data_len; $j++) {
-            $opened = $this->analyzeBlock($data, $j, &$php, $opened);
+            $opened = $this->analyzeBlock($data, $j, &$php, $opened, &$count);
         }
 
         return $php;
@@ -191,22 +252,20 @@ class PG_Converter {
      * @param  boolean $opened
      * @return boolean
      */
-    protected function analyzeBlock($data, $pos, $php, $opened) {
-    global $pt_close, $pt_open_short, $pt_open_long, $pt_size_long, $count; // TODO: remove these global vars
-
-        $tag_long  = substr($data, $pos, $pt_size_long);
+    protected function analyzeBlock($data, $pos, $php, $opened, $count) {
+        $tag_long  = substr($data, $pos, $this->pt_size_long);
         $tag_short = substr($data, $pos, 2);
 
-        $is_long_tag  = $tag_long == $pt_open_long;
-        $is_short_tag = $tag_short == $pt_open_short;
+        $is_long_tag  = $tag_long == $this->pt_open_long;
+        $is_short_tag = $tag_short == $this->pt_open_short;
 
         if (!$opened && $is_long_tag || $is_short_tag) {
-            $len  = $is_long_tag ? $pt_size_long : 2;
+            $len  = $is_long_tag ? $this->pt_size_long : 2;
             $next = substr($data, $pos + $len, 1);
             $this->setBlock(&$php, $count + 1, 'size', $len);
 
             $opened = $this->isOpened(&$php, $next, $pos);
-        } else if ($tag_short == $pt_close) {
+        } else if ($tag_short == $this->pt_close) {
             $this->setBlock(&$php, $count, 'close', $pos);
             PG_Utils::pg_message("Found php close #%s: %s", true, $count, $php[$count]['close']);
             $opened = false;

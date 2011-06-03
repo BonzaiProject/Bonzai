@@ -74,6 +74,29 @@ class PG_Script_Parser {
         $obj = new $class();
 
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
+		$this->expandPathsToFiles();
+
+        // TODO: ANALYZE THIS CODE FOR PROBLEMS
+        foreach($this->config['FILES']['LIST'] as $file) {
+            foreach($this->config['FILES']['EXCLUDE_PATH_PATTERN'] as $pattern) {
+                if (preg_match('/' . $pattern . '/', $file)) {
+                    continue 2;
+                }
+            }
+
+            $obj->elaborate($file);
+        }
+    }
+    // }}}
+    
+    // {{{ function expandPathsToFiles
+    // TODO: add to test
+    /**
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function expandPathsToFiles() {
         foreach($this->config['PATHS']['LIST'] as $path) {
             $files = PG_Utils::rscandir($path['PATH']);
             $files = preg_grep('/\.php$/', $files);
@@ -87,17 +110,6 @@ class PG_Script_Parser {
                 unset($elem['PATH']);
                 $this->config['FILES']['LIST'][] = $elem;
             }
-        }
-
-        // TODO: ANALYZE THIS CODE FOR PROBLEMS
-        foreach($this->config['FILES']['LIST'] as $file) {
-            foreach($this->config['FILES']['EXCLUDE_PATH_PATTERN'] as $pattern) {
-                if (preg_match('/' . $pattern . '/', $file)) {
-                    continue 2;
-                }
-            }
-
-            $obj->elaborate($file);
         }
     }
     // }}}
@@ -159,7 +171,8 @@ class PG_Script_Parser {
         $exclude = 'EXCLUDE_' . substr($key, 0, -1) . '_PATTERN';
         $this->config[$key][$exclude] = split(',\s*', $this->config[$key][$exclude]);
 
-        foreach($this->config[$key]['LIST'] as $k => $v) {
+        $keys = array_keys($this->config[$key]['LIST']);
+        foreach($keys as $k) {
             $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'HEADER');
             $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'FOOTER');
         }

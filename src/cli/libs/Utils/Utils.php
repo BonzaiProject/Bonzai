@@ -157,7 +157,7 @@ class PG_Utils {
             throw new PG_Exception('The file `' . $filename . '` cannot be written'); // TODO: BLOCKER ?
         }
 
-        return file_get_contents($filename);
+        return file_put_contents($filename, $content);
     }
     // }}}
 

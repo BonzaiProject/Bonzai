@@ -113,22 +113,48 @@ class PG_Controller {
     public function __autoload($name) {
         if (substr($name, 0, 3) == 'PG_') {
             // Get the class filename
-            $name     = preg_replace('/^PG_/', '', $name);
-            $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
+            $filename = $this->getClassFileName($name);
 
-            $full_filename = __DIR__ . '/../' . $filename . '.php';
-            if (!file_exists($full_filename) && ($name == $filename)) {
-                $filename     .= DIRECTORY_SEPARATOR . $name;
-                $full_filename = __DIR__ . '/../' . $filename . '.php';
-            }
-
-            if (!file_exists($full_filename)) {
+            if (!$this->checkFile($filename)) {
                 throw new PG_Exception('The class `' . $name . '` cannot be loaded'); // TODO: BLOCKER
             }
 
-            require_once $full_filename;
+            require_once __DIR__ . '/../' . $filename . '.php';;
         }
     }
     // }}}
+    
+    // {{{ function getClassFileName
+    // TODO: add to test
+    /**
+     * 
+     * @access protected
+     * @param  string    $name
+     * @return string
+     */
+    protected function getClassFileName($name) {
+    	$name     = preg_replace('/^PG_/', '', $name);
+        $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
+
+        if ($this->checkFile($filename) && ($name == $filename)) {
+            $filename .= DIRECTORY_SEPARATOR . $name;
+        }
+        
+        return $filename;
+    } 
+    
+    // {{{ function checkFile
+    // TODO: add to test
+    /**
+     * 
+     * @access protected
+     * @param  string    $filename
+     * @return boolean
+     */
+    protected function checkFile($filename) {
+    	$full_filename = __DIR__ . '/../' . $filename . '.php';
+    	
+    	return file_exists($full_filename);
+    }
     // }}}
 }
