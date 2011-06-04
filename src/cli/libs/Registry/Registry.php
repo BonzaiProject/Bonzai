@@ -43,7 +43,7 @@
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Registry {
@@ -144,6 +144,7 @@ class PG_Registry {
     // }}}
 
     // {{{ function append
+    // TODO: cyclomatic complex: 6
     /**
      *
      * @access public
@@ -158,7 +159,7 @@ class PG_Registry {
                 $this->elements[$key][] = $value;
             } elseif (is_string($this->elements[$key])) {
                 $this->elements[$key] .= $value;
-            } elseif (is_numeric($this->elements[$key]) && type == self::INTEGER_APPEND) {
+            } elseif (is_numeric($this->elements[$key]) && type == self::INTEGER_APPEND) { // TODO: too long
                 $this->elements[$key] += $value;
             }
         } else {

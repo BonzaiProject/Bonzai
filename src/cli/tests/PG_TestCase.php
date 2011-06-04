@@ -36,8 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/PG_TestCase.php';
-require_once __DIR__ . '/../libs/Encoder/Encoder.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  *
@@ -50,49 +49,18 @@ require_once __DIR__ . '/../libs/Encoder/Encoder.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Encoder_Test extends PG_TestCase {
-    public function testElaborate() {
-        // TODO: A method without return need to be tested?
-        //$this->markTestIncomplete('This test has not been implemented yet.');
+class PG_TestCase extends PHPUnit_Framework_TestCase {
+    protected $object;
+
+    protected function setUp() {
+        parent::setUp();
+
+        $className = substr(get_class($this), 0, -5);
+
+        $this->object = new $className;
     }
 
-    public function testCodeCrypt() {
-        // TODO: $this->object->codeCrypt($data);
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function testCycleEncrypt() {
-        // TODO: $this->object->cycleEncrypt($string, $key_len, $data_len);
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function testEncodeChar() {
-        // TODO: $this->object->encodeChar($character, $key);
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function testGetInner() {
-        // TODO: $this->object->getInner();
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function testGetHeader() {
-        // TODO: $this->object->getHeader($element, $inner);
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function testGetFooter() {
-        // TODO: $this->object->getFooter($element);
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function testGetEncodedFilename() {
-        // TODO: $this->object->getEncodedFilename($filename);
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function testCreateFileKey() {
-        // TODO: A method without return need to be tested?
-        //$this->markTestIncomplete('This test has not been implemented yet.');
+    protected function tearDown() {
+        parent::tearDown();
     }
 }

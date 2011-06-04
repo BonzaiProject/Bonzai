@@ -43,7 +43,7 @@
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Exception extends Exception {}

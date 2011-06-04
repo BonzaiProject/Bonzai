@@ -43,7 +43,7 @@
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Utils_Options {
@@ -83,7 +83,7 @@ class PG_Utils_Options {
             throw new PG_Exception('Missing the script arguments'); // TODO: BLOCKER
         }
 
-        $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters);
+        $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters); // TODO: too long
         $this->non_options = array_slice($argv, 1);
 
         $this->parseOptions($this->options, $this->non_options);
@@ -91,6 +91,7 @@ class PG_Utils_Options {
     // }}}
 
     // {{{ function parseOptions
+    // TODO: cyclomatic complex: 7
     /**
      *
      * @access protected
@@ -111,7 +112,7 @@ class PG_Utils_Options {
             $has_value = !$value ? '' : ':';
             $new_key   = $key . $has_value;
             if (!empty($this->parameters[$new_key])) {
-                $new_key = substr($this->parameters[$new_key], 0, strlen($this->parameters[$new_key]) - strlen($has_value));
+                $new_key = substr($this->parameters[$new_key], 0, strlen($this->parameters[$new_key]) - strlen($has_value)); // TODO: too long
                 if (empty($options[$new_key])) {
                     $options[$new_key] = $value;
                 }

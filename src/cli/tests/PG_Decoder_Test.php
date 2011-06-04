@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once 'PHPUnit/Framework/TestCase.php';
+require_once __DIR__ . '/PG_TestCase.php';
 require_once __DIR__ . '/../libs/Decoder/Decoder.php';
 
 /**
@@ -47,34 +47,22 @@ require_once __DIR__ . '/../libs/Decoder/Decoder.php';
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Decoder_Test extends PHPUnit_Framework_TestCase {
-    protected $object;
-
-    protected function setUp() {
-        parent::setUp();
-
-        $this->object = new PG_Decoder;
-    }
-
-    protected function tearDown() {
-        parent::tearDown();
-    }
-
+class PG_Decoder_Test extends PG_TestCase {
     public function testElaborate() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testPgCodeDecrypt() {
-        // TODO: $this->object->pgCodeDecrypt($data);
+    public function testCodeDecrypt() {
+        // TODO: $this->object->codeDecrypt($data);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testPgCycleDecrypt() {
-        // TODO: $this->object->pgCycleDecrypt($string, $key_len, $data_len);
+    public function testCycleDecrypt() {
+        // TODO: $this->object->cycleDecrypt($string, $key_len, $data_len);
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 

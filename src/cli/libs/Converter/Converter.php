@@ -43,7 +43,7 @@
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Converter {
@@ -90,8 +90,7 @@ class PG_Converter {
      *
      */
     public function __construct() {
-        list($this->pt_open_long, $this->pt_open_short, $this->pt_close) = $this->getTags(false);
-        $this->pt_size_long = strlen($this->pt_open_long);
+        $this->setTags(false);
     }
     // }}}
 
@@ -107,12 +106,12 @@ class PG_Converter {
         $content = PG_Utils::getFileContent($filename);
 
         // Increase the total originary bytes
-        PG_Registry::getInstance()->append('total_orig_bytes', strlen($content), PG_Registry::INTEGER_APPEND);
+        PG_Registry::getInstance()->append('total_orig_bytes', strlen($content), PG_Registry::INTEGER_APPEND); // TODO: too long
 
         $source = $this->process($content, $asptag);
 
         // Increase the total converted bytes
-        PG_Registry::getInstance()->append('total_converted_bytes', strlen($source), PG_Registry::INTEGER_APPEND);
+        PG_Registry::getInstance()->append('total_converted_bytes', strlen($source), PG_Registry::INTEGER_APPEND); // TODO: too long
 
         // Print a message
         PG_Utils::pg_message("Generated %s bytes.", true, strlen($source));
@@ -136,7 +135,7 @@ class PG_Converter {
         }
 
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
-        list($this->pt_open_long, $this->pt_open_short, $this->pt_close) = $this->getTags($asptag);
+        $this->setTags($asptag);
 
         $data = str_replace($this->pt_close, ";" . $this->pt_close, $data);
         $this->finder($data, $asptag);
@@ -150,7 +149,7 @@ class PG_Converter {
         $final_data = $this->pt_open_long . "\n";
 
         for($i = 0; $i < $data_len; $i++) {
-            $final_data .= $this->analyzeProcessBlock($data, &$count, $max, &$i, &$start, &$end, $data_len);
+            $final_data .= $this->analyzeProcessBlock($data, &$count, $max, &$i, &$start, &$end, $data_len); // TODO: too long
         }
         $final_data .= $this->pt_close;
 
@@ -160,6 +159,7 @@ class PG_Converter {
 
     // {{{ function analyzeProcessBlock
     // TODO: add to test
+    // TODO: cyclomatic complex: 7
     /**
      *
      * @access protected
@@ -173,20 +173,27 @@ class PG_Converter {
      * @param  integer   $data_len
      * @return string
      */
-    protected function analyzeProcessBlock($data, $count, $max, $i, $start, $end, $data_len) {
+    protected function analyzeProcessBlock($data, $count, $max, $i, $start, $end, $data_len) { // TODO: too long
         $final_data = '';
         $elem = $this->blocks[$count];
 
         if ($count < $max && $i >= $elem['open'] && $i <= $elem['close']) {
-            $final_data .= substr($data, $elem['open'] + $elem['size'], $elem['close'] - $elem['open'] - $elem['size']);
+            $from = $elem['open'] + $elem['size'];
+            $to   = $elem['close'] - $elem['open'] - $elem['size'];
+
+            $final_data .= substr($data, $from, $to);
             $start       = $i = (int)$elem['close'] + 2;
-            $end         = ($count + 1 >= $max) ? $data_len : $this->blocks[$count + 1]['open'];
+            $end         = ($count + 1 >= $max) ? $data_len : $this->blocks[$count + 1]['open']; // TODO: too long
             $count++;
         } else if ($i >= $start && $i <= $end) {
-            $final_data .= "\necho <<<PHPG_HD\n" . substr($data, $start, $end - $start) . "\nPHPG_HD;\n";
+            $final_data .= "\necho <<<PHPG_HD\n";
+            $final_data .= substr($data, $start, $end - $start);
+            $final_data .= "\nPHPG_HD;\n";
             $i = $end;
         } else {
-            $final_data .= "\necho <<<PHPG_HD\n" . substr($data, $i, $data_len - $i) . "\nPHPG_HD;\n";
+            $final_data .= "\necho <<<PHPG_HD\n";
+            $final_data .= substr($data, $i, $data_len - $i);
+            $final_data .= "\nPHPG_HD;\n";
             $i = $data_len;
         }
 
@@ -194,25 +201,24 @@ class PG_Converter {
     }
     // }}}
 
-    // {{{ function getTags
+    // {{{ function setTags
     /**
      *
      * @access protected
      * @param  boolean   $asptag
-     * @return array
+     * @return void
      */
-    protected function getTags($asptag) {
-        $pt_open_long = "<" . "?php";
-        $pt_close     = "?" . ">";
+    protected function setTags($asptag) {
+        $this->pt_open_long = "<" . "?php";
+        $this->pt_close     = "?" . ">";
 
         if ($asptag) {
-            $pt_open_long = "<%";
-            $pt_close     = "%>";
+            $this->pt_open_long = "<%";
+            $this->pt_close     = "%>";
         }
 
-        $pt_open_short = substr($pt_open_long, 0, 2);
-
-        return array($pt_open_long, $pt_open_short, $pt_close);
+        $this->pt_size_long  = strlen($this->pt_open_long);
+        $this->pt_open_short = substr($this->pt_open_long, 0, 2);
     }
     // }}}
 
@@ -233,8 +239,7 @@ class PG_Converter {
         $opened = false;
         $count = -1;
 
-        list($this->pt_open_long, $this->pt_open_short, $this->pt_close) = $this->getTags($asptag);
-        $this->pt_size_long = strlen($this->pt_open_long);
+        $this->setTags($asptag);
 
         $this->blocks = array();
 
@@ -243,12 +248,13 @@ class PG_Converter {
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         $data_len = strlen($data);
         for ($j = 0; $j < $data_len; $j++) {
-            $opened = $this->analyzeBlock($data, $j, $opened, &$count);
+            $opened = $this->analyzeFinderBlock($data, $j, $opened, &$count);
         }
     }
     // }}}
 
-    // {{{ function analyzeBlock
+    // {{{ function analyzeFinderBlock
+    // TODO: cyclomatic complex: 6
     /**
      *
      * @access protected
@@ -258,7 +264,7 @@ class PG_Converter {
      * @param  boolean $opened
      * @return boolean
      */
-    protected function analyzeBlock($data, $pos, $opened, $count) {
+    protected function analyzeFinderBlock($data, $pos, $opened, $count) {
         $tag_long  = substr($data, $pos, $this->pt_size_long);
         $tag_short = substr($data, $pos, 2);
 
@@ -273,7 +279,7 @@ class PG_Converter {
             $opened = $this->isOpened($next, $pos);
         } else if ($tag_short == $this->pt_close) {
             $this->setBlock($count, 'close', $pos);
-            PG_Utils::pg_message("Found php close #%s: %s", true, $count, $this->blocks[$count]['close']);
+            PG_Utils::pg_message("Found php close #%s: %s", true, $count, $this->blocks[$count]['close']); // TODO: too long
             $opened = false;
         }
 
@@ -296,7 +302,7 @@ class PG_Converter {
         $opened = in_array($next, array("\n", "=", " "));
         if ($opened) {
             $this->setBlock(++$count, 'open', $pos);
-            PG_Utils::pg_message("Found php start #%s: %s", true, $count, $this->blocks[$count]['open']);
+            PG_Utils::pg_message("Found php start #%s: %s", true, $count, $this->blocks[$count]['open']); // TODO: too long
         }
 
         return $opened;

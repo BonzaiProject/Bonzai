@@ -43,7 +43,7 @@
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Script_Parser {
@@ -78,7 +78,7 @@ class PG_Script_Parser {
 
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         foreach($this->config['FILES']['LIST'] as $file) {
-            foreach($this->config['FILES']['EXCLUDE_PATH_PATTERN'] as $pattern) {
+            foreach($this->config['FILES']['EXCLUDE_PATH_PATTERN'] as $pattern) { // TODO: too long
                 if (preg_match('/' . $pattern . '/', $file)) {
                     continue 2;
                 }
@@ -100,8 +100,8 @@ class PG_Script_Parser {
         foreach($this->config['PATHS']['LIST'] as $path) {
             $files = PG_Utils::rscandir($path['PATH']);
             $files = preg_grep('/\.php$/', $files);
-            foreach($this->config['PATHS']['EXCLUDE_PATH_PATTERN'] as $pattern) {
-                $files = preg_grep('/' . $pattern . '/', $files, PREG_GREP_INVERT);
+            foreach($this->config['PATHS']['EXCLUDE_PATH_PATTERN'] as $pattern) { // TODO: too long
+                $files = preg_grep('/' . $pattern . '/', $files, PREG_GREP_INVERT); // TODO: too long
             }
 
             foreach($files as $file) {
@@ -152,9 +152,9 @@ class PG_Script_Parser {
         $this->handleConfigFiles('FILES');
 
         if (!empty($this->config['KEY']['KEY_FILE'])) {
-            $this->config['KEY']['KEY'] = PG_Utils::getFileContent($this->config['KEY']['KEY_FILE']);
+            $this->config['KEY']['KEY'] = PG_Utils::getFileContent($this->config['KEY']['KEY_FILE']); // TODO: too long
         }
-        $this->config['KEY']['KEY_HASH'] = PG_Hash::hash($this->config['KEY']['KEY']);
+        $this->config['KEY']['KEY_HASH'] = PG_Hash::hash($this->config['KEY']['KEY']); // TODO: too long
 
         return $this->config;
     }
@@ -169,12 +169,12 @@ class PG_Script_Parser {
      */
     protected function handleConfigFiles($key) {
         $exclude = 'EXCLUDE_' . substr($key, 0, -1) . '_PATTERN';
-        $this->config[$key][$exclude] = split(',\s*', $this->config[$key][$exclude]);
+        $this->config[$key][$exclude] = split(',\s*', $this->config[$key][$exclude]); // TODO: too long
 
         $keys = array_keys($this->config[$key]['LIST']);
         foreach($keys as $k) {
-            $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'HEADER');
-            $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'FOOTER');
+            $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'HEADER'); // TODO: too long
+            $this->setInputInfoField(&$this->config[$key]['LIST'][$k], 'FOOTER'); // TODO: too long
         }
     }
     // }}}
@@ -202,7 +202,7 @@ class PG_Script_Parser {
      */
     protected function analyzeOptions() {
         foreach($this->config as $key => $value) {
-            $this->config[$key] = array_map(array($this, 'convertToBoolean'), $value);
+            $this->config[$key] = array_map(array($this, 'convertToBoolean'), $value); // TODO: too long
         }
     }
     // }}}

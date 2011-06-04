@@ -43,7 +43,7 @@
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Utils {
@@ -85,7 +85,8 @@ class PG_Utils {
             $backup_filename = $filename . '.orig';
 
             if (!is_writable($backup_filename)) {
-                throw new PG_Exception('The file `' . $backup_filename . '` cannot be written'); // TODO: BLOCKER ?
+                $message = 'The file `' . $backup_filename . '` cannot be written'; // TODO: too long
+                throw new PG_Exception($message); // TODO: BLOCKER ?
             }
 
             file_put_contents($backup_filename, self::getFileContent($filename));
@@ -94,6 +95,7 @@ class PG_Utils {
     // }}}
 
     // {{{ function rscandir
+    // TODO: cyclomatic complex: 5
     /**
      *
      * @static
@@ -105,7 +107,8 @@ class PG_Utils {
      */
     public static function rscandir($base = '', &$data = array()) {
         if (!is_readable($base)) {
-            throw new PG_Exception('The directory `' . $base . '` cannot be opened'); // TODO: BLOCKER ?
+            $message = 'The directory `' . $base . '` cannot be opened';
+            throw new PG_Exception($message); // TODO: BLOCKER ?
         }
 
         $array = array_diff(scandir($base), array('.', '..'));
@@ -135,7 +138,8 @@ class PG_Utils {
      */
     public static function getFileContent($filename) {
         if (!is_readable($filename)) {
-            throw new PG_Exception('The file `' . $filename . '` cannot be opened'); // TODO: NON BLOCKER
+            $message = 'The file `' . $filename . '` cannot be opened';
+            throw new PG_Exception($message); // TODO: NON BLOCKER
         }
 
         return file_get_contents($filename);
@@ -154,7 +158,8 @@ class PG_Utils {
      */
     public static function putFileContent($filename, $content) {
         if (!is_writable($filename)) {
-            throw new PG_Exception('The file `' . $filename . '` cannot be written'); // TODO: BLOCKER ?
+            $message = 'The file `' . $filename . '` cannot be written';
+            throw new PG_Exception($message); // TODO: BLOCKER ?
         }
 
         return file_put_contents($filename, $content);
@@ -162,6 +167,7 @@ class PG_Utils {
     // }}}
 
     // {{{ function pg_message
+    // TODO: cyclomatic complex: 5
     /**
      *
      * @static
@@ -173,7 +179,7 @@ class PG_Utils {
         $text    = array_shift($args);
         $verbose = isset($args[1]) ? array_shift($args) : true;
 
-        if (!PG_Script_Parser::$config['SETUP']['SILENT'] || ($verbose && PG_Script_Parser::$config['SETUP']['PG_S_VERBOSE'])) {
+        if (!PG_Script_Parser::$config['SETUP']['SILENT'] || ($verbose && PG_Script_Parser::$config['SETUP']['PG_S_VERBOSE'])) { // TODO: too long
             $gettext_text = _($text);
 
             //foreach($args as $arg) {

@@ -44,7 +44,7 @@
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Controller {
@@ -116,7 +116,8 @@ class PG_Controller {
             $filename = $this->getClassFileName($name);
 
             if (!$this->checkFile($filename)) {
-                throw new PG_Exception('The class `' . $name . '` cannot be loaded'); // TODO: BLOCKER
+                $message = 'The class `' . $name . '` cannot be loaded';
+                throw new PG_Exception($message); // TODO: BLOCKER
             }
 
             require_once __DIR__ . '/../' . $filename . '.php';;
@@ -142,6 +143,7 @@ class PG_Controller {
 
         return $filename;
     }
+    // }}}
 
     // {{{ function checkFile
     // TODO: add to test
@@ -156,5 +158,6 @@ class PG_Controller {
 
         return file_exists($full_filename);
     }
+    // }}}
     // }}}
 }

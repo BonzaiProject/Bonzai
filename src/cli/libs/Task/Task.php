@@ -76,7 +76,7 @@ class PG_Task {
         if (!is_null($options->getOption('generate'))) {
             $this->task       = "PG_Script_Generator";
             $this->parameters = $this->options->getOption('generate');
-        } elseif (count($options->getOptions()) == 0 && count($options->getParameters()) > 0) {
+        } elseif (count($options->getOptions()) == 0 && count($options->getParameters()) > 0) { // TODO: too long
             $this->task       = "PG_Script_Parser";
             $this->parameters = array_shift($options->getParameters());
         }
@@ -95,7 +95,7 @@ class PG_Task {
         $class = new $class();
 
         if (!method_exists($class, 'elaborate')) {
-            throw new PG_Exception('Cannot launch the task `' . $this->task . '`'); // TODO: BLOCKER
+            throw new PG_Exception('Cannot launch the task `' . $this->task . '`'); // TODO: BLOCKER // TODO: too long
         } else {
             return call_user_method('elaborate', $class, $this->parameters);
         }

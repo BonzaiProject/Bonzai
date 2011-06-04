@@ -38,20 +38,6 @@
 
 require_once 'PHPUnit/Framework/TestSuite.php';
 
-require_once __DIR__ . '/PG_Controller_Test.php';
-require_once __DIR__ . '/PG_Converter_Test.php';
-require_once __DIR__ . '/PG_Decoder_Test.php';
-require_once __DIR__ . '/PG_Encoder_Test.php';
-require_once __DIR__ . '/PG_Exception_Test.php';
-require_once __DIR__ . '/PG_Hash_Test.php';
-require_once __DIR__ . '/PG_Registry_Test.php';
-require_once __DIR__ . '/PG_Script_Generator_Test.php';
-require_once __DIR__ . '/PG_Script_Parser_Test.php';
-require_once __DIR__ . '/PG_Task_Test.php';
-require_once __DIR__ . '/PG_Utils_Help_Test.php';
-require_once __DIR__ . '/PG_Utils_Options_Test.php';
-require_once __DIR__ . '/PG_Utils_Test.php';
-
 /**
  *
  *
@@ -60,32 +46,36 @@ require_once __DIR__ . '/PG_Utils_Test.php';
  * @version   4.0
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
+ * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class cliSuite extends PHPUnit_Framework_TestSuite {
+    // {{{ function __construct
+    /**
+     *
+     * @access public
+     * @return void
+     */
     public function __construct() {
         $this->setName('cliSuite');
 
-        $this->addTestSuite('PG_Controller_Test');
-        $this->addTestSuite('PG_Converter_Test');
-        $this->addTestSuite('PG_Decoder_Test');
-        $this->addTestSuite('PG_Encoder_Test');
-        $this->addTestSuite('PG_Exception_Test');
-        $this->addTestSuite('PG_Hash_Test');
-        $this->addTestSuite('PG_Registry_Test');
-        $this->addTestSuite('PG_Script_Generator_Test');
-        $this->addTestSuite('PG_Script_Parser_Test');
-        $this->addTestSuite('PG_Task_Test');
-        $this->addTestSuite('PG_Utils_Help_Test');
-        $this->addTestSuite('PG_Utils_Options_Test');
-        $this->addTestSuite('PG_Utils_Test');
+        $files = preg_grep('PG_.+_Test.php', scandir(__DIR__));
+        foreach($files as $file) {
+            require_once __DIR__ . '/' . $file;
+            $this->addTestSuite(substr($file, 0, -4));
+        }
     }
+    // }}}
 
+    // {{{ function suite
     /**
-     * Creates the suite.
+     *
+     * @static
+     * @access public
+     * @return cliSuite
      */
     public static function suite() {
-        return new self ();
+        return new self();
     }
+    // }}}
 }
