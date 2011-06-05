@@ -51,23 +51,28 @@ require_once __DIR__ . '/../libs/Controller/Controller.php';
  * @link      http://www.phpguardian.org
  */
 class PG_Controller_Test extends PG_TestCase {
-    public function test__construct() {
+    public function testNothing() {
+        $message = 'There\'s nothing to be tested in this Testing Class.';
+        $this->markTestSkipped($message);
+    }
+
+    //public function test__construct() {
         // TODO: The constructor need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
-    public function testElaborate() {
+    //public function testElaborate() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
-    public function testHandleTask() {
+    //public function testHandleTask() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
-    public function test__autoload() {
+    //public function test__autoload() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 }

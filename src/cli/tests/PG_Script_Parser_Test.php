@@ -51,20 +51,20 @@ require_once __DIR__ . '/../libs/Script/Parser.php';
  * @link      http://www.phpguardian.org
  */
 class PG_Script_Parser_Test extends PG_TestCase {
-    public function testElaborate() {
+    //public function testElaborate() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
-    
-    public function testExpandPathsToFiles() {
-        // TODO: A method without return need to be tested?
-        //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
-    public function testLoadConfig() {
+    //public function testExpandPathsToFiles() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
+
+    //public function testLoadConfig() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
+    //}
 
     public function testElaborateConfig() {
         // TODO: $this->object->elaborateConfig();
@@ -74,31 +74,50 @@ class PG_Script_Parser_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testHandleConfigFiles() {
+    //public function testHandleConfigFiles() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
-    public function testSetInputInfoField() {
+    //public function testSetInputInfoField() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
-    public function testAnalyzeOptions() {
+    //public function testAnalyzeOptions() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
     public function testConvertToBoolean() {
         // TODO: $this->object->convertToBoolean($value);
         // INPUT:  value
         // OUTPUT: mixed
         // WHAT:   return true if yes, false if no, otherwise the original value
+        /*
+        value = null  | output = ?
+        value = ""    | output = ?
+        value = " "   | output = ?
+        value = "a"   | output = ?
+        value = ()    | output = ?
+        value = (...) | output = ?
+        value = OBJ   | output = ?
+        value = true  | output = ?
+        value = false | output = ?
+        value = 1     | output = ?
+        value = 0     | output = ?
+        value = "yes" | output = ?
+        value = "no"  | output = ?
+        value = "YES" | output = ?
+        value = "NO"  | output = ?
+        value = "YeS" | output = ?
+        value = "No"  | output = ?
+        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testParseList() {
+    //public function testParseList() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 }

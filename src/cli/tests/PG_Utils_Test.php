@@ -56,19 +56,65 @@ class PG_Utils_Test extends PG_TestCase {
         // INPUT:  file
         // OUTPUT: string
         // WHAT:   get the path of file
+        /*
+        file = null      | output = ?
+        file = ""        | output = ?
+        file = " "       | output = ?
+        file = "a"       | output = ?
+        file = "noread"  | output = ?
+        file = "nowrite" | output = ?
+        file = "write"   | output = ?
+        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testRename_file() {
+    //public function testRename_file() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
     public function testRscandir() {
         // TODO: $this->object->rscandir($base = '', &$data = array());
         // INPUT:  base, data
         // OUTPUT: array
         // WHAT:   return the all directories & files into a directory
+        /*
+        file = null      | data = null  | output = ?
+        file = null      | data = ""    | output = ?
+        file = null      | data = " "   | output = ?
+        file = null      | data = ()    | output = ?
+        file = null      | data = (...) | output = ?
+        file = ""        | data = null  | output = ?
+        file = ""        | data = ""    | output = ?
+        file = ""        | data = " "   | output = ?
+        file = ""        | data = ()    | output = ?
+        file = ""        | data = (...) | output = ?
+        file = " "       | data = null  | output = ?
+        file = " "       | data = ""    | output = ?
+        file = " "       | data = " "   | output = ?
+        file = " "       | data = ()    | output = ?
+        file = " "       | data = (...) | output = ?
+        file = "a"       | data = null  | output = ?
+        file = "a"       | data = ""    | output = ?
+        file = "a"       | data = " "   | output = ?
+        file = "a"       | data = ()    | output = ?
+        file = "a"       | data = (...) | output = ?
+        file = "noread"  | data = null  | output = ?
+        file = "noread"  | data = ""    | output = ?
+        file = "noread"  | data = " "   | output = ?
+        file = "noread"  | data = ()    | output = ?
+        file = "noread"  | data = (...) | output = ?
+        file = "nowrite" | data = null  | output = ?
+        file = "nowrite" | data = ""    | output = ?
+        file = "nowrite" | data = " "   | output = ?
+        file = "nowrite" | data = ()    | output = ?
+        file = "nowrite" | data = (...) | output = ?
+        file = "write"   | data = null  | output = ?
+        file = "write"   | data = ""    | output = ?
+        file = "write"   | data = " "   | output = ?
+        file = "write"   | data = ()    | output = ?
+        file = "write"   | data = (...) | output = ?
+        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
@@ -77,6 +123,15 @@ class PG_Utils_Test extends PG_TestCase {
         // INPUT:  filename
         // OUTPUT: string
         // WHAT:   get the file's content
+        /*
+        filename = null     | output = ?
+        filename = ""       | output = ?
+        filename = " "      | output = ?
+        filename = "a"      | output = ?
+        filename = "empty"  | output = ?
+        filename = "noread" | output = ?
+        filename = "read"   | output = ?
+        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
@@ -85,11 +140,41 @@ class PG_Utils_Test extends PG_TestCase {
         // INPUT:  filename, content
         // OUTPUT: boolean
         // WHAT:   return the status of saving
+        /*
+        filename = null      | content = null | output = ?
+        filename = null      | content = ""   | output = ?
+        filename = null      | content = " "  | output = ?
+        filename = null      | content = "a"  | output = ?
+        filename = ""        | content = null | output = ?
+        filename = ""        | content = ""   | output = ?
+        filename = ""        | content = " "  | output = ?
+        filename = ""        | content = "a"  | output = ?
+        filename = " "       | content = null | output = ?
+        filename = " "       | content = ""   | output = ?
+        filename = " "       | content = " "  | output = ?
+        filename = " "       | content = "a"  | output = ?
+        filename = "a"       | content = null | output = ?
+        filename = "a"       | content = ""   | output = ?
+        filename = "a"       | content = " "  | output = ?
+        filename = "a"       | content = "a"  | output = ?
+        filename = "empty"   | content = null | output = ?
+        filename = "empty"   | content = ""   | output = ?
+        filename = "empty"   | content = " "  | output = ?
+        filename = "empty"   | content = "a"  | output = ?
+        filename = "nowrite" | content = null | output = ?
+        filename = "nowrite" | content = ""   | output = ?
+        filename = "nowrite" | content = " "  | output = ?
+        filename = "nowrite" | content = "a"  | output = ?
+        filename = "write"   | content = null | output = ?
+        filename = "write"   | content = ""   | output = ?
+        filename = "write"   | content = " "  | output = ?
+        filename = "write"   | content = "a"  | output = ?
+        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testPg_message() {
+    //public function testPg_message() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 }

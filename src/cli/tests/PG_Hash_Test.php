@@ -56,6 +56,12 @@ class PG_Hash_Test extends PG_TestCase {
         // INPUT:  text
         // OUTPUT: string
         // WHAT:   returns the digest of string
+        /*
+        hash = null | output = ?
+        hash = ""   | output = ?
+        hash = " "  | output = ?
+        hash = "a"  | output = ?
+        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

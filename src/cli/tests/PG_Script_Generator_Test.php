@@ -51,16 +51,25 @@ require_once __DIR__ . '/../libs/Script/Generator.php';
  * @link      http://www.phpguardian.org
  */
 class PG_Script_Generator_Test extends PHPUnit_Framework_TestCase {
-    public function test__construct() {
+    //public function test__construct() {
         // TODO: The constructor need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
     public function testElaborate() {
         // TODO: $this->object->elaborate($file);
         // INPUT:  file
         // OUTPUT: boolean
         // WHAT:   true if saved the script to filesystem
+        /*
+        file = null       | output = ?
+        file = ""         | output = ?
+        file = " "        | output = ?
+        file = "a"        | output = ?
+        file = "notread"  | output = ?
+        file = "notwrite" | output = ?
+        file = "write"    | output = ?
+        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

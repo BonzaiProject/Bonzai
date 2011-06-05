@@ -52,7 +52,7 @@ require_once __DIR__ . '/../libs/Exception/Exception.php';
  */
 class PG_Exception_Test extends PG_TestCase {
     public function testNothing() {
-        $message = 'There\'s nothing to be tested in this Exception class.';
+        $message = 'There\'s nothing to be tested in this Testing Class.';
         $this->markTestSkipped($message);
     }
 }

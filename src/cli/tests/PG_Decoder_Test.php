@@ -51,21 +51,29 @@ require_once __DIR__ . '/../libs/Decoder/Decoder.php';
  * @link      http://www.phpguardian.org
  */
 class PG_Decoder_Test extends PG_TestCase {
-    public function testElaborate() {
+    //public function testElaborate() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
     public function testCodeDecrypt() {
         // TODO: $this->object->codeDecrypt($data);
         // INPUT:  data
         // OUTPUT: string
+        /*
+        data = null          | output = ?
+        data = ""            | output = ?
+        data = " "           | output = ?
+        data = "aaa"         | output = ?
+        data = "REALENCODED" | output = ?
+        */
         // WHAT:   return the decoded string
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testCycleDecrypt() {
         // TODO: $this->object->cycleDecrypt($string, $key_len, $data_len);
+        // TODO: refactor parent method: too input params
         // INPUT:  string, key_len, data_len
         // OUTPUT: string
         // WHAT:   return the decoded string
@@ -77,6 +85,28 @@ class PG_Decoder_Test extends PG_TestCase {
         // INPUT:  characters, key
         // OUTPUT: string
         // WHAT:   return the decoded char
+        /*
+        characters = null | key = null | output = ?
+        characters = null | key = ""   | output = ?
+        characters = null | key = " "  | output = ?
+        characters = null | key = "a"  | output = ?
+        characters = ""   | key = null | output = ?
+        characters = ""   | key = ""   | output = ?
+        characters = ""   | key = " "  | output = ?
+        characters = ""   | key = "a"  | output = ?
+        characters = " "  | key = null | output = ?
+        characters = " "  | key = ""   | output = ?
+        characters = " "  | key = " "  | output = ?
+        characters = " "  | key = "a"  | output = ?
+        characters = "a"  | key = null | output = ?
+        characters = "a"  | key = ""   | output = ?
+        characters = "a"  | key = " "  | output = ?
+        characters = "a"  | key = "a"  | output = ?
+        characters = "b"  | key = null | output = ?
+        characters = "b"  | key = ""   | output = ?
+        characters = "b"  | key = " "  | output = ?
+        characters = "b"  | key = "a"  | output = ?
+        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
@@ -84,6 +114,12 @@ class PG_Decoder_Test extends PG_TestCase {
         // TODO: $this->object->getDecodedFilename($filename);
         // INPUT:  filename
         // OUTPUT: string
+        /*
+        filename = null | output = ?
+        filename = ""   | output = ?
+        filename = " "  | output = ?
+        filename = "a"  | output = ?
+        */
         // WHAT:   return the decoded filename
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

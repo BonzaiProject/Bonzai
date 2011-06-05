@@ -51,10 +51,10 @@ require_once __DIR__ . '/../libs/Task/Task.php';
  * @link      http://www.phpguardian.org
  */
 class PG_Task_Test extends PG_TestCase {
-    public function testLoad() {
+    //public function testLoad() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 
     public function testExecute() {
         // TODO: $this->object->execute();

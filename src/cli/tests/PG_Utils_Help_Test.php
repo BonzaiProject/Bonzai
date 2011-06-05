@@ -51,8 +51,13 @@ require_once __DIR__ . '/../libs/Utils/Help.php';
  * @link      http://www.phpguardian.org
  */
 class PG_Utils_Help_Test extends PG_TestCase {
-    public function testElaborate() {
+    public function testNothing() {
+        $message = 'There\'s nothing to be tested in this Testing Class.';
+        $this->markTestSkipped($message);
+    }
+
+    //public function testElaborate() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
-    }
+    //}
 }
