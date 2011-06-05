@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
 require_once __DIR__ . '/../libs/Utils/Utils.php';
 
 /**
@@ -45,7 +45,7 @@ require_once __DIR__ . '/../libs/Utils/Utils.php';
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
@@ -53,6 +53,9 @@ require_once __DIR__ . '/../libs/Utils/Utils.php';
 class PG_Utils_Test extends PG_TestCase {
     public function testGetFilePath() {
         // TODO: $this->object->getFilePath($file);
+        // INPUT:  file
+        // OUTPUT: string
+        // WHAT:   get the path of file
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
@@ -63,16 +66,25 @@ class PG_Utils_Test extends PG_TestCase {
 
     public function testRscandir() {
         // TODO: $this->object->rscandir($base = '', &$data = array());
+        // INPUT:  base, data
+        // OUTPUT: array
+        // WHAT:   return the all directories & files into a directory
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetFileContent() {
         // TODO: $this->object->getFileContent($filename);
+        // INPUT:  filename
+        // OUTPUT: string
+        // WHAT:   get the file's content
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testPutFileContent() {
         // TODO: $this->object->putFileContent($filename, $content);
+        // INPUT:  filename, content
+        // OUTPUT: boolean
+        // WHAT:   return the status of saving
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 

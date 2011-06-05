@@ -41,7 +41,7 @@
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
@@ -58,9 +58,9 @@ class PG_Utils_Help {
     public function eleborate(PG_Utils_Options $options) {
         printf("       _            ____                     _ _             ____\n"); // TODO: too long
         printf(" _ __ | |__  _ __  / ___|_   _  __ _ _ __ __| (_) __ _ _ __ |___ \\\n"); // TODO: too long
-        printf("| '_ \| '_ \| '_ \| |  _| | | |/ _` | '__/ _` | |/ _` | '_ \  __) |\n"); // TODO: too long
+        printf("| '_ \\| '_ \\| '_ \\| |  _| | | |/ _` | '__/ _` | |/ _` | '_ \\  __) |\n"); // TODO: too long
         printf("| |_) | | | | |_) | |_| | |_| | (_| | | | (_| | | (_| | | | |/ __/\n"); // TODO: too long
-        printf("| .__/|_| |_| .__/ \____|\__,_|\__,_|_|  \__,_|_|\__,_|_| |_|_____|\n"); // TODO: too long
+        printf("| .__/|_| |_| .__/ \\____|\\__,_|\\__,_|_|  \\__,_|_|\\__,_|_| |_|_____|\n"); // TODO: too long
         printf("|_|         |_| phpGuardian CLI\n\n\n");
 
         printf("phpGuardian %s: %s\n", _("Version"), "4.0");

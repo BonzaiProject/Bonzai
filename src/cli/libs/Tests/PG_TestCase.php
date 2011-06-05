@@ -36,7 +36,10 @@
  * $Id$
  **/
 
+require_once 'PHPUnit/Framework/TestCase.php';
+
 /**
+ *
  *
  * @category  Security
  * @package   phpGuardian
@@ -46,4 +49,41 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Exception extends Exception {}
+class PG_TestCase extends PHPUnit_Framework_TestCase {
+    // {{{ PROPERTIES
+    /**
+     *
+     * @access protected
+     * @var    mixed
+     */
+    protected $object;
+    // }}}
+
+    // {{{ METHODS
+    // {{{ function setUp
+    /**
+     *
+     * @access protected
+     * @return void
+     */
+    protected function setUp() {
+        parent::setUp();
+
+        $className = substr(get_class($this), 0, -5);
+
+        $this->object = new $className;
+    }
+    // }}}
+
+    // {{{ function tearDown
+    /**
+     *
+     * @access protected
+     * @return void
+     */
+    protected function tearDown() {
+        parent::tearDown();
+    }
+    // }}}
+    // }}}
+}

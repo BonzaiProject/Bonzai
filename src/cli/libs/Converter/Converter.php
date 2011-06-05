@@ -41,7 +41,7 @@
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
@@ -258,10 +258,10 @@ class PG_Converter {
     /**
      *
      * @access protected
-     * @param  string $data
-     * @param  integer $pos
-     * @param  array $php
-     * @param  boolean $opened
+     * @param  string    $data
+     * @param  integer   $pos
+     * @param  boolean   $opened
+     * @param  integer   $count
      * @return boolean
      */
     protected function analyzeFinderBlock($data, $pos, $opened, $count) {
@@ -291,7 +291,6 @@ class PG_Converter {
     /**
      *
      * @access protected
-     * @param  array     $php
      * @param  string    $next
      * @param  integer   $pos
      * @return boolean
@@ -313,7 +312,6 @@ class PG_Converter {
     /**
      *
      * @access protected
-     * @param  string    $container
      * @param  integer   $pos
      * @param  string    $key
      * @param  array     $value

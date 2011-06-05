@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
 require_once __DIR__ . '/../libs/Task/Task.php';
 
 /**
@@ -45,7 +45,7 @@ require_once __DIR__ . '/../libs/Task/Task.php';
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
@@ -58,11 +58,17 @@ class PG_Task_Test extends PG_TestCase {
 
     public function testExecute() {
         // TODO: $this->object->execute();
+        // INPUT:  -
+        // OUTPUT: mixed
+        // WHAT:   return the status of child method
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testLoadAndExecute() {
         // TODO: $this->object->loadAndExecute(PG_Utils_Options $options);
+        // INPUT:  options
+        // OUTPUT: mixed
+        // WHAT:   return the status of child method
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
 require_once __DIR__ . '/../libs/Hash/Hash.php';
 
 /**
@@ -45,7 +45,7 @@ require_once __DIR__ . '/../libs/Hash/Hash.php';
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
@@ -53,6 +53,9 @@ require_once __DIR__ . '/../libs/Hash/Hash.php';
 class PG_Hash_Test extends PG_TestCase {
     public function testHash() {
         // TODO: $this->object->hash($text);
+        // INPUT:  text
+        // OUTPUT: string
+        // WHAT:   returns the digest of string
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

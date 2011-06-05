@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
 require_once __DIR__ . '/../libs/Decoder/Decoder.php';
 
 /**
@@ -45,7 +45,7 @@ require_once __DIR__ . '/../libs/Decoder/Decoder.php';
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
@@ -58,21 +58,33 @@ class PG_Decoder_Test extends PG_TestCase {
 
     public function testCodeDecrypt() {
         // TODO: $this->object->codeDecrypt($data);
+        // INPUT:  data
+        // OUTPUT: string
+        // WHAT:   return the decoded string
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testCycleDecrypt() {
         // TODO: $this->object->cycleDecrypt($string, $key_len, $data_len);
+        // INPUT:  string, key_len, data_len
+        // OUTPUT: string
+        // WHAT:   return the decoded string
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testDecodeChar() {
         // TODO: $this->object->decodeChar($characters, $key);
+        // INPUT:  characters, key
+        // OUTPUT: string
+        // WHAT:   return the decoded char
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testGetDecodedFilename() {
         // TODO: $this->object->getDecodedFilename($filename);
+        // INPUT:  filename
+        // OUTPUT: string
+        // WHAT:   return the decoded filename
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

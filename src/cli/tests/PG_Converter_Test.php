@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
 require_once __DIR__ . '/../libs/Converter/Converter.php';
 
 /**
@@ -45,7 +45,7 @@ require_once __DIR__ . '/../libs/Converter/Converter.php';
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
@@ -53,36 +53,56 @@ require_once __DIR__ . '/../libs/Converter/Converter.php';
 class PG_Converter_Test extends PG_TestCase {
     public function testConvert() {
         // TODO: $this->object->convert($filename, $asptag = false);
+        // INPUT:  filename, asptag
+        // OUTPUT: string
+        // WHAT:   convert a mixed source to a full php
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testProcess() {
-        // TODO: $this->object->setBlock($container, $pos, $key, $value);
+        // TODO: $this->object->process($data, $asptag = false);
+        // INPUT:  data, asptag
+        // OUTPUT: string
+        // WHAT:   convert a mixed source to a full php
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetTags() {
-        // TODO: $this->object->getTags($asptag);
+    public function testAnalyzeProcessBlock() {
+        // TODO: $this->object->analyzeProcessBlock($data, $count, $max, $i, $start, $end, $data_len);
+        // INPUT:  data, count, max, i, start, end, data_len
+        // OUTPUT: string
+        // WHAT:   convert a block of mixed source to a full php
         $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    public function testsetTags() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testFinder() {
-        // TODO: $this->object->finder($data, $asptag = false);
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testAnalyzeFinderBlock() {
-        // TODO: $this->object->analyzeBlock($data, $pos, $php, $opened);
+        // TODO: $this->object->analyzeFinderBlock($data, $pos, $opened, $count);
+        // INPUT:  data, pos, opened, count
+        // OUTPUT: boolean
+        // WHAT:   calculate if a block is opened or not
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testIsOpened() {
-        // TODO: $this->object->isOpened($php, $next, $pos);
+        // TODO: $this->object->isOpened($next, $pos);
+        // INPUT:  news, pos
+        // OUTPUT: boolean
+        // WHAT:   calculate if a block is opened or not
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     public function testSetBlock() {
-        // TODO: $this->object->setBlock($container, $pos, $key, $value);
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

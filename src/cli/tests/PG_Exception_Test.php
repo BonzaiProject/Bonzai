@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
 require_once __DIR__ . '/../libs/Exception/Exception.php';
 
 /**
@@ -45,14 +45,14 @@ require_once __DIR__ . '/../libs/Exception/Exception.php';
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Exception_Test extends PG_TestCase {
     public function testNothing() {
-    	$message = 'There\'s nothing to be tested in this Exception class.';
+        $message = 'There\'s nothing to be tested in this Exception class.';
         $this->markTestSkipped($message);
     }
 }

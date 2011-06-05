@@ -33,7 +33,7 @@
  *                 Licensealong with this program. If not, see
  *                 <http://www.gnu.org/licenses/>.
  *
- * $Id: $
+ * $Id$
  **/
 
 /**
@@ -41,7 +41,7 @@
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
  * @link      http://www.phpguardian.org

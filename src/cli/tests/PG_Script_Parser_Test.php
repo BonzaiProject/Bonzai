@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
 require_once __DIR__ . '/../libs/Script/Parser.php';
 
 /**
@@ -45,13 +45,18 @@ require_once __DIR__ . '/../libs/Script/Parser.php';
  * @category  Security
  * @package   phpGuardian
  * @version   4.0
- * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
 class PG_Script_Parser_Test extends PG_TestCase {
     public function testElaborate() {
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    
+    public function testExpandPathsToFiles() {
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -63,6 +68,9 @@ class PG_Script_Parser_Test extends PG_TestCase {
 
     public function testElaborateConfig() {
         // TODO: $this->object->elaborateConfig();
+        // INPUT:  -
+        // OUTPUT: array
+        // WHAT:   return the config array
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
@@ -83,6 +91,9 @@ class PG_Script_Parser_Test extends PG_TestCase {
 
     public function testConvertToBoolean() {
         // TODO: $this->object->convertToBoolean($value);
+        // INPUT:  value
+        // OUTPUT: mixed
+        // WHAT:   return true if yes, false if no, otherwise the original value
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
