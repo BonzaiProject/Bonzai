@@ -71,7 +71,7 @@ class PG_TestCase extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $className    = substr(get_class(), 0, -5); // Strip '_Test'
+        $className    = substr(get_class($this), 0, -5); // Strip '_Test'
         $this->object = new $className;
     }
     // }}}
