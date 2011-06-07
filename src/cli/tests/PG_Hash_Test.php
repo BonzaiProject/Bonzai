@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Hash/Hash.php';
 
 /**
@@ -50,8 +50,10 @@ require_once __DIR__ . '/../libs/Hash/Hash.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Hash_Test extends PG_TestCase {
-    public function testHash() {
+class PG_Hash_Test extends PG_TestCase
+{
+    public function testHash()
+    {
         // TODO: $this->object->hash($text);
         // INPUT:  text
         // OUTPUT: string

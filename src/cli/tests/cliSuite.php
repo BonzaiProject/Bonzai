@@ -49,7 +49,8 @@ require_once 'PHPUnit/Framework/TestSuite.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class cliSuite extends PHPUnit_Framework_TestSuite {
+class cliSuite extends PHPUnit_Framework_TestSuite
+{
     // {{{ METHODS
     // {{{ function __construct
     /**
@@ -57,7 +58,8 @@ class cliSuite extends PHPUnit_Framework_TestSuite {
      * @access public
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->setName('cliSuite');
 
         $files = preg_grep('/PG_.+_Test.php/', scandir(__DIR__));
@@ -75,7 +77,8 @@ class cliSuite extends PHPUnit_Framework_TestSuite {
      * @access public
      * @return cliSuite
      */
-    public static function suite() {
+    public static function suite()
+    {
         return new self();
     }
     // }}}

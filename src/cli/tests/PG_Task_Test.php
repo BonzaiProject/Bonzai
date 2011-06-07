@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Task/Task.php';
 
 /**
@@ -50,13 +50,16 @@ require_once __DIR__ . '/../libs/Task/Task.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Task_Test extends PG_TestCase {
-    //public function testLoad() {
+class PG_Task_Test extends PG_TestCase
+{
+    //public function testLoad()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    public function testExecute() {
+    public function testExecute()
+    {
         // TODO: $this->object->execute();
         // INPUT:  -
         // OUTPUT: mixed
@@ -64,7 +67,8 @@ class PG_Task_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testLoadAndExecute() {
+    public function testLoadAndExecute()
+    {
         // TODO: $this->object->loadAndExecute(PG_Utils_Options $options);
         // INPUT:  options
         // OUTPUT: mixed

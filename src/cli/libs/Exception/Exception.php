@@ -46,4 +46,5 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Exception extends Exception {}
+class PG_Exception extends Exception
+{}

@@ -46,7 +46,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Encoder {
+class PG_Encoder
+{
     // {{{ METHODS
     // {{{ function elaborate
     /**
@@ -56,7 +57,8 @@ class PG_Encoder {
      * @throws PG_Exception
      * @return void
      */
-    public function elaborate($element) {
+    public function elaborate($element)
+    {
         if (!is_array($element) || empty($element)) {
             throw new PG_Exception('The element is invalid'); // TODO: NON BLOCKER
         }
@@ -65,7 +67,7 @@ class PG_Encoder {
         $filename = $element['FILE'];
 
         // Print a message
-        PG_Utils::pg_message("Start encoding file `%s'.", false, filename);
+        PG_Utils::pg_message('Start encoding file `%s\'.', false, filename);
 
         // Get the content
         $file_content = PG_Utils::getFileContent($filename);
@@ -80,7 +82,7 @@ class PG_Encoder {
             PG_Registry::getInstance()->append('skipped_files', $filename, PG_Registry::ARRAY_APPEND); // TODO: too long
 
             // Print a message
-            PG_Utils::pg_message("ERROR: The encoded data is empty.", false);
+            PG_Utils::pg_message('ERROR: The encoded data is empty.', false);
             return;
         }
 
@@ -102,10 +104,11 @@ class PG_Encoder {
      * @param  string        $data
      * @return string | null
      */
-    protected function codeCrypt($data) {
+    protected function codeCrypt($data)
+    {
         if (empty($data)) {
             // Print a message
-            PG_Utils::pg_message("ERROR: The converted data is empty.", false);
+            PG_Utils::pg_message('ERROR: The converted data is empty.', false);
 
             return null;
         }
@@ -118,12 +121,12 @@ class PG_Encoder {
 
         // Check key size
         if ($key_len == 0) {
-            PG_Utils::pg_message("ERROR: Skipped because the private key is empty.", false); // TODO: too long
+            PG_Utils::pg_message('ERROR: Skipped because the private key is empty.', false); // TODO: too long
             return "";
         }
 
         // Print a message
-        PG_Utils::pg_message("Encoding %d bytes...", true, $data_len);
+        PG_Utils::pg_message('Encoding %d bytes...', true, $data_len);
 
         // Encrypt the data
         $crdata = $this->cycleEncrypt($data, $data_len, $key_len);
@@ -132,7 +135,7 @@ class PG_Encoder {
         PG_Registry::getInstance()->append('total_generated_bytes', strlen($crdata), PG_Registry::INTEGER_APPEND); // TODO: too long
 
         // Print a message
-        PG_Utils::pg_message("Generated %s bytes.", true, strlen($crdata));
+        PG_Utils::pg_message('Generated %s bytes.', true, strlen($crdata));
 
         return $crdata;
     }
@@ -148,7 +151,8 @@ class PG_Encoder {
      * @throws PG_Exception
      * @return string | null
      */
-    protected function cycleEncrypt($string, $key_len, $data_len) {
+    protected function cycleEncrypt($string, $key_len, $data_len)
+    {
         if (empty($string)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
@@ -173,7 +177,8 @@ class PG_Encoder {
      * @param  string    $key
      * @return string
      */
-    protected function encodeChar($character, $key) {
+    protected function encodeChar($character, $key)
+    {
         return dechex(ord($character) ^ ord($key));
     }
     // }}}
@@ -184,7 +189,8 @@ class PG_Encoder {
      * @access protected
      * @return string
      */
-    protected function getInner() {
+    protected function getInner()
+    {
         $PHPG_LIBRARY_STRING        = ''; // TODO: need include this from .h
         $PG_S_BASE_LIB_PATH         = ''; // TODO: need include this from .h
         $PHPG_EXTENSION_STRING      = ''; // TODO: need include this from .h
@@ -206,12 +212,13 @@ class PG_Encoder {
      * @param  string    $inner
      * @return string
      */
-    protected function getHeader($element, $inner) {
+    protected function getHeader($element, $inner)
+    {
         if ($element['HEADER'] == PG_Script_Parser::$config['CONFIGURATION']['HEADER']) { // TODO: too long
-            return "<" . "?php\n\n" . PG_Script_Parser::$config['CONFIGURATION']['HEADER'] . $inner; // TODO: too long
+            return '<?php' . PHP_EOL . PHP_EOL . PG_Script_Parser::$config['CONFIGURATION']['HEADER'] . $inner; // TODO: too long
         }
 
-        return "<" . "?php\n\n" . $element['HEADER'] . $inner;
+        return '<?php' . PHP_EOL . PHP_EOL . $element['HEADER'] . $inner;
     }
     // }}}
 
@@ -222,12 +229,13 @@ class PG_Encoder {
      * @param  array     $element
      * @return string
      */
-    protected function getFooter($element) {
+    protected function getFooter($element)
+    {
         if ($element['FOOTER'] == PG_Script_Parser::$config['CONFIGURATION']['FOOTER']) { // TODO: too long
-            return "');\n" . PG_Script_Parser::$config['CONFIGURATION']['FOOTER'] . "\n?" . ">"; // TODO: too long
+            return '\');' . PHP_EOL . PG_Script_Parser::$config['CONFIGURATION']['FOOTER'] . PHP_EOL . '?>'; // TODO: too long
         }
 
-        return "');\n" . $element['FOOTER'] . "\n?" . ">";
+        return '\');' . PHP_EOL . $element['FOOTER'] . PHP_EOL . '?>';
     }
     // }}}
 
@@ -238,9 +246,10 @@ class PG_Encoder {
      * @param  string    $filename
      * @return string
      */
-    protected function getEncodedFilename($filename) {
+    protected function getEncodedFilename($filename)
+    {
         if (PG_Script_Parser::$config['CONFIGURATION']['SAVE_ENCODED_AS_NEW']) {
-            return $filename . ".encoded";
+            return "$filename.encoded";
         }
 
         return $filename;
@@ -254,12 +263,13 @@ class PG_Encoder {
      * @throws PG_Exception
      * @return void
      */
-    protected function createFileKey() {
+    protected function createFileKey()
+    {
         if (empty(PG_Script_Parser::$config['KEY']['KEY_FILE'])) {
-            PG_Script_Parser::$config['KEY']['KEY_FILE'] = "key.pgk";
+            PG_Script_Parser::$config['KEY']['KEY_FILE'] = 'key.pgk';
         }
 
-        PG_Utils::pg_message("Saving key (%s bytes) into file `%s'.", true, strlen(PG_Script_Parser::$config['KEY']['KEY_HASH']), PG_Script_Parser::$config['KEY']['KEY_FILE']); // TODO: too long
+        PG_Utils::pg_message('Saving key (%s bytes) into file `%s\'.', true, strlen(PG_Script_Parser::$config['KEY']['KEY_HASH']), PG_Script_Parser::$config['KEY']['KEY_FILE']); // TODO: too long
 
         @unlink(PG_Script_Parser::$config['KEY']['KEY_FILE']);
         //file_put_content(PG_S_KEY_FILE, PG_S_KEY_HASH, PHPG_HEADER_KEY, PHPG_FOOTER_KEY);

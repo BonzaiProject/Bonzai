@@ -45,7 +45,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Server {
+class PG_Server
+{
     // {{{ PROPERTIES
     /**
      * The content data
@@ -73,14 +74,14 @@ class PG_Server {
      * %dr DOCUMENT_ROOT
      * %e  SERVER_ADMIN
      */
-    public $log_format = "[%t] %i %h %d:%s";
+    public $log_format = '[%t] %i %h %d:%s';
 
     /**
      * Log file
      * @access public
      * @type   string
      */
-    public $log_file = "/home/fabio/www/phpg.log";
+    public $log_file = '/var/log/phpguardian/phpg.log';
 
     /**
      * Date format into log_format
@@ -88,14 +89,14 @@ class PG_Server {
      * @var    string
      * see php docs for strftime syntax (http://www.php.net/strftime)
      */
-    public $date_format = "%a %d %b %Y %H:%M:%S";
+    public $date_format = '%a %d %b %Y %H:%M:%S';
 
     /**
      * Script for execution on remote servers
      * @access public
      * @var    string
      */
-    public $exec_file = "/home/fabio/www/phpg.exec";
+    public $exec_file = '/home/fabio/www/phpg.exec';
 
     /**
      * Content of execution script
@@ -113,10 +114,13 @@ class PG_Server {
      * @param  string $data
      * @return void
      */
-    public function __construct($data = "") {
+    public function __construct($data = '')
+    {
         $this->_data = $data;
 
-        if (file_exists($this->exec_file)) $this->_exec_file_content = file_get_contents($this->exec_file);
+        if (file_exists($this->exec_file)) {
+            $this->_exec_file_content = file_get_contents($this->exec_file);
+        }
     }
     // }}}
 
@@ -126,7 +130,8 @@ class PG_Server {
      * @access public
      * @return string
      */
-    public function log_data() {
+    public function log_data()
+    {
         $param = base64_decode($param);
 
         $param_arr = @unserialize($param);
@@ -149,7 +154,7 @@ class PG_Server {
         foreach($placeholder as $key => $value) $string = str_replace($key, $value, $string);
 
         $fp = fopen($this->log_file, 'a');
-        fwrite($fp, "$string\n");
+        fwrite($fp, $string . PHP_EOL);
         fclose($fp);
 
         return $this->_exec_file_content;
@@ -164,7 +169,8 @@ class PG_Server {
      * @param  array     $key
      * @return mixed
      */
-    protected function getValue($param_arr, $key) {
+    protected function getValue($param_arr, $key)
+    {
         return !empty($param_arr[$key]) ? $param_arr[$key] : 'N/A';
     }
     // }}}

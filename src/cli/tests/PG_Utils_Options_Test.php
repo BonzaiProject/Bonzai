@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Utils/Options.php';
 
 /**
@@ -50,43 +50,52 @@ require_once __DIR__ . '/../libs/Utils/Options.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Utils_Options_Test extends PG_TestCase {
-    public function testNothing() {
+class PG_Utils_Options_Test extends PG_TestCase
+{
+    public function testNothing()
+    {
         $message = 'There\'s nothing to be tested in this Testing Class.';
         $this->markTestSkipped($message);
     }
 
-    //public function testInit() {
+    //public function testInit()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testParseOptions() {
+    //public function testParseOptions()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testGetParameters() {
+    //public function testGetParameters()
+    //{
         // TODO: The getter need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testGetOptions() {
+    //public function testGetOptions()
+    //{
         // TODO: The getter need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testGetOption() {
+    //public function testGetOption()
+    //{
         // TODO: The getter need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testGetScriptParameters() {
+    //public function testGetScriptParameters()
+    //{
         // TODO: The getter need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testGetLabelParameter() {
+    //public function testGetLabelParameter()
+    //{
         // TODO: The getter need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}

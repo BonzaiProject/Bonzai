@@ -44,14 +44,15 @@
  * @version 4.0
  * @package phpGuardian
  */
-class PG_Task {
+class PG_Task
+{
     // {{{ PROPERTIES
     /**
      *
      * @access protected
      * @var    string    $task
      */
-    protected $task = null;
+    protected $task = 'PG_Utils_Help';
 
     /**
      *
@@ -69,15 +70,15 @@ class PG_Task {
      * @param  PG_Utils_Options $options
      * @return void
      */
-    public function load(PG_Utils_Options $options) {
-        $this->task       = "PG_Help";
+    public function load(PG_Utils_Options $options)
+    {
         $this->parameters = $options;
 
         if (!is_null($options->getOption('generate'))) {
-            $this->task       = "PG_Script_Generator";
+            $this->task       = 'PG_Script_Generator';
             $this->parameters = $this->options->getOption('generate');
         } elseif (count($options->getOptions()) == 0 && count($options->getParameters()) > 0) { // TODO: too long
-            $this->task       = "PG_Script_Parser";
+            $this->task       = 'PG_Script_Parser';
             $this->parameters = array_shift($options->getParameters());
         }
     }
@@ -90,7 +91,8 @@ class PG_Task {
      * @throws PG_Exception
      * @return mixed
      */
-    public function execute() {
+    public function execute()
+    {
         $class = $this->task;
         $class = new $class();
 
@@ -109,7 +111,8 @@ class PG_Task {
      * @param  PG_Utils_Options $options
      * @return mixed
      */
-    public function loadAndExecute(PG_Utils_Options $options) {
+    public function loadAndExecute(PG_Utils_Options $options)
+    {
         $this->load($options);
         return $this->execute();
     }

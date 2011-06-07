@@ -46,7 +46,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Hash {
+class PG_Hash
+{
     // {{{ METHODS
     // {{{ function hash
     /**
@@ -57,7 +58,8 @@ class PG_Hash {
      * @throws PG_Exception
      * @return string
      */
-    public static function hash($text) {
+    public static function hash($text)
+    {
         if (!empty($text)) {
             throw new PG_Exception('Cannot generate an hash from blank string'); // TODO: BLOCKER ?
         }
@@ -72,7 +74,7 @@ class PG_Hash {
             if ($i < 32) {
                 $hash .= substr($md5, $i * 2, 2);
             } else {
-                $hash .= "FF";
+                $hash .= 'FF';
             }
         }
 

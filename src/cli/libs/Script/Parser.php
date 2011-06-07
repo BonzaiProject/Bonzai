@@ -46,7 +46,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Script_Parser {
+class PG_Script_Parser
+{
     // {{{ PROPERTIES
     /**
      *
@@ -65,7 +66,8 @@ class PG_Script_Parser {
      * @param  string $file
      * @return void
      */
-    public function elaborate($file) {
+    public function elaborate($file)
+    {
         $this->loadConfig($file);
 
         $action = strtolower($this->config['SETUP']['ACTION']);
@@ -95,12 +97,13 @@ class PG_Script_Parser {
      * @access protected
      * @return void
      */
-    protected function expandPathsToFiles() {
+    protected function expandPathsToFiles()
+    {
         foreach($this->config['PATHS']['LIST'] as $path) {
             $files = PG_Utils::rscandir($path['PATH']);
             $files = preg_grep('/\.php$/', $files);
             foreach($this->config['PATHS']['EXCLUDE_PATH_PATTERN'] as $pattern) { // TODO: too long
-                $files = preg_grep('/' . $pattern . '/', $files, PREG_GREP_INVERT); // TODO: too long
+                $files = preg_grep("/$pattern/", $files, PREG_GREP_INVERT); // TODO: too long
             }
 
             foreach($files as $file) {
@@ -121,12 +124,13 @@ class PG_Script_Parser {
      * @throws PG_Exception
      * @return void
      */
-    protected function loadConfig($file) {
+    protected function loadConfig($file)
+    {
         if (empty($file) || !is_readable($file)) {
-            throw new PG_Exception('The file `' . $file . '` cannot be opened'); // TODO: BLOCKER ?
+            throw new PG_Exception("The file `$file` cannot be opened"); // TODO: BLOCKER ?
         }
 
-        PG_Utils::pg_message("Loading configuration options...", false);
+        PG_Utils::pg_message('Loading configuration options...', false);
 
         $file         = PG_Utils::getFilePath($file);
         $this->config = parse_ini_file($file, true);
@@ -144,7 +148,8 @@ class PG_Script_Parser {
      * @access public
      * @return array
      */
-    public function elaborateConfig() {
+    public function elaborateConfig()
+    {
         $this->analyzeOptions();
 
         $this->handleConfigFiles('PATHS');
@@ -166,7 +171,8 @@ class PG_Script_Parser {
      * @param  string    $key
      * @return void
      */
-    protected function handleConfigFiles($key) {
+    protected function handleConfigFiles($key)
+    {
         $exclude = 'EXCLUDE_' . substr($key, 0, -1) . '_PATTERN';
         $this->config[$key][$exclude] = split(',\s*', $this->config[$key][$exclude]); // TODO: too long
 
@@ -186,7 +192,8 @@ class PG_Script_Parser {
      * @param  string    $field
      * @return void
      */
-    protected function setInputInfoField($param, $field) {
+    protected function setInputInfoField($param, $field)
+    {
         if (!isset($param[$field])) {
             $param[$field] = $this->config[$field];
         }
@@ -199,7 +206,8 @@ class PG_Script_Parser {
      * @access protected
      * @return void
      */
-    protected function analyzeOptions() {
+    protected function analyzeOptions()
+    {
         foreach($this->config as $key => $value) {
             $this->config[$key] = array_map(array($this, 'convertToBoolean'), $value); // TODO: too long
         }
@@ -213,7 +221,8 @@ class PG_Script_Parser {
      * @param  mixed           $value
      * @return boolean | mixed
      */
-    protected function convertToBoolean($value) {
+    protected function convertToBoolean($value)
+    {
         if (is_string($value)) {
             if (strtolower($value) == 'yes') {
                 return true;
@@ -234,13 +243,14 @@ class PG_Script_Parser {
      * @param  string    $prefix
      * @return void
      */
-    protected function parseList($config, $prefix) {
+    protected function parseList($config, $prefix)
+    {
         $new = array();
         foreach($config as $key => $value) {
-            if (preg_match('/^' . $prefix . '\.\d+\./', $key)) {
+            if (preg_match("/^$prefix\.\d+\./", $key)) {
                 unset($config[$key]);
                 $id  = preg_replace('/.*(\d+).*/', '\1', $key);
-                $key = preg_replace('/^' . $prefix . '\.\d+\./', '', $key);
+                $key = preg_replace("/^$prefix\.\d+\./", '', $key);
                 $new[$id][$key] = $value;
             }
         }

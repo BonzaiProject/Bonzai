@@ -36,6 +36,8 @@
  * $Id$
  **/
 
+require_once __DIR__ . '/../Exception/Exception.php';
+
 /**
  * Handle the all global behaviours
  *
@@ -47,7 +49,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Controller {
+class PG_Controller
+{
     // {{{ PROPERTIES
     /**
      *
@@ -64,7 +67,8 @@ class PG_Controller {
      * @access public
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         // Register the custom autoloader
         spl_autoload_register('PG_Controller::__autoload');
     }
@@ -76,7 +80,8 @@ class PG_Controller {
      * @access public
      * @return void
      */
-    public function elaborate() {
+    public function elaborate()
+    {
         // Get the Script Options
         $this->options = new PG_Utils_Options();
         $this->options->init($_SERVER['argv']);
@@ -110,17 +115,18 @@ class PG_Controller {
      * @throws PG_Exception
      * @return void
      */
-    public function __autoload($name) {
+    public function __autoload($name)
+    {
         if (substr($name, 0, 3) == 'PG_') {
             // Get the class filename
             $filename = $this->getClassFileName($name);
 
             if (!$this->checkFile($filename)) {
-                $message = 'The class `' . $name . '` cannot be loaded';
+                $message = "The class `$name` cannot be loaded";
                 throw new PG_Exception($message); // TODO: BLOCKER
             }
 
-            require_once __DIR__ . '/../' . $filename . '.php';;
+            require_once __DIR__ . "/../$filename.php";
         }
     }
     // }}}
@@ -133,11 +139,12 @@ class PG_Controller {
      * @param  string    $name
      * @return string
      */
-    protected function getClassFileName($name) {
+    protected function getClassFileName($name)
+    {
         $name     = preg_replace('/^PG_/', '', $name);
         $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
 
-        if ($this->checkFile($filename) && ($name == $filename)) {
+        if (!$this->checkFile($filename) && ($name == $filename)) {
             $filename .= DIRECTORY_SEPARATOR . $name;
         }
 
@@ -153,10 +160,9 @@ class PG_Controller {
      * @param  string    $filename
      * @return boolean
      */
-    protected function checkFile($filename) {
-        $full_filename = __DIR__ . '/../' . $filename . '.php';
-
-        return file_exists($full_filename);
+    protected function checkFile($filename)
+    {
+        return file_exists(__DIR__ . "/../$filename.php");
     }
     // }}}
     // }}}

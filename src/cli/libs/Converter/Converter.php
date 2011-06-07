@@ -46,54 +46,46 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Converter {
+class PG_Converter
+{
     // {{{ PROPERTIES
     /**
      *
      * @access protected
      * @var    string
      */
-    protected $pt_open_long;
+    protected $pt_open_long = '<?php';
 
     /**
      *
      * @access protected
      * @var    string
      */
-    protected $pt_open_short;
+    protected $pt_open_short = '<?';
 
     /**
      *
      * @access protected
      * @var    string
      */
-    protected $pt_close;
+    protected $pt_close = '?>';
 
     /**
      *
      * @access protected
      * @var    integer
      */
-    protected $pt_size_long;
+    protected $pt_size_long = 5;
 
     /**
      *
      * @access protected
      * @var    array
      */
-    protected $blocks;
+    protected $blocks = array();
     // }}}
 
     // {{{ METHODS
-    // {{{ function __construct
-    /**
-     *
-     */
-    public function __construct() {
-        $this->setTags(false);
-    }
-    // }}}
-
     // {{{ function convert
     /**
      *
@@ -102,7 +94,8 @@ class PG_Converter {
      * @param  boolean   $asptag
      * @return string
      */
-    protected function convert($filename, $asptag = false) {
+    protected function convert($filename, $asptag = false)
+    {
         $content = PG_Utils::getFileContent($filename);
 
         // Increase the total originary bytes
@@ -114,7 +107,7 @@ class PG_Converter {
         PG_Registry::getInstance()->append('total_converted_bytes', strlen($source), PG_Registry::INTEGER_APPEND); // TODO: too long
 
         // Print a message
-        PG_Utils::pg_message("Generated %s bytes.", true, strlen($source));
+        PG_Utils::pg_message('Generated %s bytes.', true, strlen($source));
 
         return $source;
     }
@@ -129,7 +122,8 @@ class PG_Converter {
      * @throws PG_Exception
      * @return string
      */
-    protected function process($data, $asptag = false) {
+    protected function process($data, $asptag = false)
+    {
         if (empty($data)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
@@ -137,16 +131,17 @@ class PG_Converter {
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         $this->setTags($asptag);
 
-        $data = str_replace($this->pt_close, ";" . $this->pt_close, $data);
+        $data = str_replace($this->pt_close, ';' . $this->pt_close, $data);
         $this->finder($data, $asptag);
 
         $max = substr_count($data, $this->pt_open_short);
 
-        $start = $count = 0;
+        $start = 0;
+        $count = 0;
         $end   = $this->blocks[0]['open'];
 
-        $data_len = strlen($data);
-        $final_data = $this->pt_open_long . "\n";
+        $data_len   = strlen($data);
+        $final_data = $this->pt_open_long . PHP_EOL;
 
         for($i = 0; $i < $data_len; $i++) {
             $final_data .= $this->analyzeProcessBlock($data, &$count, $max, &$i, &$start, &$end, $data_len); // TODO: too long
@@ -173,8 +168,10 @@ class PG_Converter {
      * @param  integer   $data_len
      * @return string
      */
-    protected function analyzeProcessBlock($data, $count, $max, $i, $start, $end, $data_len) { // TODO: too long
+    protected function analyzeProcessBlock($data, $count, $max, $i, $start, $end, $data_len) // TODO: too long
+    {
         $final_data = '';
+
         $elem = $this->blocks[$count];
 
         if ($count < $max && $i >= $elem['open'] && $i <= $elem['close']) {
@@ -183,17 +180,20 @@ class PG_Converter {
 
             $final_data .= substr($data, $from, $to);
             $start       = $i = (int)$elem['close'] + 2;
-            $end         = ($count + 1 >= $max) ? $data_len : $this->blocks[$count + 1]['open']; // TODO: too long
+            $end         = ($count + 1 >= $max)
+                           ? $data_len : $this->blocks[$count + 1]['open'];
             $count++;
         } else if ($i >= $start && $i <= $end) {
-            $final_data .= "\necho <<<PHPG_HD\n";
+            $final_data .= PHP_EOL . 'echo <<<PHPG_HD' . PHP_EOL;
             $final_data .= substr($data, $start, $end - $start);
-            $final_data .= "\nPHPG_HD;\n";
+            $final_data .= PHP_EOL . 'PHPG_HD;' . PHP_EOL;
+
             $i = $end;
         } else {
-            $final_data .= "\necho <<<PHPG_HD\n";
+            $final_data .= PHP_EOL . 'echo <<<PHPG_HD' . PHP_EOL;
             $final_data .= substr($data, $i, $data_len - $i);
-            $final_data .= "\nPHPG_HD;\n";
+            $final_data .= PHP_EOL . 'PHPG_HD;' . PHP_EOL;
+
             $i = $data_len;
         }
 
@@ -208,13 +208,14 @@ class PG_Converter {
      * @param  boolean   $asptag
      * @return void
      */
-    protected function setTags($asptag) {
-        $this->pt_open_long = "<" . "?php";
-        $this->pt_close     = "?" . ">";
+    protected function setTags($asptag)
+    {
+        $this->pt_open_long = '<?php';
+        $this->pt_close     = '?>';
 
         if ($asptag) {
-            $this->pt_open_long = "<%";
-            $this->pt_close     = "%>";
+            $this->pt_open_long = '<%';
+            $this->pt_close     = '%>';
         }
 
         $this->pt_size_long  = strlen($this->pt_open_long);
@@ -231,7 +232,8 @@ class PG_Converter {
      * @throws PG_Exception
      * @return void
      */
-    protected function finder($data, $asptag = false) {
+    protected function finder($data, $asptag = false)
+    {
         if (empty($data)) {
             throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
@@ -264,22 +266,24 @@ class PG_Converter {
      * @param  integer   $count
      * @return boolean
      */
-    protected function analyzeFinderBlock($data, $pos, $opened, $count) {
+    protected function analyzeFinderBlock($data, $pos, $opened, $count)
+    {
         $tag_long  = substr($data, $pos, $this->pt_size_long);
         $tag_short = substr($data, $pos, 2);
 
-        $is_long_tag  = $tag_long == $this->pt_open_long;
+        $is_long_tag  = $tag_long  == $this->pt_open_long;
         $is_short_tag = $tag_short == $this->pt_open_short;
 
         if (!$opened && $is_long_tag || $is_short_tag) {
-            $len  = $is_long_tag ? $this->pt_size_long : 2;
+            $len  = $is_long_tag
+                    ? $this->pt_size_long : 2;
             $next = substr($data, $pos + $len, 1);
             $this->setBlock($count + 1, 'size', $len);
 
             $opened = $this->isOpened($next, $pos);
         } else if ($tag_short == $this->pt_close) {
             $this->setBlock($count, 'close', $pos);
-            PG_Utils::pg_message("Found php close #%s: %s", true, $count, $this->blocks[$count]['close']); // TODO: too long
+            PG_Utils::pg_message('Found php close #%s: %s', true, $count, $this->blocks[$count]['close']); // TODO: too long
             $opened = false;
         }
 
@@ -295,13 +299,14 @@ class PG_Converter {
      * @param  integer   $pos
      * @return boolean
      */
-    protected function isOpened($next, $pos) {
+    protected function isOpened($next, $pos)
+    {
        global $count;
 
-        $opened = in_array($next, array("\n", "=", " "));
+        $opened = in_array($next, array(PHP_EOL, '=', ' '));
         if ($opened) {
             $this->setBlock(++$count, 'open', $pos);
-            PG_Utils::pg_message("Found php start #%s: %s", true, $count, $this->blocks[$count]['open']); // TODO: too long
+            PG_Utils::pg_message('Found php start #%s: %s', true, $count, $this->blocks[$count]['open']); // TODO: too long
         }
 
         return $opened;
@@ -317,7 +322,8 @@ class PG_Converter {
      * @param  array     $value
      * @return void
      */
-    protected function setBlock($pos, $key, $value) {
+    protected function setBlock($pos, $key, $value)
+    {
       if (empty($this->blocks[$pos])) {
           $this->blocks[$pos] = array('open' => 0, 'close' => 0, 'size' => 0);
       }

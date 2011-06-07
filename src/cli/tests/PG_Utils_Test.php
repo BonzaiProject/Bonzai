@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Utils/Utils.php';
 
 /**
@@ -50,8 +50,10 @@ require_once __DIR__ . '/../libs/Utils/Utils.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Utils_Test extends PG_TestCase {
-    public function testGetFilePath() {
+class PG_Utils_Test extends PG_TestCase
+{
+    public function testGetFilePath()
+    {
         // TODO: $this->object->getFilePath($file);
         // INPUT:  file
         // OUTPUT: string
@@ -68,12 +70,14 @@ class PG_Utils_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    //public function testRename_file() {
+    //public function testRename_file()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    public function testRscandir() {
+    public function testRscandir()
+    {
         // TODO: $this->object->rscandir($base = '', &$data = array());
         // INPUT:  base, data
         // OUTPUT: array
@@ -118,7 +122,8 @@ class PG_Utils_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetFileContent() {
+    public function testGetFileContent()
+    {
         // TODO: $this->object->getFileContent($filename);
         // INPUT:  filename
         // OUTPUT: string
@@ -135,7 +140,8 @@ class PG_Utils_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testPutFileContent() {
+    public function testPutFileContent()
+    {
         // TODO: $this->object->putFileContent($filename, $content);
         // INPUT:  filename, content
         // OUTPUT: boolean
@@ -173,7 +179,8 @@ class PG_Utils_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    //public function testPg_message() {
+    //public function testPg_message()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}

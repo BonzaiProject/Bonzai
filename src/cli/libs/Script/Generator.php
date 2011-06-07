@@ -46,7 +46,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Script_Generator {
+class PG_Script_Generator
+{
     // {{{ PROPERTIES
     /**
      *
@@ -63,7 +64,8 @@ class PG_Script_Generator {
      * @access public
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->script = PG_Utils::getFileContent(__DIR__ . '/Script.dist');
     }
     // }}}
@@ -75,10 +77,9 @@ class PG_Script_Generator {
      * @param  string  $file
      * @return boolean
      */
-    public function elaborate($file) {
-        $file = PG_Utils::getFilePath($file);
-
-        return PG_Utils::putFileContent($file, $this->script);
+    public function elaborate($file)
+    {
+        return PG_Utils::putFileContent(PG_Utils::getFilePath($file), $this->script);
     }
     // }}}
     // }}}

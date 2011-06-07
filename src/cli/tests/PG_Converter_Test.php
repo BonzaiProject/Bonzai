@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Converter/Converter.php';
 
 /**
@@ -50,8 +50,10 @@ require_once __DIR__ . '/../libs/Converter/Converter.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Converter_Test extends PG_TestCase {
-    public function testConvert() {
+class PG_Converter_Test extends PG_TestCase
+{
+    public function testConvert()
+    {
         // TODO: $this->object->convert($filename, $asptag = false);
         // INPUT:  filename, asptag
         // OUTPUT: string
@@ -86,7 +88,8 @@ class PG_Converter_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testProcess() {
+    public function testProcess()
+    {
         // TODO: $this->object->process($data, $asptag = false);
         // INPUT:  data, asptag
         // OUTPUT: string
@@ -206,7 +209,8 @@ class PG_Converter_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testAnalyzeProcessBlock() {
+    public function testAnalyzeProcessBlock()
+    {
         // TODO: $this->object->analyzeProcessBlock($data, $count, $max, $i, $start, $end, $data_len);
         // TODO: refactor parent method: too input params
         // INPUT:  data, count, max, i, start, end, data_len
@@ -215,17 +219,20 @@ class PG_Converter_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    //public function testsetTags() {
+    //public function testsetTags()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testFinder() {
+    //public function testFinder()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    public function testAnalyzeFinderBlock() {
+    public function testAnalyzeFinderBlock()
+    {
         // TODO: $this->object->analyzeFinderBlock($data, $pos, $opened, $count);
         // TODO: refactor parent method: too input params
         // INPUT:  data, pos, opened, count
@@ -234,7 +241,8 @@ class PG_Converter_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testIsOpened() {
+    public function testIsOpened()
+    {
         // TODO: $this->object->isOpened($next, $pos);
         // INPUT:  news, pos
         // OUTPUT: boolean
@@ -268,7 +276,8 @@ class PG_Converter_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    //public function testSetBlock() {
+    //public function testSetBlock()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}

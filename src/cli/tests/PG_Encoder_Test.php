@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Encoder/Encoder.php';
 
 /**
@@ -50,13 +50,16 @@ require_once __DIR__ . '/../libs/Encoder/Encoder.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Encoder_Test extends PG_TestCase {
-    //public function testElaborate() {
+class PG_Encoder_Test extends PG_TestCase
+{
+    //public function testElaborate()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    public function testCodeCrypt() {
+    public function testCodeCrypt()
+    {
         // TODO: $this->object->codeCrypt($data);
         // INPUT:  data
         // OUTPUT: string
@@ -71,7 +74,8 @@ class PG_Encoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testCycleEncrypt() {
+    public function testCycleEncrypt()
+    {
         // TODO: $this->object->cycleEncrypt($string, $key_len, $data_len);
         // TODO: refactor parent method: too input params
         // INPUT:  string, key_len, data_len
@@ -80,7 +84,8 @@ class PG_Encoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testEncodeChar() {
+    public function testEncodeChar()
+    {
         // TODO: $this->object->encodeChar($character, $key);
         // INPUT:  character, key
         // OUTPUT: string
@@ -110,7 +115,8 @@ class PG_Encoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetInner() {
+    public function testGetInner()
+    {
         // TODO: $this->object->getInner();
         // INPUT:  -
         // OUTPUT: string
@@ -118,7 +124,8 @@ class PG_Encoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetHeader() {
+    public function testGetHeader()
+    {
         // TODO: $this->object->getHeader($element, $inner);
         // INPUT:  element, inner
         // OUTPUT: string
@@ -152,7 +159,8 @@ class PG_Encoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetFooter() {
+    public function testGetFooter()
+    {
         // TODO: $this->object->getFooter($element);
         // INPUT:  element
         // OUTPUT: string
@@ -168,7 +176,8 @@ class PG_Encoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetEncodedFilename() {
+    public function testGetEncodedFilename()
+    {
         // TODO: $this->object->getEncodedFilename($filename);
         // INPUT:  filename
         // OUTPUT: string
@@ -182,7 +191,8 @@ class PG_Encoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    //public function testCreateFileKey() {
+    //public function testCreateFileKey()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}

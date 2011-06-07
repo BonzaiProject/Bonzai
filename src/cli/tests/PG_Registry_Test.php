@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Registry/Registry.php';
 
 /**
@@ -50,18 +50,22 @@ require_once __DIR__ . '/../libs/Registry/Registry.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Registry_Test extends PG_TestCase {
-    //public function testGetInstance() {
+class PG_Registry_Test extends PG_TestCase
+{
+    //public function testGetInstance()
+    //{
         // TODO: The constructor need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testAdd() {
+    //public function testAdd()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    public function testGet() {
+    public function testGet()
+    {
         // TODO: $this->object->get($key);
         // INPUT:  key
         // OUTPUT: mixed
@@ -76,12 +80,14 @@ class PG_Registry_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    //public function testRemove() {
+    //public function testRemove()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testAppend() {
+    //public function testAppend()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}

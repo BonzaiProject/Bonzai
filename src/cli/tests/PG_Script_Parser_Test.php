@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Script/Parser.php';
 
 /**
@@ -50,23 +50,28 @@ require_once __DIR__ . '/../libs/Script/Parser.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Script_Parser_Test extends PG_TestCase {
-    //public function testElaborate() {
+class PG_Script_Parser_Test extends PG_TestCase
+{
+    //public function testElaborate()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testExpandPathsToFiles() {
+    //public function testExpandPathsToFiles()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testLoadConfig() {
+    //public function testLoadConfig()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    public function testElaborateConfig() {
+    public function testElaborateConfig()
+    {
         // TODO: $this->object->elaborateConfig();
         // INPUT:  -
         // OUTPUT: array
@@ -74,22 +79,26 @@ class PG_Script_Parser_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    //public function testHandleConfigFiles() {
+    //public function testHandleConfigFiles()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testSetInputInfoField() {
+    //public function testSetInputInfoField()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    //public function testAnalyzeOptions() {
+    //public function testAnalyzeOptions()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    public function testConvertToBoolean() {
+    public function testConvertToBoolean()
+    {
         // TODO: $this->object->convertToBoolean($value);
         // INPUT:  value
         // OUTPUT: mixed
@@ -116,7 +125,8 @@ class PG_Script_Parser_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    //public function testParseList() {
+    //public function testParseList()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}

@@ -46,7 +46,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Utils_Options {
+class PG_Utils_Options
+{
     // {{{ PROPERTIES
     /**
      *
@@ -78,8 +79,9 @@ class PG_Utils_Options {
      * @throws PG_Exception
      * @return void
      */
-    public function init($argv) {
-        if (!is_array($argv) || empty($argv)) {
+    public function init($argv)
+    {
+        if (empty($argv) || !is_array($argv)) {
             throw new PG_Exception('Missing the script arguments'); // TODO: BLOCKER
         }
 
@@ -100,7 +102,8 @@ class PG_Utils_Options {
      * @throws PG_Exception
      * @return void
      */
-    protected function parseOptions(&$options, &$non_options) {
+    protected function parseOptions(&$options, &$non_options)
+    {
         if (!is_array($options) || !is_array($non_options)) {
             throw new PG_Exception('Invalid parameters to be parsed'); // TODO: NON BLOCKER
         }
@@ -128,7 +131,8 @@ class PG_Utils_Options {
      * @access public
      * @return array
      */
-    public function getParameters() {
+    public function getParameters()
+    {
         return $this->non_options;
     }
     // }}}
@@ -139,7 +143,8 @@ class PG_Utils_Options {
      * @access public
      * @return array
      */
-    public function getOptions() {
+    public function getOptions()
+    {
         return $this->options;
     }
     // }}}
@@ -151,7 +156,8 @@ class PG_Utils_Options {
      * @param  string        $key
      * @return string | null
      */
-    public function getOption($key) {
+    public function getOption($key)
+    {
         if (isset($this->options[$key])) {
             return $this->options[$key];
         }
@@ -166,7 +172,8 @@ class PG_Utils_Options {
      * @access public
      * @return array
      */
-    public function getScriptParameters() {
+    public function getScriptParameters()
+    {
         return $this->parameters;
     }
     // }}}
@@ -178,7 +185,8 @@ class PG_Utils_Options {
      * @param  string        $key
      * @return string | null
      */
-    public function getLabelParameter($key) {
+    public function getLabelParameter($key)
+    {
         if (isset($this->labels[$key])) {
             return $this->labels[$key];
         }

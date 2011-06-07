@@ -36,7 +36,7 @@
  * $Id$
  **/
 
-require_once __DIR__ . '/../libs/Tests/PG_TestCase.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Decoder/Decoder.php';
 
 /**
@@ -50,13 +50,16 @@ require_once __DIR__ . '/../libs/Decoder/Decoder.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Decoder_Test extends PG_TestCase {
-    //public function testElaborate() {
+class PG_Decoder_Test extends PG_TestCase
+{
+    //public function testElaborate()
+    //{
         // TODO: A method without return need to be tested?
         //$this->markTestIncomplete('This test has not been implemented yet.');
     //}
 
-    public function testCodeDecrypt() {
+    public function testCodeDecrypt()
+    {
         // TODO: $this->object->codeDecrypt($data);
         // INPUT:  data
         // OUTPUT: string
@@ -71,7 +74,8 @@ class PG_Decoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testCycleDecrypt() {
+    public function testCycleDecrypt()
+    {
         // TODO: $this->object->cycleDecrypt($string, $key_len, $data_len);
         // TODO: refactor parent method: too input params
         // INPUT:  string, key_len, data_len
@@ -80,7 +84,8 @@ class PG_Decoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testDecodeChar() {
+    public function testDecodeChar()
+    {
         // TODO: $this->object->decodeChar($characters, $key);
         // INPUT:  characters, key
         // OUTPUT: string
@@ -110,7 +115,8 @@ class PG_Decoder_Test extends PG_TestCase {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testGetDecodedFilename() {
+    public function testGetDecodedFilename()
+    {
         // TODO: $this->object->getDecodedFilename($filename);
         // INPUT:  filename
         // OUTPUT: string

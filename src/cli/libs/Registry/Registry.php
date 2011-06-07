@@ -46,7 +46,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Registry {
+class PG_Registry
+{
     // {{{ PROPERTIES
     /**
      *
@@ -87,7 +88,8 @@ class PG_Registry {
      * @access public
      * @return PG_Registry
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (is_null(self::$instance)) {
             self::$instance = new self();
         }
@@ -105,7 +107,8 @@ class PG_Registry {
      * @param  integer $type
      * @return void
      */
-    public function add($key, $value, $type = null) {
+    public function add($key, $value, $type = null)
+    {
         if ($type == self::ARRAY_APPEND) {
             $value = array($value);
         }
@@ -120,7 +123,8 @@ class PG_Registry {
      * @param  string       $key
      * @return mixed | null
      */
-    public function get($key) {
+    public function get($key)
+    {
         if (isset($this->elements[$key])) {
             return $this->elements[$key];
         }
@@ -136,7 +140,8 @@ class PG_Registry {
      * @param  string $key
      * @return void
      */
-    public function remove($key) {
+    public function remove($key)
+    {
         if (isset($this->elements[$key])) {
             unset($this->elements[$key]);
         }
@@ -153,7 +158,8 @@ class PG_Registry {
      * @param  integer $type
      * @return void
      */
-    public function append($key, $value, $type = null) {
+    public function append($key, $value, $type = null)
+    {
         if (isset($this->elements[$key])) {
             if (is_array($value)) {
                 $this->elements[$key][] = $value;

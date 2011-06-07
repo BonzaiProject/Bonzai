@@ -49,7 +49,8 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_TestCase extends PHPUnit_Framework_TestCase {
+class PG_TestCase extends PHPUnit_Framework_TestCase
+{
     // {{{ PROPERTIES
     /**
      *
@@ -66,23 +67,12 @@ class PG_TestCase extends PHPUnit_Framework_TestCase {
      * @access protected
      * @return void
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
 
-        $className = substr(get_class($this), 0, -5);
-
+        $className    = substr(get_class(), 0, -5); // Strip '_Test'
         $this->object = new $className;
-    }
-    // }}}
-
-    // {{{ function tearDown
-    /**
-     *
-     * @access protected
-     * @return void
-     */
-    protected function tearDown() {
-        parent::tearDown();
     }
     // }}}
     // }}}

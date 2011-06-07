@@ -46,7 +46,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
  * @link      http://www.phpguardian.org
  */
-class PG_Utils {
+class PG_Utils
+{
     // {{{ METHODS
     // {{{ function getFilePath
     /**
@@ -57,13 +58,14 @@ class PG_Utils {
      * @throws PG_Exception
      * @return string
      */
-    public static function getFilePath($file) {
+    public static function getFilePath($file)
+    {
         if (!file_exists(dirname($file)) || dirname($file) == '.') {
-            $file = getcwd() . '/' . $file;
+            $file = getcwd() . "/$file";
         }
 
         if (!is_readable($file)) {
-            throw new PG_Exception('The file `' . $file . '` cannot be opened'); // TODO: BLOCKER ?
+            throw new PG_Exception("The file `$file` cannot be opened"); // TODO: BLOCKER ?
         } else {
             return $file;
         }
@@ -80,12 +82,13 @@ class PG_Utils {
      * @throws PG_Exception
      * @return void
      */
-    public static function rename_file($filename, $backup = true) {
+    public static function rename_file($filename, $backup = true)
+    {
         if ($backup) {
-            $backup_filename = $filename . '.orig';
+            $backup_filename = "$filename.orig";
 
             if (!is_writable($backup_filename)) {
-                $message = 'The file `' . $backup_filename . '` cannot be written'; // TODO: too long
+                $message = "The file `$backup_filename` cannot be written";
                 throw new PG_Exception($message); // TODO: BLOCKER ?
             }
 
@@ -105,18 +108,19 @@ class PG_Utils {
      * @throws PG_Exception
      * @return array
      */
-    public static function rscandir($base = '', &$data = array()) {
+    public static function rscandir($base = '', &$data = array())
+    {
         if (!is_readable($base)) {
-            $message = 'The directory `' . $base . '` cannot be opened';
+            $message = "The directory `$base` cannot be opened";
             throw new PG_Exception($message); // TODO: BLOCKER ?
         }
 
         $array = array_diff(scandir($base), array('.', '..'));
 
         foreach($array as $value) {
-            $path = $base . '/' . $value;
+            $path = "$base/$value";
             if (is_dir($path)) {
-                $data[] = $path . '/';
+                $data[] = "$path/";
                 $data = PG_Utils::rscandir($path, $data);
             } elseif (is_file($path)) {
                 $data[] = $path;
@@ -136,9 +140,10 @@ class PG_Utils {
      * @throws PG_Exception
      * @return string
      */
-    public static function getFileContent($filename) {
+    public static function getFileContent($filename)
+    {
         if (!is_readable($filename)) {
-            $message = 'The file `' . $filename . '` cannot be opened';
+            $message = "The file `$filename` cannot be opened";
             throw new PG_Exception($message); // TODO: NON BLOCKER
         }
 
@@ -156,9 +161,10 @@ class PG_Utils {
      * @throws PG_Exception
      * @return string
      */
-    public static function putFileContent($filename, $content) {
+    public static function putFileContent($filename, $content)
+    {
         if (!is_writable($filename)) {
-            $message = 'The file `' . $filename . '` cannot be written';
+            $message = "The file `$filename` cannot be written";
             throw new PG_Exception($message); // TODO: BLOCKER ?
         }
 
@@ -174,10 +180,12 @@ class PG_Utils {
      * @access public
      * @return void
      */
-    public static function pg_message() {
+    public static function pg_message()
+    {
         $args    = func_get_args();
         $text    = array_shift($args);
-        $verbose = isset($args[1]) ? array_shift($args) : true;
+        $verbose = isset($args[1])
+                   ? array_shift($args) : true;
 
         if (!PG_Script_Parser::$config['SETUP']['SILENT'] || ($verbose && PG_Script_Parser::$config['SETUP']['PG_S_VERBOSE'])) { // TODO: too long
             $gettext_text = _($text);
