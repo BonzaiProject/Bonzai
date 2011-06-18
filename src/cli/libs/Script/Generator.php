@@ -18,20 +18,19 @@
  * E-MAIL:         info@phpguardian.org
  *
  * COPYRIGHT:      2006-2011 Fabio Cicerchia
- * LICENSE:        GNU GPL 3+
- *                 This program is free software: you can redistribute it and/or
- *                 modify it under the terms of the GNU General Public License
- *                 as published by the Free Software Foundation, either version
- *                 3 of the License, or (at your option) any later version.
- *
- *                 This program is distributed in the hope that it will be
- *                 useful, but WITHOUT ANY WARRANTY; without even the implied
- *                 warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- *                 PURPOSE. See the GNU General Public License for more details.
- *
- *                 You should have received a copy of the GNU General Public
- *                 Licensealong with this program. If not, see
- *                 <http://www.gnu.org/licenses/>.
+ * LICENSE:        MIT or GNU GPL 2
+ *                 The MIT License is recommended for most projects, it's simple
+ *                 and  easy  to understand and it places almost no restrictions
+ *                 on  what  you  can do with phpGuardian.
+ *                 If  the  GPL  suits  your project better you are also free to
+ *                 use phpGuardian under that license.
+ *                 You   don't  have  to  do  anything  special  to  choose  one
+ *                 license  or  the  other  and  you don't have to notify anyone
+ *                 which   license   you   are   using.  You  are  free  to  use
+ *                 phpGuardian  in  commercial projects as long as the copyright
+ *                 header is left intact.
+ *                 <http://www.opensource.org/licenses/mit-license.php>
+ *                 <http://www.opensource.org/licenses/gpl-2.0.php>
  *
  * $Id$
  **/
@@ -43,7 +42,8 @@
  * @version   4.0
  * @author    Fabio Cicerchia <info@phpguardian.org>
  * @copyright 2006-2011 Fabio Cicerchia
- * @license   http://www.gnu.org/licenses/gpl-3.0.txt GNU GPL 3.0
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://www.phpguardian.org
  */
 class PG_Script_Generator
