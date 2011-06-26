@@ -28,7 +28,8 @@
  *
  **/
 
-require_once 'PHPUnit/Framework/TestSuite.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
+require_once __DIR__ . '/../libs/Task/Task.php';
 
 /**
  *
@@ -41,38 +42,29 @@ require_once 'PHPUnit/Framework/TestSuite.php';
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://bonzai.fabiocicerchia.it
  */
-class cliSuite extends PHPUnit_Framework_TestSuite
+class Bonzai_Task_Test extends Bonzai_TestCase
 {
-    // {{{ METHODS
-    // {{{ function __construct
-    /**
-     *
-     * @access public
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setName('cliSuite');
+    //public function testLoad()
+    //{
+        // TODO: A method without return need to be tested?
+        //$this->markTestIncomplete('This test has not been implemented yet.');
+    //}
 
-        $files = preg_grep('/Bonzai_.+_Test.php/', scandir(__DIR__));
-        foreach($files as $file) {
-            require_once __DIR__ . '/' . $file;
-            $this->addTestSuite(substr($file, 0, -4));
-        }
-    }
-    // }}}
-
-    // {{{ function suite
-    /**
-     *
-     * @static
-     * @access public
-     * @return cliSuite
-     */
-    public static function suite()
+    public function testExecute()
     {
-        return new self();
+        // TODO: $this->object->execute();
+        // INPUT:  -
+        // OUTPUT: mixed
+        // WHAT:   return the status of child method
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
-    // }}}
-    // }}}
+
+    public function testLoadAndExecute()
+    {
+        // TODO: $this->object->loadAndExecute(Bonzai_Utils_Options $options);
+        // INPUT:  options
+        // OUTPUT: mixed
+        // WHAT:   return the status of child method
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
 }

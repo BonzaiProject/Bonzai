@@ -15,13 +15,13 @@
  * LICENSE:        MIT or GNU GPL 2
  *                 The MIT License is recommended for most projects, it's simple
  *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with bonzai.
+ *                 on  what  you  can do with Bonzai.
  *                 If  the  GPL  suits  your project better you are also free to
- *                 use bonzai under that license.
+ *                 use Bonzai under that license.
  *                 You   don't  have  to  do  anything  special  to  choose  one
  *                 license  or  the  other  and  you don't have to notify anyone
  *                 which   license   you   are   using.  You  are  free  to  use
- *                 bonzai  in  commercial  projects  as  long  as  the copyright
+ *                 Bonzai  in  commercial  projects  as  long  as  the copyright
  *                 header is left intact.
  *                 <http://www.opensource.org/licenses/mit-license.php>
  *                 <http://www.opensource.org/licenses/gpl-2.0.php>
@@ -30,7 +30,7 @@
 /**
  *
  * @category  Security
- * @package   bonzai
+ * @package   Bonzai
  * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
@@ -39,7 +39,7 @@
  * @link      http://bonzai.fabiocicerchia.it
  */
 
-class PG_Converter
+class Bonzai_Converter
 {
     // {{{ PROPERTIES
     /**
@@ -89,18 +89,18 @@ class PG_Converter
      */
     protected function convert($filename, $asptag = false)
     {
-        $content = PG_Utils::getFileContent($filename);
+        $content = Bonzai_Utils::getFileContent($filename);
 
         // Increase the total originary bytes
-        PG_Registry::getInstance()->append('total_orig_bytes', strlen($content), PG_Registry::INTEGER_APPEND); // TODO: too long
+        Bonzai_Registry::getInstance()->append('total_orig_bytes', strlen($content), Bonzai_Registry::INTEGER_APPEND); // TODO: too long
 
         $source = $this->process($content, $asptag);
 
         // Increase the total converted bytes
-        PG_Registry::getInstance()->append('total_converted_bytes', strlen($source), PG_Registry::INTEGER_APPEND); // TODO: too long
+        Bonzai_Registry::getInstance()->append('total_converted_bytes', strlen($source), Bonzai_Registry::INTEGER_APPEND); // TODO: too long
 
         // Print a message
-        PG_Utils::pg_message('Generated %s bytes.', true, strlen($source));
+        Bonzai_Utils::bonzai_message('Generated %s bytes.', true, strlen($source));
 
         return $source;
     }
@@ -112,13 +112,13 @@ class PG_Converter
      * @access protected
      * @param  string       $data
      * @param  boolean      $asptag
-     * @throws PG_Exception
+     * @throws Bonzai_Exception
      * @return string
      */
     protected function process($data, $asptag = false)
     {
         if (empty($data)) {
-            throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
+            throw new Bonzai_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
 
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
@@ -177,15 +177,15 @@ class PG_Converter
                            ? $data_len : $this->blocks[$count + 1]['open'];
             $count++;
         } else if ($i >= $start && $i <= $end) {
-            $final_data .= PHP_EOL . 'echo <<<PHPG_HD' . PHP_EOL;
+            $final_data .= PHP_EOL . 'echo <<<BONZAI_HD' . PHP_EOL;
             $final_data .= substr($data, $start, $end - $start);
-            $final_data .= PHP_EOL . 'PHPG_HD;' . PHP_EOL;
+            $final_data .= PHP_EOL . 'BONZAI_HD;' . PHP_EOL;
 
             $i = $end;
         } else {
-            $final_data .= PHP_EOL . 'echo <<<PHPG_HD' . PHP_EOL;
+            $final_data .= PHP_EOL . 'echo <<<BONZAI_HD' . PHP_EOL;
             $final_data .= substr($data, $i, $data_len - $i);
-            $final_data .= PHP_EOL . 'PHPG_HD;' . PHP_EOL;
+            $final_data .= PHP_EOL . 'BONZAI_HD;' . PHP_EOL;
 
             $i = $data_len;
         }
@@ -222,13 +222,13 @@ class PG_Converter
      * @access protected
      * @param  string       $data
      * @param  boolean      $asptag
-     * @throws PG_Exception
+     * @throws Bonzai_Exception
      * @return void
      */
     protected function finder($data, $asptag = false)
     {
         if (empty($data)) {
-            throw new PG_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
+            throw new Bonzai_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
         }
 
         $opened = false;
@@ -276,7 +276,7 @@ class PG_Converter
             $opened = $this->isOpened($next, $pos);
         } else if ($tag_short == $this->pt_close) {
             $this->setBlock($count, 'close', $pos);
-            PG_Utils::pg_message('Found php close #%s: %s', true, $count, $this->blocks[$count]['close']); // TODO: too long
+            Bonzai_Utils::bonzai_message('Found php close #%s: %s', true, $count, $this->blocks[$count]['close']); // TODO: too long
             $opened = false;
         }
 
@@ -299,7 +299,7 @@ class PG_Converter
         $opened = in_array($next, array(PHP_EOL, '=', ' '));
         if ($opened) {
             $this->setBlock(++$count, 'open', $pos);
-            PG_Utils::pg_message('Found php start #%s: %s', true, $count, $this->blocks[$count]['open']); // TODO: too long
+            Bonzai_Utils::bonzai_message('Found php start #%s: %s', true, $count, $this->blocks[$count]['open']); // TODO: too long
         }
 
         return $opened;

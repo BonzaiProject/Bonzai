@@ -11,9 +11,9 @@ TODO LIST:
 [ ]    creare i pacchetti .zip & .tar.gz
 [ ]    committare tutto su sourceforge.net
 
-phpg-checker
-phpg-profiler
-phpg-key-decoder
+bonzai-checker
+bonzai-profiler
+bonzai-key-decoder
 
 [ ] rimuovere eccezioni S_SPLINT_S
 [X] rimuovere casting espliciti
@@ -81,13 +81,13 @@ CLI -> General -> Compile Project for WIN
 	compile
 	testing
 ---
-CLI -> Encode -> pg_convert
+CLI -> Encode -> bonzai_convert
 	optimizing (remove tabulation, comments, line breaks)
-CLI -> Encode -> pg_encode_file
+CLI -> Encode -> bonzai_encode_file
 	set decodable bytes
         N: if set a cli param -> enabled by default
 ---
-CLI -> Decode -> pg_is_decodable
+CLI -> Decode -> bonzai_is_decodable
 	testing
 ---
 Script Class -> Decode -> Administration
@@ -115,8 +115,8 @@ KEY TROUBLES
             else
         key_file from path (for each project)
 
-        file phpg.ini in the same path of module (.so or .dll)
-            phpg_ini (opt) - to get option
+        file bonzai.ini in the same path of module (.so or .dll)
+            bonzai_ini (opt) - to get option
     CLASS
         set path via php (insecure!)
 

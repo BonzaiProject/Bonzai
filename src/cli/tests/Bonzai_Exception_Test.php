@@ -1,3 +1,4 @@
+<?php
 /**
  *
  * BONZAI
@@ -24,36 +25,28 @@
  *                 header is left intact.
  *                 <http://www.opensource.org/licenses/mit-license.php>
  *                 <http://www.opensource.org/licenses/gpl-2.0.php>
+ *
  **/
 
-#ifndef PHP_BONZAI_H
-    // {{{ DEFINES
-    #define PHP_BONZAI_H
-    #define PHP_BONZAI_VERSION "0.1"
-    #define PHP_BONZAI_EXTNAME "Bonzai"
-    /*#define BONZAI_FOOTER_KEY "\n# BONZAI P_KEY END BLOCK ##########"
-    #define BONZAI_HEADER_KEY "# BONZAI P_KEY START BLOCK ########\n"*/
-    #define ZTS 1
-    #define phpext_bonzai_ptr &bonzai_module_entry
-    // }}}
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
+require_once __DIR__ . '/../libs/Exception/Exception.php';
 
-    // {{{ STRUCTS
-    extern zend_module_entry bonzai_module_entry;
-    // }}}
-
-    // {{{ METHODS
-    PHP_MINIT_FUNCTION(bonzai);
-    PHP_MSHUTDOWN_FUNCTION(bonzai);
-    PHP_MINFO_FUNCTION(bonzai);
-
-    PHP_FUNCTION(bonzai_exec);
-    char *_bonzai_decode(char *code, char *key);
-    char *_bonzai_get_key();
-    PHP_FUNCTION(bonzai_info);
-    PHP_FUNCTION(bonzai_credits);
-    PHP_FUNCTION(bonzai_version);
-    PHP_FUNCTION(bonzai_log);
-    char *bonzai_base64_encode(char *data);
-    PHP_FUNCTION(bonzai_logo_guid);
-    // }}}
-#endif /* PHP_BONZAI_H */
+/**
+ *
+ * @category  Security
+ * @package   Bonzai
+ * @version   0.1
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @link      http://bonzai.fabiocicerchia.it
+ */
+class Bonzai_Exception_Test extends Bonzai_TestCase
+{
+    public function testNothing()
+    {
+        $message = 'There\'s nothing to be tested in this Testing Class.';
+        $this->markTestSkipped($message);
+    }
+}

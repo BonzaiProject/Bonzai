@@ -1,32 +1,31 @@
-        _            ____                     _ _             ____  
-  _ __ | |__  _ __  / ___|_   _  __ _ _ __ __| (_) __ _ _ __ |___ \ 
- | '_ \| '_ \| '_ \| |  _| | | |/ _` | '__/ _` | |/ _` | '_ \  __) |
- | |_) | | | | |_) | |_| | |_| | (_| | | | (_| | | (_| | | | |/ __/ 
- | .__/|_| |_| .__/ \____|\__,_|\__,_|_|  \__,_|_|\__,_|_| |_|_____|
- |_|         |_|
+BONZAI
+(was phpGuardian)
 
-====== [ INFORMATION ] ======
-PHPGUARDIAN2
----
-CODE NAME:          phoenix
-ENGINE VERSION:     4.0
-MODULE VERSION:     1.0
+CODE NAME:      phoenix
+VERSION:        0.1
 
-COPYRIGHT:          2006-2011 Fabio Cicerchia
-LICENSE:            GNU GPL 3+
+URL:            http://bonzai.fabiocicerchia.it
+E-MAIL:         bonzai@fabiocicerchia.it
 
-URL:                http://www.phpguardian.org
-E-MAIL:             info@phpguardian.org
+COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
+LICENSE:        MIT or GNU GPL 2
+                The MIT License is recommended for most projects, it's simple
+                and  easy  to understand and it places almost no restrictions
+                on  what  you  can do with Bonzai.
+                If  the  GPL  suits  your project better you are also free to
+                use Bonzai under that license.
+                You   don't  have  to  do  anything  special  to  choose  one
+                license  or  the  other  and  you don't have to notify anyone
+                which   license   you   are   using.  You  are  free  to  use
+                Bonzai  in  commercial  projects  as  long  as  the copyright
+                header is left intact.
+                <http://www.opensource.org/licenses/mit-license.php>
+                <http://www.opensource.org/licenses/gpl-2.0.php>
 
-====== [ DESCRIPTION ] ======
-Protect, encode and log your source code
+DESCRIPTION
+Protect and track your PHP source code
 
-This script encode the php source code and log the server information to check
-if the script is running in another server (useful in the event in which the
-script it has been duplicated without authorization) and optionally execute
-arbitrary code (es. for lock the executing)
+This project allow you to protect effectively your sources, without losing performances.
+The only FREE, OPEN-SOURCE and EVERYONE ACCESSIBLE, solution that you can sleep soundly.
 
 Look the CHANGELOG file for versioning informations.
-Look the INSTALL file for the compiling & installation.
-Look the USAGE file for the basics of use, or for detailed documentations look inside the folder `docs`.
-Look the TODO & BUGS for more information on the status of project development. 

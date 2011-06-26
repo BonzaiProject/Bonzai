@@ -14,13 +14,13 @@
  * LICENSE:        MIT or GNU GPL 2
  *                 The MIT License is recommended for most projects, it's simple
  *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with bonzai.
+ *                 on  what  you  can do with Bonzai.
  *                 If  the  GPL  suits  your project better you are also free to
- *                 use bonzai under that license.
+ *                 use Bonzai under that license.
  *                 You   don't  have  to  do  anything  special  to  choose  one
  *                 license  or  the  other  and  you don't have to notify anyone
  *                 which   license   you   are   using.  You  are  free  to  use
- *                 bonzai  in  commercial  projects  as  long  as  the copyright
+ *                 Bonzai  in  commercial  projects  as  long  as  the copyright
  *                 header is left intact.
  *                 <http://www.opensource.org/licenses/mit-license.php>
  *                 <http://www.opensource.org/licenses/gpl-2.0.php>
@@ -54,7 +54,7 @@
 
 #define BONZAI_MAX_LEN 4096
 #define BONZAI_VERSION "0.1"
-#define SAPI_BONZAI_VERSION_HEADER "X-Encoded-By: bonzai v" BONZAI_VERSION
+#define SAPI_BONZAI_VERSION_HEADER "X-Encoded-By: Bonzai v" BONZAI_VERSION
 
 static function_entry bonzai_functions[] = {
     PHP_FE(bonzai_exec, NULL)
@@ -110,8 +110,8 @@ PHP_MSHUTDOWN_FUNCTION(bonzai)
 PHP_MINFO_FUNCTION(bonzai)
 {
     php_info_print_table_start();
-    php_info_print_table_row(2, "bonzai support", "enabled");
-    php_info_print_table_row(2, "bonzai version", PHP_BONZAI_VERSION);
+    php_info_print_table_row(2, "Bonzai support", "enabled");
+    php_info_print_table_row(2, "Bonzai version", PHP_BONZAI_VERSION);
     php_info_print_table_end();
 }
 
@@ -128,8 +128,8 @@ PHP_FUNCTION(bonzai_exec)
         RETURN_NULL();
     }
 
-    char *key = _pg_get_key();
-    char *decoded = _pg_decode(code, key);
+    char *key = _bonzai_get_key();
+    char *decoded = _bonzai_decode(code, key);
 
     char *eval_string = decoded;
     int len = strlen(decoded);
@@ -183,10 +183,10 @@ PHP_FUNCTION(bonzai_info)
     }
 
     if (sapi_module.phpinfo_as_text) {
-        php_info_print_table_row(2, "bonzai Version", PHP_BONZAI_VERSION);
+        php_info_print_table_row(2, "Bonzai Version", PHP_BONZAI_VERSION);
     } else {
         php_info_print_box_start(1);
-        php_printf("<h1 class=\"p\">bonzai Version %s</h1>\n", PHP_BONZAI_VERSION);
+        php_printf("<h1 class=\"p\">Bonzai Version %s</h1>\n", PHP_BONZAI_VERSION);
     }
     php_info_print_box_end();
 
@@ -220,34 +220,34 @@ PHP_FUNCTION(bonzai_info)
     php_info_print_table_end();
 
     if (sapi_module.phpinfo_as_text) {
-        PUTS("\nbonzai License\n");
+        PUTS("\nBonzai License\n");
         php_info_print_box_start(0);
         PUTS("MIT or GNU GPL 2\n");
         PUTS("The MIT License is recommended for most projects, it's simple\n");
         PUTS("and  easy  to understand and it places almost no restrictions\n");
-        PUTS("on  what  you  can do with bonzai.\n");
+        PUTS("on  what  you  can do with Bonzai.\n");
         PUTS("If  the  GPL  suits  your project better you are also free to\n");
-        PUTS("use bonzai under that license.\n");
+        PUTS("use Bonzai under that license.\n");
         PUTS("You   don't  have  to  do  anything  special  to  choose  one\n");
         PUTS("license  or  the  other  and  you don't have to notify anyone\n");
         PUTS("which   license   you   are   using.  You  are  free  to  use\n");
-        PUTS("bonzai  in  commercial  projects  as  long  as  the copyright\n");
+        PUTS("Bonzai  in  commercial  projects  as  long  as  the copyright\n");
         PUTS("header is left intact.\n");
         PUTS("<http://www.opensource.org/licenses/mit-license.php>\n");
         PUTS("<http://www.opensource.org/licenses/gpl-2.0.php>\n");
     } else {
-        PUTS("<h2>phpGuardian License</h2>");
+        PUTS("<h2>Bonzai License</h2>");
         php_info_print_box_start(0);
         PUTS("<p>MIT or GNU GPL 2</p>");
         PUTS("<p>The MIT License is recommended for most projects, it's simple\n");
         PUTS("and  easy  to understand and it places almost no restrictions\n");
-        PUTS("on  what  you  can do with bonzai.</p>\n");
+        PUTS("on  what  you  can do with Bonzai.</p>\n");
         PUTS("<p>If  the  GPL  suits  your project better you are also free to\n");
-        PUTS("use bonzai under that license.</p>\n");
+        PUTS("use Bonzai under that license.</p>\n");
         PUTS("<p>You   don't  have  to  do  anything  special  to  choose  one\n");
         PUTS("license  or  the  other  and  you don't have to notify anyone\n");
         PUTS("which   license   you   are   using.  You  are  free  to  use\n");
-        PUTS("bonzai  in  commercial  projects  as  long  as  the copyright\n");
+        PUTS("Bonzai  in  commercial  projects  as  long  as  the copyright\n");
         PUTS("header is left intact.</p>\n");
         PUTS("<p>&lt;http://www.opensource.org/licenses/mit-license.php&gt;</p>\n");
         PUTS("<p>&lt;http://www.opensource.org/licenses/gpl-2.0.php&gt;</p>\n");
@@ -281,10 +281,10 @@ PHP_FUNCTION(bonzai_credits)
     }
 
     if (sapi_module.phpinfo_as_text) {
-        PUTS("bonzai Credits\n");
+        PUTS("Bonzai Credits\n");
     } else {
         php_info_print_box_start(1);
-        PUTS("<h1 class=\"p\">bonzai Credits</h1>\n");
+        PUTS("<h1 class=\"p\">Bonzai Credits</h1>\n");
     }
     php_info_print_box_end();
 

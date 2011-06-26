@@ -15,13 +15,13 @@
  * LICENSE:        MIT or GNU GPL 2
  *                 The MIT License is recommended for most projects, it's simple
  *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with bonzai.
+ *                 on  what  you  can do with Bonzai.
  *                 If  the  GPL  suits  your project better you are also free to
- *                 use bonzai under that license.
+ *                 use Bonzai under that license.
  *                 You   don't  have  to  do  anything  special  to  choose  one
  *                 license  or  the  other  and  you don't have to notify anyone
  *                 which   license   you   are   using.  You  are  free  to  use
- *                 bonzai  in  commercial  projects  as  long  as  the copyright
+ *                 Bonzai  in  commercial  projects  as  long  as  the copyright
  *                 header is left intact.
  *                 <http://www.opensource.org/licenses/mit-license.php>
  *                 <http://www.opensource.org/licenses/gpl-2.0.php>
@@ -30,7 +30,7 @@
 /**
  *
  * @category  Security
- * @package   bonzai
+ * @package   Bonzai
  * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
@@ -38,7 +38,7 @@
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://bonzai.fabiocicerchia.it
  */
-class PG_Server
+class Bonzai_Server
 {
     // {{{ PROPERTIES
     /**
@@ -74,7 +74,7 @@ class PG_Server
      * @access public
      * @type   string
      */
-    public $log_file = '/var/log/phpguardian/phpg.log';
+    public $log_file = '/var/log/bonzai/bonzai.log';
 
     /**
      * Date format into log_format
@@ -89,7 +89,7 @@ class PG_Server
      * @access public
      * @var    string
      */
-    public $exec_file = '/home/fabio/www/phpg.exec';
+    public $exec_file = '/home/fabio/www/bonzai.exec';
 
     /**
      * Content of execution script
@@ -174,12 +174,12 @@ class PG_Server
  * Process the request
  */
 if (isset($_GET['pc'])) {
-    $pg_server = new PG_Server(strip_tags($_GET['pc']));
+    $bonzai_server = new Bonzai_Server(strip_tags($_GET['pc']));
 
     if (isset($_GET['op'])) {
         switch(strip_tags($_GET['op'])) {
             case "log":
-                echo $pg_server->log_data();
+                echo $bonzai_server->log_data();
                 break;
         }
     }

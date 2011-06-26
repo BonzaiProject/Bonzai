@@ -15,13 +15,13 @@
  * LICENSE:        MIT or GNU GPL 2
  *                 The MIT License is recommended for most projects, it's simple
  *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with bonzai.
+ *                 on  what  you  can do with Bonzai.
  *                 If  the  GPL  suits  your project better you are also free to
- *                 use bonzai under that license.
+ *                 use Bonzai under that license.
  *                 You   don't  have  to  do  anything  special  to  choose  one
  *                 license  or  the  other  and  you don't have to notify anyone
  *                 which   license   you   are   using.  You  are  free  to  use
- *                 bonzai  in  commercial  projects  as  long  as  the copyright
+ *                 Bonzai  in  commercial  projects  as  long  as  the copyright
  *                 header is left intact.
  *                 <http://www.opensource.org/licenses/mit-license.php>
  *                 <http://www.opensource.org/licenses/gpl-2.0.php>
@@ -30,7 +30,7 @@
 /**
  *
  * @category  Security
- * @package   bonzai
+ * @package   Bonzai
  * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
@@ -38,7 +38,7 @@
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://bonzai.fabiocicerchia.it
  */
-class PG_Utils_Options
+class Bonzai_Utils_Options
 {
     // {{{ PROPERTIES
     /**
@@ -68,13 +68,13 @@ class PG_Utils_Options
      *
      * @access public
      * @param  array        $argv
-     * @throws PG_Exception
+     * @throws Bonzai_Exception
      * @return void
      */
     public function init($argv)
     {
         if (empty($argv) || !is_array($argv)) {
-            throw new PG_Exception('Missing the script arguments'); // TODO: BLOCKER
+            throw new Bonzai_Exception('Missing the script arguments'); // TODO: BLOCKER
         }
 
         $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters); // TODO: too long
@@ -91,13 +91,13 @@ class PG_Utils_Options
      * @access protected
      * @param  array     $options
      * @param  array     $non_options
-     * @throws PG_Exception
+     * @throws Bonzai_Exception
      * @return void
      */
     protected function parseOptions(&$options, &$non_options)
     {
         if (!is_array($options) || !is_array($non_options)) {
-            throw new PG_Exception('Invalid parameters to be parsed'); // TODO: NON BLOCKER
+            throw new Bonzai_Exception('Invalid parameters to be parsed'); // TODO: NON BLOCKER
         }
 
         // TODO: ANALYZE THIS CODE FOR PROBLEMS

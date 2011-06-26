@@ -15,13 +15,13 @@
  * LICENSE:        MIT or GNU GPL 2
  *                 The MIT License is recommended for most projects, it's simple
  *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with bonzai.
+ *                 on  what  you  can do with Bonzai.
  *                 If  the  GPL  suits  your project better you are also free to
- *                 use bonzai under that license.
+ *                 use Bonzai under that license.
  *                 You   don't  have  to  do  anything  special  to  choose  one
  *                 license  or  the  other  and  you don't have to notify anyone
  *                 which   license   you   are   using.  You  are  free  to  use
- *                 bonzai  in  commercial  projects  as  long  as  the copyright
+ *                 Bonzai  in  commercial  projects  as  long  as  the copyright
  *                 header is left intact.
  *                 <http://www.opensource.org/licenses/mit-license.php>
  *                 <http://www.opensource.org/licenses/gpl-2.0.php>
@@ -30,7 +30,7 @@
 /**
  *
  * @category  Security
- * @package   bonzai
+ * @package   Bonzai
  * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
@@ -38,7 +38,7 @@
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://bonzai.fabiocicerchia.it
  */
-class PG_Encoder
+class Bonzai_Encoder
 {
     // {{{ METHODS
     // {{{ function elaborate
@@ -46,46 +46,46 @@ class PG_Encoder
      *
      * @access public
      * @param  array        $element
-     * @throws PG_Exception
+     * @throws Bonzai_Exception
      * @return void
      */
     public function elaborate($element)
     {
         if (!is_array($element) || empty($element)) {
-            throw new PG_Exception('The element is invalid'); // TODO: NON BLOCKER
+            throw new Bonzai_Exception('The element is invalid'); // TODO: NON BLOCKER
         }
 
         // Get the filename
         $filename = $element['FILE'];
 
         // Print a message
-        PG_Utils::pg_message('Start encoding file `%s\'.', false, filename);
+        Bonzai_Utils::bonzai_message('Start encoding file `%s\'.', false, filename);
 
         // Get the content
-        $file_content = PG_Utils::getFileContent($filename);
+        $file_content = Bonzai_Utils::getFileContent($filename);
 
         // Convert the content
-        // TODO: $converted_content = PG_Converter::convert($file_content, PG_Script_Parser::$config['SETUP']['USE_ASP_TAGS']); // TODO: too long
+        // TODO: $converted_content = Bonzai_Converter::convert($file_content, Bonzai_Script_Parser::$config['SETUP']['USE_ASP_TAGS']); // TODO: too long
 
         // TODO: $encoded_content = $this->codeCrypt($converted_content);
 
         /* TODO: if (empty($encoded_content)) {
             // Set the file as skipped
-            PG_Registry::getInstance()->append('skipped_files', $filename, PG_Registry::ARRAY_APPEND); // TODO: too long
+            Bonzai_Registry::getInstance()->append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND); // TODO: too long
 
             // Print a message
-            PG_Utils::pg_message('ERROR: The encoded data is empty.', false);
+            Bonzai_Utils::bonzai_message('ERROR: The encoded data is empty.', false);
             return;
         }*/
 
-        PG_Utils::rename_file($filename);
+        Bonzai_Utils::rename_file($filename);
         $encoded_filename = $this->getEncodedFilename($filename);
 
         // Print a message
-        // TODO: PG_Utils::pg_message("Saving %s bytes...", true, strlen($encoded_content)); // TODO: too long
+        // TODO: Bonzai_Utils::bonzai_message("Saving %s bytes...", true, strlen($encoded_content)); // TODO: too long
 
         // Save the file
-        // TODO: PG_Utils::putFileContent($encoded_filename, $encoded_content . $this->getHeader($element, $this->getInner()) . $this->getFooter($element)); // TODO: too long
+        // TODO: Bonzai_Utils::putFileContent($encoded_filename, $encoded_content . $this->getHeader($element, $this->getInner()) . $this->getFooter($element)); // TODO: too long
     }
     // }}}
 
@@ -100,34 +100,34 @@ class PG_Encoder
     {
         if (empty($data)) {
             // Print a message
-            PG_Utils::pg_message('ERROR: The converted data is empty.', false);
+            Bonzai_Utils::bonzai_message('ERROR: The converted data is empty.', false);
 
             return null;
         }
 
         $data_len = strlen($data);
-        // TODO: $key_len  = strlen(PG_Script_Parser::$config['KEY']['KEY_HASH']);
+        // TODO: $key_len  = strlen(Bonzai_Script_Parser::$config['KEY']['KEY_HASH']);
 
         // Increase file counter
-        PG_Registry::getInstance()->append('total_files', 1, PG_Registry::INTEGER_APPEND); // TODO: too long
+        Bonzai_Registry::getInstance()->append('total_files', 1, Bonzai_Registry::INTEGER_APPEND); // TODO: too long
 
         // Check key size
         /* TODO: if ($key_len == 0) {
-            PG_Utils::pg_message('ERROR: Skipped because the private key is empty.', false); // TODO: too long
+            Bonzai_Utils::bonzai_message('ERROR: Skipped because the private key is empty.', false); // TODO: too long
             return "";
         }*/
 
         // Print a message
-        PG_Utils::pg_message('Encoding %d bytes...', true, $data_len);
+        Bonzai_Utils::bonzai_message('Encoding %d bytes...', true, $data_len);
 
         // Encrypt the data
         // TODO: USE APC + ECC...
 
         // Increase the total generated bytes
-        // TODO: PG_Registry::getInstance()->append('total_generated_bytes', strlen($crdata), PG_Registry::INTEGER_APPEND); // TODO: too long
+        // TODO: Bonzai_Registry::getInstance()->append('total_generated_bytes', strlen($crdata), Bonzai_Registry::INTEGER_APPEND); // TODO: too long
 
         // Print a message
-        // TODO: PG_Utils::pg_message('Generated %s bytes.', true, strlen($crdata));
+        // TODO: Bonzai_Utils::bonzai_message('Generated %s bytes.', true, strlen($crdata));
 
         // TODO: return $crdata;
     }
@@ -141,16 +141,16 @@ class PG_Encoder
      */
     protected function getInner()
     {
-        $PHPG_LIBRARY_STRING        = ''; // TODO: need include this from .h
-        $PG_S_BASE_LIB_PATH         = ''; // TODO: need include this from .h
-        $PHPG_EXTENSION_STRING      = ''; // TODO: need include this from .h
-        $PG_S_EXTENSION_MODULE_PATH = ''; // TODO: need include this from .h
+        $PHBonzai_LIBRARY_STRING        = ''; // TODO: need include this from .h
+        $Bonzai_S_BASE_LIB_PATH         = ''; // TODO: need include this from .h
+        $PHBonzai_EXTENSION_STRING      = ''; // TODO: need include this from .h
+        $Bonzai_S_EXTENSION_MODULE_PATH = ''; // TODO: need include this from .h
 
-        /* TODO: if (PG_Script_Parser::$config['SETUP']['USE_PHP_EXTENSION']) {
-            return $PHPG_EXTENSION_STRING . $PG_S_EXTENSION_MODULE_PATH; // TODO: MISSING STRINGS
+        /* TODO: if (Bonzai_Script_Parser::$config['SETUP']['USE_PHP_EXTENSION']) {
+            return $BONZAI_EXTENSION_STRING . $BONZAI_S_EXTENSION_MODULE_PATH; // TODO: MISSING STRINGS
         }*/
 
-        return $PHPG_LIBRARY_STRING . $PG_S_BASE_LIB_PATH; // TODO: MISSING STRINGS
+        return $BONZAI_LIBRARY_STRING . $BONZAI_S_BASE_LIB_PATH; // TODO: MISSING STRINGS
     }
     // }}}
 
@@ -164,8 +164,8 @@ class PG_Encoder
      */
     protected function getHeader($element, $inner)
     {
-        /* TODO: if ($element['HEADER'] == PG_Script_Parser::$config['CONFIGURATION']['HEADER']) { // TODO: too long
-            return '<?php' . PHP_EOL . PHP_EOL . PG_Script_Parser::$config['CONFIGURATION']['HEADER'] . $inner; // TODO: too long
+        /* TODO: if ($element['HEADER'] == Bonzai_Script_Parser::$config['CONFIGURATION']['HEADER']) { // TODO: too long
+            return '<?php' . PHP_EOL . PHP_EOL . Bonzai_Script_Parser::$config['CONFIGURATION']['HEADER'] . $inner; // TODO: too long
         }*/
 
         return '<?php' . PHP_EOL . PHP_EOL . $element['HEADER'] . $inner;
@@ -181,8 +181,8 @@ class PG_Encoder
      */
     protected function getFooter($element)
     {
-        /* TODO: if ($element['FOOTER'] == PG_Script_Parser::$config['CONFIGURATION']['FOOTER']) { // TODO: too long
-            return '\');' . PHP_EOL . PG_Script_Parser::$config['CONFIGURATION']['FOOTER'] . PHP_EOL . '?>'; // TODO: too long
+        /* TODO: if ($element['FOOTER'] == Bonzai_Script_Parser::$config['CONFIGURATION']['FOOTER']) { // TODO: too long
+            return '\');' . PHP_EOL . Bonzai_Script_Parser::$config['CONFIGURATION']['FOOTER'] . PHP_EOL . '?>'; // TODO: too long
         }*/
 
         return '\');' . PHP_EOL . $element['FOOTER'] . PHP_EOL . '?>';
@@ -198,7 +198,7 @@ class PG_Encoder
      */
     protected function getEncodedFilename($filename)
     {
-        /* TODO: if (PG_Script_Parser::$config['CONFIGURATION']['SAVE_ENCODED_AS_NEW']) {
+        /* TODO: if (Bonzai_Script_Parser::$config['CONFIGURATION']['SAVE_ENCODED_AS_NEW']) {
             return "$filename.encoded";
         }*/
 
