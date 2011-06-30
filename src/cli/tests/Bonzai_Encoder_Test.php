@@ -8,8 +8,8 @@
  * ENGINE VERSION: 0.1
  * MODULE VERSION: 0.1
  *
- * URL:            http://bonzai.fabiocicerchia.it
- * E-MAIL:         bonzai@fabiocicerchia.it
+ * URL:            http://www.bonzai-project.org
+ * E-MAIL:         info@bonzai-project.org
  *
  * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * LICENSE:        MIT or GNU GPL 2
@@ -40,105 +40,43 @@ require_once __DIR__ . '/../libs/Encoder/Encoder.php';
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @link      http://bonzai.fabiocicerchia.it
+ * @link      http://www.bonzai-project.org
  */
 class Bonzai_Encoder_Test extends Bonzai_TestCase
 {
-    //public function testElaborate()
-    //{
-        // TODO: A method without return need to be tested?
-        //$this->markTestIncomplete('This test has not been implemented yet.');
-    //}
-
-    public function testCodeCrypt()
+    public function testElaborate()
     {
-        // TODO: $this->object->codeCrypt($data);
-        // INPUT:  data
-        // OUTPUT: string
-        // WHAT:   return the encoded string
-        /*
-        data = null          | output = ?
-        data = ""            | output = ?
-        data = " "           | output = ?
-        data = "aaa"         | output = ?
-        data = "REALDECODED" | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: analyze
+        //elaborate($files)
     }
 
-    public function testGetInner()
+    public function testProcessFile()
     {
-        // TODO: $this->object->getInner();
-        // INPUT:  -
-        // OUTPUT: string
-        // WHAT:   get the internal string that loads the libraries
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: analyze
+        //processFile($filename)
     }
 
-    public function testGetHeader()
+    public function testSaveOutput()
     {
-        // TODO: $this->object->getHeader($element, $inner);
-        // INPUT:  element, inner
-        // OUTPUT: string
-        // WHAT:   get the header string
-        /*
-        element = null  | inner = null | output = ?
-        element = null  | inner = ""   | output = ?
-        element = null  | inner = " "  | output = ?
-        element = null  | inner = "a"  | output = ?
-        element = ""    | inner = null | output = ?
-        element = ""    | inner = ""   | output = ?
-        element = ""    | inner = " "  | output = ?
-        element = ""    | inner = "a"  | output = ?
-        element = " "   | inner = null | output = ?
-        element = " "   | inner = ""   | output = ?
-        element = " "   | inner = " "  | output = ?
-        element = " "   | inner = "a"  | output = ?
-        element = "a"   | inner = null | output = ?
-        element = "a"   | inner = ""   | output = ?
-        element = "a"   | inner = " "  | output = ?
-        element = "a"   | inner = "a"  | output = ?
-        element = ()    | inner = null | output = ?
-        element = ()    | inner = ""   | output = ?
-        element = ()    | inner = " "  | output = ?
-        element = ()    | inner = "a"  | output = ?
-        element = (...) | inner = null | output = ?
-        element = (...) | inner = ""   | output = ?
-        element = (...) | inner = " "  | output = ?
-        element = (...) | inner = "a"  | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: analyze
+        //saveOutput($filename, $bytecode)
     }
 
-    public function testGetFooter()
+    public function testGetByteCode()
     {
-        // TODO: $this->object->getFooter($element);
-        // INPUT:  element
-        // OUTPUT: string
-        // WHAT:   get the footer string
-        /*
-        element = null  | output = ?
-        element = ""    | output = ?
-        element = " "   | output = ?
-        element = "a"   | output = ?
-        element = ()    | output = ?
-        element = (...) | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: analyze
+        //saveOutput($filename, $bytecode)
     }
 
-    public function testGetEncodedFilename()
+    public function testGetFullPHP()
     {
-        // TODO: $this->object->getEncodedFilename($filename);
-        // INPUT:  filename
-        // OUTPUT: string
-        // WHAT:   return the encoded filename
-        /*
-        filename = null | output = ?
-        filename = ""   | output = ?
-        filename = " "  | output = ?
-        filename = "a"  | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // TODO: analyze
+        //getFullPHP($filename)
+    }
+
+    public function testExpandPathsToFiles()
+    {
+        // TODO: analyze
+        //expandPathsToFiles($files)
     }
 }

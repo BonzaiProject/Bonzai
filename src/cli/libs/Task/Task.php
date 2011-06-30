@@ -8,8 +8,8 @@
  * ENGINE VERSION: 0.1
  * MODULE VERSION: 0.1
  *
- * URL:            http://bonzai.fabiocicerchia.it
- * E-MAIL:         bonzai@fabiocicerchia.it
+ * URL:            http://www.bonzai-project.org
+ * E-MAIL:         info@bonzai-project.org
  *
  * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * LICENSE:        MIT or GNU GPL 2
@@ -36,7 +36,7 @@
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @link      http://bonzai.fabiocicerchia.it
+ * @link      http://www.bonzai-project.org
  */
 class Bonzai_Task
 {
@@ -69,13 +69,10 @@ class Bonzai_Task
         $this->parameters = $options;
 
         // TODO: load the correct action
-        /*if (!is_null($options->getOption('generate'))) {
-            $this->task       = 'Bonzai_Script_Generator';
-            $this->parameters = $this->options->getOption('generate');
-        } elseif (count($options->getOptions()) == 0 && count($options->getParameters()) > 0) { // TODO: too long
-            $this->task       = 'Bonzai_Script_Parser';
-            $this->parameters = array_shift($options->getParameters());
-        }*/
+        if (!is_null($options->getNonOptions())) {
+            $this->task       = 'Bonzai_Encoder';
+            $this->parameters = $options->getNonOptions();
+        }
     }
     // }}}
 

@@ -8,8 +8,8 @@
  * ENGINE VERSION: 0.1
  * MODULE VERSION: 0.1
  *
- * URL:            http://bonzai.fabiocicerchia.it
- * E-MAIL:         bonzai@fabiocicerchia.it
+ * URL:            http://www.bonzai-project.org
+ * E-MAIL:         info@bonzai-project.org
  *
  * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * LICENSE:        MIT or GNU GPL 2
@@ -36,7 +36,7 @@
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @link      http://bonzai.fabiocicerchia.it
+ * @link      http://www.bonzai-project.org
  */
 class Bonzai_Utils_Options
 {
@@ -47,7 +47,9 @@ class Bonzai_Utils_Options
      * @var    array     $parameters
      */
     protected $parameters = array(
-        'g:' => 'generate:',
+        'b'  => 'backup',
+        'e:' => 'ext:',
+        'a'  => 'asp',
         'h'  => 'help',
         'v'  => 'version');
 
@@ -57,9 +59,11 @@ class Bonzai_Utils_Options
      * @var    array     $labels
      */
     protected $labels = array(
-        'generate' => 'Generate a new script file',
-        'help'     => 'Show the help',
-        'version'  => 'Show the version');
+        'backup'  => 'Backup the original file, generate a .bak file (default: false)',
+    	'ext'     => 'Parse only the file that matches the specified extension (default: php)',
+        'asp'     => 'Use the ASP tags instead PHP',
+        'help'    => 'Show the help',
+        'version' => 'Show the version');
     // }}}
 
     // {{{ METHODS
@@ -123,7 +127,7 @@ class Bonzai_Utils_Options
      * @access public
      * @return array
      */
-    public function getParameters()
+    public function getNonOptions()
     {
         return $this->non_options;
     }
@@ -164,7 +168,7 @@ class Bonzai_Utils_Options
      * @access public
      * @return array
      */
-    public function getScriptParameters()
+    public function getParameters()
     {
         return $this->parameters;
     }

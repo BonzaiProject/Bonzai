@@ -8,8 +8,8 @@
  * ENGINE VERSION: 0.1
  * MODULE VERSION: 0.1
  *
- * URL:            http://bonzai.fabiocicerchia.it
- * E-MAIL:         bonzai@fabiocicerchia.it
+ * URL:            http://www.bonzai-project.org
+ * E-MAIL:         info@bonzai-project.org
  *
  * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * LICENSE:        MIT or GNU GPL 2
@@ -38,7 +38,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @link      http://bonzai.fabiocicerchia.it
+ * @link      http://www.bonzai-project.org
  */
 class Bonzai_TestCase extends PHPUnit_Framework_TestCase
 {

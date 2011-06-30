@@ -8,8 +8,8 @@
  * ENGINE VERSION: 0.1
  * MODULE VERSION: 0.1
  *
- * URL:            http://bonzai.fabiocicerchia.it
- * E-MAIL:         bonzai@fabiocicerchia.it
+ * URL:            http://www.bonzai-project.org
+ * E-MAIL:         info@bonzai-project.org
  *
  * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * LICENSE:        MIT or GNU GPL 2
@@ -36,7 +36,7 @@
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @link      http://bonzai.fabiocicerchia.it
+ * @link      http://www.bonzai-project.org
  */
 class Bonzai_Utils_Help
 {
@@ -50,51 +50,46 @@ class Bonzai_Utils_Help
      */
     public function elaborate(Bonzai_Utils_Options $options)
     {
-        printf('BONZAI' . PHP_EOL);
-        printf('(was phpGuardian)' . PHP_EOL . PHP_EOL);
+        $BOLD    = "\033[1m";
+        $CLS     = "\033[0m";
 
-        printf('Version: 0.1' . PHP_EOL);
-        printf('Copyright (C) 2006-2011 Bonzai - Fabio Cicerchia.
-				All rights reserved.' . PHP_EOL);
-        printf('License MIT <http://www.opensource.org/licenses/mit-license.php>
-        		 or GNU GPL 2 <http://www.opensource.org/licenses/gpl-2.0.php>'
-        	   . PHP_EOL . PHP_EOL);
+        $BLACK   = "\033[30m";
+        $RED     = "\033[31m";
+        $GREEN   = "\033[32m";
+        $YELLOW  = "\033[33m";
+        $BLUE    = "\033[34m";
+        $MAGENTA = "\033[35m";
+        $CYAN    = "\033[36m";
+        $WHITE   = "\033[37m";
 
-        printf('Usage:' . PHP_EOL);
-        printf('    ./bonzai-cli [COMMAND] [OPTIONS]... [FILE|DIRECTORY]'
-        	   . PHP_EOL . PHP_EOL);
+        printf($BOLD . "BONZAI\n" . $CLS);
+        printf("(was phpGuardian)\n");
 
-        printf('Commands:' . PHP_EOL);
-        printf('    encode            Encode all files into directory
-				(recursively)' . PHP_EOL . PHP_EOL);
+        printf("-------------------------------------------------------------------------------\n");
+        printf("Version: 0.1\n");
+        printf("Copyright (C) 2006-2011 Bonzai - Fabio Cicerchia."
+               . " All rights reserved.\n");
+        printf("License MIT or GNU GPL 2\n");
+        printf("-------------------------------------------------------------------------------\n");
 
-        printf('Options:' . PHP_EOL);
-        printf('    -b, --backup		Backup the original file, generate a
-				.bak file (default: false)' . PHP_EOL);
-        printf('    --ext=<extension>	Parse only the file that matches the
-				specified extension (default: php)' . PHP_EOL);
-        printf('    -a, --asp			Use the tags asp instead php'
-				. PHP_EOL . PHP_EOL);
+        if (is_null($options->getOption('version'))) {
+            printf("\n%s\n%s [%s]... [%s|%s]\n\n", $BOLD . _('Usage:') . $CLS, $_SERVER['argv'][0], _('OPTIONS'), _('FILE'), _('DIRECTORY')); // TODO: too long
+            printf("%s\n", $BOLD . _('Options:') . $CLS);
+            foreach($options->getParameters() as $short => $long) {
+                $has_value = strpos($short, ':') > 0;
 
-        printf('	--verbose			Verbose' . PHP_EOL);
-        printf('    -h, --help			Show the help' . PHP_EOL);
-        printf('    -v, --version		Show the version' . PHP_EOL . PHP_EOL);
-
-
-        printf('Report bugs to bonzai@fabiocicerchia.it' . PHP_EOL);
-
-        /*if (!is_null($options->getOption('version'))) {
-            printf('%s %s [%s] <config_file>' . PHP_EOL . PHP_EOL, _('Usage:'), $_SERVER['argv'][0], _('options')); // TODO: too long
-            printf('%s' . PHP_EOL, _('Command & Relative Options:'));
-            foreach($options->getScriptParameters() as $short => $long) {
                 $short = str_replace(':', '', $short);
                 $long  = str_replace(':', '', $long);
 
-                $info = "-$short [--$long]";
-                printf(' ' . str_pad($info, 40, " ") . '%s' . PHP_EOL, _($options->getLabelParameter($long))); // TODO: too long
+                $info = "-$short, --$long";
+                if ($has_value) {
+                    $info .= "=<value>";
+                }
+
+                printf('    ' . str_pad($info, 30, " ") . "%s\n", _($options->getLabelParameter($long))); // TODO: too long
             }
-            printf(PHP_EOL . '%s' . PHP_EOL . PHP_EOL, _('Report bugs to bugs@bonzai.org'));
-        }*/
+            printf("Report bugs to info@bonzai-project.org\n");
+        }
     }
     // }}}
     // }}}

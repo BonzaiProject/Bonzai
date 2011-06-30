@@ -13,24 +13,12 @@ TODO LIST:
 
 bonzai-checker
 bonzai-profiler
-bonzai-key-decoder
 
-[ ] rimuovere eccezioni S_SPLINT_S
-[X] rimuovere casting espliciti
-[ ] rimuovere inibizioni splint
 [ ] dare nomi significativi alle variabili
 [/] Enable support for Windows
 [ ] Enhance CLI with ncurses (or qt)
-[ ] Speed up the encoding process
 [ ] Create a GUI for the CLI -> Java
-[ ] Enhance security of private key
-[ ] Enhance security of encoder algorithm
-[ ] Implement the source obfuscation
 [ ] Add more test case to unittest
-[ ] Use valgrind to memory checks
-[ ] Use cachegrind to profiling
-[ ] Use helgrind to thread error checks
-[ ] Use Massif to heap profiling
 [X] Create the execution benchmark report
 
 DIPENDENZE:
@@ -74,21 +62,8 @@ CLASS
 EXT
 - salvare il file su filesystem fuori dalla document root del web server rendendo vano l'accesso diretto al file da web.
 ---
-
-CLI -> General -> Compile Project for WIN
-	install visual c++ express edition
-	create project file
-	compile
-	testing
----
 CLI -> Encode -> bonzai_convert
 	optimizing (remove tabulation, comments, line breaks)
-CLI -> Encode -> bonzai_encode_file
-	set decodable bytes
-        N: if set a cli param -> enabled by default
----
-CLI -> Decode -> bonzai_is_decodable
-	testing
 ---
 Script Class -> Decode -> Administration
 Script Class -> Decode -> Administration -> Logger
@@ -104,27 +79,6 @@ PHP Ext
     install php with debug options
     ini_params
 
-KEY TROUBLES
-    general
-        reverse order & mixed chars
-        eg:
-            ORIG      -> ABCDEF
-            FOR CLASS -> FEDCBA -> FDBECA
-    EXT
-        key_file from php.ini (global)
-            else
-        key_file from path (for each project)
-
-        file bonzai.ini in the same path of module (.so or .dll)
-            bonzai_ini (opt) - to get option
-    CLASS
-        set path via php (insecure!)
-
 First release
-    no obfuscator
     i18n -> IT, EN
     docs -> IT, EN
-
-php class
-    clean/dirty version (with the tool to obfuscate)
-    mod phpinfo()...if possible

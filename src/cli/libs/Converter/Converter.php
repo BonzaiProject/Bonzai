@@ -8,8 +8,8 @@
  * ENGINE VERSION: 0.1
  * MODULE VERSION: 0.1
  *
- * URL:            http://bonzai.fabiocicerchia.it
- * E-MAIL:         bonzai@fabiocicerchia.it
+ * URL:            http://www.bonzai-project.org
+ * E-MAIL:         info@bonzai-project.org
  *
  * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * LICENSE:        MIT or GNU GPL 2
@@ -36,7 +36,7 @@
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @link      http://bonzai.fabiocicerchia.it
+ * @link      http://www.bonzai-project.org
  */
 
 class Bonzai_Converter
@@ -76,6 +76,13 @@ class Bonzai_Converter
      * @var    array
      */
     protected $blocks = array();
+
+    /**
+     *
+     * @access protected
+     * @var    integer
+     */
+    protected $count = -1;
     // }}}
 
     // {{{ METHODS
@@ -87,7 +94,7 @@ class Bonzai_Converter
      * @param  boolean   $asptag
      * @return string
      */
-    protected function convert($filename, $asptag = false)
+    public function convert($filename, $asptag = false)
     {
         $content = Bonzai_Utils::getFileContent($filename);
 
@@ -100,7 +107,7 @@ class Bonzai_Converter
         Bonzai_Registry::getInstance()->append('total_converted_bytes', strlen($source), Bonzai_Registry::INTEGER_APPEND); // TODO: too long
 
         // Print a message
-        Bonzai_Utils::bonzai_message('Generated %s bytes.', true, strlen($source));
+        Bonzai_Utils::message('Generated %s bytes.', true, strlen($source));
 
         return $source;
     }
@@ -129,15 +136,16 @@ class Bonzai_Converter
 
         $max = substr_count($data, $this->pt_open_short);
 
+        $this->count = 0;
         $start = 0;
-        $count = 0;
         $end   = $this->blocks[0]['open'];
 
         $data_len   = strlen($data);
         $final_data = $this->pt_open_long . PHP_EOL;
 
         for($i = 0; $i < $data_len; $i++) {
-            $final_data .= $this->analyzeProcessBlock($data, &$count, $max, &$i, &$start, &$end, $data_len); // TODO: too long
+            $token = $this->analyzeProcessBlock($data, $max, &$i, &$start, &$end, $data_len); // TODO: too long
+            $final_data .= $token;
         }
         $final_data .= $this->pt_close;
 
@@ -161,21 +169,21 @@ class Bonzai_Converter
      * @param  integer   $data_len
      * @return string
      */
-    protected function analyzeProcessBlock($data, $count, $max, $i, $start, $end, $data_len) // TODO: too long
+    protected function analyzeProcessBlock($data, $max, $i, $start, $end, $data_len) // TODO: too long
     {
         $final_data = '';
 
-        $elem = $this->blocks[$count];
+        $elem = $this->blocks[$this->count];
 
-        if ($count < $max && $i >= $elem['open'] && $i <= $elem['close']) {
+        if ($this->count < $max && $i >= $elem['open'] && $i <= $elem['close']) {
             $from = $elem['open'] + $elem['size'];
             $to   = $elem['close'] - $elem['open'] - $elem['size'];
 
             $final_data .= substr($data, $from, $to);
             $start       = $i = (int)$elem['close'] + 2;
-            $end         = ($count + 1 >= $max)
-                           ? $data_len : $this->blocks[$count + 1]['open'];
-            $count++;
+            $end         = ($this->count + 1 >= $max)
+                           ? $data_len : $this->blocks[$this->count + 1]['open'];
+            $this->count++;
         } else if ($i >= $start && $i <= $end) {
             $final_data .= PHP_EOL . 'echo <<<BONZAI_HD' . PHP_EOL;
             $final_data .= substr($data, $start, $end - $start);
@@ -243,8 +251,10 @@ class Bonzai_Converter
         // TODO: ANALYZE THIS CODE FOR PROBLEMS
         $data_len = strlen($data);
         for ($j = 0; $j < $data_len; $j++) {
-            $opened = $this->analyzeFinderBlock($data, $j, $opened, &$count);
+            $opened = $this->analyzeFinderBlock($data, $j, $opened);
         }
+
+        $this->setBlock('close', $data_len);
     }
     // }}}
 
@@ -259,7 +269,7 @@ class Bonzai_Converter
      * @param  integer   $count
      * @return boolean
      */
-    protected function analyzeFinderBlock($data, $pos, $opened, $count)
+    protected function analyzeFinderBlock($data, $pos, $opened)
     {
         $tag_long  = substr($data, $pos, $this->pt_size_long);
         $tag_short = substr($data, $pos, 2);
@@ -271,12 +281,12 @@ class Bonzai_Converter
             $len  = $is_long_tag
                     ? $this->pt_size_long : 2;
             $next = substr($data, $pos + $len, 1);
-            $this->setBlock($count + 1, 'size', $len);
 
             $opened = $this->isOpened($next, $pos);
+            $this->setBlock('size', $len);
         } else if ($tag_short == $this->pt_close) {
-            $this->setBlock($count, 'close', $pos);
-            Bonzai_Utils::bonzai_message('Found php close #%s: %s', true, $count, $this->blocks[$count]['close']); // TODO: too long
+            $this->setBlock('close', $pos);
+            Bonzai_Utils::message('Found php close #%s: %s', true, $this->count, $pos); // TODO: too long
             $opened = false;
         }
 
@@ -294,12 +304,10 @@ class Bonzai_Converter
      */
     protected function isOpened($next, $pos)
     {
-       global $count;
-
         $opened = in_array($next, array(PHP_EOL, '=', ' '));
         if ($opened) {
-            $this->setBlock(++$count, 'open', $pos);
-            Bonzai_Utils::bonzai_message('Found php start #%s: %s', true, $count, $this->blocks[$count]['open']); // TODO: too long
+            $this->setBlock('open', $pos);
+            Bonzai_Utils::message('Found php start #%s: %s', true, $this->count, $pos); // TODO: too long
         }
 
         return $opened;
@@ -315,13 +323,18 @@ class Bonzai_Converter
      * @param  array     $value
      * @return void
      */
-    protected function setBlock($pos, $key, $value)
+    protected function setBlock($key, $value)
     {
-      if (empty($this->blocks[$pos])) {
-          $this->blocks[$pos] = array('open' => 0, 'close' => 0, 'size' => 0);
-      }
+        if ($key == 'open') {
+            $this->count++;
+        }
+        $pos = $this->count;
 
-      $this->blocks[$pos][$key] = $value;
+        if (empty($this->blocks[$pos])) {
+            $this->blocks[$pos] = array('open' => -1, 'close' => -1, 'size' => 0);
+        }
+
+        $this->blocks[$pos][$key] = $value;
     }
     // }}}
     // }}}

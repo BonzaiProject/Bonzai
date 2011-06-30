@@ -8,8 +8,8 @@
  * ENGINE VERSION: 0.1
  * MODULE VERSION: 0.1
  *
- * URL:            http://bonzai.fabiocicerchia.it
- * E-MAIL:         bonzai@fabiocicerchia.it
+ * URL:            http://www.bonzai-project.org
+ * E-MAIL:         info@bonzai-project.org
  *
  * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * LICENSE:        MIT or GNU GPL 2
@@ -36,7 +36,7 @@
  * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @link      http://bonzai.fabiocicerchia.it
+ * @link      http://www.bonzai-project.org
  */
 class Bonzai_Encoder
 {
@@ -49,161 +49,143 @@ class Bonzai_Encoder
      * @throws Bonzai_Exception
      * @return void
      */
-    public function elaborate($element)
+    public function elaborate($files)
     {
-        if (!is_array($element) || empty($element)) {
-            throw new Bonzai_Exception('The element is invalid'); // TODO: NON BLOCKER
+        $this->expandPathsToFiles(&$files);
+
+        foreach($files as $filename) {
+            $this->processFile($filename);
+        }
+    }
+    // }}}
+
+    public function processFile($filename)
+    {
+        if (empty($filename) || !file_exists($filename)) {
+            throw new Bonzai_Exception('The file is invalid'); // TODO: NON BLOCKER
         }
 
-        // Get the filename
-        $filename = $element['FILE'];
+        // Print a message
+        Bonzai_Utils::message('Start encoding file `%s\'.', false, $filename);
+
+        $bytecode = $this->getByteCode($filename);
+
+        //Bonzai_Utils::rename_file($filename, $backup = true); // ???
 
         // Print a message
-        Bonzai_Utils::bonzai_message('Start encoding file `%s\'.', false, filename);
+        Bonzai_Utils::message("Saving %s bytes...", true, strlen($bytecode)); // TODO: too long
 
-        // Get the content
-        $file_content = Bonzai_Utils::getFileContent($filename);
+        $this->saveOutput($filename, $bytecode);
+    }
 
-        // Convert the content
-        // TODO: $converted_content = Bonzai_Converter::convert($file_content, Bonzai_Script_Parser::$config['SETUP']['USE_ASP_TAGS']); // TODO: too long
+    // {{{ function saveOutput
+    /**
+     *
+     * @access public
+     * @param  string $filename
+     * @param  string $bytecode
+     * @return void
+     */
+    public function saveOutput($filename, $bytecode)
+    {
+        // Save the file
+        $bytecode = wordwrap($bytecode, 80, "\n             ", true);
+        $final_content = "<?php\n\n# BONZAI START BLOCK #####\n";
+        $final_content .= 'bonzai_exec("' . $bytecode . '");';
+        $final_content .= "\n# BONZAI END BLOCK #######\n?>";
 
-        // TODO: $encoded_content = $this->codeCrypt($converted_content);
+        Bonzai_Utils::putFileContent($filename, $final_content);
+    }
+    // }}}
 
-        /* TODO: if (empty($encoded_content)) {
+    // {{{ funcation getByteCode
+    /**
+     *
+     * @access public
+     * @param  string $filename
+     * @return string
+     */
+    public function getByteCode($filename)
+    {
+        $bytecode = bonzai_get_bytecode($this->getFullPHP($filename)); // TODO: into ext
+
+        if (empty($bytecode)) {
             // Set the file as skipped
             Bonzai_Registry::getInstance()->append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND); // TODO: too long
 
             // Print a message
-            Bonzai_Utils::bonzai_message('ERROR: The encoded data is empty.', false);
+            Bonzai_Utils::message('ERROR: The generated data is empty.', false);
             return;
-        }*/
-
-        Bonzai_Utils::rename_file($filename);
-        $encoded_filename = $this->getEncodedFilename($filename);
-
-        // Print a message
-        // TODO: Bonzai_Utils::bonzai_message("Saving %s bytes...", true, strlen($encoded_content)); // TODO: too long
-
-        // Save the file
-        // TODO: Bonzai_Utils::putFileContent($encoded_filename, $encoded_content . $this->getHeader($element, $this->getInner()) . $this->getFooter($element)); // TODO: too long
-    }
-    // }}}
-
-    // {{{ function codeCrypt
-    /**
-     *
-     * @access protected
-     * @param  string        $data
-     * @return string | null
-     */
-    protected function codeCrypt($data)
-    {
-        if (empty($data)) {
-            // Print a message
-            Bonzai_Utils::bonzai_message('ERROR: The converted data is empty.', false);
-
-            return null;
         }
 
-        $data_len = strlen($data);
-        // TODO: $key_len  = strlen(Bonzai_Script_Parser::$config['KEY']['KEY_HASH']);
-
-        // Increase file counter
-        Bonzai_Registry::getInstance()->append('total_files', 1, Bonzai_Registry::INTEGER_APPEND); // TODO: too long
-
-        // Check key size
-        /* TODO: if ($key_len == 0) {
-            Bonzai_Utils::bonzai_message('ERROR: Skipped because the private key is empty.', false); // TODO: too long
-            return "";
-        }*/
-
-        // Print a message
-        Bonzai_Utils::bonzai_message('Encoding %d bytes...', true, $data_len);
-
-        // Encrypt the data
-        // TODO: USE APC + ECC...
-
-        // Increase the total generated bytes
-        // TODO: Bonzai_Registry::getInstance()->append('total_generated_bytes', strlen($crdata), Bonzai_Registry::INTEGER_APPEND); // TODO: too long
-
-        // Print a message
-        // TODO: Bonzai_Utils::bonzai_message('Generated %s bytes.', true, strlen($crdata));
-
-        // TODO: return $crdata;
+        return $bytecode;
     }
     // }}}
 
-    // {{{ function getInner
+    // {{{ function getFullPHP
     /**
      *
-     * @access protected
+     * @access public
+     * @param  string $filename
      * @return string
      */
-    protected function getInner()
+    public function getFullPHP($filename)
     {
-        $PHBonzai_LIBRARY_STRING        = ''; // TODO: need include this from .h
-        $Bonzai_S_BASE_LIB_PATH         = ''; // TODO: need include this from .h
-        $PHBonzai_EXTENSION_STRING      = ''; // TODO: need include this from .h
-        $Bonzai_S_EXTENSION_MODULE_PATH = ''; // TODO: need include this from .h
+        // Convert the content
+        $BConverter = new Bonzai_Converter();
+        $converted_content = $BConverter->convert($filename, $asp = false); // ???
 
-        /* TODO: if (Bonzai_Script_Parser::$config['SETUP']['USE_PHP_EXTENSION']) {
-            return $BONZAI_EXTENSION_STRING . $BONZAI_S_EXTENSION_MODULE_PATH; // TODO: MISSING STRINGS
-        }*/
-
-        return $BONZAI_LIBRARY_STRING . $BONZAI_S_BASE_LIB_PATH; // TODO: MISSING STRINGS
+        return $converted_content;
     }
     // }}}
 
-    // {{{ function getHeader
+    // {{{ function expandPathsToFiles
     /**
-     *
-     * @access protected
-     * @param  array     $element
-     * @param  string    $inner
-     * @return string
-     */
-    protected function getHeader($element, $inner)
+      *
+      * @access protected
+      * @return void
+      */
+    protected function expandPathsToFiles($files)
     {
-        /* TODO: if ($element['HEADER'] == Bonzai_Script_Parser::$config['CONFIGURATION']['HEADER']) { // TODO: too long
-            return '<?php' . PHP_EOL . PHP_EOL . Bonzai_Script_Parser::$config['CONFIGURATION']['HEADER'] . $inner; // TODO: too long
-        }*/
-
-        return '<?php' . PHP_EOL . PHP_EOL . $element['HEADER'] . $inner;
-    }
-    // }}}
-
-    // {{{ function getFooter
-    /**
-     *
-     * @access protected
-     * @param  array     $element
-     * @return string
-     */
-    protected function getFooter($element)
-    {
-        /* TODO: if ($element['FOOTER'] == Bonzai_Script_Parser::$config['CONFIGURATION']['FOOTER']) { // TODO: too long
-            return '\');' . PHP_EOL . Bonzai_Script_Parser::$config['CONFIGURATION']['FOOTER'] . PHP_EOL . '?>'; // TODO: too long
-        }*/
-
-        return '\');' . PHP_EOL . $element['FOOTER'] . PHP_EOL . '?>';
-    }
-    // }}}
-
-    // {{{ function getEncodedFilename
-    /**
-     *
-     * @access protected
-     * @param  string    $filename
-     * @return string
-     */
-    protected function getEncodedFilename($filename)
-    {
-        /* TODO: if (Bonzai_Script_Parser::$config['CONFIGURATION']['SAVE_ENCODED_AS_NEW']) {
-            return "$filename.encoded";
-        }*/
-
-        return $filename;
+        $cloned = $files;
+        foreach($cloned as $key => $path) {
+            $files[$key] = $path = realpath(getcwd() . "/$path");
+            if (is_dir($path)) {
+                unset($files[$key]);
+                $new_files = preg_grep('/\.php$/', Bonzai_Utils::rscandir($path));
+                array_merge($files, $new_files);
+            }
+        }
     }
     // }}}
     // }}}
+}
+
+#############################################################################################
+
+function bonzai_get_bytecode($content) {
+    file_put_contents('/tmp/phb.php', $content);
+
+    $fh = fopen('/tmp/phb.phb', "w");
+    bcompiler_write_header($fh);
+    bcompiler_write_file($fh, '/tmp/phb.php');
+    bcompiler_write_footer($fh);
+    fclose($fh);
+
+    $content = file_get_contents('/tmp/phb.phb');
+    unlink('/tmp/phb.phb');
+
+    $content = convert_to_hex(gzcompress($content, 9));
+    $content = base64_encode(gzcompress($content, 9));
+
+    return $content;
+}
+
+function convert_to_hex($string) {
+  $hex = '';
+  for($i = 0, $len = strlen($string); $i < $len; $i++) {
+    $hex .= str_pad(dechex(ord($string[$i])), 2, "0", STR_PAD_LEFT);
+  }
+
+  return strtoupper($hex);
 }
