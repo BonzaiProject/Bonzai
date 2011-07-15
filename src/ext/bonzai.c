@@ -1,29 +1,26 @@
 /**
- *
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME:      phoenix
- * ENGINE VERSION: 0.1
- * MODULE VERSION: 0.1
+ * CODE NAME:  phoenix
+ * VERSION:    0.1
  *
- * URL:            http://www.bonzai-project.org
- * E-MAIL:         info@bonzai-project.org
+ * URL:        http://www.bonzai-project.org
+ * E-MAIL:     info@bonzai-project.org
  *
- * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
- * LICENSE:        MIT or GNU GPL 2
- *                 The MIT License is recommended for most projects, it's simple
- *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with Bonzai.
- *                 If  the  GPL  suits  your project better you are also free to
- *                 use Bonzai under that license.
- *                 You   don't  have  to  do  anything  special  to  choose  one
- *                 license  or  the  other  and  you don't have to notify anyone
- *                 which   license   you   are   using.  You  are  free  to  use
- *                 Bonzai  in  commercial  projects  as  long  as  the copyright
- *                 header is left intact.
- *                 <http://www.opensource.org/licenses/mit-license.php>
- *                 <http://www.opensource.org/licenses/gpl-2.0.php>
+ * COPYRIGHT:  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * LICENSE:    MIT or GNU GPL 2
+ *             The MIT License is recommended for most projects, it's simple and
+ *             easy to understand  and it places  almost no restrictions on what
+ *             you can do with Bonzai.
+ *             If the GPL  suits your project  better you are  also free to  use
+ *             Bonzai under that license.
+ *             You don't have  to do anything  special to choose  one license or
+ *             the other  and you don't have to notify  anyone which license you
+ *             are using.  You are free  to use Bonzai in commercial projects as
+ *             long as the copyright header is left intact.
+ *             <http://www.opensource.org/licenses/mit-license.php>
+ *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
 #ifdef HAVE_CONFIG_H
@@ -98,12 +95,14 @@ PHP_MINIT_FUNCTION(bonzai)
 
     REGISTER_STRING_CONSTANT("BONZAI_VERSION", PHP_BONZAI_VERSION, CONST_CS | CONST_PERSISTENT);
     REGISTER_INI_ENTRIES();
+
     return SUCCESS;
 }
 
 PHP_MSHUTDOWN_FUNCTION(bonzai)
 {
     UNREGISTER_INI_ENTRIES();
+
     return SUCCESS;
 }
 
@@ -128,20 +127,23 @@ PHP_FUNCTION(bonzai_exec)
         RETURN_NULL();
     }
 
-    char *key = _bonzai_get_key();
+    char *key     = _bonzai_get_key();
     char *decoded = _bonzai_decode(code, key);
 
     char *eval_string = decoded;
-    int len = strlen(decoded);
-    char *tmp = (char *)emalloc(6);
-    char *tmp2 = (char *)emalloc(4);
+    int len           = strlen(decoded);
+    char *tmp         = (char *)emalloc(6);
+    char *tmp2        = (char *)emalloc(4);
+
     strncpy(tmp, decoded, 5);
     tmp[5] = '\0';
     strncpy(tmp2, decoded + len - 3, 3);
     tmp2[2] = '\0';
+
     if (strcmp(tmp, "<?php") == 0 && strcmp(tmp2, "?>") == 0) {
         strncpy(eval_string, decoded + 5, len - 8);
         eval_string[len - 8] = '\0';
+
         while (eval_string[strlen(eval_string) - 1] == '?') eval_string[strlen(eval_string) - 1] = '\0';
 
         sapi_add_header(SAPI_BONZAI_VERSION_HEADER, sizeof(SAPI_BONZAI_VERSION_HEADER) - 1, 1);
@@ -155,6 +157,7 @@ PHP_FUNCTION(bonzai_exec)
     } else {
         php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed evaluating crypted source code!");
     }
+
     efree(key);
     efree(decoded);
     efree(tmp);
@@ -366,10 +369,9 @@ PHP_FUNCTION(bonzai_log)
 }
 // }}}
 
-// {{{ char *bonzai_base64_encode 
+// {{{ bonzai_base64_encode
 /**
- * Convert a string in base64
- * @param char *data
+ * @param  char *data
  * @return char *
  */
 char *bonzai_base64_encode(char *data) {
@@ -382,9 +384,9 @@ char *bonzai_base64_encode(char *data) {
 
 PHP_FUNCTION(bonzai_logo_guid)
 {
-        if (ZEND_NUM_ARGS() != 0) {
-                WRONG_PARAM_COUNT;
-        }
+	if (ZEND_NUM_ARGS() != 0) {
+		WRONG_PARAM_COUNT;
+	}
 
-        RETURN_STRINGL(BONZAI_LOGO_GUID, sizeof(BONZAI_LOGO_GUID) - 1, 1);
+	RETURN_STRINGL(BONZAI_LOGO_GUID, sizeof(BONZAI_LOGO_GUID) - 1, 1);
 }

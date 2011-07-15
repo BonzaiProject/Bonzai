@@ -1,39 +1,35 @@
 <?php
 /**
- *
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME:      phoenix
- * ENGINE VERSION: 0.1
- * MODULE VERSION: 0.1
+ * CODE NAME:  phoenix
+ * VERSION:    0.1
  *
- * URL:            http://www.bonzai-project.org
- * E-MAIL:         info@bonzai-project.org
+ * URL:        http://www.bonzai-project.org
+ * E-MAIL:     info@bonzai-project.org
  *
- * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
- * LICENSE:        MIT or GNU GPL 2
- *                 The MIT License is recommended for most projects, it's simple
- *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with Bonzai.
- *                 If  the  GPL  suits  your project better you are also free to
- *                 use Bonzai under that license.
- *                 You   don't  have  to  do  anything  special  to  choose  one
- *                 license  or  the  other  and  you don't have to notify anyone
- *                 which   license   you   are   using.  You  are  free  to  use
- *                 Bonzai  in  commercial  projects  as  long  as  the copyright
- *                 header is left intact.
- *                 <http://www.opensource.org/licenses/mit-license.php>
- *                 <http://www.opensource.org/licenses/gpl-2.0.php>
+ * COPYRIGHT:  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * LICENSE:    MIT or GNU GPL 2
+ *             The MIT License is recommended for most projects, it's simple and
+ *             easy to understand  and it places  almost no restrictions on what
+ *             you can do with Bonzai.
+ *             If the GPL  suits your project  better you are  also free to  use
+ *             Bonzai under that license.
+ *             You don't have  to do anything  special to choose  one license or
+ *             the other  and you don't have to notify  anyone which license you
+ *             are using.  You are free  to use Bonzai in commercial projects as
+ *             long as the copyright header is left intact.
+ *             <http://www.opensource.org/licenses/mit-license.php>
+ *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
 /**
- *
- * @category  Security
+ * @category  Optimization & Security
  * @package   Bonzai
  * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
- * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://www.bonzai-project.org
@@ -42,14 +38,12 @@ class Bonzai_Server
 {
     // {{{ PROPERTIES
     /**
-     * The content data
      * @access private
      * @var    string
      */
-    private $_data;
+    private $data;
 
     /**
-     * String format for log
      * @access public
      * @var    string
      *
@@ -70,46 +64,39 @@ class Bonzai_Server
     public $log_format = '[%t] %i %h %d:%s';
 
     /**
-     * Log file
      * @access public
      * @type   string
      */
     public $log_file = '/var/log/bonzai/bonzai.log';
 
     /**
-     * Date format into log_format
      * @access public
      * @var    string
-     * see php docs for strftime syntax (http://www.php.net/strftime)
      */
     public $date_format = '%a %d %b %Y %H:%M:%S';
 
     /**
-     * Script for execution on remote servers
      * @access public
      * @var    string
      */
     public $exec_file = '/home/fabio/www/bonzai.exec';
 
     /**
-     * Content of execution script
      * @access private
      * @var    sting
      */
     private $_exec_file_content;
     // }}}
 
-    // {{{ METHODS
-    // {{{ function __construct
+    // {{{ __construct
     /**
-     * Constructor (PHP5)
      * @access public
      * @param  string $data
      * @return void
      */
     public function __construct($data = '')
     {
-        $this->_data = $data;
+        $this->data = $data;
 
         if (file_exists($this->exec_file)) {
             $this->_exec_file_content = file_get_contents($this->exec_file);
@@ -117,7 +104,7 @@ class Bonzai_Server
     }
     // }}}
 
-    // {{{ function log_data
+    // {{{ log_data
     /**
      * Process the request, save a line of log and if available send the execution script
      * @access public
@@ -154,7 +141,7 @@ class Bonzai_Server
     }
     // }}}
 
-    // {{{ function getValue
+    // {{{ getValue
     /**
      *
      * @access protected
@@ -166,7 +153,6 @@ class Bonzai_Server
     {
         return !empty($param_arr[$key]) ? $param_arr[$key] : 'N/A';
     }
-    // }}}
     // }}}
 }
 

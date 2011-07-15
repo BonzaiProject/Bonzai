@@ -1,49 +1,43 @@
 <?php
 /**
- *
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME:      phoenix
- * ENGINE VERSION: 0.1
- * MODULE VERSION: 0.1
+ * CODE NAME:  phoenix
+ * VERSION:    0.1
  *
- * URL:            http://www.bonzai-project.org
- * E-MAIL:         info@bonzai-project.org
+ * URL:        http://www.bonzai-project.org
+ * E-MAIL:     info@bonzai-project.org
  *
- * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
- * LICENSE:        MIT or GNU GPL 2
- *                 The MIT License is recommended for most projects, it's simple
- *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with Bonzai.
- *                 If  the  GPL  suits  your project better you are also free to
- *                 use Bonzai under that license.
- *                 You   don't  have  to  do  anything  special  to  choose  one
- *                 license  or  the  other  and  you don't have to notify anyone
- *                 which   license   you   are   using.  You  are  free  to  use
- *                 Bonzai  in  commercial  projects  as  long  as  the copyright
- *                 header is left intact.
- *                 <http://www.opensource.org/licenses/mit-license.php>
- *                 <http://www.opensource.org/licenses/gpl-2.0.php>
+ * COPYRIGHT:  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * LICENSE:    MIT or GNU GPL 2
+ *             The MIT License is recommended for most projects, it's simple and
+ *             easy to understand  and it places  almost no restrictions on what
+ *             you can do with Bonzai.
+ *             If the GPL  suits your project  better you are  also free to  use
+ *             Bonzai under that license.
+ *             You don't have  to do anything  special to choose  one license or
+ *             the other  and you don't have to notify  anyone which license you
+ *             are using.  You are free  to use Bonzai in commercial projects as
+ *             long as the copyright header is left intact.
+ *             <http://www.opensource.org/licenses/mit-license.php>
+ *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
 /**
- *
- * @category  Security
+ * @category  Optimization & Security
  * @package   Bonzai
  * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
- * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://www.bonzai-project.org
  */
 class Bonzai_Utils
 {
-    // {{{ METHODS
-    // {{{ function getFilePath
+    // {{{ getFilePath
     /**
-     *
      * @static
      * @access public
      * @param  string $file
@@ -53,20 +47,19 @@ class Bonzai_Utils
     public static function getFilePath($file)
     {
         if (!file_exists(dirname($file)) || dirname($file) == '.') {
-            $file = getcwd() . "/$file";
+            $file = getcwd() . '/' . $file;
         }
 
         if (!is_readable($file)) {
-            throw new Bonzai_Exception("The file `$file` cannot be opened"); // TODO: BLOCKER ?
+            throw new Bonzai_Exception('The file `' . $file . '` cannot be opened'); // UNCATCHED
         } else {
             return $file;
         }
     }
     // }}}
 
-    // {{{ function rename_file
+    // {{{ renameFile
     /**
-     *
      * @static
      * @access public
      * @param  string  $filename
@@ -74,14 +67,13 @@ class Bonzai_Utils
      * @throws Bonzai_Exception
      * @return void
      */
-    public static function rename_file($filename, $backup = true)
+    public static function renameFile($filename, $backup = true)
     {
         if ($backup) {
-            $backup_filename = "$filename.orig";
+            $backup_filename = $filename . '.orig';
 
             if (!is_writable($backup_filename)) {
-                $message = "The file `$backup_filename` cannot be written";
-                throw new Bonzai_Exception($message); // TODO: BLOCKER ?
+                throw new Bonzai_Exception('The file `' . $backup_filename . '` cannot be written'); // UNCATCHED
             }
 
             file_put_contents($backup_filename, self::getFileContent($filename));
@@ -89,30 +81,27 @@ class Bonzai_Utils
     }
     // }}}
 
-    // {{{ function rscandir
-    // TODO: cyclomatic complex: 5
+    // {{{ rscandir
     /**
-     *
      * @static
      * @access public
-     * @param  string       $base
-     * @param  array        $data
+     * @param  string $base
+     * @param  array  $data
      * @throws Bonzai_Exception
      * @return array
      */
     public static function rscandir($base = '', &$data = array())
     {
         if (!is_readable($base)) {
-            $message = "The directory `$base` cannot be opened";
-            throw new Bonzai_Exception($message); // TODO: BLOCKER ?
+            throw new Bonzai_Exception('The directory `' . $base . '` cannot be opened'); // UNCATCHED
         }
 
         $array = array_diff(scandir($base), array('.', '..'));
 
         foreach($array as $value) {
-            $path = "$base/$value";
+            $path = $base . '/' . $value;
             if (is_dir($path)) {
-                $data[] = "$path/";
+                $data[] = $path . '/';
                 $data = Bonzai_Utils::rscandir($path, $data);
             } elseif (is_file($path)) {
                 $data[] = $path;
@@ -123,51 +112,45 @@ class Bonzai_Utils
     }
     // }}}
 
-    // {{{ function getFileContent
+    // {{{ getFileContent
     /**
-     *
      * @static
      * @access public
-     * @param  string       $filename
+     * @param  string $filename
      * @throws Bonzai_Exception
      * @return string
      */
     public static function getFileContent($filename)
     {
         if (!is_readable($filename)) {
-            $message = "The file `$filename` cannot be opened";
-            throw new Bonzai_Exception($message); // TODO: NON BLOCKER
+            throw new Bonzai_Exception('The file `' . $filename . '` cannot be opened'); // UNCATCHED
         }
 
         return file_get_contents($filename);
     }
     // }}}
 
-    // {{{ function putFileContent
+    // {{{ putFileContent
     /**
-     *
      * @static
      * @access public
-     * @param  string       $filename
-     * @param  string       $content
+     * @param  string $filename
+     * @param  string $content
      * @throws Bonzai_Exception
      * @return string
      */
     public static function putFileContent($filename, $content)
     {
         if (!is_writable($filename)) {
-            $message = "The file `$filename` cannot be written";
-            throw new Bonzai_Exception($message); // TODO: BLOCKER ?
+            throw new Bonzai_Exception('The file `' . $filename . '` cannot be written'); // UNCATCHED
         }
 
         return file_put_contents($filename, $content);
     }
     // }}}
 
-    // {{{ function message
-    // TODO: cyclomatic complex: 5
+    // {{{ message
     /**
-     *
      * @static
      * @access public
      * @return void
@@ -189,6 +172,5 @@ class Bonzai_Utils
             printf("[%d] %s\n", time(), $gettext_text);
         }*/
     }
-    // }}}
     // }}}
 }

@@ -1,326 +1,297 @@
 <?php
 /**
- *
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME:      phoenix
- * ENGINE VERSION: 0.1
- * MODULE VERSION: 0.1
+ * CODE NAME:  phoenix
+ * VERSION:    0.1
  *
- * URL:            http://www.bonzai-project.org
- * E-MAIL:         info@bonzai-project.org
+ * URL:        http://www.bonzai-project.org
+ * E-MAIL:     info@bonzai-project.org
  *
- * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
- * LICENSE:        MIT or GNU GPL 2
- *                 The MIT License is recommended for most projects, it's simple
- *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with Bonzai.
- *                 If  the  GPL  suits  your project better you are also free to
- *                 use Bonzai under that license.
- *                 You   don't  have  to  do  anything  special  to  choose  one
- *                 license  or  the  other  and  you don't have to notify anyone
- *                 which   license   you   are   using.  You  are  free  to  use
- *                 Bonzai  in  commercial  projects  as  long  as  the copyright
- *                 header is left intact.
- *                 <http://www.opensource.org/licenses/mit-license.php>
- *                 <http://www.opensource.org/licenses/gpl-2.0.php>
+ * COPYRIGHT:  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * LICENSE:    MIT or GNU GPL 2
+ *             The MIT License is recommended for most projects, it's simple and
+ *             easy to understand  and it places  almost no restrictions on what
+ *             you can do with Bonzai.
+ *             If the GPL  suits your project  better you are  also free to  use
+ *             Bonzai under that license.
+ *             You don't have  to do anything  special to choose  one license or
+ *             the other  and you don't have to notify  anyone which license you
+ *             are using.  You are free  to use Bonzai in commercial projects as
+ *             long as the copyright header is left intact.
+ *             <http://www.opensource.org/licenses/mit-license.php>
+ *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
 /**
- *
- * @category  Security
+ * @category  Optimization & Security
  * @package   Bonzai
  * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
- * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://www.bonzai-project.org
  */
-
 class Bonzai_Converter
 {
     // {{{ PROPERTIES
     /**
-     *
      * @access protected
-     * @var    string
+     * @var    array
      */
-    protected $pt_open_long = '<?php';
+    protected $php_tags = array();
 
     /**
-     *
-     * @access protected
-     * @var    string
-     */
-    protected $pt_open_short = '<?';
-
-    /**
-     *
-     * @access protected
-     * @var    string
-     */
-    protected $pt_close = '?>';
-
-    /**
-     *
-     * @access protected
-     * @var    integer
-     */
-    protected $pt_size_long = 5;
-
-    /**
-     *
      * @access protected
      * @var    array
      */
     protected $blocks = array();
 
     /**
-     *
      * @access protected
      * @var    integer
      */
     protected $count = -1;
+
+    /**
+     * @access protected
+     * @var    integer
+     */
+    protected $max = 0;
+
+    /**
+     * @access protected
+     * @var    integer
+     */
+    protected $start = 0;
+
+    /**
+     * @access protected
+     * @var    integer
+     */
+    protected $end = 0;
+
+    /**
+     * @access protected
+     * @var    integer
+     */
+    protected $curr = 0;
+
+    /**
+     * @access protected
+     * @var    boolean
+     */
+    protected $opened = false;
     // }}}
 
-    // {{{ METHODS
-    // {{{ function convert
+    // {{{ convert
     /**
-     *
-     * @access protected
-     * @param  string    $filename
-     * @param  boolean   $asptag
+     * @access public
+     * @param  string  $filename
+     * @param  boolean $asptag
      * @return string
      */
     public function convert($filename, $asptag = false)
     {
         $content = Bonzai_Utils::getFileContent($filename);
+        $source  = $this->process($content, $asptag);
 
-        // Increase the total originary bytes
-        Bonzai_Registry::getInstance()->append('total_orig_bytes', strlen($content), Bonzai_Registry::INTEGER_APPEND); // TODO: too long
+        Bonzai_Registry::append('total_orig_bytes',      strlen($content), Bonzai_Registry::INT_APPEND);
+        Bonzai_Registry::append('total_converted_bytes', strlen($source),  Bonzai_Registry::INT_APPEND);
 
-        $source = $this->process($content, $asptag);
-
-        // Increase the total converted bytes
-        Bonzai_Registry::getInstance()->append('total_converted_bytes', strlen($source), Bonzai_Registry::INTEGER_APPEND); // TODO: too long
-
-        // Print a message
         Bonzai_Utils::message('Generated %s bytes.', true, strlen($source));
 
         return $source;
     }
     // }}}
 
-    // {{{ function process
+    // {{{ process
     /**
-     *
      * @access protected
-     * @param  string       $data
-     * @param  boolean      $asptag
+     * @param  string  $data
+     * @param  boolean $asptag
      * @throws Bonzai_Exception
      * @return string
      */
     protected function process($data, $asptag = false)
     {
         if (empty($data)) {
-            throw new Bonzai_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
+            throw new Bonzai_Exception('Cannot parse an empty data'); // UNCATCHED
         }
 
-        // TODO: ANALYZE THIS CODE FOR PROBLEMS
         $this->setTags($asptag);
 
-        $data = str_replace($this->pt_close, ';' . $this->pt_close, $data);
+        $data = str_replace($this->php_tags['close'], ';' . $this->php_tags['close'], $data); // USEFUL?
         $this->finder($data, $asptag);
 
-        $max = substr_count($data, $this->pt_open_short);
+        $this->max = substr_count($data, substr($this->php_tags['open'], 0, 2));
 
         $this->count = 0;
-        $start = 0;
-        $end   = $this->blocks[0]['open'];
+        $this->start = 0;
+        $this->end   = $this->blocks[0]['open'];
 
-        $data_len   = strlen($data);
-        $final_data = $this->pt_open_long . PHP_EOL;
+        $data_len = strlen($data);
 
-        for($i = 0; $i < $data_len; $i++) {
-            $token = $this->analyzeProcessBlock($data, $max, &$i, &$start, &$end, $data_len); // TODO: too long
-            $final_data .= $token;
+        $final_data = '';
+        for($this->curr = 0; $this->curr < $data_len; $this->curr++) {
+            $final_data .= $this->analyzeProcessBlock($data);
         }
-        $final_data .= $this->pt_close;
+        $final_data = $this->php_tags['open'] . PHP_EOL . $final_data . $this->php_tags['close'];
 
         return $final_data;
     }
     // }}}
 
-    // {{{ function analyzeProcessBlock
-    // TODO: add to test
-    // TODO: cyclomatic complex: 7
+    // {{{ analyzeProcessBlock
     /**
-     *
      * @access protected
-     * @param  array     $data
-     * @param  array     $elem
-     * @param  integer   $count
-     * @param  integer   $max
-     * @param  integer   $i
-     * @param  integer   $start
-     * @param  integer   $end
-     * @param  integer   $data_len
+     * @param  array $data
      * @return string
      */
-    protected function analyzeProcessBlock($data, $max, $i, $start, $end, $data_len) // TODO: too long
+    protected function analyzeProcessBlock($data)
     {
         $final_data = '';
+        $data_len   = strlen($data);
 
-        $elem = $this->blocks[$this->count];
+        $block = $this->blocks[$this->count];
 
-        if ($this->count < $max && $i >= $elem['open'] && $i <= $elem['close']) {
-            $from = $elem['open'] + $elem['size'];
-            $to   = $elem['close'] - $elem['open'] - $elem['size'];
+        $validElement = $this->count < $this->max;
+        $intoBlock = $this->curr >= $block['open'] && $this->curr <= $block['close'];
+        $betweenBlocks = $this->curr >= $this->start && $this->curr <= $this->end;
+
+        if ($validElement && $intoBlock) {
+            $from = $block['open'] + $block['size'];
+            $to   = $block['close'] - $block['open'] - $block['size'];
 
             $final_data .= substr($data, $from, $to);
-            $start       = $i = (int)$elem['close'] + 2;
-            $end         = ($this->count + 1 >= $max)
+            $this->curr  = (int)$block['close'] + 2;
+            $this->start = $this->curr;
+            $this->end   = ($this->count + 1 >= $this->max)
                            ? $data_len : $this->blocks[$this->count + 1]['open'];
             $this->count++;
-        } else if ($i >= $start && $i <= $end) {
-            $final_data .= PHP_EOL . 'echo <<<BONZAI_HD' . PHP_EOL;
-            $final_data .= substr($data, $start, $end - $start);
-            $final_data .= PHP_EOL . 'BONZAI_HD;' . PHP_EOL;
-
-            $i = $end;
         } else {
             $final_data .= PHP_EOL . 'echo <<<BONZAI_HD' . PHP_EOL;
-            $final_data .= substr($data, $i, $data_len - $i);
-            $final_data .= PHP_EOL . 'BONZAI_HD;' . PHP_EOL;
 
-            $i = $data_len;
+            if ($betweenBlocks) {
+                $final_data .= substr($data, $this->start, $this->end - $this->start);
+                $this->curr = $this->end;
+            } else {
+                $final_data .= substr($data, $this->curr, $data_len - $this->curr);
+                $this->curr = $data_len;
+            }
+
+            $final_data .= PHP_EOL . 'BONZAI_HD;' . PHP_EOL;
         }
 
         return $final_data;
     }
     // }}}
 
-    // {{{ function setTags
+    // {{{ setTags
     /**
-     *
      * @access protected
-     * @param  boolean   $asptag
+     * @param  boolean $asptag
      * @return void
      */
     protected function setTags($asptag)
     {
-        $this->pt_open_long = '<?php';
-        $this->pt_close     = '?>';
+        $this->php_tags = array(
+          'open'  => '<?php',
+          'close' => '?' . '>'
+        );
 
         if ($asptag) {
-            $this->pt_open_long = '<%';
-            $this->pt_close     = '%>';
+            $this->php_tags['open']  = '<%';
+            $this->php_tags['close'] = '%' . '>';
         }
-
-        $this->pt_size_long  = strlen($this->pt_open_long);
-        $this->pt_open_short = substr($this->pt_open_long, 0, 2);
     }
     // }}}
 
-    // {{{ function finder
+    // {{{ finder
     /**
-     *
      * @access protected
-     * @param  string       $data
-     * @param  boolean      $asptag
+     * @param  string  $data
+     * @param  boolean $asptag
      * @throws Bonzai_Exception
      * @return void
      */
     protected function finder($data, $asptag = false)
     {
         if (empty($data)) {
-            throw new Bonzai_Exception('Cannot parse an empty data'); // TODO: NON BLOCKER
+            throw new Bonzai_Exception('Cannot parse an empty data'); // UNCATCHED
         }
-
-        $opened = false;
-        $count = -1;
 
         $this->setTags($asptag);
 
         $this->blocks = array();
+        $this->count  = -1;
+        $this->opened = false;
 
-        //$max = substr_count($data, $pt_open_short);
-
-        // TODO: ANALYZE THIS CODE FOR PROBLEMS
         $data_len = strlen($data);
-        for ($j = 0; $j < $data_len; $j++) {
-            $opened = $this->analyzeFinderBlock($data, $j, $opened);
+        for ($this->curr = 0; $this->curr < $data_len; $this->curr++) {
+            $this->analyzeFinderBlock($data);
         }
 
         $this->setBlock('close', $data_len);
     }
     // }}}
 
-    // {{{ function analyzeFinderBlock
-    // TODO: cyclomatic complex: 6
+    // {{{ analyzeFinderBlock
     /**
-     *
      * @access protected
-     * @param  string    $data
-     * @param  integer   $pos
-     * @param  boolean   $opened
-     * @param  integer   $count
-     * @return boolean
+     * @param  string $data
+     * @return void
      */
-    protected function analyzeFinderBlock($data, $pos, $opened)
+    protected function analyzeFinderBlock($data)
     {
-        $tag_long  = substr($data, $pos, $this->pt_size_long);
-        $tag_short = substr($data, $pos, 2);
+        $tag_long  = substr($data, $this->curr, strlen($this->php_tags['open']));
+        $tag_short = substr($data, $this->curr, 2);
 
-        $is_long_tag  = $tag_long  == $this->pt_open_long;
-        $is_short_tag = $tag_short == $this->pt_open_short;
+        $is_long_tag  = $tag_long  == $this->php_tags['open'];
+        $is_short_tag = $tag_short == substr($this->php_tags['open'], 0, 2);
 
-        if (!$opened && $is_long_tag || $is_short_tag) {
+        if (!$this->opened && ($is_long_tag || $is_short_tag)) {
             $len  = $is_long_tag
-                    ? $this->pt_size_long : 2;
-            $next = substr($data, $pos + $len, 1);
+                    ? strlen($this->php_tags['open']) : 2;
+            $next = substr($data, $this->curr + $len, 1);
 
-            $opened = $this->isOpened($next, $pos);
+            $this->opened = $this->isOpened($next, $this->curr);
             $this->setBlock('size', $len);
-        } else if ($tag_short == $this->pt_close) {
-            $this->setBlock('close', $pos);
-            Bonzai_Utils::message('Found php close #%s: %s', true, $this->count, $pos); // TODO: too long
-            $opened = false;
-        }
+        } else if ($tag_short == $this->php_tags['close']) {
+            $this->setBlock('close', $this->curr);
+            $this->opened = false;
 
-        return $opened;
+            Bonzai_Utils::message('Found php close #%s: %s', true, $this->count, $this->curr);
+        }
     }
     // }}}
 
-    // {{{ function isOpened
+    // {{{ isOpened
     /**
-     *
      * @access protected
-     * @param  string    $next
-     * @param  integer   $pos
+     * @param  string  $token
+     * @param  integer $pos
      * @return boolean
      */
-    protected function isOpened($next, $pos)
+    protected function isOpened($token, $pos)
     {
-        $opened = in_array($next, array(PHP_EOL, '=', ' '));
+        $opened = in_array($token, array(PHP_EOL, '=', ' ', "\t"));
         if ($opened) {
             $this->setBlock('open', $pos);
-            Bonzai_Utils::message('Found php start #%s: %s', true, $this->count, $pos); // TODO: too long
+            Bonzai_Utils::message('Found php start #%s: %s', true, $this->count, $pos);
         }
 
         return $opened;
     }
     // }}}
 
-    // {{{ function setBlock
+    // {{{ setBlock
     /**
-     *
      * @access protected
-     * @param  integer   $pos
-     * @param  string    $key
-     * @param  array     $value
+     * @param  string $key
+     * @param  array  $value
      * @return void
      */
     protected function setBlock($key, $value)
@@ -336,6 +307,5 @@ class Bonzai_Converter
 
         $this->blocks[$pos][$key] = $value;
     }
-    // }}}
     // }}}
 }

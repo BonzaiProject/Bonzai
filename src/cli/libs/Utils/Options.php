@@ -1,39 +1,35 @@
 <?php
 /**
- *
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME:      phoenix
- * ENGINE VERSION: 0.1
- * MODULE VERSION: 0.1
+ * CODE NAME:  phoenix
+ * VERSION:    0.1
  *
- * URL:            http://www.bonzai-project.org
- * E-MAIL:         info@bonzai-project.org
+ * URL:        http://www.bonzai-project.org
+ * E-MAIL:     info@bonzai-project.org
  *
- * COPYRIGHT:      2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
- * LICENSE:        MIT or GNU GPL 2
- *                 The MIT License is recommended for most projects, it's simple
- *                 and  easy  to understand and it places almost no restrictions
- *                 on  what  you  can do with Bonzai.
- *                 If  the  GPL  suits  your project better you are also free to
- *                 use Bonzai under that license.
- *                 You   don't  have  to  do  anything  special  to  choose  one
- *                 license  or  the  other  and  you don't have to notify anyone
- *                 which   license   you   are   using.  You  are  free  to  use
- *                 Bonzai  in  commercial  projects  as  long  as  the copyright
- *                 header is left intact.
- *                 <http://www.opensource.org/licenses/mit-license.php>
- *                 <http://www.opensource.org/licenses/gpl-2.0.php>
+ * COPYRIGHT:  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * LICENSE:    MIT or GNU GPL 2
+ *             The MIT License is recommended for most projects, it's simple and
+ *             easy to understand  and it places  almost no restrictions on what
+ *             you can do with Bonzai.
+ *             If the GPL  suits your project  better you are  also free to  use
+ *             Bonzai under that license.
+ *             You don't have  to do anything  special to choose  one license or
+ *             the other  and you don't have to notify  anyone which license you
+ *             are using.  You are free  to use Bonzai in commercial projects as
+ *             long as the copyright header is left intact.
+ *             <http://www.opensource.org/licenses/mit-license.php>
+ *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
 /**
- *
- * @category  Security
+ * @category  Optimization & Security
  * @package   Bonzai
  * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
- * @copyright 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link      http://www.bonzai-project.org
@@ -42,9 +38,8 @@ class Bonzai_Utils_Options
 {
     // {{{ PROPERTIES
     /**
-     *
      * @access protected
-     * @var    array     $parameters
+     * @var    array $parameters
      */
     protected $parameters = array(
         'b'  => 'backup',
@@ -54,76 +49,67 @@ class Bonzai_Utils_Options
         'v'  => 'version');
 
     /**
-     *
      * @access protected
-     * @var    array     $labels
+     * @var    array $labels
      */
     protected $labels = array(
         'backup'  => 'Backup the original file, generate a .bak file (default: false)',
-    	'ext'     => 'Parse only the file that matches the specified extension (default: php)',
+    	  'ext'     => 'Parse only the file that matches the specified extension (default: php)',
         'asp'     => 'Use the ASP tags instead PHP',
         'help'    => 'Show the help',
         'version' => 'Show the version');
     // }}}
 
-    // {{{ METHODS
-    // {{{ function init
+    // {{{ init
     /**
-     *
      * @access public
-     * @param  array        $argv
+     * @param  array $argv
      * @throws Bonzai_Exception
      * @return void
      */
     public function init($argv)
     {
         if (empty($argv) || !is_array($argv)) {
-            throw new Bonzai_Exception('Missing the script arguments'); // TODO: BLOCKER
+            throw new Bonzai_Exception('Missing the script arguments'); // UNCATCHED
         }
 
-        $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters); // TODO: too long
+        $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters);
         $this->non_options = array_slice($argv, 1);
 
-        $this->parseOptions($this->options, $this->non_options);
+        $this->parseOptions();
     }
     // }}}
 
-    // {{{ function parseOptions
-    // TODO: cyclomatic complex: 7
+    // {{{ parseOptions
     /**
-     *
      * @access protected
-     * @param  array     $options
-     * @param  array     $non_options
      * @throws Bonzai_Exception
      * @return void
      */
-    protected function parseOptions(&$options, &$non_options)
+    protected function parseOptions()
     {
-        if (!is_array($options) || !is_array($non_options)) {
-            throw new Bonzai_Exception('Invalid parameters to be parsed'); // TODO: NON BLOCKER
+        if (!is_array($this->options) || !is_array($this->non_options)) {
+            throw new Bonzai_Exception('Invalid parameters to be parsed'); // UNCATCHED
         }
 
-        // TODO: ANALYZE THIS CODE FOR PROBLEMS
-        foreach($options as $key => $value) {
-            unset($non_options[array_search('-' . $key, $non_options)]);
+        foreach($this->options as $key => $value) {
+            unset($this->non_options[array_search('-' . $key, $this->non_options)]);
 
             $has_value = !$value ? '' : ':';
             $new_key   = $key . $has_value;
             if (!empty($this->parameters[$new_key])) {
-                $new_key = substr($this->parameters[$new_key], 0, strlen($this->parameters[$new_key]) - strlen($has_value)); // TODO: too long
-                if (empty($options[$new_key])) {
+                $new_key = substr($this->parameters[$new_key], 0, strlen($this->parameters[$new_key]) - strlen($has_value));
+                if (empty($this->options[$new_key])) {
                     $options[$new_key] = $value;
                 }
-                unset($options[$key]);
+                unset($this->options[$key]);
             }
         }
     }
     // }}}
 
-    // {{{ function getParameters
+    // {{{ getNonOptions
     /**
-     *
      * @access public
      * @return array
      */
@@ -133,9 +119,8 @@ class Bonzai_Utils_Options
     }
     // }}}
 
-    // {{{ function getOptions
+    // {{{ getOptions
     /**
-     *
      * @access public
      * @return array
      */
@@ -145,11 +130,10 @@ class Bonzai_Utils_Options
     }
     // }}}
 
-    // {{{ function getOption
+    // {{{ getOption
     /**
-     *
      * @access public
-     * @param  string        $key
+     * @param  string $key
      * @return string | null
      */
     public function getOption($key)
@@ -162,9 +146,8 @@ class Bonzai_Utils_Options
     }
     // }}}
 
-    // {{{ function getScriptParameters
+    // {{{ getScriptParameters
     /**
-     *
      * @access public
      * @return array
      */
@@ -174,11 +157,10 @@ class Bonzai_Utils_Options
     }
     // }}}
 
-    // {{{ function getLabelParameter
+    // {{{ getLabelParameter
     /**
-     *
      * @access public
-     * @param  string        $key
+     * @param  string $key
      * @return string | null
      */
     public function getLabelParameter($key)
@@ -189,6 +171,5 @@ class Bonzai_Utils_Options
 
         return null;
     }
-    // }}}
     // }}}
 }
