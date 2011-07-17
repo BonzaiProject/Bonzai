@@ -41,122 +41,116 @@ class Bonzai_Converter_Test extends Bonzai_TestCase
 {
     public function testProcess()
     {
-        // TODO:   $this->object->process($data, $asptag = false);
-        // INPUT:  data, asptag
-        // OUTPUT: string
-        // WHAT:   convert a mixed source to a full php
-        /*
-        filename = null                           | asptag = null  | output = ?
-        filename = null                           | asptag = ""    | output = ?
-        filename = null                           | asptag = " "   | output = ?
-        filename = null                           | asptag = true  | output = ?
-        filename = null                           | asptag = false | output = ?
-        filename = ""                             | asptag = null  | output = ?
-        filename = ""                             | asptag = ""    | output = ?
-        filename = ""                             | asptag = " "   | output = ?
-        filename = ""                             | asptag = true  | output = ?
-        filename = ""                             | asptag = false | output = ?
-        filename = " "                            | asptag = null  | output = ?
-        filename = " "                            | asptag = ""    | output = ?
-        filename = " "                            | asptag = " "   | output = ?
-        filename = " "                            | asptag = true  | output = ?
-        filename = " "                            | asptag = false | output = ?
-        filename = "aaa"                          | asptag = null  | output = ?
-        filename = "aaa"                          | asptag = ""    | output = ?
-        filename = "aaa"                          | asptag = " "   | output = ?
-        filename = "aaa"                          | asptag = true  | output = ?
-        filename = "aaa"                          | asptag = false | output = ?
-        filename = "<?php echo 'a'; ?>"           | asptag = null  | output = ?
-        filename = "<?php echo 'a'; ?>"           | asptag = ""    | output = ?
-        filename = "<?php echo 'a'; ?>"           | asptag = " "   | output = ?
-        filename = "<?php echo 'a'; ?>"           | asptag = true  | output = ?
-        filename = "<?php echo 'a'; ?>"           | asptag = false | output = ?
-        filename = "<pre><?php echo 'a'; ?>"      | asptag = null  | output = ?
-        filename = "<pre><?php echo 'a'; ?>"      | asptag = ""    | output = ?
-        filename = "<pre><?php echo 'a'; ?>"      | asptag = " "   | output = ?
-        filename = "<pre><?php echo 'a'; ?>"      | asptag = true  | output = ?
-        filename = "<pre><?php echo 'a'; ?>"      | asptag = false | output = ?
-        filename = "<?php echo 'a'; ?><pre>"      | asptag = null  | output = ?
-        filename = "<?php echo 'a'; ?><pre>"      | asptag = ""    | output = ?
-        filename = "<?php echo 'a'; ?><pre>"      | asptag = " "   | output = ?
-        filename = "<?php echo 'a'; ?><pre>"      | asptag = true  | output = ?
-        filename = "<?php echo 'a'; ?><pre>"      | asptag = false | output = ?
-        filename = "<pre><?php echo 'a'; ?><pre>" | asptag = null  | output = ?
-        filename = "<pre><?php echo 'a'; ?><pre>" | asptag = ""    | output = ?
-        filename = "<pre><?php echo 'a'; ?><pre>" | asptag = " "   | output = ?
-        filename = "<pre><?php echo 'a'; ?><pre>" | asptag = true  | output = ?
-        filename = "<pre><?php echo 'a'; ?><pre>" | asptag = false | output = ?
-        filename = "<? echo 'a'; ?>"              | asptag = null  | output = ?
-        filename = "<? echo 'a'; ?>"              | asptag = ""    | output = ?
-        filename = "<? echo 'a'; ?>"              | asptag = " "   | output = ?
-        filename = "<? echo 'a'; ?>"              | asptag = true  | output = ?
-        filename = "<? echo 'a'; ?>"              | asptag = false | output = ?
-        filename = "<pre><? echo 'a'; ?>"         | asptag = null  | output = ?
-        filename = "<pre><? echo 'a'; ?>"         | asptag = ""    | output = ?
-        filename = "<pre><? echo 'a'; ?>"         | asptag = " "   | output = ?
-        filename = "<pre><? echo 'a'; ?>"         | asptag = true  | output = ?
-        filename = "<pre><? echo 'a'; ?>"         | asptag = false | output = ?
-        filename = "<? echo 'a'; ?><pre>"         | asptag = null  | output = ?
-        filename = "<? echo 'a'; ?><pre>"         | asptag = ""    | output = ?
-        filename = "<? echo 'a'; ?><pre>"         | asptag = " "   | output = ?
-        filename = "<? echo 'a'; ?><pre>"         | asptag = true  | output = ?
-        filename = "<? echo 'a'; ?><pre>"         | asptag = false | output = ?
-        filename = "<pre><? echo 'a'; ?><pre>"    | asptag = null  | output = ?
-        filename = "<pre><? echo 'a'; ?><pre>"    | asptag = ""    | output = ?
-        filename = "<pre><? echo 'a'; ?><pre>"    | asptag = " "   | output = ?
-        filename = "<pre><? echo 'a'; ?><pre>"    | asptag = true  | output = ?
-        filename = "<pre><? echo 'a'; ?><pre>"    | asptag = false | output = ?
-        filename = "<?= 'a'; ?>"                  | asptag = null  | output = ?
-        filename = "<?= 'a'; ?>"                  | asptag = ""    | output = ?
-        filename = "<?= 'a'; ?>"                  | asptag = " "   | output = ?
-        filename = "<?= 'a'; ?>"                  | asptag = true  | output = ?
-        filename = "<?= 'a'; ?>"                  | asptag = false | output = ?
-        filename = "<pre><?= 'a'; ?>"             | asptag = null  | output = ?
-        filename = "<pre><?= 'a'; ?>"             | asptag = ""    | output = ?
-        filename = "<pre><?= 'a'; ?>"             | asptag = " "   | output = ?
-        filename = "<pre><?= 'a'; ?>"             | asptag = true  | output = ?
-        filename = "<pre><?= 'a'; ?>"             | asptag = false | output = ?
-        filename = "<?= 'a'; ?><pre>"             | asptag = null  | output = ?
-        filename = "<?= 'a'; ?><pre>"             | asptag = ""    | output = ?
-        filename = "<?= 'a'; ?><pre>"             | asptag = " "   | output = ?
-        filename = "<?= 'a'; ?><pre>"             | asptag = true  | output = ?
-        filename = "<?= 'a'; ?><pre>"             | asptag = false | output = ?
-        filename = "<pre><?= 'a'; ?><pre>"        | asptag = null  | output = ?
-        filename = "<pre><?= 'a'; ?><pre>"        | asptag = ""    | output = ?
-        filename = "<pre><?= 'a'; ?><pre>"        | asptag = " "   | output = ?
-        filename = "<pre><?= 'a'; ?><pre>"        | asptag = true  | output = ?
-        filename = "<pre><?= 'a'; ?><pre>"        | asptag = false | output = ?
-        filename = "<% echo 'a'; %>"              | asptag = null  | output = ?
-        filename = "<% echo 'a'; %>"              | asptag = ""    | output = ?
-        filename = "<% echo 'a'; %>"              | asptag = " "   | output = ?
-        filename = "<% echo 'a'; %>"              | asptag = true  | output = ?
-        filename = "<% echo 'a'; %>"              | asptag = false | output = ?
-        filename = "<pre><% echo 'a'; %>"         | asptag = null  | output = ?
-        filename = "<pre><% echo 'a'; %>"         | asptag = ""    | output = ?
-        filename = "<pre><% echo 'a'; %>"         | asptag = " "   | output = ?
-        filename = "<pre><% echo 'a'; %>"         | asptag = true  | output = ?
-        filename = "<pre><% echo 'a'; %>"         | asptag = false | output = ?
-        filename = "<% echo 'a'; %><pre>"         | asptag = null  | output = ?
-        filename = "<% echo 'a'; %><pre>"         | asptag = ""    | output = ?
-        filename = "<% echo 'a'; %><pre>"         | asptag = " "   | output = ?
-        filename = "<% echo 'a'; %><pre>"         | asptag = true  | output = ?
-        filename = "<% echo 'a'; %><pre>"         | asptag = false | output = ?
-        filename = "<pre><% echo 'a'; %><pre>"    | asptag = null  | output = ?
-        filename = "<pre><% echo 'a'; %><pre>"    | asptag = ""    | output = ?
-        filename = "<pre><% echo 'a'; %><pre>"    | asptag = " "   | output = ?
-        filename = "<pre><% echo 'a'; %><pre>"    | asptag = true  | output = ?
-        filename = "<pre><% echo 'a'; %><pre>"    | asptag = false | output = ?
-        filename = "<?php echo '?>'; ?>"          | asptag = null  | output = ?
-        filename = "<?php echo '?>'; ?>"          | asptag = ""    | output = ?
-        filename = "<?php echo '?>'; ?>"          | asptag = " "   | output = ?
-        filename = "<?php echo '?>'; ?>"          | asptag = true  | output = ?
-        filename = "<?php echo '?>'; ?>"          | asptag = false | output = ?
-        filename = "<?php echo '<?php ?>'; ?>"    | asptag = null  | output = ?
-        filename = "<?php echo '<?php ?>'; ?>"    | asptag = ""    | output = ?
-        filename = "<?php echo '<?php ?>'; ?>"    | asptag = " "   | output = ?
-        filename = "<?php echo '<?php ?>'; ?>"    | asptag = true  | output = ?
-        filename = "<?php echo '<?php ?>'; ?>"    | asptag = false | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: convert a mixed source to a full php
+        $this->assertEquals('', $this->object->process(null, null));
+        $this->assertEquals('', $this->object->process(null, ''));
+        $this->assertEquals('', $this->object->process(null, ' '));
+        $this->assertEquals('', $this->object->process(null, true));
+        $this->assertEquals('', $this->object->process(null, false));
+        $this->assertEquals('', $this->object->process('', null));
+        $this->assertEquals('', $this->object->process('', ''));
+        $this->assertEquals('', $this->object->process('', ' '));
+        $this->assertEquals('', $this->object->process('', true));
+        $this->assertEquals('', $this->object->process('', false));
+        $this->assertEquals('', $this->object->process(' ', null));
+        $this->assertEquals('', $this->object->process(' ', ''));
+        $this->assertEquals('', $this->object->process(' ', ' '));
+        $this->assertEquals('', $this->object->process(' ', true));
+        $this->assertEquals('', $this->object->process(' ', false));
+        $this->assertEquals('', $this->object->process('aaa', null));
+        $this->assertEquals('', $this->object->process('aaa', ''));
+        $this->assertEquals('', $this->object->process('aaa', ' '));
+        $this->assertEquals('', $this->object->process('aaa', true));
+        $this->assertEquals('', $this->object->process('aaa', false));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?>', null));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?>', ''));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?>', ' '));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?>', true));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?>', false));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?>', null));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?>', ''));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?>', ' '));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?>', true));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?>', false));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?><pre>', null));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?><pre>', ''));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?><pre>', ' '));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?><pre>', true));
+        $this->assertEquals('', $this->object->process('<?php echo "a"; ?><pre>', false));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?><pre>', null));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?><pre>', ''));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?><pre>', ' '));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?><pre>', true));
+        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?><pre>', false));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?>', null));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?>', ''));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?>', ' '));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?>', true));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?>', false));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?>', null));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?>', ''));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?>', ' '));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?>', true));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?>', false));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?><pre>', null));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?><pre>', ''));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?><pre>', ' '));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?><pre>', true));
+        $this->assertEquals('', $this->object->process('<? echo "a"; ?><pre>', false));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?><pre>', null));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?><pre>', ''));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?><pre>', ' '));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?><pre>', true));
+        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?><pre>', false));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?>', null));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?>', ''));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?>', ' '));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?>', true));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?>', false));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?>', null));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?>', ''));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?>', ' '));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?>', true));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?>', false));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?><pre>', null));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?><pre>', ''));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?><pre>', ' '));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?><pre>', true));
+        $this->assertEquals('', $this->object->process('<?= "a"; ?><pre>', false));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?><pre>', null));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?><pre>', ''));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?><pre>', ' '));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?><pre>', true));
+        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?><pre>', false));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %>', null));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %>', ''));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %>', ' '));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %>', true));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %>', false));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %>', null));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %>', ''));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %>', ' '));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %>', true));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %>', false));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %><pre>', null));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %><pre>', ''));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %><pre>', ' '));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %><pre>', true));
+        $this->assertEquals('', $this->object->process('<% echo "a"; %><pre>', false));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %><pre>', null));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %><pre>', ''));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %><pre>', ' '));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %><pre>', true));
+        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %><pre>', false));
+        $this->assertEquals('', $this->object->process('<?php echo "?>"; ?>', null));
+        $this->assertEquals('', $this->object->process('<?php echo "?>"; ?>', ''));
+        $this->assertEquals('', $this->object->process('<?php echo "?>"; ?>', ' '));
+        $this->assertEquals('', $this->object->process('<?php echo "?>"; ?>', true));
+        $this->assertEquals('', $this->object->process('<?php echo "?>"; ?>', false));
+        $this->assertEquals('', $this->object->process('<?php echo "<?php ?>"; ?>', null));
+        $this->assertEquals('', $this->object->process('<?php echo "<?php ?>"; ?>', ''));
+        $this->assertEquals('', $this->object->process('<?php echo "<?php ?>"; ?>', ' '));
+        $this->assertEquals('', $this->object->process('<?php echo "<?php ?>"; ?>', true));
+        $this->assertEquals('', $this->object->process('<?php echo "<?php ?>"; ?>', false));
     }
 }

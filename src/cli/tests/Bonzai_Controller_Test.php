@@ -41,37 +41,25 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
 {
     public function testGetFileNameFromClassName()
     {
-        // TODO:   $this->object->getFileNameFromClassName($name);
-        // INPUT:  name
-        // OUTPUT: string
-        // WHAT:   retrieve the class filename
-        /*
-        name = ''                  | output = ?
-        name = null                | output = ?
-        name = ' '                 | output = ?
-        name = 'aaa'               | output = ?
-        name = 'Bonzai_'           | output = ?
-        name = 'Bonzai_aaa'        | output = ?
-        name = 'Bonzai_Controller' | output = ?
-        name = 'Bonzai_Utils'      | output = ?
-        name = 'Bonzai_Utils_Help' | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: retrieve the class filename
+        $this->assertEquals('', $this->object->getFileNameFromClassName(''));
+        $this->assertEquals('', $this->object->getFileNameFromClassName(null));
+        $this->assertEquals('', $this->object->getFileNameFromClassName(' '));
+        $this->assertEquals('', $this->object->getFileNameFromClassName('aaa'));
+        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_'));
+        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_aaa'));
+        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_Controller'));
+        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_Utils'));
+        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_Utils_Help'));
     }
 
     public function testCheckFile()
     {
-        // TODO:   $this->object->checkFile($filename);
-        // INPUT:  filename
-        // OUTPUT: boolean
-        // WHAT:   check if a file exists in a dir
-        /*
-        filename = ''                      | output = ?
-        filename = null                    | output = ?
-        filename = ' '                     | output = ?
-        filename = 'Controller'            | output = ?
-        filename = 'Controller/Controller' | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: check if a file exists in a dir
+        $this->assertEquals('', $this->object->checkFile(''));
+        $this->assertEquals('', $this->object->checkFile(null));
+        $this->assertEquals('', $this->object->checkFile(' '));
+        $this->assertEquals('', $this->object->checkFile('Controller'));
+        $this->assertEquals('', $this->object->checkFile('Controller/Controller'));
     }
 }

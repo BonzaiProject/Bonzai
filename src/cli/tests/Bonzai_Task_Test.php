@@ -45,8 +45,6 @@ class Bonzai_Task_Test extends Bonzai_TestCase
         // INPUT:  options
         // OUTPUT: void
         // WHAT:   set the options
-        /*
-        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

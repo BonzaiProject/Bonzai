@@ -45,8 +45,6 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
         // INPUT:  argv
         // OUTPUT: void
         // WHAT:   set the options
-        /*
-        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
@@ -56,8 +54,6 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
         // INPUT:  -
         // OUTPUT: void
         // WHAT:   parse the options
-        /*
-        */
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

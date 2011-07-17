@@ -39,63 +39,129 @@ require_once __DIR__ . '/../libs/Registry/Registry.php';
  */
 class Bonzai_Registry_Test extends Bonzai_TestCase
 {
-    public function testGetInstance()
-    {
-        // TODO:   $this->object->getInstance();
-        // INPUT:  -
-        // OUTPUT: class
-        // WHAT:   get the instance
-        /*
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
     public function testAdd()
     {
-        // TODO:   $this->object->add($key, $value, $type = null);
-        // INPUT:  key, value, type
-        // OUTPUT: void
-        // WHAT:   add an element
-        /*
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: add an element
+        $this->assertEquals('', $this->object->add('', '', null));
+        $this->assertEquals('', $this->object->add('', '', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add('', null, null));
+        $this->assertEquals('', $this->object->add('', null, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add('', 'aaa', null));
+        $this->assertEquals('', $this->object->add('', 'aaa', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add(null, '', null));
+        $this->assertEquals('', $this->object->add(null, '', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add(null, null, null));
+        $this->assertEquals('', $this->object->add(null, null, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add(null, 'aaa', null));
+        $this->assertEquals('', $this->object->add(null, 'aaa', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add('aaa', '', null));
+        $this->assertEquals('', $this->object->add('aaa', '', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add('aaa', null, null));
+        $this->assertEquals('', $this->object->add('aaa', null, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add('aaa', 'aaa', null));
+        $this->assertEquals('', $this->object->add('aaa', 'aaa', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add(array(), '', null));
+        $this->assertEquals('', $this->object->add(array(), '', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add(array(), null, null));
+        $this->assertEquals('', $this->object->add(array(), null, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->add(array(), 'aaa', null));
+        $this->assertEquals('', $this->object->add(array(), 'aaa', $this->object::ARRAY_APPEND));
     }
 
     public function testGet()
     {
-        // TODO: $this->object->get($key);
-        // INPUT:  key
-        // OUTPUT: mixed
-        // WHAT:   return a saved object
-        /*
-        key = null    | output = ?
-        key = ""      | output = ?
-        key = " "     | output = ?
-        key = "a"     | output = ?
-        key = "EXIST" | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: return a saved object
+        $this->assertEquals('', $this->object->get(null));
+        $this->assertEquals('', $this->object->get(''));
+        $this->assertEquals('', $this->object->get(' '));
+        $this->assertEquals('', $this->object->get('a'));
+        $this->assertEquals('', $this->object->get('EXIST'));
     }
 
     public function testRemove()
     {
-        // TODO:   $this->object->remove($key);
-        // INPUT:  key
-        // OUTPUT: void
-        // WHAT:   remove an element
-        /*
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: remove an element
+        $this->assertEquals('', $this->object->remove(null));
+        $this->assertEquals('', $this->object->remove(''));
+        $this->assertEquals('', $this->object->remove(' '));
+        $this->assertEquals('', $this->object->remove('a'));
+        $this->assertEquals('', $this->object->remove('EXIST'));
     }
 
     public function testAppend()
     {
-        // TODO:   $this->object->append($key, $value, $type = null);
-        // INPUT:  key, value, type
-        // OUTPUT: void
-        // WHAT:   append an element
-        /*
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: append an element
+        $this->assertEquals('', $this->object->append('', '', null));
+        $this->assertEquals('', $this->object->append('', '', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('', '', $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('', null, null));
+        $this->assertEquals('', $this->object->append('', null, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('', null, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('', 'aaa', null));
+        $this->assertEquals('', $this->object->append('', 'aaa', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('', 'aaa', $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('', 0, null));
+        $this->assertEquals('', $this->object->append('', 0, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('', 0, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('', 1, null));
+        $this->assertEquals('', $this->object->append('', 1, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('', 1, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('', -1, null));
+        $this->assertEquals('', $this->object->append('', -1, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('', -1, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(null, '', null));
+        $this->assertEquals('', $this->object->append(null, '', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(null, '', $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(null, null, null));
+        $this->assertEquals('', $this->object->append(null, null, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(null, null, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(null, 'aaa', null));
+        $this->assertEquals('', $this->object->append(null, 'aaa', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(null, 'aaa', $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(null, 0, null));
+        $this->assertEquals('', $this->object->append(null, 0, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(null, 0, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(null, 1, null));
+        $this->assertEquals('', $this->object->append(null, 1, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(null, 1, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(null, -1, null));
+        $this->assertEquals('', $this->object->append(null, -1, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(null, -1, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', '', null));
+        $this->assertEquals('', $this->object->append('aaa', '', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', '', $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', null, null));
+        $this->assertEquals('', $this->object->append('aaa', null, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', null, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', 'aaa', null));
+        $this->assertEquals('', $this->object->append('aaa', 'aaa', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', 'aaa', $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', 0, null));
+        $this->assertEquals('', $this->object->append('aaa', 0, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', 0, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', 1, null));
+        $this->assertEquals('', $this->object->append('aaa', 1, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', 1, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', -1, null));
+        $this->assertEquals('', $this->object->append('aaa', -1, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append('aaa', -1, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(array(), '', null));
+        $this->assertEquals('', $this->object->append(array(), '', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(array(), '', $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(array(), null, null));
+        $this->assertEquals('', $this->object->append(array(), null, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(array(), null, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(array(), 'aaa', null));
+        $this->assertEquals('', $this->object->append(array(), 'aaa', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(array(), 'aaa', $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(array(), 0, null));
+        $this->assertEquals('', $this->object->append(array(), 0, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(array(), 0, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(array(), 1, null));
+        $this->assertEquals('', $this->object->append(array(), 1, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(array(), 1, $this->object::INT_APPEND));
+        $this->assertEquals('', $this->object->append(array(), -1, null));
+        $this->assertEquals('', $this->object->append(array(), -1, $this->object::ARRAY_APPEND));
+        $this->assertEquals('', $this->object->append(array(), -1, $this->object::INT_APPEND));
     }
 }

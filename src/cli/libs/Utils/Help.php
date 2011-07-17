@@ -44,13 +44,13 @@ class Bonzai_Utils_Help
      */
     public function elaborate(Bonzai_Utils_Options $options)
     {
-        printf('BONZAI' . PHP_EOL);
-        printf('(was phpGuardian)' . PHP_EOL);
+        printf('BONZAI' . str_repeat(' ', 50));
+        printf('(previously phpGuardian)' . PHP_EOL);
 
         printf(str_repeat('-', 80) . PHP_EOL);
         printf('Version: 0.1' . PHP_EOL);
-        printf('Copyright (C) 2006-2011 Bonzai - Fabio Cicerchia.'
-               . ' All rights reserved.' . PHP_EOL);
+        printf('Copyright (C) 2006 - %s Bonzai (Fabio Cicerchia).'
+               . ' All rights reserved.' . PHP_EOL, date('Y'));
         printf('License MIT or GNU GPL 2' . PHP_EOL);
         printf(str_repeat('-', 80) . PHP_EOL);
 
@@ -68,9 +68,10 @@ class Bonzai_Utils_Help
                     $info .= '=<value>';
                 }
 
-                printf('    ' . str_pad($info, 30, ' ') . '%s' . PHP_EOL, _($options->getLabelParameter($long)));
+                $row = sprintf('    ' . str_pad($info, 30, ' ') . '%s' . PHP_EOL, _($options->getLabelParameter($long)));
+                echo wordwrap($row, 80, "\n" . str_repeat(' ', 34), true);
             }
-            printf('Report bugs to info@bonzai-project.org' . PHP_EOL);
+            printf(PHP_EOL . 'Report bugs to info@bonzai-project.org' . PHP_EOL);
         }
     }
     // }}}

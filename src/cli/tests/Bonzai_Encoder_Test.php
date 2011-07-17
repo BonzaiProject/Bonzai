@@ -41,38 +41,26 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 {
     public function testProcessFile()
     {
-        // TODO:   $this->object->processFile($filename);
-        // INPUT:  filename
-        // OUTPUT: void
-        // WHAT:   process a file
-        /*
-        filename = null     | output = ?
-        filename = ""       | output = ?
-        filename = " "      | output = ?
-        filename = "a"      | output = ?
-        filename = "empty"  | output = ?
-        filename = "noread" | output = ?
-        filename = "read"   | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: process a file
+        $this->assertEquals('', $this->object->processFile(null));
+        $this->assertEquals('', $this->object->processFile(''));
+        $this->assertEquals('', $this->object->processFile(' '));
+        $this->assertEquals('', $this->object->processFile('a'));
+        $this->assertEquals('', $this->object->processFile('empty'));
+        $this->assertEquals('', $this->object->processFile('noread'));
+        $this->assertEquals('', $this->object->processFile('read'));
     }
 
     public function testGetByteCode()
     {
-        // TODO:   $this->object->getByteCode($filename);
-        // INPUT:  filename
-        // OUTPUT: string
-        // WHAT:   get the bytecode
-        /*
-        filename = null     | output = ?
-        filename = ""       | output = ?
-        filename = " "      | output = ?
-        filename = "a"      | output = ?
-        filename = "empty"  | output = ?
-        filename = "noread" | output = ?
-        filename = "read"   | output = ?
-        */
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // WHAT: get the bytecode
+        $this->assertEquals('', $this->object->getByteCode(null));
+        $this->assertEquals('', $this->object->getByteCode(''));
+        $this->assertEquals('', $this->object->getByteCode(' '));
+        $this->assertEquals('', $this->object->getByteCode('a'));
+        $this->assertEquals('', $this->object->getByteCode('empty'));
+        $this->assertEquals('', $this->object->getByteCode('noread'));
+        $this->assertEquals('', $this->object->getByteCode('read'));
     }
 
     public function testExpandPathsToFiles()

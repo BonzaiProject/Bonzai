@@ -100,7 +100,7 @@ class Bonzai_Utils_Options
             if (!empty($this->parameters[$new_key])) {
                 $new_key = substr($this->parameters[$new_key], 0, strlen($this->parameters[$new_key]) - strlen($has_value));
                 if (empty($this->options[$new_key])) {
-                    $options[$new_key] = $value;
+                    $this->options[$new_key] = $value;
                 }
                 unset($this->options[$key]);
             }
