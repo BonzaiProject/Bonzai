@@ -39,27 +39,171 @@ require_once __DIR__ . '/../libs/Controller/Controller.php';
  */
 class Bonzai_Controller_Test extends Bonzai_TestCase
 {
-    public function testGetFileNameFromClassName()
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName1()
     {
-        // WHAT: retrieve the class filename
-        $this->assertEquals('', $this->object->getFileNameFromClassName(''));
-        $this->assertEquals('', $this->object->getFileNameFromClassName(null));
-        $this->assertEquals('', $this->object->getFileNameFromClassName(' '));
-        $this->assertEquals('', $this->object->getFileNameFromClassName('aaa'));
-        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_'));
-        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_aaa'));
-        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_Controller'));
-        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_Utils'));
-        $this->assertEquals('', $this->object->getFileNameFromClassName('Bonzai_Utils_Help'));
+        $this->assertEquals(null, $this->object->getFileNameFromClassName(''));
     }
+    // }}}
 
-    public function testCheckFile()
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName2()
     {
-        // WHAT: check if a file exists in a dir
-        $this->assertEquals('', $this->object->checkFile(''));
-        $this->assertEquals('', $this->object->checkFile(null));
-        $this->assertEquals('', $this->object->checkFile(' '));
-        $this->assertEquals('', $this->object->checkFile('Controller'));
-        $this->assertEquals('', $this->object->checkFile('Controller/Controller'));
+        $this->assertEquals(null, $this->object->getFileNameFromClassName(null));
     }
+    // }}}
+
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName3()
+    {
+        $this->assertEquals(null, $this->object->getFileNameFromClassName(' '));
+    }
+    // }}}
+
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName4()
+    {
+        $this->assertEquals(null, $this->object->getFileNameFromClassName('aaa'));
+    }
+    // }}}
+
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName5()
+    {
+        $this->assertEquals(null, $this->object->getFileNameFromClassName('Bonzai_'));
+    }
+    // }}}
+
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName6()
+    {
+        $this->assertEquals(null, $this->object->getFileNameFromClassName('Bonzai_aaa'));
+    }
+    // }}}
+
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName7()
+    {
+        $this->assertEquals('Controller/Controller.php', $this->object->getFileNameFromClassName('Bonzai_Controller'));
+    }
+    // }}}
+
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName8()
+    {
+        $this->assertEquals('Utils/Utils.php', $this->object->getFileNameFromClassName('Bonzai_Utils'));
+    }
+    // }}}
+
+    // {{{ testGetFileNameFromClassName
+    // WHAT: retrieve the class filename
+    /**
+     * @access public
+     * @return void
+     */
+    public function testGetFileNameFromClassName9()
+    {
+        $this->assertEquals('Utils/Help.php', $this->object->getFileNameFromClassName('Bonzai_Utils_Help'));
+    }
+    // }}}
+
+    // {{{ testCheckFile
+    // WHAT: check if a file exists in a dir
+    /**
+     * @access public
+     * @return void
+     */
+    public function testCheckFile1()
+    {
+        $this->assertEquals(false, $this->object->checkFile(''));
+    }
+    // }}}
+
+    // {{{ testCheckFile
+    // WHAT: check if a file exists in a dir
+    /**
+     * @access public
+     * @return void
+     */
+    public function testCheckFile2()
+    {
+        $this->assertEquals(false, $this->object->checkFile(null));
+    }
+    // }}}
+
+    // {{{ testCheckFile
+    // WHAT: check if a file exists in a dir
+    /**
+     * @access public
+     * @return void
+     */
+    public function testCheckFile3()
+    {
+        $this->assertEquals(false, $this->object->checkFile(' '));
+    }
+    // }}}
+
+    // {{{ testCheckFile
+    // WHAT: check if a file exists in a dir
+    /**
+     * @access public
+     * @return void
+     */
+    public function testCheckFile4()
+    {
+        $this->assertEquals(false, $this->object->checkFile('Controller'));
+    }
+    // }}}
+
+    // {{{ testCheckFile
+    // WHAT: check if a file exists in a dir
+    /**
+     * @access public
+     * @return void
+     */
+    public function testCheckFile5()
+    {
+        $this->assertEquals(true, $this->object->checkFile('Controller/Controller'));
+    }
+    // }}}
 }

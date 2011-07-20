@@ -39,27 +39,87 @@ require_once __DIR__ . '/../libs/Encoder/Encoder.php';
  */
 class Bonzai_Encoder_Test extends Bonzai_TestCase
 {
-    public function testProcessFile()
+    // WHAT: process a file
+    public function testProcessFile1()
     {
-        // WHAT: process a file
         $this->assertEquals('', $this->object->processFile(null));
+    }
+
+    // WHAT: process a file
+    public function testProcessFile2()
+    {
         $this->assertEquals('', $this->object->processFile(''));
+    }
+
+    // WHAT: process a file
+    public function testProcessFile3()
+    {
         $this->assertEquals('', $this->object->processFile(' '));
+    }
+
+    // WHAT: process a file
+    public function testProcessFile4()
+    {
         $this->assertEquals('', $this->object->processFile('a'));
+    }
+
+    // WHAT: process a file
+    public function testProcessFile5()
+    {
         $this->assertEquals('', $this->object->processFile('empty'));
+    }
+
+    // WHAT: process a file
+    public function testProcessFile6()
+    {
         $this->assertEquals('', $this->object->processFile('noread'));
+    }
+
+    // WHAT: process a file
+    public function testProcessFile7()
+    {
         $this->assertEquals('', $this->object->processFile('read'));
     }
 
-    public function testGetByteCode()
+    // WHAT: get the bytecode
+    public function testGetByteCode1()
     {
-        // WHAT: get the bytecode
-        $this->assertEquals('', $this->object->getByteCode(null));
-        $this->assertEquals('', $this->object->getByteCode(''));
-        $this->assertEquals('', $this->object->getByteCode(' '));
+        $this->assertEquals(null, $this->object->getByteCode(null));
+    }
+
+    // WHAT: get the bytecode
+    public function testGetByteCode2()
+    {
+        $this->assertEquals(null, $this->object->getByteCode(''));
+    }
+
+    // WHAT: get the bytecode
+    public function testGetByteCode3()
+    {
+        $this->assertEquals(null, $this->object->getByteCode(' '));
+    }
+
+    // WHAT: get the bytecode
+    public function testGetByteCode4()
+    {
         $this->assertEquals('', $this->object->getByteCode('a'));
+    }
+
+    // WHAT: get the bytecode
+    public function testGetByteCode5()
+    {
         $this->assertEquals('', $this->object->getByteCode('empty'));
+    }
+
+    // WHAT: get the bytecode
+    public function testGetByteCode6()
+    {
         $this->assertEquals('', $this->object->getByteCode('noread'));
+    }
+
+    // WHAT: get the bytecode
+    public function testGetByteCode7()
+    {
         $this->assertEquals('', $this->object->getByteCode('read'));
     }
 

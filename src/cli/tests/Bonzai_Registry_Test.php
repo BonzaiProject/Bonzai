@@ -39,129 +39,639 @@ require_once __DIR__ . '/../libs/Registry/Registry.php';
  */
 class Bonzai_Registry_Test extends Bonzai_TestCase
 {
-    public function testAdd()
+    // WHAT: add an element
+    public function testAdd1()
     {
-        // WHAT: add an element
-        $this->assertEquals('', $this->object->add('', '', null));
-        $this->assertEquals('', $this->object->add('', '', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add('', null, null));
-        $this->assertEquals('', $this->object->add('', null, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add('', 'aaa', null));
-        $this->assertEquals('', $this->object->add('', 'aaa', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add(null, '', null));
-        $this->assertEquals('', $this->object->add(null, '', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add(null, null, null));
-        $this->assertEquals('', $this->object->add(null, null, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add(null, 'aaa', null));
-        $this->assertEquals('', $this->object->add(null, 'aaa', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add('aaa', '', null));
-        $this->assertEquals('', $this->object->add('aaa', '', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add('aaa', null, null));
-        $this->assertEquals('', $this->object->add('aaa', null, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add('aaa', 'aaa', null));
-        $this->assertEquals('', $this->object->add('aaa', 'aaa', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add(array(), '', null));
-        $this->assertEquals('', $this->object->add(array(), '', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add(array(), null, null));
-        $this->assertEquals('', $this->object->add(array(), null, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->add(array(), 'aaa', null));
-        $this->assertEquals('', $this->object->add(array(), 'aaa', $this->object::ARRAY_APPEND));
+        $this->assertEquals('', Bonzai_Registry::add('', '', null));
     }
 
-    public function testGet()
+    // WHAT: add an element
+    public function testAdd2()
     {
-        // WHAT: return a saved object
-        $this->assertEquals('', $this->object->get(null));
-        $this->assertEquals('', $this->object->get(''));
-        $this->assertEquals('', $this->object->get(' '));
-        $this->assertEquals('', $this->object->get('a'));
-        $this->assertEquals('', $this->object->get('EXIST'));
+        $this->assertEquals('', Bonzai_Registry::add('', '', Bonzai_Registry::ARRAY_APPEND));
     }
 
-    public function testRemove()
+    // WHAT: add an element
+    public function testAdd3()
     {
-        // WHAT: remove an element
-        $this->assertEquals('', $this->object->remove(null));
-        $this->assertEquals('', $this->object->remove(''));
-        $this->assertEquals('', $this->object->remove(' '));
-        $this->assertEquals('', $this->object->remove('a'));
-        $this->assertEquals('', $this->object->remove('EXIST'));
+        $this->assertEquals('', Bonzai_Registry::add('', null, null));
     }
 
-    public function testAppend()
+    // WHAT: add an element
+    public function testAdd4()
     {
-        // WHAT: append an element
-        $this->assertEquals('', $this->object->append('', '', null));
-        $this->assertEquals('', $this->object->append('', '', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('', '', $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('', null, null));
-        $this->assertEquals('', $this->object->append('', null, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('', null, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('', 'aaa', null));
-        $this->assertEquals('', $this->object->append('', 'aaa', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('', 'aaa', $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('', 0, null));
-        $this->assertEquals('', $this->object->append('', 0, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('', 0, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('', 1, null));
-        $this->assertEquals('', $this->object->append('', 1, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('', 1, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('', -1, null));
-        $this->assertEquals('', $this->object->append('', -1, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('', -1, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(null, '', null));
-        $this->assertEquals('', $this->object->append(null, '', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(null, '', $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(null, null, null));
-        $this->assertEquals('', $this->object->append(null, null, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(null, null, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(null, 'aaa', null));
-        $this->assertEquals('', $this->object->append(null, 'aaa', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(null, 'aaa', $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(null, 0, null));
-        $this->assertEquals('', $this->object->append(null, 0, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(null, 0, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(null, 1, null));
-        $this->assertEquals('', $this->object->append(null, 1, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(null, 1, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(null, -1, null));
-        $this->assertEquals('', $this->object->append(null, -1, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(null, -1, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', '', null));
-        $this->assertEquals('', $this->object->append('aaa', '', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', '', $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', null, null));
-        $this->assertEquals('', $this->object->append('aaa', null, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', null, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', 'aaa', null));
-        $this->assertEquals('', $this->object->append('aaa', 'aaa', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', 'aaa', $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', 0, null));
-        $this->assertEquals('', $this->object->append('aaa', 0, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', 0, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', 1, null));
-        $this->assertEquals('', $this->object->append('aaa', 1, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', 1, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', -1, null));
-        $this->assertEquals('', $this->object->append('aaa', -1, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append('aaa', -1, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(array(), '', null));
-        $this->assertEquals('', $this->object->append(array(), '', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(array(), '', $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(array(), null, null));
-        $this->assertEquals('', $this->object->append(array(), null, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(array(), null, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(array(), 'aaa', null));
-        $this->assertEquals('', $this->object->append(array(), 'aaa', $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(array(), 'aaa', $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(array(), 0, null));
-        $this->assertEquals('', $this->object->append(array(), 0, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(array(), 0, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(array(), 1, null));
-        $this->assertEquals('', $this->object->append(array(), 1, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(array(), 1, $this->object::INT_APPEND));
-        $this->assertEquals('', $this->object->append(array(), -1, null));
-        $this->assertEquals('', $this->object->append(array(), -1, $this->object::ARRAY_APPEND));
-        $this->assertEquals('', $this->object->append(array(), -1, $this->object::INT_APPEND));
+        $this->assertEquals('', Bonzai_Registry::add('', null, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd5()
+    {
+        $this->assertEquals('', Bonzai_Registry::add('', 'aaa', null));
+    }
+
+    // WHAT: add an element
+    public function testAdd6()
+    {
+        $this->assertEquals('', Bonzai_Registry::add('', 'aaa', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd7()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(null, '', null));
+    }
+
+    // WHAT: add an element
+    public function testAdd8()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(null, '', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd9()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(null, null, null));
+    }
+
+    // WHAT: add an element
+    public function testAdd10()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(null, null, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd11()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(null, 'aaa', null));
+    }
+
+    // WHAT: add an element
+    public function testAdd12()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(null, 'aaa', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd13()
+    {
+        $this->assertEquals('', Bonzai_Registry::add('aaa', '', null));
+    }
+
+    // WHAT: add an element
+    public function testAdd14()
+    {
+        $this->assertEquals('', Bonzai_Registry::add('aaa', '', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd15()
+    {
+        $this->assertEquals('', Bonzai_Registry::add('aaa', null, null));
+    }
+
+    // WHAT: add an element
+    public function testAdd16()
+    {
+        $this->assertEquals('', Bonzai_Registry::add('aaa', null, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd17()
+    {
+        $this->assertEquals('', Bonzai_Registry::add('aaa', 'aaa', null));
+    }
+
+    // WHAT: add an element
+    public function testAdd18()
+    {
+        $this->assertEquals('', Bonzai_Registry::add('aaa', 'aaa', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd19()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(array(), '', null));
+    }
+
+    // WHAT: add an element
+    public function testAdd20()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(array(), '', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd21()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(array(), null, null));
+    }
+
+    // WHAT: add an element
+    public function testAdd22()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(array(), null, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: add an element
+    public function testAdd23()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(array(), 'aaa', null));
+    }
+
+    // WHAT: add an element
+    public function testAdd24()
+    {
+        $this->assertEquals('', Bonzai_Registry::add(array(), 'aaa', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: return a saved object
+    public function testGet1()
+    {
+        $this->assertEquals('', Bonzai_Registry::get(null));
+    }
+
+    // WHAT: return a saved object
+    public function testGet2()
+    {
+        $this->assertEquals('', Bonzai_Registry::get(''));
+    }
+
+    // WHAT: return a saved object
+    public function testGet3()
+    {
+        $this->assertEquals('', Bonzai_Registry::get(' '));
+    }
+
+    // WHAT: return a saved object
+    public function testGet4()
+    {
+        $this->assertEquals('', Bonzai_Registry::get('a'));
+    }
+
+    // WHAT: return a saved object
+    public function testGet5()
+    {
+        $this->assertEquals('', Bonzai_Registry::get('EXIST'));
+    }
+
+    // WHAT: remove an element
+    public function testRemove1()
+    {
+        $this->assertEquals('', Bonzai_Registry::remove(null));
+    }
+
+    // WHAT: remove an element
+    public function testRemove2()
+    {
+        $this->assertEquals('', Bonzai_Registry::remove(''));
+    }
+
+    // WHAT: remove an element
+    public function testRemove3()
+    {
+        $this->assertEquals('', Bonzai_Registry::remove(' '));
+    }
+
+    // WHAT: remove an element
+    public function testRemove4()
+    {
+        $this->assertEquals('', Bonzai_Registry::remove('a'));
+    }
+
+    // WHAT: remove an element
+    public function testRemove5()
+    {
+        $this->assertEquals('', Bonzai_Registry::remove('EXIST'));
+    }
+
+    // WHAT: append an element
+    public function testAppend1()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', '', null));
+    }
+
+    // WHAT: append an element
+    public function testAppend2()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', '', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend3()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', '', Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend4()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', null, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend5()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', null, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend6()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', null, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend7()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 'aaa', null));
+    }
+
+    // WHAT: append an element
+    public function testAppend8()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 'aaa', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend9()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 'aaa', Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend10()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 0, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend11()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 0, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend12()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 0, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend13()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 1, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend14()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 1, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend15()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', 1, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend16()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', -1, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend17()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', -1, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend18()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('', -1, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend19()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, '', null));
+    }
+
+    // WHAT: append an element
+    public function testAppend20()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, '', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend21()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, '', Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend22()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, null, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend23()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, null, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend24()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, null, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend25()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 'aaa', null));
+    }
+
+    // WHAT: append an element
+    public function testAppend26()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 'aaa', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend27()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 'aaa', Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend28()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 0, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend29()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 0, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend30()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 0, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend31()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 1, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend32()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 1, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend33()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, 1, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend34()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, -1, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend35()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, -1, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend36()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(null, -1, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend37()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', '', null));
+    }
+
+    // WHAT: append an element
+    public function testAppend38()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', '', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend39()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', '', Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend40()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', null, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend41()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', null, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend42()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', null, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend43()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 'aaa', null));
+    }
+
+    // WHAT: append an element
+    public function testAppend44()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 'aaa', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend45()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 'aaa', Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend46()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 0, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend47()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 0, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend48()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 0, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend49()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 1, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend50()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 1, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend51()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', 1, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend52()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', -1, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend53()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', -1, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend54()
+    {
+        $this->assertEquals('', Bonzai_Registry::append('aaa', -1, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend55()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), '', null));
+    }
+
+    // WHAT: append an element
+    public function testAppend56()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), '', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend57()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), '', Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend58()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), null, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend59()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), null, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend60()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), null, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend61()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 'aaa', null));
+    }
+
+    // WHAT: append an element
+    public function testAppend62()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 'aaa', Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend63()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 'aaa', Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend64()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 0, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend65()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 0, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend66()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 0, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend67()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 1, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend68()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 1, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend69()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), 1, Bonzai_Registry::INT_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend70()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), -1, null));
+    }
+
+    // WHAT: append an element
+    public function testAppend71()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), -1, Bonzai_Registry::ARRAY_APPEND));
+    }
+
+    // WHAT: append an element
+    public function testAppend72()
+    {
+        $this->assertEquals('', Bonzai_Registry::append(array(), -1, Bonzai_Registry::INT_APPEND));
     }
 }

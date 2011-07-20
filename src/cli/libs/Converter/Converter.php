@@ -109,13 +109,13 @@ class Bonzai_Converter
 
     // {{{ process
     /**
-     * @access protected
+     * @access public
      * @param  string  $data
      * @param  boolean $asptag
      * @throws Bonzai_Exception
      * @return string
      */
-    protected function process($data, $asptag = false)
+    public function process($data, $asptag = false)
     {
         if (empty($data)) {
             throw new Bonzai_Exception('Cannot parse an empty data'); // UNCATCHED

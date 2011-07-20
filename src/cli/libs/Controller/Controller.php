@@ -106,11 +106,11 @@ class Bonzai_Controller
 
     // {{{ getFileNameFromClassName
     /**
-     * @access protected
+     * @access public
      * @param  string $name
      * @return string
      */
-    protected function getFileNameFromClassName($name)
+    public function getFileNameFromClassName($name)
     {
         $name     = preg_replace('/^Bonzai_/', '', $name);
         $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
@@ -125,11 +125,11 @@ class Bonzai_Controller
 
     // {{{ checkFile
     /**
-     * @access protected
+     * @access public
      * @param  string $filename
      * @return boolean
      */
-    protected function checkFile($filename)
+    public function checkFile($filename)
     {
         return file_exists(__DIR__ . '/../' . $filename . '.php');
     }
