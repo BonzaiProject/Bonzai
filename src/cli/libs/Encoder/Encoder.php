@@ -88,9 +88,9 @@ class Bonzai_Encoder
     public function saveOutput($filename, $bytecode)
     {
         $bytecode = wordwrap($bytecode, 80, "\n             ", true);
-        $final_content = '<?php' . PHP_EOL . PHP_EOL . '# BONZAI START BLOCK #####' . PHP_EOL;
+        $final_content = '<' . '?php' . PHP_EOL . PHP_EOL . '# BONZAI START BLOCK #####' . PHP_EOL;
         $final_content .= 'bonzai_exec("' . $bytecode . '");';
-        $final_content .= PHP_EOL . '# BONZAI END BLOCK #######' . PHP_EOL . '?>';
+        $final_content .= PHP_EOL . '# BONZAI END BLOCK #######' . PHP_EOL . '?' . '>';
 
         Bonzai_Utils::putFileContent($filename, $final_content);
     }

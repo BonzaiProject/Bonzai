@@ -25,6 +25,10 @@
  **/
 
 require_once __DIR__ . '/../libs/Tests/TestCase.php';
+require_once __DIR__ . '/../libs/Exception/Exception.php';
+require_once __DIR__ . '/../libs/Converter/Converter.php';
+require_once __DIR__ . '/../libs/Utils/Utils.php';
+require_once __DIR__ . '/../libs/Registry/Registry.php';
 require_once __DIR__ . '/../libs/Encoder/Encoder.php';
 
 /**
@@ -40,24 +44,36 @@ require_once __DIR__ . '/../libs/Encoder/Encoder.php';
 class Bonzai_Encoder_Test extends Bonzai_TestCase
 {
     // WHAT: process a file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testProcessFile1()
     {
         $this->assertEquals('', $this->object->processFile(null));
     }
 
     // WHAT: process a file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testProcessFile2()
     {
         $this->assertEquals('', $this->object->processFile(''));
     }
 
     // WHAT: process a file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testProcessFile3()
     {
         $this->assertEquals('', $this->object->processFile(' '));
     }
 
     // WHAT: process a file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testProcessFile4()
     {
         $this->assertEquals('', $this->object->processFile('a'));
@@ -66,40 +82,73 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // WHAT: process a file
     public function testProcessFile5()
     {
-        $this->assertEquals('', $this->object->processFile('empty'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        try {
+            $this->assertEquals('', $this->object->processFile($filename));
+        } catch (Exception $e) {
+            unlink($filename);
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
     }
 
     // WHAT: process a file
     public function testProcessFile6()
     {
-        $this->assertEquals('', $this->object->processFile('noread'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'aaa');
+        chmod($filename, 0700);
+
+        try {
+            $this->assertEquals('', $this->object->processFile($filename));
+        } catch (Exception $e) {
+            unlink($filename);
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
     }
 
     // WHAT: process a file
     public function testProcessFile7()
     {
-        $this->assertEquals('', $this->object->processFile('read'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '<?php echo "aaa"; ?>');
+
+        $this->assertEquals('', $this->object->processFile($filename));
+        unlink($filename);
     }
 
     // WHAT: get the bytecode
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetByteCode1()
     {
         $this->assertEquals(null, $this->object->getByteCode(null));
     }
 
     // WHAT: get the bytecode
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetByteCode2()
     {
         $this->assertEquals(null, $this->object->getByteCode(''));
     }
 
     // WHAT: get the bytecode
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetByteCode3()
     {
         $this->assertEquals(null, $this->object->getByteCode(' '));
     }
 
     // WHAT: get the bytecode
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetByteCode4()
     {
         $this->assertEquals('', $this->object->getByteCode('a'));
@@ -108,19 +157,40 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // WHAT: get the bytecode
     public function testGetByteCode5()
     {
-        $this->assertEquals('', $this->object->getByteCode('empty'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        try {
+            $this->assertEquals('', $this->object->getByteCode($filename));
+        } catch (Exception $e) {
+            unlink($filename);
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
     }
 
     // WHAT: get the bytecode
     public function testGetByteCode6()
     {
-        $this->assertEquals('', $this->object->getByteCode('noread'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0700);
+
+        try {
+            $this->assertEquals('', $this->object->getByteCode($filename));
+        } catch (Exception $e) {
+            unlink($filename);
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
     }
 
     // WHAT: get the bytecode
     public function testGetByteCode7()
     {
-        $this->assertEquals('', $this->object->getByteCode('read'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '<?php echo "aaa"; ?>');
+
+        $this->assertEquals('', $this->object->getByteCode($filename));
+        unlink($filename);
     }
 
     public function testExpandPathsToFiles()

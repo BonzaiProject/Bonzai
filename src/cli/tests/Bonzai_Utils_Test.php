@@ -25,6 +25,7 @@
  **/
 
 require_once __DIR__ . '/../libs/Tests/TestCase.php';
+require_once __DIR__ . '/../libs/Exception/Exception.php';
 require_once __DIR__ . '/../libs/Utils/Utils.php';
 
 /**
@@ -58,18 +59,27 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
 
     // WHAT: get the path of file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFilePath4()
     {
         $this->assertEquals('', Bonzai_Utils::getFilePath('a'));
     }
 
     // WHAT: get the path of file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFilePath5()
     {
         $this->assertEquals('', Bonzai_Utils::getFilePath('noread'));
     }
 
     // WHAT: get the path of file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFilePath6()
     {
         $this->assertEquals('', Bonzai_Utils::getFilePath('nowrite'));
@@ -91,150 +101,225 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir1()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(null, $value = null));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir2()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(null, $value = ''));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir3()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(null, $value = ' '));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir4()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(null, $value = array()));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir5()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(null, $value = array('a')));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir6()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('', $value = null));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir7()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('', $value = ''));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir8()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('', $value = ' '));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir9()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('', $value = array()));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir10()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('', $value = array('a')));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir11()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(' ', $value = null));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir12()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(' ', $value = ''));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir13()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(' ', $value = ' '));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir14()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(' ', $value = array()));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir15()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir(' ', $value = array('a')));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir16()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('a', $value = null));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir17()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('a', $value = ''));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir18()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('a', $value = ' '));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir19()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('a', $value = array()));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir20()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('a', $value = array('a')));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir21()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('noread', $value = null));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir22()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('noread', $value = ''));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir23()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('noread', $value = ' '));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir24()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('noread', $value = array()));
     }
 
     // WHAT: return the all directories & files into a directory
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testRscandir25()
     {
         $this->assertEquals('', Bonzai_Utils::rscandir('noread', $value = array('a')));
@@ -301,24 +386,36 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
 
     // WHAT: get the file's content
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFileContent1()
     {
         $this->assertEquals(null, Bonzai_Utils::getFileContent(null));
     }
 
     // WHAT: get the file's content
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFileContent2()
     {
         $this->assertEquals(null, Bonzai_Utils::getFileContent(''));
     }
 
     // WHAT: get the file's content
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFileContent3()
     {
         $this->assertEquals(null, Bonzai_Utils::getFileContent(' '));
     }
 
     // WHAT: get the file's content
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFileContent4()
     {
         $this->assertEquals('', Bonzai_Utils::getFileContent('a'));
@@ -327,10 +424,17 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // WHAT: get the file's content
     public function testGetFileContent5()
     {
-        $this->assertEquals('', Bonzai_Utils::getFileContent('empty'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        $this->assertEquals('', Bonzai_Utils::getFileContent($filename));
+        unlink($filename);
     }
 
     // WHAT: get the file's content
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFileContent6()
     {
         $this->assertEquals(null, Bonzai_Utils::getFileContent('noread'));
@@ -343,144 +447,196 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent1()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent(null, null));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent2()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent(null, ''));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent3()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent(null, ' '));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent4()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent(null, 'a'));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent5()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent('', null));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent6()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent('', ''));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent7()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent('', ' '));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent8()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent('', 'a'));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent9()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent(' ', null));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent10()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent(' ', ''));
+        $this->assertEquals(0, Bonzai_Utils::putFileContent(' ', ''));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent11()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent(' ', ' '));
+        $this->assertEquals(0, Bonzai_Utils::putFileContent(' ', ' '));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent12()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent(' ', 'a'));
+        $this->assertEquals(0, Bonzai_Utils::putFileContent(' ', 'a'));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent13()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('a', null));
+        $this->assertEquals(0, Bonzai_Utils::putFileContent('a', null));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent14()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('a', ''));
+        $this->assertEquals(0, Bonzai_Utils::putFileContent('a', ''));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent15()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('a', ' '));
+        $this->assertEquals(1, Bonzai_Utils::putFileContent('a', ' '));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent16()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('a', 'a'));
+        $this->assertEquals(1, Bonzai_Utils::putFileContent('a', 'a'));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent17()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('empty', null));
+        Bonzai_Utils::putFileContent('empty', null);
+        $this->assertEquals('', file_get_contents('empty'));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent18()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('empty', ''));
+        Bonzai_Utils::putFileContent('empty', '');
+        $this->assertEquals('', file_get_contents('empty'));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent19()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('empty', ' '));
+        Bonzai_Utils::putFileContent('empty', ' ');
+        $this->assertEquals(' ', file_get_contents('empty'));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent20()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('empty', 'a'));
+        Bonzai_Utils::putFileContent('empty', 'a');
+        $this->assertEquals('a', file_get_contents('empty'));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent21()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent('nowrite', null));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent22()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent('nowrite', ''));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent23()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent('nowrite', ' '));
     }
 
     // WHAT: return the status of saving
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testPutFileContent24()
     {
         $this->assertEquals('', Bonzai_Utils::putFileContent('nowrite', 'a'));
@@ -489,25 +645,29 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // WHAT: return the status of saving
     public function testPutFileContent25()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('write', null));
+        Bonzai_Utils::putFileContent('write', null);
+        $this->assertEquals('', file_get_contents('write'));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent26()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('write', ''));
+        Bonzai_Utils::putFileContent('write', '');
+        $this->assertEquals('', file_get_contents('write'));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent27()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('write', ' '));
+        Bonzai_Utils::putFileContent('write', ' ');
+        $this->assertEquals(' ', file_get_contents('write'));
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent28()
     {
-        $this->assertEquals('', Bonzai_Utils::putFileContent('write', 'a'));
+        Bonzai_Utils::putFileContent('write', 'a');
+        $this->assertEquals('a', file_get_contents('write'));
     }
 
     public function testMessage()

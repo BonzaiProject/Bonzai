@@ -46,6 +46,8 @@ class Bonzai_Utils
      */
     public static function getFilePath($file)
     {
+        $file = trim($file);
+
         if (!file_exists(dirname($file)) || dirname($file) == '.') {
             $file = getcwd() . '/' . $file;
         }
@@ -141,7 +143,9 @@ class Bonzai_Utils
      */
     public static function putFileContent($filename, $content)
     {
-        if (!is_writable($filename)) {
+        $filename = trim($filename);
+
+        if (file_exists($filename) && !is_writable($filename)) {
             throw new Bonzai_Exception('The file `' . $filename . '` cannot be written'); // UNCATCHED
         }
 

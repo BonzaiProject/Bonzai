@@ -119,7 +119,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName7()
     {
-        $this->assertEquals('Controller/Controller.php', $this->object->getFileNameFromClassName('Bonzai_Controller'));
+        $this->assertEquals('Controller/Controller', $this->object->getFileNameFromClassName('Bonzai_Controller'));
     }
     // }}}
 
@@ -131,7 +131,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName8()
     {
-        $this->assertEquals('Utils/Utils.php', $this->object->getFileNameFromClassName('Bonzai_Utils'));
+        $this->assertEquals('Utils/Utils', $this->object->getFileNameFromClassName('Bonzai_Utils'));
     }
     // }}}
 
@@ -143,7 +143,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName9()
     {
-        $this->assertEquals('Utils/Help.php', $this->object->getFileNameFromClassName('Bonzai_Utils_Help'));
+        $this->assertEquals('Utils/Help', $this->object->getFileNameFromClassName('Bonzai_Utils_Help'));
     }
     // }}}
 

@@ -112,14 +112,21 @@ class Bonzai_Controller
      */
     public function getFileNameFromClassName($name)
     {
-        $name     = preg_replace('/^Bonzai_/', '', $name);
-        $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
+        $name = preg_replace('/^Bonzai_/', '', trim($name));
+        if (empty($name)) {
+            return null;
+        }
 
+        $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
         if (!$this->checkFile($filename) && ($name == $filename)) {
             $filename .= DIRECTORY_SEPARATOR . $name;
         }
 
-        return $filename;
+        if ($this->checkFile($filename)) {
+            return $filename;
+        }
+
+        return null;
     }
     // }}}
 
