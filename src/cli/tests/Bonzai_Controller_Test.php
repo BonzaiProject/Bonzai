@@ -47,7 +47,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName1()
     {
-        $this->assertEquals(null, $this->object->getFileNameFromClassName(''));
+        $this->assertNull($this->object->getFileNameFromClassName(''));
     }
     // }}}
 
@@ -59,7 +59,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName2()
     {
-        $this->assertEquals(null, $this->object->getFileNameFromClassName(null));
+        $this->assertNull($this->object->getFileNameFromClassName(null));
     }
     // }}}
 
@@ -71,7 +71,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName3()
     {
-        $this->assertEquals(null, $this->object->getFileNameFromClassName(' '));
+        $this->assertNull($this->object->getFileNameFromClassName(' '));
     }
     // }}}
 
@@ -83,7 +83,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName4()
     {
-        $this->assertEquals(null, $this->object->getFileNameFromClassName('aaa'));
+        $this->assertNull($this->object->getFileNameFromClassName('aaa'));
     }
     // }}}
 
@@ -95,7 +95,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName5()
     {
-        $this->assertEquals(null, $this->object->getFileNameFromClassName('Bonzai_'));
+        $this->assertNull($this->object->getFileNameFromClassName('Bonzai_'));
     }
     // }}}
 
@@ -107,7 +107,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testGetFileNameFromClassName6()
     {
-        $this->assertEquals(null, $this->object->getFileNameFromClassName('Bonzai_aaa'));
+        $this->assertNull($this->object->getFileNameFromClassName('Bonzai_aaa'));
     }
     // }}}
 
@@ -155,7 +155,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testCheckFile1()
     {
-        $this->assertEquals(false, $this->object->checkFile(''));
+        $this->assertFalse($this->object->checkFile(''));
     }
     // }}}
 
@@ -167,7 +167,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testCheckFile2()
     {
-        $this->assertEquals(false, $this->object->checkFile(null));
+        $this->assertFalse($this->object->checkFile(null));
     }
     // }}}
 
@@ -179,7 +179,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testCheckFile3()
     {
-        $this->assertEquals(false, $this->object->checkFile(' '));
+        $this->assertFalse($this->object->checkFile(' '));
     }
     // }}}
 
@@ -191,7 +191,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testCheckFile4()
     {
-        $this->assertEquals(false, $this->object->checkFile('Controller'));
+        $this->assertFalse($this->object->checkFile('Controller'));
     }
     // }}}
 
@@ -203,7 +203,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      */
     public function testCheckFile5()
     {
-        $this->assertEquals(true, $this->object->checkFile('Controller/Controller'));
+        $this->assertTrue($this->object->checkFile('Controller/Controller'));
     }
     // }}}
 }
