@@ -24,7 +24,7 @@
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
-require_once __DIR__ . '/../Exception/Exception.php';
+require_once dirname(__FILE__) . '/../Exception/Exception.php';
 
 /**
  * @category  Optimization & Security
@@ -99,7 +99,7 @@ class Bonzai_Controller
                 throw new Bonzai_Exception('The class `' . $name . '` cannot be loaded'); // UNCATCHED
             }
 
-            require_once __DIR__ . '/../' . $filename . '.php';
+            require_once dirname(__FILE__) . '/../' . $filename . '.php';
         }
     }
     // }}}
@@ -138,7 +138,7 @@ class Bonzai_Controller
      */
     public function checkFile($filename)
     {
-        return file_exists(__DIR__ . '/../' . $filename . '.php');
+        return file_exists(dirname(__FILE__) . '/../' . $filename . '.php');
     }
     // }}}
 }

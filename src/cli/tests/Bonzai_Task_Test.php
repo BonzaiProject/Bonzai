@@ -24,8 +24,8 @@
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
-require_once __DIR__ . '/../libs/Tests/TestCase.php';
-require_once __DIR__ . '/../libs/Task/Task.php';
+require_once dirname(__FILE__) . '/../libs/Tests/TestCase.php';
+require_once dirname(__FILE__) . '/../libs/Task/Task.php';
 
 /**
  * @category  Optimization & Security

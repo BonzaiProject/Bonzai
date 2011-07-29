@@ -128,17 +128,18 @@ class Bonzai_Converter
 
         $this->max = substr_count($data, substr($this->php_tags['open'], 0, 2));
 
+        $data_len = strlen($data);
+
         $this->count = 0;
         $this->start = 0;
         $this->end   = $this->blocks[0]['open'];
-
-        $data_len = strlen($data);
 
         $final_data = '';
         for($this->curr = 0; $this->curr < $data_len; $this->curr++) {
             $final_data .= $this->analyzeProcessBlock($data);
         }
-        $final_data = $this->php_tags['open'] . PHP_EOL . $final_data . $this->php_tags['close'];
+
+        $final_data = '<?php' . PHP_EOL . $final_data . '?>';
 
         return $final_data;
     }
@@ -163,7 +164,7 @@ class Bonzai_Converter
 
         if ($validElement && $intoBlock) {
             $from = $block['open'] + $block['size'];
-            $to   = $block['close'] - $block['open'] - $block['size'];
+            $to   = $block['close'] - $from - 2;
 
             $final_data .= substr($data, $from, $to);
             $this->curr  = (int)$block['close'] + 2;
@@ -202,7 +203,7 @@ class Bonzai_Converter
           'close' => '?' . '>'
         );
 
-        if ($asptag) {
+        if ($asptag === true) {
             $this->php_tags['open']  = '<%';
             $this->php_tags['close'] = '%' . '>';
         }
@@ -234,7 +235,13 @@ class Bonzai_Converter
             $this->analyzeFinderBlock($data);
         }
 
-        $this->setBlock('close', $data_len);
+        if ($this->count > -1) {
+            $this->setBlock('close', $data_len);
+        }
+
+        if ($this->count == -1) {
+            $this->blocks[] = array('open' => -1, 'close' => -1, 'size' => 0);
+        }
     }
     // }}}
 

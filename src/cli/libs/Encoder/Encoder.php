@@ -104,7 +104,7 @@ class Bonzai_Encoder
      */
     public function getByteCode($filename)
     {
-        $bytecode = bonzai_get_bytecode($this->getFullPHP($filename)); // TODO: into ext
+        $bytecode = bonzai_get_bytecode($filename); // TODO: into ext
 
         if (empty($bytecode)) {
             Bonzai_Registry::append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND);
@@ -112,20 +112,6 @@ class Bonzai_Encoder
         }
 
         return $bytecode;
-    }
-    // }}}
-
-    // {{{ getFullPHP
-    /**
-     * @access public
-     * @param  string $filename
-     * @return string
-     */
-    public function getFullPHP($filename)
-    {
-        $BConverter = new Bonzai_Converter();
-
-        return $BConverter->convert($filename, $asp = false); // ???
     }
     // }}}
 
@@ -153,12 +139,10 @@ class Bonzai_Encoder
 
 #############################################################################################
 
-function bonzai_get_bytecode($content) {
-    file_put_contents('/tmp/phb.php', $content);
-
+function bonzai_get_bytecode($filename) {
     $fh = fopen('/tmp/phb.phb', 'w');
     bcompiler_write_header($fh);
-    bcompiler_write_file($fh, '/tmp/phb.php');
+    bcompiler_write_file($fh, $filename);
     bcompiler_write_footer($fh);
     fclose($fh);
 

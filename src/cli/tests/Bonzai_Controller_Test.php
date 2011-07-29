@@ -24,8 +24,8 @@
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
-require_once __DIR__ . '/../libs/Tests/TestCase.php';
-require_once __DIR__ . '/../libs/Controller/Controller.php';
+require_once dirname(__FILE__) . '/../libs/Tests/TestCase.php';
+require_once dirname(__FILE__) . '/../libs/Controller/Controller.php';
 
 /**
  * @category  Optimization & Security
@@ -39,7 +39,7 @@ require_once __DIR__ . '/../libs/Controller/Controller.php';
  */
 class Bonzai_Controller_Test extends Bonzai_TestCase
 {
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName1
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -51,7 +51,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName2
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -63,7 +63,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName3
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -75,7 +75,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName4
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -87,7 +87,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName5
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -99,7 +99,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName6
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -111,7 +111,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName7
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -123,7 +123,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName8
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -135,7 +135,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName
+    // {{{ testGetFileNameFromClassName9
     // WHAT: retrieve the class filename
     /**
      * @access public
@@ -147,7 +147,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testCheckFile
+    // {{{ testCheckFile1
     // WHAT: check if a file exists in a dir
     /**
      * @access public
@@ -159,7 +159,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testCheckFile
+    // {{{ testCheckFile2
     // WHAT: check if a file exists in a dir
     /**
      * @access public
@@ -171,7 +171,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testCheckFile
+    // {{{ testCheckFile3
     // WHAT: check if a file exists in a dir
     /**
      * @access public
@@ -183,7 +183,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testCheckFile
+    // {{{ testCheckFile4
     // WHAT: check if a file exists in a dir
     /**
      * @access public
@@ -195,7 +195,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testCheckFile
+    // {{{ testCheckFile5
     // WHAT: check if a file exists in a dir
     /**
      * @access public

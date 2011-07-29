@@ -24,10 +24,10 @@
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
-require_once __DIR__ . '/../libs/Tests/TestCase.php';
-require_once __DIR__ . '/../libs/Exception/Exception.php';
-require_once __DIR__ . '/../libs/Utils/Utils.php';
-require_once __DIR__ . '/../libs/Converter/Converter.php';
+require_once dirname(__FILE__) . '/../libs/Tests/TestCase.php';
+require_once dirname(__FILE__) . '/../libs/Exception/Exception.php';
+require_once dirname(__FILE__) . '/../libs/Utils/Utils.php';
+require_once dirname(__FILE__) . '/../libs/Converter/Converter.php';
 
 /**
  * @category  Optimization & Security
@@ -132,902 +132,662 @@ class Bonzai_Converter_Test extends Bonzai_TestCase
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess11()
     {
-        $this->assertEquals(null, $this->object->process(' ', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n \nBONZAI_HD;\n?>", $this->object->process(' ', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess12()
     {
-        $this->assertEquals(null, $this->object->process(' ', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n \nBONZAI_HD;\n?>", $this->object->process(' ', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess13()
     {
-        $this->assertEquals(null, $this->object->process(' ', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n \nBONZAI_HD;\n?>", $this->object->process(' ', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess14()
     {
-        $this->assertEquals(null, $this->object->process(' ', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n \nBONZAI_HD;\n?>", $this->object->process(' ', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess15()
     {
-        $this->assertEquals(null, $this->object->process(' ', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n \nBONZAI_HD;\n?>", $this->object->process(' ', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess16()
     {
-        $this->assertEquals(null, $this->object->process('aaa', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\naaa\nBONZAI_HD;\n?>", $this->object->process('aaa', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess17()
     {
-        $this->assertEquals(null, $this->object->process('aaa', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\naaa\nBONZAI_HD;\n?>", $this->object->process('aaa', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess18()
     {
-        $this->assertEquals(null, $this->object->process('aaa', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\naaa\nBONZAI_HD;\n?>", $this->object->process('aaa', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess19()
     {
-        $this->assertEquals("<%\necho <<<BONZAI;\naaa\nBONZAI;\n%>", $this->object->process('aaa', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\naaa\nBONZAI_HD;\n?>", $this->object->process('aaa', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess20()
     {
-        $this->assertEquals("<?php\necho <<<BONZAI;\naaa\nBONZAI;\n?>", $this->object->process('aaa', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\naaa\nBONZAI_HD;\n?>", $this->object->process('aaa', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess21()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "a"; ?>', null));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?php echo "a"; ?>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess22()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "a"; ?>', ''));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?php echo "a"; ?>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess23()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "a"; ?>', ' '));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?php echo "a"; ?>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess24()
     {
-        $this->assertEquals('<% echo "a"; %>', $this->object->process('<?php echo "a"; ?>', true));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?php echo "a"; ?>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess25()
     {
-        $this->assertEquals('<?php echo "a"; ?>', $this->object->process('<?php echo "a"; ?>', false));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?php echo "a"; ?>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess26()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?php echo "a"; ?>', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?php echo "a"; ?>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess27()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?php echo "a"; ?>', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?php echo "a"; ?>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess28()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?php echo "a"; ?>', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?php echo "a"; ?>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess29()
     {
-        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?>', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre><?php echo \"a\"; ?>\nBONZAI_HD;\n?>", $this->object->process('<pre><?php echo "a"; ?>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess30()
     {
-        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?>', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?php echo "a"; ?>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess31()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "a"; ?><pre>', null));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?php echo "a"; ?><pre>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess32()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "a"; ?><pre>', ''));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?php echo "a"; ?><pre>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess33()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "a"; ?><pre>', ' '));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?php echo "a"; ?><pre>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess34()
     {
-        $this->assertEquals('', $this->object->process('<?php echo "a"; ?><pre>', true));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?php echo "a"; ?><pre>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess35()
     {
-        $this->assertEquals('', $this->object->process('<?php echo "a"; ?><pre>', false));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?php echo "a"; ?><pre>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess36()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?php echo "a"; ?><pre>', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?php echo "a"; ?><pre>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess37()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?php echo "a"; ?><pre>', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?php echo "a"; ?><pre>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess38()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?php echo "a"; ?><pre>', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?php echo "a"; ?><pre>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess39()
     {
-        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?><pre>', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?php echo "a"; ?><pre>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess40()
     {
-        $this->assertEquals('', $this->object->process('<pre><?php echo "a"; ?><pre>', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?php echo "a"; ?><pre>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess41()
     {
-        $this->assertEquals(null, $this->object->process('<? echo "a"; ?>', null));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<? echo "a"; ?>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess42()
     {
-        $this->assertEquals(null, $this->object->process('<? echo "a"; ?>', ''));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<? echo "a"; ?>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess43()
     {
-        $this->assertEquals(null, $this->object->process('<? echo "a"; ?>', ' '));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<? echo "a"; ?>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess44()
     {
-        $this->assertEquals('', $this->object->process('<? echo "a"; ?>', true));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<? echo "a"; ?>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess45()
     {
-        $this->assertEquals('', $this->object->process('<? echo "a"; ?>', false));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<? echo "a"; ?>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess46()
     {
-        $this->assertEquals(null, $this->object->process('<pre><? echo "a"; ?>', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><? echo "a"; ?>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess47()
     {
-        $this->assertEquals(null, $this->object->process('<pre><? echo "a"; ?>', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><? echo "a"; ?>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess48()
     {
-        $this->assertEquals(null, $this->object->process('<pre><? echo "a"; ?>', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><? echo "a"; ?>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess49()
     {
-        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?>', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><? echo "a"; ?>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess50()
     {
-        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?>', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><? echo "a"; ?>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess51()
     {
-        $this->assertEquals(null, $this->object->process('<? echo "a"; ?><pre>', null));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<? echo "a"; ?><pre>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess52()
     {
-        $this->assertEquals(null, $this->object->process('<? echo "a"; ?><pre>', ''));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<? echo "a"; ?><pre>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess53()
     {
-        $this->assertEquals(null, $this->object->process('<? echo "a"; ?><pre>', ' '));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<? echo "a"; ?><pre>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess54()
     {
-        $this->assertEquals('', $this->object->process('<? echo "a"; ?><pre>', true));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<? echo "a"; ?><pre>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess55()
     {
-        $this->assertEquals('', $this->object->process('<? echo "a"; ?><pre>', false));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<? echo "a"; ?><pre>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess56()
     {
-        $this->assertEquals(null, $this->object->process('<pre><? echo "a"; ?><pre>', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><? echo "a"; ?><pre>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess57()
     {
-        $this->assertEquals(null, $this->object->process('<pre><? echo "a"; ?><pre>', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><? echo "a"; ?><pre>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess58()
     {
-        $this->assertEquals(null, $this->object->process('<pre><? echo "a"; ?><pre>', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><? echo "a"; ?><pre>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess59()
     {
-        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?><pre>', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><? echo "a"; ?><pre>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess60()
     {
-        $this->assertEquals('', $this->object->process('<pre><? echo "a"; ?><pre>', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><? echo "a"; ?><pre>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess61()
     {
-        $this->assertEquals('', $this->object->process('<?= "a"; ?>', null));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?= "a"; ?>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess62()
     {
-        $this->assertEquals(null, $this->object->process('<?= "a"; ?>', ''));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?= "a"; ?>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess63()
     {
-        $this->assertEquals(null, $this->object->process('<?= "a"; ?>', ' '));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?= "a"; ?>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess64()
     {
-        $this->assertEquals(null, $this->object->process('<?= "a"; ?>', true));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?= "a"; ?>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess65()
     {
-        $this->assertEquals('', $this->object->process('<?= "a"; ?>', false));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<?= "a"; ?>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess66()
     {
-        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?>', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?= "a"; ?>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess67()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?= "a"; ?>', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?= "a"; ?>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess68()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?= "a"; ?>', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?= "a"; ?>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess69()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?= "a"; ?>', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?= "a"; ?>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess70()
     {
-        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?>', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><?= "a"; ?>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess71()
     {
-        $this->assertEquals('', $this->object->process('<?= "a"; ?><pre>', null));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?= "a"; ?><pre>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess72()
     {
-        $this->assertEquals(null, $this->object->process('<?= "a"; ?><pre>', ''));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?= "a"; ?><pre>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess73()
     {
-        $this->assertEquals(null, $this->object->process('<?= "a"; ?><pre>', ' '));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?= "a"; ?><pre>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess74()
     {
-        $this->assertEquals(null, $this->object->process('<?= "a"; ?><pre>', true));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?= "a"; ?><pre>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess75()
     {
-        $this->assertEquals('', $this->object->process('<?= "a"; ?><pre>', false));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<?= "a"; ?><pre>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess76()
     {
         $this->assertEquals('', $this->object->process('<pre><?= "a"; ?><pre>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess77()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?= "a"; ?><pre>', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?= "a"; ?><pre>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess78()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?= "a"; ?><pre>', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?= "a"; ?><pre>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess79()
     {
-        $this->assertEquals(null, $this->object->process('<pre><?= "a"; ?><pre>', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?= "a"; ?><pre>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess80()
     {
-        $this->assertEquals('', $this->object->process('<pre><?= "a"; ?><pre>', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><?= "a"; ?><pre>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess81()
     {
-        $this->assertEquals('', $this->object->process('<% echo "a"; %>', null));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<% echo "a"; %>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess82()
     {
-        $this->assertEquals(null, $this->object->process('<% echo "a"; %>', ''));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<% echo "a"; %>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess83()
     {
-        $this->assertEquals(null, $this->object->process('<% echo "a"; %>', ' '));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<% echo "a"; %>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess84()
     {
-        $this->assertEquals(null, $this->object->process('<% echo "a"; %>', true));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<% echo "a"; %>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess85()
     {
-        $this->assertEquals('', $this->object->process('<% echo "a"; %>', false));
+        $this->assertEquals("<?php\n echo \"a\"; ;?>", $this->object->process('<% echo "a"; %>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess86()
     {
-        $this->assertEquals(null, $this->object->process('<pre><% echo "a"; %>', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><% echo "a"; %>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess87()
     {
-        $this->assertEquals(null, $this->object->process('<pre><% echo "a"; %>', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><% echo "a"; %>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess88()
     {
-        $this->assertEquals(null, $this->object->process('<pre><% echo "a"; %>', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><% echo "a"; %>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess89()
     {
-        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %>', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><% echo "a"; %>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess90()
     {
-        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %>', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\"; ;?>", $this->object->process('<pre><% echo "a"; %>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess91()
     {
-        $this->assertEquals(null, $this->object->process('<% echo "a"; %><pre>', null));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<% echo "a"; %><pre>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess92()
     {
-        $this->assertEquals(null, $this->object->process('<% echo "a"; %><pre>', ''));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<% echo "a"; %><pre>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess93()
     {
-        $this->assertEquals(null, $this->object->process('<% echo "a"; %><pre>', ' '));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<% echo "a"; %><pre>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess94()
     {
-        $this->assertEquals('', $this->object->process('<% echo "a"; %><pre>', true));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<% echo "a"; %><pre>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess95()
     {
-        $this->assertEquals('', $this->object->process('<% echo "a"; %><pre>', false));
+        $this->assertEquals("<?php\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<% echo "a"; %><pre>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess96()
     {
-        $this->assertEquals(null, $this->object->process('<pre><% echo "a"; %><pre>', null));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><% echo "a"; %><pre>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess97()
     {
-        $this->assertEquals(null, $this->object->process('<pre><% echo "a"; %><pre>', ''));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><% echo "a"; %><pre>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess98()
     {
-        $this->assertEquals(null, $this->object->process('<pre><% echo "a"; %><pre>', ' '));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><% echo "a"; %><pre>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess99()
     {
-        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %><pre>', true));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><% echo "a"; %><pre>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess100()
     {
-        $this->assertEquals('', $this->object->process('<pre><% echo "a"; %><pre>', false));
+        $this->assertEquals("<?php\n\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n echo \"a\";\necho <<<BONZAI_HD\n<pre>\nBONZAI_HD;\n?>", $this->object->process('<pre><% echo "a"; %><pre>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess101()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "?>"; ?>', null));
+        $this->assertEquals("<?php\n echo \"?>\"; ;?>", $this->object->process('<?php echo "?>"; ?>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess102()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "?>"; ?>', ''));
+        $this->assertEquals("<?php\n echo \"?>\"; ;?>", $this->object->process('<?php echo "?>"; ?>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess103()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "?>"; ?>', ' '));
+        $this->assertEquals("<?php\n echo \"?>\"; ;?>", $this->object->process('<?php echo "?>"; ?>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess104()
     {
-        $this->assertEquals('', $this->object->process('<?php echo "?>"; ?>', true));
+        $this->assertEquals("<?php\n echo \"?>\"; ;?>", $this->object->process('<?php echo "?>"; ?>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess105()
     {
-        $this->assertEquals('', $this->object->process('<?php echo "?>"; ?>', false));
+        $this->assertEquals("<?php\n echo \"?>\"; ;?>", $this->object->process('<?php echo "?>"; ?>', false));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess106()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "<?php ?>"; ?>', null));
+        $this->assertEquals("<?php\n echo \"<?php ?>\"; ;?>", $this->object->process('<?php echo "<?php ?>"; ?>', null));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess107()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "<?php ?>"; ?>', ''));
+        $this->assertEquals("<?php\n echo \"<?php ?>\"; ;?>", $this->object->process('<?php echo "<?php ?>"; ?>', ''));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess108()
     {
-        $this->assertEquals(null, $this->object->process('<?php echo "<?php ?>"; ?>', ' '));
+        $this->assertEquals("<?php\n echo \"<?php ?>\"; ;?>", $this->object->process('<?php echo "<?php ?>"; ?>', ' '));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess109()
     {
-        $this->assertEquals('', $this->object->process('<?php echo "<?php ?>"; ?>', true));
+        $this->assertEquals("<?php\n echo \"<?php ?>\"; ;?>", $this->object->process('<?php echo "<?php ?>"; ?>', true));
     }
 
     // WHAT: convert a mixed source to a full php
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testProcess110()
     {
-        $this->assertEquals('', $this->object->process('<?php echo "<?php ?>"; ?>', false));
+        $this->assertEquals("<?php\n echo \"<?php ?>\"; ;?>", $this->object->process('<?php echo "<?php ?>"; ?>', false));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess111()
+    {
+        $this->assertEquals("<?php\n echo \"%>\"; ;?>", $this->object->process('<% echo "%>"; %>', null));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess112()
+    {
+        $this->assertEquals("<?php\n echo \"%>\"; ;?>", $this->object->process('<% echo "%>"; %>', ''));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess113()
+    {
+        $this->assertEquals("<?php\n echo \"%>\"; ;?>", $this->object->process('<% echo "%>"; %>', ' '));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess114()
+    {
+        $this->assertEquals("<?php\n echo \"%>\"; ;?>", $this->object->process('<% echo "%>"; %>', true));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess115()
+    {
+        $this->assertEquals("<?php\n echo \"%>\"; ;?>", $this->object->process('<% echo "%>"; %>', false));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess116()
+    {
+        $this->assertEquals("<?php\n echo \"<% %>\"; ;?>", $this->object->process('<?php echo "<% %>"; ?>', null));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess117()
+    {
+        $this->assertEquals("<?php\n echo \"<% %>\"; ;?>", $this->object->process('<?php echo "<% %>"; ?>', ''));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess118()
+    {
+        $this->assertEquals("<?php\n echo \"<% %>\"; ;?>", $this->object->process('<?php echo "<% %>"; ?>', ' '));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess119()
+    {
+        $this->assertEquals("<?php\n echo \"<% %>\"; ;?>", $this->object->process('<?php echo "<% %>"; ?>', true));
+    }
+
+    // WHAT: convert a mixed source to a full php
+    public function testProcess120()
+    {
+        $this->assertEquals("<?php\n echo \"<% %>\"; ;?>", $this->object->process('<?php echo "<% %>"; ?>', false));
     }
 }
