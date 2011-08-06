@@ -48,15 +48,15 @@ class Bonzai_Utils
     {
         $file = trim($file);
 
-        if (!file_exists(dirname($file)) || dirname($file) == '.') {
+        if (!empty($file) && (!file_exists(dirname($file)) || dirname($file) == '.')) {
             $file = getcwd() . '/' . $file;
         }
 
         if (!is_readable($file)) {
             throw new Bonzai_Exception('The file `' . $file . '` cannot be opened'); // UNCATCHED
-        } else {
-            return $file;
         }
+
+        return $file;
     }
     // }}}
 
@@ -94,8 +94,12 @@ class Bonzai_Utils
      */
     public static function rscandir($base = '', &$data = array())
     {
-        if (!is_readable($base)) {
+        if (!is_readable($base) && !is_executable($base)) {
             throw new Bonzai_Exception('The directory `' . $base . '` cannot be opened'); // UNCATCHED
+        }
+
+        if (!is_array($data)) {
+          $data = array();
         }
 
         $array = array_diff(scandir($base), array('.', '..'));
@@ -145,7 +149,7 @@ class Bonzai_Utils
     {
         $filename = trim($filename);
 
-        if (file_exists($filename) && !is_writable($filename)) {
+        if (empty($filename) || (file_exists($filename) && !is_writable($filename))) {
             throw new Bonzai_Exception('The file `' . $filename . '` cannot be written'); // UNCATCHED
         }
 

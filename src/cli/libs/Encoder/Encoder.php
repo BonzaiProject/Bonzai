@@ -45,7 +45,7 @@ class Bonzai_Encoder
      */
     public function elaborate($files)
     {
-        $this->expandPathsToFiles(&$files);
+        $this->expandPathsToFiles($files);
 
         foreach($files as $filename) {
             $this->processFile($filename);
@@ -140,10 +140,22 @@ class Bonzai_Encoder
 #############################################################################################
 
 function bonzai_get_bytecode($filename) {
+    if (empty($filename) || !file_exists($filename)) {
+        throw new Bonzai_Exception('The file is invalid'); // UNCATCHED
+    }
+
+    if (!is_readable($filename)) {
+        throw new Bonzai_Exception('The file is not readable'); // UNCATCHED
+    }
+
+    if (filesize($filename) == 0) {
+        throw new Bonzai_Exception('The file is empty'); // UNCATCHED
+    }
+
     $fh = fopen('/tmp/phb.phb', 'w');
-    bcompiler_write_header($fh);
+    //bcompiler_write_header($fh);
     bcompiler_write_file($fh, $filename);
-    bcompiler_write_footer($fh);
+    //bcompiler_write_footer($fh);
     fclose($fh);
 
     $content = file_get_contents('/tmp/phb.phb');

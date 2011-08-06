@@ -77,6 +77,8 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     public function testProcessFile4()
     {
         $this->assertEmpty($this->object->processFile('a'));
+
+        unlink('a');
     }
 
     // WHAT: process a file
@@ -86,11 +88,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         file_put_contents($filename, '');
 
         try {
-            $this->assertEmpty($this->object->processFile($filename));
+            $this->object->processFile($filename);
+            $this->assertTrue(false, "The exception was not threw.");
         } catch (Exception $e) {
-            unlink($filename);
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
+
+        unlink($filename);
     }
 
     // WHAT: process a file
@@ -98,23 +102,27 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'aaa');
-        chmod($filename, 0700);
+        chmod($filename, 0333);
 
         try {
-            $this->assertEmpty($this->object->processFile($filename));
+            $this->object->processFile($filename);
+            $this->assertTrue(false, "The exception was not threw.");
         } catch (Exception $e) {
-            unlink($filename);
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
+
+        chmod($filename, 0777);
+        unlink($filename);
     }
 
     // WHAT: process a file
     public function testProcessFile7()
     {
         $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '<?php echo "aaa"; ?>');
+        file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
         $this->assertEmpty($this->object->processFile($filename));
+
         unlink($filename);
     }
 
@@ -161,11 +169,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         file_put_contents($filename, '');
 
         try {
-            $this->assertEmpty($this->object->getByteCode($filename));
+            $this->object->getByteCode($filename);
+            $this->assertTrue(false, "The exception was not threw.");
         } catch (Exception $e) {
-            unlink($filename);
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
+
+        unlink($filename);
     }
 
     // WHAT: get the bytecode
@@ -176,20 +186,23 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         chmod($filename, 0700);
 
         try {
-            $this->assertEmpty($this->object->getByteCode($filename));
+            $this->object->getByteCode($filename);
+            $this->assertTrue(false, "The exception was not threw.");
         } catch (Exception $e) {
-            unlink($filename);
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
+
+        unlink($filename);
     }
 
     // WHAT: get the bytecode
     public function testGetByteCode7()
     {
         $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '<?php echo "aaa"; ?>');
+        file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
-        $this->assertEmpty($this->object->getByteCode($filename));
+        $this->assertRegExp('/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/', $this->object->getByteCode($filename));
+
         unlink($filename);
     }
 

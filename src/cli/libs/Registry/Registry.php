@@ -87,7 +87,7 @@ class Bonzai_Registry
      * @param  string $key
      * @return mixed | null
      */
-    public function get($key)
+    public static function get($key)
     {
         if (empty($key) || (!is_string($key) && !is_numeric($key))) {
             throw new Bonzai_Exception('Invalid key type');
@@ -108,7 +108,7 @@ class Bonzai_Registry
      * @param  string $key
      * @return void
      */
-    public function remove($key)
+    public static function remove($key)
     {
         if (empty($key) || (!is_string($key) && !is_numeric($key))) {
             throw new Bonzai_Exception('Invalid key type');
@@ -129,7 +129,7 @@ class Bonzai_Registry
      * @param  integer $type
      * @return void
      */
-    public function append($key, $value, $type = null)
+    public static function append($key, $value, $type = null)
     {
         if (empty($key) || (!is_string($key) && !is_numeric($key))) {
             throw new Bonzai_Exception('Invalid key type');

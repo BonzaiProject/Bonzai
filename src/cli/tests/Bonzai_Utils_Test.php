@@ -41,21 +41,30 @@ require_once dirname(__FILE__) . '/../libs/Utils/Utils.php';
 class Bonzai_Utils_Test extends Bonzai_TestCase
 {
     // WHAT: get the path of file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFilePath1()
     {
-        $this->assertNull(Bonzai_Utils::getFilePath(null));
+        Bonzai_Utils::getFilePath(null);
     }
 
     // WHAT: get the path of file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFilePath2()
     {
-        $this->assertNull(Bonzai_Utils::getFilePath(''));
+        Bonzai_Utils::getFilePath('');
     }
 
     // WHAT: get the path of file
+    /**
+     * @expectedException Bonzai_Exception
+     */
     public function testGetFilePath3()
     {
-        $this->assertNull(Bonzai_Utils::getFilePath(' '));
+        Bonzai_Utils::getFilePath(' ');
     }
 
     // WHAT: get the path of file
@@ -64,31 +73,49 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testGetFilePath4()
     {
-        $this->assertEmpty(Bonzai_Utils::getFilePath('a'));
+        Bonzai_Utils::getFilePath('a');
     }
 
     // WHAT: get the path of file
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testGetFilePath5()
     {
-        $this->assertEmpty(Bonzai_Utils::getFilePath('noread'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'aaa');
+        chmod($filename, 0333);
+
+        try {
+            Bonzai_Utils::getFilePath($filename);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($filename, 0777);
+        unlink($filename);
     }
 
     // WHAT: get the path of file
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testGetFilePath6()
     {
-        $this->assertEmpty(Bonzai_Utils::getFilePath('nowrite'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'aaa');
+        chmod($filename, 0555);
+
+        $this->assertEquals($filename, Bonzai_Utils::getFilePath($filename));
+
+        chmod($filename, 0777);
+        unlink($filename);
     }
 
     // WHAT: get the path of file
     public function testGetFilePath7()
     {
-        $this->assertEmpty(Bonzai_Utils::getFilePath('write'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'aaa');
+
+        Bonzai_Utils::getFilePath($filename);
+
+        unlink($filename);
     }
 
     public function testRenameFile()
@@ -106,7 +133,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir1()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(null, $value = null));
+        $value = null;
+        Bonzai_Utils::rscandir(null, $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -115,7 +143,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir2()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(null, $value = ''));
+        $value = '';
+        Bonzai_Utils::rscandir(null, $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -124,7 +153,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir3()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(null, $value = ' '));
+        $value = ' ';
+        Bonzai_Utils::rscandir(null, $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -133,7 +163,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir4()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(null, $value = array()));
+        $value = array();
+        Bonzai_Utils::rscandir(null, $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -142,7 +173,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir5()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(null, $value = array('a')));
+        $value = array('a');
+        Bonzai_Utils::rscandir(null, $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -151,7 +183,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir6()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('', $value = null));
+        $value = null;
+        Bonzai_Utils::rscandir('', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -160,7 +193,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir7()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('', $value = ''));
+        $value = '';
+        Bonzai_Utils::rscandir('', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -169,7 +203,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir8()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('', $value = ' '));
+        $value = ' ';
+        Bonzai_Utils::rscandir('', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -178,7 +213,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir9()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('', $value = array()));
+        $value = array();
+        Bonzai_Utils::rscandir('', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -187,7 +223,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir10()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('', $value = array('a')));
+        $value = array('a');
+        Bonzai_Utils::rscandir('', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -196,7 +233,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir11()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(' ', $value = null));
+        $value = null;
+        Bonzai_Utils::rscandir(' ', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -205,7 +243,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir12()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(' ', $value = ''));
+        $value = '';
+        Bonzai_Utils::rscandir(' ', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -214,7 +253,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir13()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(' ', $value = ' '));
+        $value = ' ';
+        Bonzai_Utils::rscandir(' ', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -223,7 +263,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir14()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(' ', $value = array()));
+        $value = array();
+        Bonzai_Utils::rscandir(' ', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -232,7 +273,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir15()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir(' ', $value = array('a')));
+        $value = array('a');
+        Bonzai_Utils::rscandir(' ', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -241,7 +283,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir16()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('a', $value = null));
+        $value = null;
+        Bonzai_Utils::rscandir('a', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -250,7 +293,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir17()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('a', $value = ''));
+        $value = '';
+        Bonzai_Utils::rscandir('a', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -259,7 +303,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir18()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('a', $value = ' '));
+        $value = ' ';
+        Bonzai_Utils::rscandir('a', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -268,7 +313,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir19()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('a', $value = array()));
+        $value = array();
+        Bonzai_Utils::rscandir('a', $value);
     }
 
     // WHAT: return the all directories & files into a directory
@@ -277,112 +323,217 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      */
     public function testRscandir20()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('a', $value = array('a')));
+        $value = array('a');
+        Bonzai_Utils::rscandir('a', $value);
     }
 
     // WHAT: return the all directories & files into a directory
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testRscandir21()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('noread', $value = null));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0222);
+
+        try {
+            $value = null;
+            Bonzai_Utils::rscandir($dirname, $value);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testRscandir22()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('noread', $value = ''));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0222);
+
+        try {
+            $value = '';
+            Bonzai_Utils::rscandir($dirname, $value);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testRscandir23()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('noread', $value = ' '));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0222);
+
+        try {
+            $value = ' ';
+            Bonzai_Utils::rscandir($dirname, $value);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testRscandir24()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('noread', $value = array()));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0222);
+
+        try {
+            $value = array();
+            Bonzai_Utils::rscandir($dirname, $value);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testRscandir25()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('noread', $value = array('a')));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0222);
+
+        try {
+            $value = array('a');
+            Bonzai_Utils::rscandir($dirname, $value);
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir26()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('nowrite', $value = null));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0555);
+
+        $value = null;
+        $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir27()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('nowrite', $value = ''));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0555);
+
+        $value = '';
+        $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir28()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('nowrite', $value = ' '));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0555);
+
+        $value = ' ';
+        $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir29()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('nowrite', $value = array()));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0555);
+
+        $value = array();
+        $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir30()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('nowrite', $value = array('a')));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0555);
+
+        $value = array('a');
+        $this->assertEquals(array('a'), Bonzai_Utils::rscandir($dirname, $value));
+
+        chmod($dirname, 0777);
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir31()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('write', $value = null));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0777);
+
+        $value = null;
+        $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir32()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('write', $value = ''));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0777);
+
+        $value = '';
+        $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir33()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('write', $value = ' '));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0777);
+
+        $value = ' ';
+        $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir34()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('write', $value = array()));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0777);
+
+        $value = array();
+        $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
+        rmdir($dirname);
     }
 
     // WHAT: return the all directories & files into a directory
     public function testRscandir35()
     {
-        $this->assertEmpty(Bonzai_Utils::rscandir('write', $value = array('a')));
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0777);
+
+        $value = array('a');
+        $this->assertEquals(array('a'), Bonzai_Utils::rscandir($dirname, $value));
+        rmdir($dirname);
     }
 
     // WHAT: get the file's content
@@ -426,24 +577,41 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
+        chmod($filename, 0333);
 
-        $this->assertEmpty(Bonzai_Utils::getFileContent($filename));
+        try {
+            Bonzai_Utils::getFileContent($filename);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($filename, 0777);
         unlink($filename);
     }
 
     // WHAT: get the file's content
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testGetFileContent6()
     {
-        $this->assertNull(Bonzai_Utils::getFileContent('noread'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0555);
+
+        $this->assertEmpty(Bonzai_Utils::getFileContent($filename));
+
+        chmod($filename, 0777);
+        unlink($filename);
     }
 
     // WHAT: get the file's content
     public function testGetFileContent7()
     {
-        $this->assertEmpty(Bonzai_Utils::getFileContent('read'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::getFileContent($filename);
+
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
@@ -558,116 +726,200 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     public function testPutFileContent13()
     {
         $this->assertEquals(0, Bonzai_Utils::putFileContent('a', null));
+
+        unlink('a');
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent14()
     {
         $this->assertEquals(0, Bonzai_Utils::putFileContent('a', ''));
+
+        unlink('a');
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent15()
     {
         $this->assertEquals(1, Bonzai_Utils::putFileContent('a', ' '));
+
+        unlink('a');
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent16()
     {
         $this->assertEquals(1, Bonzai_Utils::putFileContent('a', 'a'));
+
+        unlink('a');
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent17()
     {
-        Bonzai_Utils::putFileContent('empty', null);
-        $this->assertEmpty(file_get_contents('empty'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::putFileContent($filename, null);
+        $this->assertEmpty(file_get_contents($filename));
+
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent18()
     {
-        Bonzai_Utils::putFileContent('empty', '');
-        $this->assertEmpty(file_get_contents('empty'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::putFileContent($filename, '');
+        $this->assertEmpty(file_get_contents($filename));
+
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent19()
     {
-        Bonzai_Utils::putFileContent('empty', ' ');
-        $this->assertEquals(' ', file_get_contents('empty'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::putFileContent($filename, ' ');
+        $this->assertEquals(' ', file_get_contents($filename));
+
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent20()
     {
-        Bonzai_Utils::putFileContent('empty', 'a');
-        $this->assertEquals('a', file_get_contents('empty'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::putFileContent($filename, 'a');
+        $this->assertEquals('a', file_get_contents($filename));
+
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testPutFileContent21()
     {
-        $this->assertEmpty(Bonzai_Utils::putFileContent('nowrite', null));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0555);
+
+        try {
+            Bonzai_Utils::putFileContent($filename, null);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($filename, 0777);
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testPutFileContent22()
     {
-        $this->assertEmpty(Bonzai_Utils::putFileContent('nowrite', ''));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0555);
+
+        try {
+            Bonzai_Utils::putFileContent($filename, '');
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($filename, 0777);
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testPutFileContent23()
     {
-        $this->assertEmpty(Bonzai_Utils::putFileContent('nowrite', ' '));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0555);
+
+        try {
+            Bonzai_Utils::putFileContent($filename, ' ');
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($filename, 0777);
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
-    /**
-     * @expectedException Bonzai_Exception
-     */
     public function testPutFileContent24()
     {
-        $this->assertEmpty(Bonzai_Utils::putFileContent('nowrite', 'a'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0555);
+
+        try {
+            Bonzai_Utils::putFileContent($filename, 'a');
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        chmod($filename, 0777);
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent25()
     {
-        Bonzai_Utils::putFileContent('write', null);
-        $this->assertEmpty(file_get_contents('write'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::putFileContent($filename, null);
+        $this->assertEmpty(file_get_contents($filename));
+
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent26()
     {
-        Bonzai_Utils::putFileContent('write', '');
-        $this->assertEmpty(file_get_contents('write'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::putFileContent($filename, '');
+        $this->assertEmpty(file_get_contents($filename));
+
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent27()
     {
-        Bonzai_Utils::putFileContent('write', ' ');
-        $this->assertEquals(' ', file_get_contents('write'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::putFileContent($filename, ' ');
+        $this->assertEquals(' ', file_get_contents($filename));
+
+        unlink($filename);
     }
 
     // WHAT: return the status of saving
     public function testPutFileContent28()
     {
-        Bonzai_Utils::putFileContent('write', 'a');
-        $this->assertEquals('a', file_get_contents('write'));
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+
+        Bonzai_Utils::putFileContent($filename, 'a');
+        $this->assertEquals('a', file_get_contents($filename));
+
+        unlink($filename);
     }
 
     public function testMessage()

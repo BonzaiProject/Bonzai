@@ -60,10 +60,10 @@ class Bonzai_Task
     {
         $this->parameters = $options;
 
-        $parameters = $options->getNonOptions();
-        if (!empty($parameters)) {
+        $options = $this->parameters->getNonOptions();
+        if (!empty($options)) {
             $this->task       = 'Bonzai_Encoder';
-            $this->parameters = $parameters;
+            $this->parameters = $options;
         }
     }
     // }}}
