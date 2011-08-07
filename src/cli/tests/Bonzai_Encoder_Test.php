@@ -26,7 +26,6 @@
 
 require_once dirname(__FILE__) . '/../libs/Tests/TestCase.php';
 require_once dirname(__FILE__) . '/../libs/Exception/Exception.php';
-require_once dirname(__FILE__) . '/../libs/Converter/Converter.php';
 require_once dirname(__FILE__) . '/../libs/Utils/Utils.php';
 require_once dirname(__FILE__) . '/../libs/Registry/Registry.php';
 require_once dirname(__FILE__) . '/../libs/Encoder/Encoder.php';
@@ -43,35 +42,50 @@ require_once dirname(__FILE__) . '/../libs/Encoder/Encoder.php';
  */
 class Bonzai_Encoder_Test extends Bonzai_TestCase
 {
+    // {{{ testProcessFile1
     // WHAT: process a file
     /**
+     * @access public
+     * @return void
      * @expectedException Bonzai_Exception
      */
     public function testProcessFile1()
     {
         $this->assertEmpty($this->object->processFile(null));
     }
+    // }}}
 
+    // {{{ testProcessFile2
     // WHAT: process a file
     /**
+     * @access public
+     * @return void
      * @expectedException Bonzai_Exception
      */
     public function testProcessFile2()
     {
         $this->assertEmpty($this->object->processFile(''));
     }
+    // }}}
 
+    // {{{ testProcessFile3
     // WHAT: process a file
     /**
+     * @access public
+     * @return void
      * @expectedException Bonzai_Exception
      */
     public function testProcessFile3()
     {
         $this->assertEmpty($this->object->processFile(' '));
     }
+    // }}}
 
+    // {{{ testProcessFile4
     // WHAT: process a file
     /**
+     * @access public
+     * @return void
      * @expectedException Bonzai_Exception
      */
     public function testProcessFile4()
@@ -80,8 +94,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
         unlink('a');
     }
+    // }}}
 
+    // {{{ testProcessFile5
     // WHAT: process a file
+    /**
+     * @access public
+     * @return void
+     */
     public function testProcessFile5()
     {
         $filename = tempnam('.', 'test_');
@@ -96,8 +116,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
         unlink($filename);
     }
+    // }}}
 
+    // {{{ testProcessFile6
     // WHAT: process a file
+    /**
+     * @access public
+     * @return void
+     */
     public function testProcessFile6()
     {
         $filename = tempnam('.', 'test_');
@@ -114,8 +140,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         chmod($filename, 0777);
         unlink($filename);
     }
+    // }}}
 
+    // {{{ testProcessFile7
     // WHAT: process a file
+    /**
+     * @access public
+     * @return void
+     */
     public function testProcessFile7()
     {
         $filename = tempnam('.', 'test_');
@@ -125,44 +157,66 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
         unlink($filename);
     }
+    // }}}
 
+    // {{{ testGetByteCode1
     // WHAT: get the bytecode
     /**
+     * @access public
+     * @return void
      * @expectedException Bonzai_Exception
      */
     public function testGetByteCode1()
     {
         $this->assertNull($this->object->getByteCode(null));
     }
+    // }}}
 
+    // {{{ testGetByteCode2
     // WHAT: get the bytecode
     /**
+     * @access public
+     * @return void
      * @expectedException Bonzai_Exception
      */
     public function testGetByteCode2()
     {
         $this->assertNull($this->object->getByteCode(''));
     }
+    // }}}
 
+    // {{{ testGetByteCode3
     // WHAT: get the bytecode
     /**
+     * @access public
+     * @return void
      * @expectedException Bonzai_Exception
      */
     public function testGetByteCode3()
     {
         $this->assertNull($this->object->getByteCode(' '));
     }
+    // }}}
 
+    // {{{ testGetByteCode4
     // WHAT: get the bytecode
     /**
+     * @access public
+     * @return void
      * @expectedException Bonzai_Exception
      */
     public function testGetByteCode4()
     {
         $this->assertEmpty($this->object->getByteCode('a'));
     }
+    // }}}
 
+    // {{{ testGetByteCode5
     // WHAT: get the bytecode
+    /**
+     * @access public
+     * @return void
+     */
     public function testGetByteCode5()
     {
         $filename = tempnam('.', 'test_');
@@ -177,8 +231,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
         unlink($filename);
     }
+    // }}}
 
+    // {{{ testGetByteCode6
     // WHAT: get the bytecode
+    /**
+     * @access public
+     * @return void
+     */
     public function testGetByteCode6()
     {
         $filename = tempnam('.', 'test_');
@@ -194,8 +254,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
         unlink($filename);
     }
+    // }}}
 
+    // {{{ testGetByteCode7
     // WHAT: get the bytecode
+    /**
+     * @access public
+     * @return void
+     */
     public function testGetByteCode7()
     {
         $filename = tempnam('.', 'test_');
@@ -205,13 +271,16 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
         unlink($filename);
     }
+    // }}}
 
+    // {{{ testExpandPathsToFiles
+    /**
+     * @access public
+     * @return void
+     */
     public function testExpandPathsToFiles()
     {
-        // TODO:   $this->object->expandPathsToFiles($files);
-        // INPUT:  files
-        // OUTPUT: void
-        // WHAT:   explode dir in files list
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
+    // }}}
 }

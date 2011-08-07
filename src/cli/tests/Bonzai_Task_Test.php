@@ -39,12 +39,14 @@ require_once dirname(__FILE__) . '/../libs/Task/Task.php';
  */
 class Bonzai_Task_Test extends Bonzai_TestCase
 {
+    // {{{ testLoad
+    /**
+     * @access public
+     * @return void
+     */
     public function testLoad()
     {
-        // TODO: $this->object->load(Bonzai_Utils_Options $options);
-        // INPUT:  options
-        // OUTPUT: void
-        // WHAT:   set the options
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
+    // }}}
 }
