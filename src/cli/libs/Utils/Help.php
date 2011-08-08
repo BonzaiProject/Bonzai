@@ -44,19 +44,19 @@ class Bonzai_Utils_Help
      */
     public function elaborate(Bonzai_Utils_Options $options)
     {
-        printf('BONZAI' . str_repeat(' ', 50));
-        printf('(previously phpGuardian)' . PHP_EOL);
+        echo 'BONZAI' . str_repeat(' ', 50);
+        echo gettext('(previously phpGuardian)') . PHP_EOL;
 
-        printf(str_repeat('-', 80) . PHP_EOL);
-        printf('Version: 0.1' . PHP_EOL);
-        printf('Copyright (C) 2006 - %s Bonzai (Fabio Cicerchia).'
-               . ' All rights reserved.' . PHP_EOL, date('Y'));
-        printf('License MIT or GNU GPL 2' . PHP_EOL);
-        printf(str_repeat('-', 80) . PHP_EOL);
+        echo str_repeat('-', 80) . PHP_EOL;
+        echo gettext('Version') . ': 0.1' . PHP_EOL);
+        echo 'Copyright (C) 2006 - ' . date('Y') . '%s Bonzai (Fabio Cicerchia). '
+               . gettext('All rights reserved.') . PHP_EOL;
+        echo gettext('License MIT or GNU GPL 2') . PHP_EOL;
+        echo str_repeat('-', 80) . PHP_EOL;
 
         if (is_null($options->getOption('version'))) {
-            printf(PHP_EOL . '%s' . PHP_EOL . '%s [%s]... [%s|%s]' . PHP_EOL . PHP_EOL, _('Usage:'), $_SERVER['argv'][0], _('OPTIONS'), _('FILE'), _('DIRECTORY'));
-            printf('%s' . PHP_EOL, _('Options:'));
+            echo PHP_EOL . gettext('Usage') . ':' . PHP_EOL . $_SERVER['argv'][0]' [' . gettext('OPTIONS') . ']... [' . gettext('FILE') . '|' . gettext('DIRECTORY') . ']' . PHP_EOL . PHP_EOL;
+            echo gettext('Options') . ':' . PHP_EOL;
             foreach($options->getParameters() as $short => $long) {
                 $has_value = strpos($short, ':') > 0;
 
@@ -68,10 +68,10 @@ class Bonzai_Utils_Help
                     $info .= '=<value>';
                 }
 
-                $row = sprintf('    ' . str_pad($info, 30, ' ') . '%s' . PHP_EOL, _($options->getLabelParameter($long)));
+                $row = sprintf('    ' . str_pad($info, 30, ' ') . '%s' . PHP_EOL, gettext($options->getLabelParameter($long)));
                 echo wordwrap($row, 80, "\n" . str_repeat(' ', 34), true);
             }
-            printf(PHP_EOL . 'Report bugs to info@bonzai-project.org' . PHP_EOL);
+            echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org') . PHP_EOL;
         }
     }
     // }}}

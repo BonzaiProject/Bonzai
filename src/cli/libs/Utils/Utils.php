@@ -40,23 +40,24 @@ class Bonzai_Utils
     /**
      * @static
      * @access public
-     * @param  string $file
+     * @param  string $filename
      * @throws Bonzai_Exception
      * @return string
      */
-    public static function getFilePath($file)
+    public static function getFilePath($filename)
     {
-        $file = trim($file);
+        $filename = trim($filename);
 
-        if (!empty($file) && (!file_exists(dirname($file)) || dirname($file) == '.')) {
-            $file = getcwd() . '/' . $file;
+        if (!empty($filename) && (!file_exists(dirname($filename)) || dirname($filename) == '.')) {
+            $filename = getcwd() . '/' . $filename;
         }
 
-        if (!is_readable($file)) {
-            throw new Bonzai_Exception('The file `' . $file . '` cannot be opened'); // UNCATCHED
+        if (!is_readable($filename)) {
+            $message = gettext('The file `%s` cannot be opened.');
+            throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
         }
 
-        return $file;
+        return $filename;
     }
     // }}}
 
@@ -75,7 +76,8 @@ class Bonzai_Utils
             $backup_filename = $filename . '.orig';
 
             if (!is_writable($backup_filename)) {
-                throw new Bonzai_Exception('The file `' . $backup_filename . '` cannot be written'); // UNCATCHED
+                $message = gettext('The file `%s` cannot be written.');
+                throw new Bonzai_Exception(sprintf($message, $backup_filename)); // UNCATCHED
             }
 
             file_put_contents($backup_filename, self::getFileContent($filename));
@@ -95,7 +97,8 @@ class Bonzai_Utils
     public static function rscandir($base = '', &$data = array())
     {
         if (!is_readable($base) && !is_executable($base)) {
-            throw new Bonzai_Exception('The directory `' . $base . '` cannot be opened'); // UNCATCHED
+            $message = gettext('The directory `%s` cannot be opened.');
+            throw new Bonzai_Exception(sprintf($message, $base)); // UNCATCHED
         }
 
         if (!is_array($data)) {
@@ -129,7 +132,8 @@ class Bonzai_Utils
     public static function getFileContent($filename)
     {
         if (!is_readable($filename)) {
-            throw new Bonzai_Exception('The file `' . $filename . '` cannot be opened'); // UNCATCHED
+            $message = gettext('The file `%s` cannot be opened.');
+            throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
         }
 
         return file_get_contents($filename);
@@ -150,7 +154,8 @@ class Bonzai_Utils
         $filename = trim($filename);
 
         if (empty($filename) || (file_exists($filename) && !is_writable($filename))) {
-            throw new Bonzai_Exception('The file `' . $filename . '` cannot be written'); // UNCATCHED
+            $message = gettext('The file `%s` cannot be written.');
+            throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
         }
 
         return file_put_contents($filename, $content);
@@ -170,15 +175,9 @@ class Bonzai_Utils
         $verbose = isset($args[1])
                    ? array_shift($args) : true;
 
-        /* TODO: if (!Bonzai_Script_Parser::$config['SETUP']['SILENT'] || ($verbose && Bonzai_Script_Parser::$config['SETUP']['Bonzai_S_VERBOSE'])) { // TODO: too long
-            $gettext_text = _($text);
+        $text = vsprintf(gettext($text), $args);
 
-            //foreach($args as $arg) {
-                //$gettext_text = str_replace('%s', $arg, $gettext_text, 1); //TODO: FIX THIS
-            //}
-
-            printf("[%d] %s\n", time(), $gettext_text);
-        }*/
+        printf("[%d] %s\n", time(), $text);
     }
     // }}}
 }

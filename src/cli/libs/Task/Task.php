@@ -80,7 +80,8 @@ class Bonzai_Task
         $class = new $class();
 
         if (!method_exists($class, 'elaborate')) {
-            throw new Bonzai_Exception('Cannot launch the task `' . $this->task . '`'); // UNCATCHED
+            $message = gettext('Cannot launch the task `%s`.');
+            throw new Bonzai_Exception(sprintf($message, $this->task)); // UNCATCHED
         }
 
         return call_user_method('elaborate', $class, $this->parameters);

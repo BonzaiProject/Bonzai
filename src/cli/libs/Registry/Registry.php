@@ -68,9 +68,7 @@ class Bonzai_Registry
      */
     public static function add($key, $value, $type = null)
     {
-        if (empty($key) || (!is_string($key) && !is_numeric($key))) {
-            throw new Bonzai_Exception('Invalid key type');
-        }
+        self::checkKeyValidity($key);
 
         if ($type === self::ARRAY_APPEND) {
             $value = array($value);
@@ -89,9 +87,7 @@ class Bonzai_Registry
      */
     public static function get($key)
     {
-        if (empty($key) || (!is_string($key) && !is_numeric($key))) {
-            throw new Bonzai_Exception('Invalid key type');
-        }
+        self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
             return self::$elements[$key];
@@ -110,9 +106,7 @@ class Bonzai_Registry
      */
     public static function remove($key)
     {
-        if (empty($key) || (!is_string($key) && !is_numeric($key))) {
-            throw new Bonzai_Exception('Invalid key type');
-        }
+        self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
             unset(self::$elements[$key]);
@@ -131,9 +125,7 @@ class Bonzai_Registry
      */
     public static function append($key, $value, $type = null)
     {
-        if (empty($key) || (!is_string($key) && !is_numeric($key))) {
-            throw new Bonzai_Exception('Invalid key type');
-        }
+        self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
             if (is_array($value)) {
@@ -148,4 +140,20 @@ class Bonzai_Registry
         }
     }
     // }}}
+
+    // {{{ checkKeyValidity
+    // TODO: ADD TO TEST
+    /**
+     * @static
+     * @access protected
+     * @param  string $key
+     * @return void
+     */
+    protected static function checkKeyValidity($key)
+    {
+        if (empty($key) || (!is_string($key) && !is_numeric($key))) {
+            $message = gettext('Invalid key type.');
+            throw new Bonzai_Exception($message);
+        }
+    }
 }

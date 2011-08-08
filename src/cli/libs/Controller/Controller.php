@@ -96,7 +96,8 @@ class Bonzai_Controller
             $filename = $this->getFileNameFromClassName($name);
 
             if (!$this->checkFile($filename)) {
-                throw new Bonzai_Exception('The class `' . $name . '` cannot be loaded'); // UNCATCHED
+                $message = gettext('The class `%s` cannot be loaded.');
+                throw new Bonzai_Exception(sprintf($message, $name)); // UNCATCHED
             }
 
             require_once dirname(__FILE__) . '/../' . $filename . '.php';

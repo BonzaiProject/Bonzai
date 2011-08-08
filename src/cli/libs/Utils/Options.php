@@ -70,7 +70,8 @@ class Bonzai_Utils_Options
     public function init($argv)
     {
         if (empty($argv) || !is_array($argv)) {
-            throw new Bonzai_Exception('Missing the script arguments'); // UNCATCHED
+            $message = gettext('Missing the script arguments.');
+            throw new Bonzai_Exception($message); // UNCATCHED
         }
 
         $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters);
@@ -89,7 +90,8 @@ class Bonzai_Utils_Options
     protected function parseOptions()
     {
         if (!is_array($this->options) || !is_array($this->non_options)) {
-            throw new Bonzai_Exception('Invalid parameters to be parsed'); // UNCATCHED
+            $message = gettext('Invalid parameters to be parsed.');
+            throw new Bonzai_Exception($message); // UNCATCHED
         }
 
         foreach($this->options as $key => $value) {

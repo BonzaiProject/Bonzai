@@ -63,7 +63,8 @@ class Bonzai_Encoder
     public function processFile($filename)
     {
         if (empty($filename) || !file_exists($filename)) {
-            throw new Bonzai_Exception('The file is invalid'); // UNCATCHED
+            $message = gettext('The file `%s` is invalid.');
+            throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
         }
 
         Bonzai_Utils::message('Start encoding file `%s\'.', false, $filename);
@@ -141,15 +142,18 @@ class Bonzai_Encoder
 
 function bonzai_get_bytecode($filename) {
     if (empty($filename) || !file_exists($filename)) {
-        throw new Bonzai_Exception('The file is invalid'); // UNCATCHED
+        $message = gettext('The file `%s` is invalid.');
+        throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
     }
 
     if (!is_readable($filename)) {
-        throw new Bonzai_Exception('The file is not readable'); // UNCATCHED
+        $message = gettext('The file `%s` is not readable.');
+        throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
     }
 
     if (filesize($filename) == 0) {
-        throw new Bonzai_Exception('The file is empty'); // UNCATCHED
+        $message = gettext('The file `%s` is empty.');
+        throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
     }
 
     $fh = fopen('/tmp/phb.phb', 'w');
