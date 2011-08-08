@@ -43,8 +43,6 @@ class Bonzai_Utils_Options
      */
     protected $parameters = array(
         'b'  => 'backup',
-        'e:' => 'ext:',
-        'a'  => 'asp',
         'h'  => 'help',
         'v'  => 'version');
 
@@ -54,8 +52,6 @@ class Bonzai_Utils_Options
      */
     protected $labels = array(
         'backup'  => 'Backup the original file, generate a .bak file (default: false)',
-    	  'ext'     => 'Parse only the file that matches the specified extension (default: php)',
-        'asp'     => 'Use the ASP tags instead PHP',
         'help'    => 'Show the help',
         'version' => 'Show the version');
     // }}}
@@ -71,7 +67,7 @@ class Bonzai_Utils_Options
     {
         if (empty($argv) || !is_array($argv)) {
             $message = gettext('Missing the script arguments.');
-            throw new Bonzai_Exception($message); // UNCATCHED
+            throw new Bonzai_Exception($message);
         }
 
         $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters);
@@ -91,7 +87,7 @@ class Bonzai_Utils_Options
     {
         if (!is_array($this->options) || !is_array($this->non_options)) {
             $message = gettext('Invalid parameters to be parsed.');
-            throw new Bonzai_Exception($message); // UNCATCHED
+            throw new Bonzai_Exception($message);
         }
 
         foreach($this->options as $key => $value) {

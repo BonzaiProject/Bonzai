@@ -28,6 +28,8 @@ require_once dirname(__FILE__) . '/../libs/Tests/TestCase.php';
 require_once dirname(__FILE__) . '/../libs/Exception/Exception.php';
 require_once dirname(__FILE__) . '/../libs/Utils/Utils.php';
 
+Bonzai_Utils::$silenced = true;
+
 /**
  * @category  Optimization & Security
  * @package   Bonzai
@@ -40,118 +42,6 @@ require_once dirname(__FILE__) . '/../libs/Utils/Utils.php';
  */
 class Bonzai_Utils_Test extends Bonzai_TestCase
 {
-    // {{{ testGetFilePath1
-    // WHAT: get the path of file
-    /**
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testGetFilePath1()
-    {
-        Bonzai_Utils::getFilePath(null);
-    }
-    // }}}
-
-    // {{{ testGetFilePath2
-    // WHAT: get the path of file
-    /**
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testGetFilePath2()
-    {
-        Bonzai_Utils::getFilePath('');
-    }
-    // }}}
-
-    // {{{ testGetFilePath3
-    // WHAT: get the path of file
-    /**
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testGetFilePath3()
-    {
-        Bonzai_Utils::getFilePath(' ');
-    }
-    // }}}
-
-    // {{{ testGetFilePath4
-    // WHAT: get the path of file
-    /**
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testGetFilePath4()
-    {
-        Bonzai_Utils::getFilePath('a');
-    }
-    // }}}
-
-    // {{{ testGetFilePath5
-    // WHAT: get the path of file
-    /**
-     * @access public
-     * @return void
-     */
-    public function testGetFilePath5()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, 'aaa');
-        chmod($filename, 0333);
-
-        try {
-            Bonzai_Utils::getFilePath($filename);
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
-
-        chmod($filename, 0777);
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ testGetFilePath6
-    // WHAT: get the path of file
-    /**
-     * @access public
-     * @return void
-     */
-    public function testGetFilePath6()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, 'aaa');
-        chmod($filename, 0555);
-
-        $this->assertEquals($filename, Bonzai_Utils::getFilePath($filename));
-
-        chmod($filename, 0777);
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ testGetFilePath7
-    // WHAT: get the path of file
-    /**
-     * @access public
-     * @return void
-     */
-    public function testGetFilePath7()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, 'aaa');
-
-        Bonzai_Utils::getFilePath($filename);
-
-        unlink($filename);
-    }
-    // }}}
-
 // {{{ testRenameFile
     /**
      * @access public

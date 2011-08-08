@@ -147,13 +147,14 @@ class Bonzai_Registry
      * @static
      * @access protected
      * @param  string $key
+     * @throws Bonzai_Exception
      * @return void
      */
     protected static function checkKeyValidity($key)
     {
         if (empty($key) || (!is_string($key) && !is_numeric($key))) {
             $message = gettext('Invalid key type.');
-            throw new Bonzai_Exception($message);
+            throw new Bonzai_Exception($message); // UNCATCHED
         }
     }
 }

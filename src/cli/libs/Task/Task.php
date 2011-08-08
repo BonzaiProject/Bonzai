@@ -81,10 +81,10 @@ class Bonzai_Task
 
         if (!method_exists($class, 'elaborate')) {
             $message = gettext('Cannot launch the task `%s`.');
-            throw new Bonzai_Exception(sprintf($message, $this->task)); // UNCATCHED
+            throw new Bonzai_Exception(sprintf($message, $this->task));
         }
 
-        return call_user_method('elaborate', $class, $this->parameters);
+        return $class->elaborate($this->parameters);
     }
     // }}}
 
@@ -98,7 +98,12 @@ class Bonzai_Task
     {
         $this->load($options);
 
-        return $this->execute();
+        try {
+            return $this->execute();
+        } catch (Bonzai_Exception $e) {
+            $faultback = new Bonzai_Utils_Help();
+            return $faultback->elaborate(new Bonzai_Utils_Options());
+        }
     }
     // }}}
 }

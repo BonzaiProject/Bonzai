@@ -30,6 +30,8 @@ require_once dirname(__FILE__) . '/../libs/Utils/Utils.php';
 require_once dirname(__FILE__) . '/../libs/Registry/Registry.php';
 require_once dirname(__FILE__) . '/../libs/Encoder/Encoder.php';
 
+Bonzai_Utils::$silenced = true;
+
 /**
  * @category  Optimization & Security
  * @package   Bonzai
@@ -107,12 +109,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
 
-        try {
-            $this->object->processFile($filename);
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
+        $this->object->processFile($filename);
 
         unlink($filename);
     }
@@ -130,12 +127,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         file_put_contents($filename, 'aaa');
         chmod($filename, 0333);
 
-        try {
-            $this->object->processFile($filename);
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
+        $this->assertEmpty($this->object->processFile($filename));
 
         chmod($filename, 0777);
         unlink($filename);
@@ -164,7 +156,6 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     /**
      * @access public
      * @return void
-     * @expectedException Bonzai_Exception
      */
     public function testGetByteCode1()
     {
@@ -177,7 +168,6 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     /**
      * @access public
      * @return void
-     * @expectedException Bonzai_Exception
      */
     public function testGetByteCode2()
     {
@@ -190,7 +180,6 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     /**
      * @access public
      * @return void
-     * @expectedException Bonzai_Exception
      */
     public function testGetByteCode3()
     {
@@ -203,7 +192,6 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     /**
      * @access public
      * @return void
-     * @expectedException Bonzai_Exception
      */
     public function testGetByteCode4()
     {
@@ -222,12 +210,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
 
-        try {
-            $this->object->getByteCode($filename);
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
+        $this->assertNull($this->object->getByteCode($filename));
 
         unlink($filename);
     }
@@ -245,12 +228,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         file_put_contents($filename, '');
         chmod($filename, 0700);
 
-        try {
-            $this->object->getByteCode($filename);
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
+        $this->assertNull($this->object->getByteCode($filename));
 
         unlink($filename);
     }

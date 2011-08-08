@@ -36,29 +36,13 @@
  */
 class Bonzai_Utils
 {
-    // {{{ getFilePath
+    // {{{ PROPERTIES
     /**
      * @static
      * @access public
-     * @param  string $filename
-     * @throws Bonzai_Exception
-     * @return string
+     * @var    boolean
      */
-    public static function getFilePath($filename)
-    {
-        $filename = trim($filename);
-
-        if (!empty($filename) && (!file_exists(dirname($filename)) || dirname($filename) == '.')) {
-            $filename = getcwd() . '/' . $filename;
-        }
-
-        if (!is_readable($filename)) {
-            $message = gettext('The file `%s` cannot be opened.');
-            throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
-        }
-
-        return $filename;
-    }
+    public static $silenced = false;
     // }}}
 
     // {{{ renameFile
@@ -98,7 +82,7 @@ class Bonzai_Utils
     {
         if (!is_readable($base) && !is_executable($base)) {
             $message = gettext('The directory `%s` cannot be opened.');
-            throw new Bonzai_Exception(sprintf($message, $base)); // UNCATCHED
+            throw new Bonzai_Exception(sprintf($message, $base));
         }
 
         if (!is_array($data)) {
@@ -108,12 +92,16 @@ class Bonzai_Utils
         $array = array_diff(scandir($base), array('.', '..'));
 
         foreach($array as $value) {
-            $path = $base . '/' . $value;
-            if (is_dir($path)) {
-                $data[] = $path . '/';
-                $data = Bonzai_Utils::rscandir($path, $data);
-            } elseif (is_file($path)) {
-                $data[] = $path;
+            try {
+                $path = $base . '/' . $value;
+                if (is_dir($path)) {
+                    $data[] = $path . '/';
+                    $data = Bonzai_Utils::rscandir($path, $data);
+                } elseif (is_file($path)) {
+                    $data[] = $path;
+                }
+            } catch (Bonzai_Exception $e) {
+                Bonzai_Utils::message('The directory `%s` was skipped because not readable.', $path);
             }
         }
 
@@ -129,11 +117,11 @@ class Bonzai_Utils
      * @throws Bonzai_Exception
      * @return string
      */
-    public static function getFileContent($filename)
+    public static function getFileContent($filename) // UNUSED
     {
         if (!is_readable($filename)) {
             $message = gettext('The file `%s` cannot be opened.');
-            throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
+            throw new Bonzai_Exception(sprintf($message, $filename));
         }
 
         return file_get_contents($filename);
@@ -155,7 +143,7 @@ class Bonzai_Utils
 
         if (empty($filename) || (file_exists($filename) && !is_writable($filename))) {
             $message = gettext('The file `%s` cannot be written.');
-            throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
+            throw new Bonzai_Exception(sprintf($message, $filename));
         }
 
         return file_put_contents($filename, $content);
@@ -170,14 +158,14 @@ class Bonzai_Utils
      */
     public static function message()
     {
-        $args    = func_get_args();
-        $text    = array_shift($args);
-        $verbose = isset($args[1])
-                   ? array_shift($args) : true;
+        if (!self::$silenced) {
+            $args = func_get_args();
+            $text = array_shift($args);
 
-        $text = vsprintf(gettext($text), $args);
+            $text = vsprintf(gettext($text), $args);
 
-        printf("[%d] %s\n", time(), $text);
+            printf("[%d] %s" . PHP_EOL, time(), $text);
+        }
     }
     // }}}
 }

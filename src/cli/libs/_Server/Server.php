@@ -98,9 +98,7 @@ class Bonzai_Server
     {
         $this->data = $data;
 
-        if (file_exists($this->exec_file)) {
-            $this->_exec_file_content = file_get_contents($this->exec_file);
-        }
+        $this->_exec_file_content = Bonzai_Utils::getFileContent($this->exec_file);
     }
     // }}}
 
@@ -131,7 +129,9 @@ class Bonzai_Server
         $placeholder['%e']  = $this->getValue($param_arr, 'SERVER_ADMIN');
 
         $string = $this->log_format;
-        foreach($placeholder as $key => $value) $string = str_replace($key, $value, $string);
+        foreach($placeholder as $key => $value) {
+            $string = str_replace($key, $value, $string);
+        }
 
         $fp = fopen($this->log_file, 'a');
         fwrite($fp, $string . PHP_EOL);

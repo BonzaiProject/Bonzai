@@ -65,7 +65,12 @@ class Bonzai_Controller
     public function elaborate()
     {
         $this->options = new Bonzai_Utils_Options();
-        $this->options->init($_SERVER['argv']);
+
+        try {
+            $this->options->init($_SERVER['argv']);
+        } catch (Bonzai_Exception $e) {
+            $this->options->init(array()); // NOT SURE FOR THIS
+        }
 
         $this->handleTask();
     }
@@ -97,7 +102,7 @@ class Bonzai_Controller
 
             if (!$this->checkFile($filename)) {
                 $message = gettext('The class `%s` cannot be loaded.');
-                throw new Bonzai_Exception(sprintf($message, $name)); // UNCATCHED
+                throw new Bonzai_Exception(sprintf($message, $name));
             }
 
             require_once dirname(__FILE__) . '/../' . $filename . '.php';

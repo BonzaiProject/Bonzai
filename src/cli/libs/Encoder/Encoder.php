@@ -40,15 +40,18 @@ class Bonzai_Encoder
     /**
      * @access public
      * @param  array $files
-     * @throws Bonzai_Exception
      * @return void
      */
     public function elaborate($files)
     {
         $this->expandPathsToFiles($files);
 
-        foreach($files as $filename) {
-            $this->processFile($filename);
+        try {
+            foreach($files as $filename) {
+                $this->processFile($filename);
+            }
+        } catch (Bonzai_Exception $e) {
+            // The file `%s` is invalid.
         }
     }
     // }}}
@@ -64,16 +67,16 @@ class Bonzai_Encoder
     {
         if (empty($filename) || !file_exists($filename)) {
             $message = gettext('The file `%s` is invalid.');
-            throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
+            throw new Bonzai_Exception(sprintf($message, $filename));
         }
 
-        Bonzai_Utils::message('Start encoding file `%s\'.', false, $filename);
+        Bonzai_Utils::message('Start encoding file `%s\'.', $filename);
 
         $bytecode = $this->getByteCode($filename);
 
         //Bonzai_Utils::renameFile($filename, $backup = true); // ???
 
-        Bonzai_Utils::message("Saving %s bytes...", true, strlen($bytecode));
+        Bonzai_Utils::message("Saving %s bytes...", strlen($bytecode));
 
         $this->saveOutput($filename, $bytecode);
     }
@@ -88,12 +91,17 @@ class Bonzai_Encoder
      */
     public function saveOutput($filename, $bytecode)
     {
-        $bytecode = wordwrap($bytecode, 80, "\n             ", true);
-        $final_content = '<' . '?php' . PHP_EOL . PHP_EOL . '# BONZAI START BLOCK #####' . PHP_EOL;
-        $final_content .= 'bonzai_exec("' . $bytecode . '");';
-        $final_content .= PHP_EOL . '# BONZAI END BLOCK #######' . PHP_EOL . '?' . '>';
+        $bytecode = wordwrap($bytecode, 80, PHP_EOL . "             ", true);
+        $content  = '<' . '?php' . PHP_EOL . PHP_EOL . '# BONZAI START BLOCK #####' . PHP_EOL;
+        $content .= 'bonzai_exec("' . $bytecode . '");';
+        $content .= PHP_EOL . '# BONZAI END BLOCK #######' . PHP_EOL . '?' . '>';
 
-        Bonzai_Utils::putFileContent($filename, $final_content);
+        try {
+            Bonzai_Utils::putFileContent($filename, $content);
+        } catch (Bonzai_Exception $e) {
+             Bonzai_Utils::message('The file `%s` was skipped because cannot be able to save it.', $filename);
+             Bonzai_Registry::append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND);
+        }
     }
     // }}}
 
@@ -105,11 +113,13 @@ class Bonzai_Encoder
      */
     public function getByteCode($filename)
     {
-        $bytecode = bonzai_get_bytecode($filename); // TODO: into ext
+        $bytecode = null;
 
-        if (empty($bytecode)) {
+        try {
+            $bytecode = bonzai_get_bytecode($filename); // TODO: into ext
+        } catch (Bonzai_Exception $e) {
             Bonzai_Registry::append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND);
-            Bonzai_Utils::message('ERROR: The generated data is empty.', false);
+            Bonzai_Utils::message('Cannot handle the file `%s`.', $filename);
         }
 
         return $bytecode;
@@ -128,10 +138,14 @@ class Bonzai_Encoder
             $files[$key] = realpath(getcwd() . '/' . $path);
             $path        = $files[$key];
 
-            if (is_dir($path)) {
-                unset($files[$key]);
-                $new_files = preg_grep('/\.php$/', Bonzai_Utils::rscandir($path));
-                array_merge($files, $new_files);
+            try {
+                if (is_dir($path)) {
+                    unset($files[$key]);
+                    $new_files = preg_grep('/\.php$/', Bonzai_Utils::rscandir($path));
+                    array_merge($files, $new_files);
+                }
+            } catch (Bonzai_Exception $e) {
+                Bonzai_Utils::message('The directory `%s` was skipped because not readable.', $path);
             }
         }
     }
@@ -143,17 +157,17 @@ class Bonzai_Encoder
 function bonzai_get_bytecode($filename) {
     if (empty($filename) || !file_exists($filename)) {
         $message = gettext('The file `%s` is invalid.');
-        throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
+        throw new Bonzai_Exception(sprintf($message, $filename));
     }
 
     if (!is_readable($filename)) {
         $message = gettext('The file `%s` is not readable.');
-        throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
+        throw new Bonzai_Exception(sprintf($message, $filename));
     }
 
     if (filesize($filename) == 0) {
         $message = gettext('The file `%s` is empty.');
-        throw new Bonzai_Exception(sprintf($message, $filename)); // UNCATCHED
+        throw new Bonzai_Exception(sprintf($message, $filename));
     }
 
     $fh = fopen('/tmp/phb.phb', 'w');
@@ -162,7 +176,7 @@ function bonzai_get_bytecode($filename) {
     //bcompiler_write_footer($fh);
     fclose($fh);
 
-    $content = file_get_contents('/tmp/phb.phb');
+    $content = Bonzai_Utils::getFileContent('/tmp/phb.phb');
     unlink('/tmp/phb.phb');
 
     $content = convert_to_hex(gzcompress($content, 9));
