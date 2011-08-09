@@ -69,7 +69,7 @@ class Bonzai_Controller
         try {
             $this->options->init($_SERVER['argv']);
         } catch (Bonzai_Exception $e) {
-            $this->options->init(array()); // NOT SURE FOR THIS
+            $this->options->init(array()); // TODO: NOT SURE FOR THIS
         }
 
         $this->handleTask();

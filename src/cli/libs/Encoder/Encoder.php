@@ -51,7 +51,7 @@ class Bonzai_Encoder
                 $this->processFile($filename);
             }
         } catch (Bonzai_Exception $e) {
-            // The file `%s` is invalid.
+            // TODO: The file `%s` is invalid.
         }
     }
     // }}}
@@ -74,7 +74,7 @@ class Bonzai_Encoder
 
         $bytecode = $this->getByteCode($filename);
 
-        //Bonzai_Utils::renameFile($filename, $backup = true); // ???
+        //Bonzai_Utils::renameFile($filename, $backup = true); // TODO: ???
 
         Bonzai_Utils::message("Saving %s bytes...", strlen($bytecode));
 
@@ -171,9 +171,7 @@ function bonzai_get_bytecode($filename) {
     }
 
     $fh = fopen('/tmp/phb.phb', 'w');
-    //bcompiler_write_header($fh);
     bcompiler_write_file($fh, $filename);
-    //bcompiler_write_footer($fh);
     fclose($fh);
 
     $content = Bonzai_Utils::getFileContent('/tmp/phb.phb');

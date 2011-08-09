@@ -54,7 +54,7 @@ class Bonzai_Utils
      * @throws Bonzai_Exception
      * @return void
      */
-    public static function renameFile($filename, $backup = true)
+    public static function renameFile($filename, $backup = true) // TODO: UNUSED
     {
         if ($backup) {
             $backup_filename = $filename . '.orig';
@@ -117,7 +117,7 @@ class Bonzai_Utils
      * @throws Bonzai_Exception
      * @return string
      */
-    public static function getFileContent($filename) // UNUSED
+    public static function getFileContent($filename) // TODO: UNUSED
     {
         if (!is_readable($filename)) {
             $message = gettext('The file `%s` cannot be opened.');
