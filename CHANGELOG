@@ -26,8 +26,7 @@ v4.0dev     phpGuardian
 
 v3.1        phpGuardian
 * ADDED   - 4 missing files
-
-* Fixed error in logger.php
+* FIXED   - Error in Logger Server
 
 v3.0        phpGuardian
 * ADDED   - Administration Panel to configure all options
