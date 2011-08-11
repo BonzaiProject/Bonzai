@@ -23,48 +23,33 @@
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <ctype.h>
-#include <math.h>
-#include <string.h>
-#include "php.h"
-#include "php_ini.h"
-#include "../standard/head.h"
-#include "../standard/html.h"
-#include "../standard/css.h"
-#include "../standard/php_var.h"
-#include "../standard/base64.h"
-#include "../standard/file.h"
-//#include "../zlib/zlib.c"
-//#include "../zlib/zlib_fopen_wrapper.c"
-//#include "../zlib/zlib_filter.c"
-//#include "../zlib/php_zlib.hi"
-#include "SAPI.h"
-#include "zend_extensions.h"
 #include "bonzai.h"
-#include "logos.h"
 
-#define BONZAI_MAX_LEN 4096
-#define BONZAI_VERSION "0.1"
-#define SAPI_BONZAI_VERSION_HEADER "X-Encoded-By: Bonzai v" BONZAI_VERSION
+#ifdef PHP_WIN32
+    #define PHP_ZLIB_MODIFIER 100
+#else
+    #define PHP_ZLIB_MODIFIER 1000
+#endif
+    #define Z_OK            0
+    #define Z_BUF_ERROR    (-5)
+
+#pragma pack(1)
 
 static function_entry bonzai_functions[] = {
     PHP_FE(bonzai_exec, NULL)
     PHP_FE(bonzai_info, NULL)
     PHP_FE(bonzai_credits, NULL)
     PHP_FE(bonzai_version, NULL)
-    PHP_FE(bonzai_log, NULL)
+    PHP_FE(bonzai_get_bytecode, NULL)
     {NULL, NULL, NULL}
 };
 
 zend_module_entry bonzai_module_entry = {
-#if ZEND_MODULE_API_NO >= 20010901
+#if ZEND_MODULE_API_NO >= 20050922
+    STANDARD_MODULE_HEADER_EX,
+    NULL,
+    NULL,
+#else
     STANDARD_MODULE_HEADER,
 #endif
     PHP_BONZAI_EXTNAME,
@@ -84,36 +69,70 @@ zend_module_entry bonzai_module_entry = {
 ZEND_GET_MODULE(bonzai)
 #endif
 
-PHP_INI_BEGIN()
-    PHP_INI_ENTRY("bonzai.log_server", "", PHP_INI_ALL, NULL)
-    PHP_INI_ENTRY("bonzai.error_connection", "", PHP_INI_ALL, NULL)
-    PHP_INI_ENTRY("bonzai.not_reachable_die", "", PHP_INI_ALL, NULL)
-PHP_INI_END()
-
-PHP_MINIT_FUNCTION(bonzai)
-{
+// {{{ PHP_MINIT_FUNCTION
+PHP_MINIT_FUNCTION(bonzai) {
     php_register_info_logo(BONZAI_LOGO_GUID, "image/gif", bonzai_logo, sizeof(bonzai_logo));
 
     REGISTER_STRING_CONSTANT("BONZAI_VERSION", PHP_BONZAI_VERSION, CONST_CS | CONST_PERSISTENT);
-    REGISTER_INI_ENTRIES();
 
     return SUCCESS;
 }
+// }}}
 
-PHP_MSHUTDOWN_FUNCTION(bonzai)
-{
-    UNREGISTER_INI_ENTRIES();
-
+// {{{ PHP_MSHUTDOWN_FUNCTION
+PHP_MSHUTDOWN_FUNCTION(bonzai) {
     return SUCCESS;
 }
+// }}}
 
-PHP_MINFO_FUNCTION(bonzai)
-{
+// {{{ PHP_MINFO_FUNCTION
+PHP_MINFO_FUNCTION(bonzai) {
     php_info_print_table_start();
     php_info_print_table_row(2, "Bonzai support", "enabled");
     php_info_print_table_row(2, "Bonzai version", PHP_BONZAI_VERSION);
     php_info_print_table_end();
 }
+// }}}
+
+// FUNCTION FOR PUBLIC USE
+
+// {{{ PHP_FUNCTION bonzai_credits
+/**
+ * Print the credits of bonzai project
+ */
+PHP_FUNCTION(bonzai_credits)
+{
+    if (sapi_module.phpinfo_as_text) {
+        PUTS("bonzai_credits()\n");
+    } else {
+        PUTS("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"DTD/xhtml1-transitional.dtd\">\n");
+        PUTS("<html>");
+        PUTS("<head>\n");
+        php_info_print_style(TSRMLS_C);
+        PUTS("<title>bonzai_credits()</title>");
+        PUTS("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n");
+        PUTS("<meta name=\"ROBOTS\" content=\"NOINDEX,NOFOLLOW,NOARCHIVE\" />");
+        PUTS("</head>\n");
+        PUTS("<body><div class=\"center\">\n");
+    }
+
+    if (sapi_module.phpinfo_as_text) {
+        PUTS("Bonzai Credits\n");
+    } else {
+        php_info_print_box_start(1);
+        PUTS("<h1 class=\"p\">Bonzai Credits</h1>\n");
+    }
+    php_info_print_box_end();
+
+    php_info_print_table_start();
+    php_info_print_table_row(2, "Owner", "Fabio Cicerchia");
+    php_info_print_box_end();
+
+    if (!sapi_module.phpinfo_as_text) {
+        PUTS("</div></body></html>");
+    }
+}
+// }}}
 
 // {{{ PHP_FUNCTION bonzai_exec
 /**
@@ -121,48 +140,134 @@ PHP_MINFO_FUNCTION(bonzai)
  */
 PHP_FUNCTION(bonzai_exec)
 {
-    char *code;
-    int code_len;
+    FILE *fp;
+    char *code, *plain, *tmpname = "BNZTMP2";
+    char hex[2];
+    int code_len, i, len, res;
+    struct stat finfo;
+    unsigned int chr;
+	zend_op_array *op_array;
 
     if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &code, &code_len) == FAILURE) {
         RETURN_NULL();
     }
 
-    char *key     = _bonzai_get_key();
-    char *decoded = _bonzai_decode(code, key);
+    plain = bonzai_base64_decode(code);
+    len   = strlen(plain);
 
-    char *eval_string = decoded;
-    int len           = strlen(decoded);
-    char *tmp         = (char *)emalloc(6);
-    char *tmp2        = (char *)emalloc(4);
+    fp = fopen(tmpname, "wb");
+    for(i = 0; i < len; i += 2) {
+        strncpy(hex, plain + i, 2);
+        hex[2] = '\0';
 
-    strncpy(tmp, decoded, 5);
-    tmp[5] = '\0';
-    strncpy(tmp2, decoded + len - 3, 3);
-    tmp2[2] = '\0';
+        chr = hex2int((char *)hex);
+        fputc(chr, fp);
+    }
+    fclose(fp);
 
-    if (strcmp(tmp, "<?php") == 0 && strcmp(tmp2, "?>") == 0) {
-        strncpy(eval_string, decoded + 5, len - 8);
-        eval_string[len - 8] = '\0';
+    stat(tmpname, &finfo);
+    fp  = fopen(tmpname, "rb");
+    res = fread(&op_array, sizeof(op_array), 1, fp);
+    fclose(fp);
 
-        while (eval_string[strlen(eval_string) - 1] == '?') eval_string[strlen(eval_string) - 1] = '\0';
+	zend_execute(op_array TSRMLS_CC);
 
-        sapi_add_header(SAPI_BONZAI_VERSION_HEADER, sizeof(SAPI_BONZAI_VERSION_HEADER) - 1, 1);
+    unlink(tmpname);
 
-        char *compiled_string_description = zend_make_compiled_string_description("Nothing to declare... for now ;)" TSRMLS_CC);
-        if (zend_eval_string(eval_string, NULL, compiled_string_description TSRMLS_CC) == FAILURE) {
-            efree(compiled_string_description);
-            php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed evaluating crypted source code!");
-        }
-        efree(compiled_string_description);
-    } else {
-        php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed evaluating crypted source code!");
+#ifdef ZEND_ENGINE_2
+	destroy_op_array(op_array TSRMLS_CC);
+#else
+	destroy_op_array(op_array);
+#endif
+	efree(op_array);
+
+    efree(plain);
+}
+// }}}
+
+// {{{ PHP_FUNCTION bonzai_get_bytecode
+/**
+ * @see php/ext/standard/file.c
+ */
+PHP_FUNCTION(bonzai_get_bytecode)
+{
+    FILE *fp;
+    char *filename, *real_path, *content, *base64, *tmpname = "BNZTMP";
+    char hex[2];
+    int filename_len, i = -1;
+    php_stream *stream;
+    struct stat finfo;
+	zend_file_handle file_handle = {0};
+	zend_op_array *op_array = NULL;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &filename, &filename_len) == FAILURE) {
+        RETURN_NULL();
     }
 
-    efree(key);
-    efree(decoded);
-    efree(tmp);
-    efree(tmp2);
+    if (strlen(filename) == 0 || VCWD_ACCESS(filename, F_OK) == -1) {
+        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is invalid.", filename);
+        RETURN_NULL();
+    }
+
+    if (VCWD_ACCESS(filename, R_OK) == -1) {
+        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is not readable.", filename);
+        RETURN_NULL();
+    }
+
+    stat(filename, &finfo);
+    if (finfo.st_size == 0) {
+        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is empty.", filename);
+        RETURN_NULL();
+    }
+
+	real_path = expand_filepath(filename, NULL TSRMLS_CC);
+	if (!real_path) {
+		RETURN_FALSE;
+	}
+
+	file_handle.filename      = real_path;
+	file_handle.free_filename = 0;
+	file_handle.type          = ZEND_HANDLE_FILENAME;
+	file_handle.opened_path   = NULL;
+	CG(zend_lineno) = 0;
+
+	op_array = zend_compile_file(&file_handle, ZEND_INCLUDE TSRMLS_CC);
+	zend_destroy_file_handle(&file_handle TSRMLS_CC);
+
+	if (!op_array) {
+		efree(real_path);
+        return;
+	}
+
+    fp = fopen(tmpname, "wb");
+    fwrite(&op_array, sizeof op_array, 99999, fp); // TODO: calculate the size of zend_op_array
+    fclose(fp);
+
+    stat(tmpname, &finfo);
+    content = (char *)malloc((finfo.st_size * 2) * sizeof(char));
+    fp = fopen(tmpname, "rb");
+    while (++i < finfo.st_size) {
+        sprintf(hex, "%02X", fgetc(fp));
+        hex[2] = '\0';
+        strcat(content, (char *)hex);
+    }
+    fclose(fp);
+
+    base64 = bonzai_base64_encode(content);
+
+    unlink(tmpname);
+
+    RETURN_STRING(base64, 1);
+
+#ifdef ZEND_ENGINE_2
+	destroy_op_array(op_array TSRMLS_CC);
+#else
+	destroy_op_array(op_array);
+#endif
+	efree(op_array);
+
+    efree(base64);
+    efree(content);
 }
 // }}}
 
@@ -172,6 +277,8 @@ PHP_FUNCTION(bonzai_exec)
  */
 PHP_FUNCTION(bonzai_info)
 {
+    char temp_api[10];
+
     if (sapi_module.phpinfo_as_text) {
         PUTS("bonzai_info()\n");
     } else {
@@ -195,8 +302,6 @@ PHP_FUNCTION(bonzai_info)
     php_info_print_box_end();
 
     php_info_print_table_start();
-
-    char temp_api[10];
 
     php_info_print_table_row(2, "Build Date", __DATE__ " " __TIME__);
     php_info_print_table_row(2, "PHP Version", PHP_VERSION);
@@ -264,41 +369,14 @@ PHP_FUNCTION(bonzai_info)
 }
 // }}}
 
-// {{{ PHP_FUNCTION bonzai_credits
-/**
- * Print the credits of bonzai project
- */
-PHP_FUNCTION(bonzai_credits)
+// {{{ PHP_FUNCTION bonzai_logo_guid
+PHP_FUNCTION(bonzai_logo_guid)
 {
-    if (sapi_module.phpinfo_as_text) {
-        PUTS("bonzai_credits()\n");
-    } else {
-        PUTS("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"DTD/xhtml1-transitional.dtd\">\n");
-        PUTS("<html>");
-        PUTS("<head>\n");
-        php_info_print_style(TSRMLS_C);
-        PUTS("<title>bonzai_credits()</title>");
-        PUTS("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n");
-        PUTS("<meta name=\"ROBOTS\" content=\"NOINDEX,NOFOLLOW,NOARCHIVE\" />");
-        PUTS("</head>\n");
-        PUTS("<body><div class=\"center\">\n");
-    }
+	if (ZEND_NUM_ARGS() != 0) {
+		WRONG_PARAM_COUNT;
+	}
 
-    if (sapi_module.phpinfo_as_text) {
-        PUTS("Bonzai Credits\n");
-    } else {
-        php_info_print_box_start(1);
-        PUTS("<h1 class=\"p\">Bonzai Credits</h1>\n");
-    }
-    php_info_print_box_end();
-
-    php_info_print_table_start();
-    php_info_print_table_row(2, "Owner", "Fabio Cicerchia");
-    php_info_print_box_end();
-
-    if (!sapi_module.phpinfo_as_text) {
-        PUTS("</div></body></html>");
-    }
+	RETURN_STRINGL(BONZAI_LOGO_GUID, sizeof(BONZAI_LOGO_GUID) - 1, 1);
 }
 // }}}
 
@@ -313,67 +391,7 @@ PHP_FUNCTION(bonzai_version)
 }
 // }}}
 
-/**
- * @see php/ext/standard/file.c
- */
-char *bonzai_get_bytecode(char *filename) {
-    /* TODO: CONVERT FROM PHP TO C
-    if (empty(filename) || !file_exists(filename)) {
-        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is invalid.");
-    }
-
-    if (!is_readable(filename)) {
-        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is not readable.");
-    }
-
-    if (filesize(filename) == 0) {
-        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is empty.");
-    }
-    */
-
-    char *tmpname = tempnam('.', "BNZTMP");
-    FILE *fh = fopen(tmpname, 'w');
-
-    bcompiler_write_file(fh, filename);
-    fclose(fh);
-
-    char *content = file_get_contents(tmpname);
-    unlink(tmpname);
-
-    //content = bonzai_convert_to_hex(bonzai_gzcompress($content, 9)); // TODO: UNCOMMENT
-    content = bonzai_base64_encode(bonzai_gzcompress($content, 9));
-
-    return content;
-}
-
-/*
-char *convert_to_hex(char *string) {
-  char *hex;
-  int i, len = strlen(string);
-
-  for(i = 0; i < len; i++) {
-    hex .= str_pad(dechex(ord(string[i])), 2, '0', STR_PAD_LEFT);
-  }
-
-  return strtoupper(hex);
-}
-*/
-
-// {{{ bonzai_base64_encode
-/**
- * @param  char *data
- * @return char *
- * @see php/ext/standard/base64.c
- */
-char *bonzai_base64_encode(char *data) {
-    unsigned char *result;
-    int str_len = strlen(data), ret_length;
-
-    result = php_base64_encode(data, str_len, &ret_length);
-
-    return (char *)result;
-}
-// }}}
+// FUNCTION FOR INTERNAL USE ONLY
 
 // {{{ bonzai_base64_decode
 /**
@@ -382,91 +400,44 @@ char *bonzai_base64_encode(char *data) {
  * @see php/ext/standard/base64.c
  */
 char *bonzai_base64_decode(char *data) {
-    unsigned char *result;
     int str_len = strlen(data), ret_length;
+    unsigned char *result;
 
-    result = php_base64_decode(data, str_len, &ret_length);
-
-    return (char *)result;
+    return (char *)php_base64_decode(data, str_len, &ret_length);
 }
 // }}}
 
-// {{{ bonzai_gzcompress
+// {{{ bonzai_base64_encode
 /**
  * @param  char *data
  * @return char *
- * @see php/ext/zlib/zlib.h
+ * @see php/ext/standard/base64.c
  */
-char *bonzai_gzcompress(char *data) {
-    return gzcompress(data, 9);
-/*
-    int data_len = strlen(data), status;
-    long level = 9;
-    unsigned long l2;
-    char *data, *s2;
+char *bonzai_base64_encode(char *data) {
+    int str_len = strlen(data), ret_length;
+    unsigned char *result;
 
-    l2 = data_len + (data_len / PHP_ZLIB_MODIFIER) + 15 + 1;
-    s2 = (char *) emalloc(l2);
-    if (!s2) {
-        RETURN_FALSE;
-    }
-
-    status = compress2(s2, &l2, data, data_len, level);
-    if (status == Z_OK) {
-        s2 = erealloc(s2, l2 + 1);
-        s2[l2] = '\0';
-        RETURN_STRINGL(s2, l2, 0);
-    } else {
-        efree(s2);
-        php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", zError(status));
-        RETURN_FALSE;
-    }
-*/
+    return (char *)php_base64_encode(data, str_len, &ret_length);
 }
 // }}}
 
-// {{{ bonzai_gzuncompress
+// {{{ hex2int
 /**
- * @param  char *data
- * @return char *
- * @see php/ext/zlib/zlib.h
+ * @param  char *value
+ * @return unsigned int
  */
-char *bonzai_gzuncompress(char *data) {
-    return gzuncompress(data);
-/*
-    int data_len = strlen(data), status;
-    unsigned int factor = 1, maxfactor = 16;
-    long limit = 0;
-    unsigned long plength = 0, length;
-    char *data, *s1 = NULL, *s2 = NULL;
+unsigned int hex2int(char *value) {
+    int i, ch, value_len = strlen(value);
+    unsigned int int_value = 0;
 
-    plength = limit;
-
-    do {
-        length = plength ? plength : (unsigned long)data_len * (1 << factor++);
-        s2 = (char *) erealloc(s1, length);
-        status = uncompress(s2, &length, data, data_len);
-        s1 = s2;
-    } while ((status == Z_BUF_ERROR) && (!plength) && (factor < maxfactor));
-
-    if (status == Z_OK) {
-        s2 = erealloc(s2, length + 1);
-        s2[ length ] = '\0';
-        RETURN_STRINGL(s2, length, 0);
-    } else {
-        efree(s2);
-        php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", zError(status));
-        RETURN_FALSE;
+    for (i = 0; i < value_len; i++) {
+        ch = (int)value[i];
+        if      (ch >= 48 && ch <= 57)  ch = ch - 48; // From 0 to 9
+        else if (ch >= 65 && ch <= 70)  ch = ch - 55; // From A to F
+        else if (ch >= 97 && ch <= 102) ch = ch - 87; // From a to f
+        else return int_value;
+        int_value = (int_value << 4) + ch;
     }
-*/
+    return int_value;
 }
 // }}}
-
-PHP_FUNCTION(bonzai_logo_guid)
-{
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
-	}
-
-	RETURN_STRINGL(BONZAI_LOGO_GUID, sizeof(BONZAI_LOGO_GUID) - 1, 1);
-}

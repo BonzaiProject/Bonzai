@@ -9,4 +9,4 @@ Fabio Cicerchia <cicerchia@php.net>
 var_dump(bonzai_version());
 ?>
 --EXPECT--
-.
+string(3) "0.1"

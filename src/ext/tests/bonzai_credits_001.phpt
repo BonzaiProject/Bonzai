@@ -6,7 +6,10 @@ N/A
 Fabio Cicerchia <cicerchia@php.net>
 --FILE--
 <?php
-var_dump(bonzai_credits());
+bonzai_credits();
 ?>
 --EXPECT--
-.
+bonzai_credits()
+Bonzai Credits
+
+Owner => Fabio Cicerchia

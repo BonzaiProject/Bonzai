@@ -24,15 +24,44 @@
  **/
 
 #ifndef PHP_BONZAI_H
+
     // {{{ DEFINES
+    //#define ZTS 1 // ???
     #define PHP_BONZAI_H
     #define PHP_BONZAI_VERSION "0.1"
     #define PHP_BONZAI_EXTNAME "Bonzai"
-    /*#define BONZAI_FOOTER_KEY "\n# BONZAI P_KEY END BLOCK ##########"
-    #define BONZAI_HEADER_KEY "# BONZAI P_KEY START BLOCK ########\n"*/
-    #define ZTS 1
+    #define SAPI_BONZAI_VERSION_HEADER "X-Encoded-By: Bonzai v" BONZAI_VERSION
     #define phpext_bonzai_ptr &bonzai_module_entry
+#ifdef ZTS
+    #define BONZAIG(v) TSRMG(bonzai_globals_id, zend_bonzai_globals *, v)
+#else
+    #define BONZAIG(v) (bonzai_globals.v)
+#endif
     // }}}
+
+#ifdef HAVE_CONFIG_H
+    #include "config.h"
+#endif
+
+    #include <fcntl.h>
+    #include <string.h>
+    #include <sys/stat.h>
+    #include <sys/types.h>
+    #include "php.h"
+    #include "SAPI.h"
+#ifdef ZTS
+    #include "TSRM.h"
+#endif
+    #include "zend_extensions.h"
+    #include "../standard/base64.h"
+    #include "../standard/css.h"
+    #include "../standard/file.h"
+    #include "../standard/head.h"
+    #include "../standard/html.h"
+    #include "../standard/php_var.h"
+    #include "../../main/php_streams.h"
+    #include "../../TSRM/tsrm_virtual_cwd.h"
+    #include "logos.h"
 
     // {{{ STRUCTS
     extern zend_module_entry bonzai_module_entry;
@@ -43,14 +72,16 @@
     PHP_MSHUTDOWN_FUNCTION(bonzai);
     PHP_MINFO_FUNCTION(bonzai);
 
-    PHP_FUNCTION(bonzai_exec);
-    char *_bonzai_decode(char *code, char *key);
-    char *_bonzai_get_key();
-    PHP_FUNCTION(bonzai_info);
     PHP_FUNCTION(bonzai_credits);
-    PHP_FUNCTION(bonzai_version);
-    PHP_FUNCTION(bonzai_log);
-    char *bonzai_base64_encode(char *data);
+    PHP_FUNCTION(bonzai_exec);
+    PHP_FUNCTION(bonzai_get_bytecode);
+    PHP_FUNCTION(bonzai_info);
     PHP_FUNCTION(bonzai_logo_guid);
+    PHP_FUNCTION(bonzai_version);
+
+    char *bonzai_base64_decode(char *data);
+    char *bonzai_base64_encode(char *data);
+    unsigned int hex2int(char *value);
     // }}}
+
 #endif /* PHP_BONZAI_H */

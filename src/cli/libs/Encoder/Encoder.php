@@ -154,6 +154,7 @@ class Bonzai_Encoder
 
 #############################################################################################
 
+if (!function_exists('bonzai_get_bytecode')) {
 function bonzai_get_bytecode($filename) {
     if (empty($filename) || !file_exists($filename)) {
         $message = gettext('The file `%s` is invalid.');
@@ -181,6 +182,7 @@ function bonzai_get_bytecode($filename) {
     $content = base64_encode(gzcompress($content, 9));
 
     return $content;
+}
 }
 
 function convert_to_hex($string) {
