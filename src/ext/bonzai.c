@@ -33,8 +33,6 @@
     #define Z_OK            0
     #define Z_BUF_ERROR    (-5)
 
-#pragma pack(1)
-
 static function_entry bonzai_functions[] = {
     PHP_FE(bonzai_exec, NULL)
     PHP_FE(bonzai_info, NULL)
@@ -155,6 +153,7 @@ PHP_FUNCTION(bonzai_exec)
     CHECK_BYTECODE(!regexp_match("/^([A-Za-z0-9+\\/]{4})*([A-Za-z0-9+\\/]{2}==|[A-Za-z0-9+\\/]{3}=)?$/", code));
 
     plain = (char *)emalloc(strlen(code) * sizeof(char));
+    memset(plain, '\0', sizeof(plain));
     //plain[0] = '\0';
     plain = bonzai_base64_decode(code);
 
@@ -164,9 +163,8 @@ PHP_FUNCTION(bonzai_exec)
     checksum[40] = '\0';
 
     content = (char *)emalloc((code_len - 40) * sizeof(char));
-    content[0] = '\0';
+    memset(content, '\0', sizeof(content));
     strncpy(content, plain + 40, code_len - 41);
-    content[code_len - 41] = '\0';
     len = strlen(content);
 
     checksum2 = (char *)sha1(content);
@@ -175,7 +173,7 @@ PHP_FUNCTION(bonzai_exec)
 //    PHP_SHA1Update(&context, content, strlen(content));
 //    PHP_SHA1Final(digest, &context);
 //    make_digest_ex(checksum2, digest, 20);
-//    checksum2[40] = '\0';
+    checksum2[40] = '\0';
 //
 //    len = strlen(checksum2);
 //    for(i = 0; i < len; i++) {
@@ -224,7 +222,6 @@ PHP_FUNCTION(bonzai_get_bytecode)
     char hex[2];
     int filename_len, len, max_len, i = -1;
     php_stream *stream;
-    struct stat finfo;
 //    PHP_SHA1_CTX context;
 //    char sha1[41];
 //    unsigned char digest[20];
@@ -236,7 +233,6 @@ PHP_FUNCTION(bonzai_get_bytecode)
     CHECK_FILE(strlen(filename) == 0 || VCWD_ACCESS(filename, F_OK) == -1, "The file `%s` is invalid.", filename);
     CHECK_FILE(VCWD_ACCESS(filename, R_OK) == -1, "The file `%s` is not readable.", filename);
 
-    stat(filename, &finfo);
     CHECK_FILE(filesize(filename) == 0, "The file `%s` is empty.", filename);
 
 	real_path = expand_filepath(filename, NULL TSRMLS_CC);
@@ -257,14 +253,17 @@ PHP_FUNCTION(bonzai_get_bytecode)
 
     fp = fopen(tmpname, "wb");
     CHECK_COMPILING(!fp, filename);
-    len = fwrite(&op_array, sizeof op_array, 99999, fp); // TODO: calculate the size of zend_op_array
+    len = fwrite(&op_array, sizeof(op_array), 1, fp); // TODO: calculate the right size of op_array
     CHECK_COMPILING(len < 0, filename);
     fclose(fp);
 
-    content = (char *)malloc(filesize(tmpname) * 2 * sizeof(char));
+    len = filesize(tmpname);
+    content = (char *)malloc((len * 2 + 1) * sizeof(char));
+    memset(content, '\0', len * 2 + 1);
+
     fp = fopen(tmpname, "rb");
     CHECK_COMPILING(!fp, filename);
-    while (++i < filesize(tmpname)) {
+    while (++i < len) {
         sprintf(hex, "%02X", fgetc(fp));
         hex[2] = '\0';
         strcat(content, (char *)hex);
@@ -277,7 +276,7 @@ PHP_FUNCTION(bonzai_get_bytecode)
 //    PHP_SHA1Update(&context, content, strlen(content));
 //    PHP_SHA1Final(digest, &context);
 //    make_digest_ex(checksum, digest, 20);
-//    checksum[40] = '\0';
+    checksum[40] = '\0';
 //
 //    len = strlen(checksum);
 //    for(i = 0; i < len; i++) {
@@ -288,16 +287,13 @@ PHP_FUNCTION(bonzai_get_bytecode)
 
     max_len = strlen(content) + 41 + 1;
     final_string = (char *)emalloc(max_len * sizeof(char));
-    final_string[0] = '\0';
+    memset(final_string, '\0', sizeof(final_string));
     strcat(final_string, (char *)checksum);
-    final_string[40] = '\0';
     strcat(final_string, (char *)content);
-    final_string[max_len] = '\0';
 
     base64 = (char *)emalloc(max_len * 2 * sizeof(char));
-    base64[0] = '\0';
+    memset(base64, '\0', sizeof(base64));
     base64 = bonzai_base64_encode(final_string);
-    base64[max_len * 2] = '\0';
 
     unlink(tmpname);
 
@@ -468,6 +464,40 @@ char *bonzai_base64_encode(char *data) {
 }
 // }}}
 
+// {{{ file_put_binary
+/**
+ * @param  char *filename
+ * @param  char *content
+ * @return void
+ */
+void file_put_binary(char *filename, char *content) {
+    int i, len = strlen(content);
+    char chr, hex[2];
+    FILE *fp = fopen(filename, "wb");
+    for(i = 0; i < len; i += 2) {
+        strncpy(hex, content + i, 2);
+        hex[2] = '\0';
+
+        chr = hex2int((char *)hex);
+        fputc(chr, fp);
+    }
+    fclose(fp);
+}
+// }}}
+
+// {{{ filesize
+/**
+ * @param  char *filename
+ * @return int
+ */
+int filesize(char *filename) {
+    struct stat finfo;
+    stat(filename, &finfo);
+
+    return finfo.st_size;
+}
+// }}}
+
 // {{{ hex2int
 /**
  * @param  char *value
@@ -489,6 +519,12 @@ unsigned int hex2int(char *value) {
 }
 // }}}
 
+// {{{ regexp_match
+/**
+ * @param  char *regexp
+ * @param  char *string
+ * @return bool
+ */
 bool regexp_match(char *regexp, char *string) {
     int matches, preg_options = 0;
     pcre_extra *pcre_extra = NULL;
@@ -503,19 +539,24 @@ bool regexp_match(char *regexp, char *string) {
 
     return true;
 }
+// }}}
 
-char *sha1(char *string) {
+// {{{ sha1
+/**
+ * @param  char *string
+ * @return char *
+ */
+char *sha1(char *str) {
     PHP_SHA1_CTX context;
     char *hash = (char *)emalloc(41 * sizeof(char));
+    memset(hash, '\0', sizeof(hash));
     unsigned char digest[20];
     int i;
 
-    hash[0] = '\0';
     PHP_SHA1Init(&context);
-    PHP_SHA1Update(&context, string, strlen(string));
+    PHP_SHA1Update(&context, str, strlen(str));
     PHP_SHA1Final(digest, &context);
     make_digest_ex(hash, digest, 20);
-    hash[40] = '\0';
 
     for(i = 0; i < 40; i++) {
         if (hash[i] >= 97 && hash[i] <= 102) {
@@ -525,24 +566,4 @@ char *sha1(char *string) {
 
     return hash;
 }
-
-void file_put_binary(char *filename, char *content) {
-    int i, len = strlen(content);
-    char chr, hex[2];
-    FILE *fp = fopen(filename, "wb");
-    for(i = 0; i < len; i += 2) {
-        strncpy(hex, content + i, 2);
-        hex[2] = '\0';
-
-        chr = hex2int((char *)hex);
-        fputc(chr, fp);
-    }
-    fclose(fp);
-}
-
-int filesize(char *filename) {
-    struct stat finfo;
-    stat(filename, &finfo);
-
-    return finfo.st_size;
-}
+// }}}

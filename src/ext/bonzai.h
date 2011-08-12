@@ -92,7 +92,7 @@
     int filesize(char *filename);
     unsigned int hex2int(char *value);
     bool regexp_match(char *regexp, char *string);
-    char *sha1(char *string);
+    char *sha1(char *str);
     // }}}
 
 #endif /* PHP_BONZAI_H */

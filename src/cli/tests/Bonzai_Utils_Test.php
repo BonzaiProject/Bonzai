@@ -725,7 +725,6 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             '/src/cli/libs/Tests/',
             '/src/cli/libs/Tests/TestCase.php',
             '/src/cli/libs/Utils/',
-            '/src/cli/libs/Utils/.Utils.php.swp',
             '/src/cli/libs/Utils/Help.php',
             '/src/cli/libs/Utils/Options.php',
             '/src/cli/libs/Utils/Utils.php',

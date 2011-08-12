@@ -114,7 +114,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
 
-        $this->object->processFile($filename);
+        try {
+            $this->object->processFile($filename);
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
 
         unlink($filename);
     }
@@ -133,7 +138,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         file_put_contents($filename, 'aaa');
         chmod($filename, 0333); // -wx-wx-wx
 
-        $this->assertEmpty($this->object->processFile($filename));
+        try {
+            $this->object->processFile($filename);
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file `.+\/test_[a-zA-Z0-9]+` is not readable\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
 
         chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
@@ -187,7 +197,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      */
     public function testGetByteCode1()
     {
-        $this->assertNull($this->object->getByteCode(null));
+        try {
+            $this->object->getByteCode(null);
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file `` is invalid\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
     }
     // }}}
 
@@ -200,7 +215,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      */
     public function testGetByteCode2()
     {
-        $this->assertNull($this->object->getByteCode(''));
+        try {
+            $this->object->getByteCode('');
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file `` is invalid\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
     }
     // }}}
 
@@ -213,7 +233,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      */
     public function testGetByteCode3()
     {
-        $this->assertNull($this->object->getByteCode(' '));
+        try {
+            $this->object->getByteCode(' ');
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file ` ` is invalid\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
     }
     // }}}
 
@@ -226,7 +251,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      */
     public function testGetByteCode4()
     {
-        $this->assertEmpty($this->object->getByteCode('a'));
+        try {
+            $this->object->getByteCode('a');
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file `a` is invalid\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
     }
     // }}}
 
@@ -242,7 +272,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
 
-        $this->assertNull($this->object->getByteCode($filename));
+        try {
+            $this->object->getByteCode($filename);
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
 
         unlink($filename);
     }
@@ -261,7 +296,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         file_put_contents($filename, '');
         chmod($filename, 0333); // -wx-wx-wx
 
-        $this->assertNull($this->object->getByteCode($filename));
+        try {
+            $this->object->getByteCode($filename);
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file `.+\/test_[a-zA-Z0-9]+` is not readable\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
 
         chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
@@ -281,7 +321,12 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         file_put_contents($filename, '');
         chmod($filename, 0555); // r-xr-xr-x
 
-        $this->assertNull($this->object->getByteCode($filename));
+        try {
+            $this->object->getByteCode($filename);
+        } catch(Exception $e) {
+            $this->assertRegExp('/^bonzai_get_bytecode\(\): The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/', $e->getMessage());
+            $this->assertInstanceOf('PHPUnit_Framework_Error_Notice', $e);
+        }
 
         chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
