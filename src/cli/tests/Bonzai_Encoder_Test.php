@@ -47,6 +47,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testProcessFile1
     // WHAT: process a file
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -60,6 +61,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testProcessFile2
     // WHAT: process a file
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -73,6 +75,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testProcessFile3
     // WHAT: process a file
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -86,6 +89,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testProcessFile4
     // WHAT: process a file
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -101,6 +105,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testProcessFile5
     // WHAT: process a file
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -118,6 +123,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testProcessFile6
     // WHAT: process a file
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -125,11 +131,11 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'aaa');
-        chmod($filename, 0333);
+        chmod($filename, 0333); // -wx-wx-wx
 
         $this->assertEmpty($this->object->processFile($filename));
 
-        chmod($filename, 0777);
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
@@ -137,10 +143,31 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testProcessFile7
     // WHAT: process a file
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testProcessFile7()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'aaa');
+        chmod($filename, 0555); // r-xr-xr-x
+
+        $this->assertEmpty($this->object->processFile($filename));
+
+        chmod($filename, 0777); // rwxrwxrwx
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testProcessFile7
+    // WHAT: process a file
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testProcessFile8()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
@@ -154,6 +181,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testGetByteCode1
     // WHAT: get the bytecode
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -166,6 +194,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testGetByteCode2
     // WHAT: get the bytecode
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -178,6 +207,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testGetByteCode3
     // WHAT: get the bytecode
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -190,6 +220,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testGetByteCode4
     // WHAT: get the bytecode
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -202,6 +233,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testGetByteCode5
     // WHAT: get the bytecode
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -219,6 +251,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testGetByteCode6
     // WHAT: get the bytecode
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -226,10 +259,11 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
-        chmod($filename, 0700);
+        chmod($filename, 0333); // -wx-wx-wx
 
         $this->assertNull($this->object->getByteCode($filename));
 
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
@@ -237,15 +271,39 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ testGetByteCode7
     // WHAT: get the bytecode
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testGetByteCode7()
     {
         $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0555); // r-xr-xr-x
+
+        $this->assertNull($this->object->getByteCode($filename));
+
+        chmod($filename, 0777); // rwxrwxrwx
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testGetByteCode8
+    // WHAT: get the bytecode
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testGetByteCode8()
+    {
+        $filename = tempnam('.', 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
-        $this->assertRegExp('/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/', $this->object->getByteCode($filename));
+        $bytecode = $this->object->getByteCode($filename);
+
+        $this->assertRegExp('/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/', $bytecode);
+        $this->assertRegExp('/^[0-9A-F]+$/', base64_decode($bytecode));
 
         unlink($filename);
     }
@@ -253,6 +311,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
     // {{{ testExpandPathsToFiles
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -261,4 +320,46 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
     // }}}
+}
+
+#############################################################################################
+
+if (!function_exists('bonzai_get_bytecode')) {
+function bonzai_get_bytecode($filename) {
+    if (empty($filename) || !file_exists($filename)) {
+        $message = gettext('The file `%s` is invalid.');
+        throw new Bonzai_Exception(sprintf($message, $filename));
+    }
+
+    if (!is_readable($filename)) {
+        $message = gettext('The file `%s` is not readable.');
+        throw new Bonzai_Exception(sprintf($message, $filename));
+    }
+
+    if (filesize($filename) == 0) {
+        $message = gettext('The file `%s` is empty.');
+        throw new Bonzai_Exception(sprintf($message, $filename));
+    }
+
+    $fh = fopen('/tmp/phb.phb', 'w');
+    bcompiler_write_file($fh, $filename);
+    fclose($fh);
+
+    $content = Bonzai_Utils::getFileContent('/tmp/phb.phb');
+    unlink('/tmp/phb.phb');
+
+    $content = base64_encode(convert_to_hex($content));
+
+    return $content;
+}
+
+function convert_to_hex($string) {
+    $hex = '';
+    $len = strlen($string);
+    for($i = 0; $i < $len; $i++) {
+        $hex .= str_pad(dechex(ord($string[$i])), 2, '0', STR_PAD_LEFT);
+    }
+
+    return strtoupper($hex);
+}
 }

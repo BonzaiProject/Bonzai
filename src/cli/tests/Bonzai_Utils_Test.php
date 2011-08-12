@@ -44,6 +44,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
 {
 // {{{ testRenameFile
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -56,6 +57,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir1
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -70,6 +72,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir2
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -84,6 +87,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir3
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -98,6 +102,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir4
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -112,6 +117,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir5
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -126,6 +132,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir6
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -140,6 +147,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir7
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -154,6 +162,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir8
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -168,6 +177,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir9
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -182,6 +192,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir10
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -196,6 +207,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir11
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -210,6 +222,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir12
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -224,6 +237,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir13
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -238,6 +252,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir14
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -252,6 +267,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir15
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -266,6 +282,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir16
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -280,6 +297,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir17
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -294,6 +312,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir18
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -308,6 +327,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir19
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -322,6 +342,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir20
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -336,13 +357,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir21
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir21()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0222);
+        mkdir($dirname, 0222); // -w--w--w-
 
         try {
             $value = null;
@@ -352,7 +374,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -360,13 +382,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir22
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir22()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0222);
+        mkdir($dirname, 0222); // -w--w--w-
 
         try {
             $value = '';
@@ -376,7 +399,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -384,13 +407,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir23
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir23()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0222);
+        mkdir($dirname, 0222); // -w--w--w-
 
         try {
             $value = ' ';
@@ -400,7 +424,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -408,13 +432,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir24
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir24()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0222);
+        mkdir($dirname, 0222); // -w--w--w-
 
         try {
             $value = array();
@@ -424,7 +449,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -432,22 +457,24 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir25
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir25()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0222);
+        mkdir($dirname, 0222); // -w--w--w-
 
         try {
             $value = array('a');
             Bonzai_Utils::rscandir($dirname, $value);
+            $this->assertTrue(false, "The exception was not threw.");
         } catch (Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -455,18 +482,19 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir26
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir26()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0555);
+        mkdir($dirname, 0555); // r-xr-xr-x
 
         $value = null;
         $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -474,18 +502,19 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir27
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir27()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0555);
+        mkdir($dirname, 0555); // r-xr-xr-x
 
         $value = '';
         $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -493,18 +522,19 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir28
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir28()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0555);
+        mkdir($dirname, 0555); // r-xr-xr-x
 
         $value = ' ';
         $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -512,18 +542,19 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir29
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir29()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0555);
+        mkdir($dirname, 0555); // r-xr-xr-x
 
         $value = array();
         $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -531,18 +562,19 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir30
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir30()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0555);
+        mkdir($dirname, 0555); // r-xr-xr-x
 
         $value = array('a');
         $this->assertEquals(array('a'), Bonzai_Utils::rscandir($dirname, $value));
 
-        chmod($dirname, 0777);
+        chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
     }
     // }}}
@@ -550,13 +582,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir31
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir31()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777);
+        mkdir($dirname, 0777); // rwxrwxrwx
 
         $value = null;
         $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
@@ -567,13 +600,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir32
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir32()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777);
+        mkdir($dirname, 0777); // rwxrwxrwx
 
         $value = '';
         $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
@@ -584,13 +618,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir33
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir33()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777);
+        mkdir($dirname, 0777); // rwxrwxrwx
 
         $value = ' ';
         $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
@@ -601,13 +636,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir34
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir34()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777);
+        mkdir($dirname, 0777); // rwxrwxrwx
 
         $value = array();
         $this->assertEmpty(Bonzai_Utils::rscandir($dirname, $value));
@@ -618,13 +654,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testRscandir35
     // WHAT: return the all directories & files into a directory
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRscandir35()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777);
+        mkdir($dirname, 0777); // rwxrwxrwx
 
         $value = array('a');
         $this->assertEquals(array('a'), Bonzai_Utils::rscandir($dirname, $value));
@@ -632,9 +669,86 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
+    // {{{ testRscandir36
+    // WHAT: return the all directories & files into a directory
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testRscandir36()
+    {
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0777); // rwxrwxrwx
+
+        $dirname2 = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir("$dirname/$dirname2", 0222); // -w--w--w-
+
+        $this->assertEquals(array("$dirname/$dirname2/"), Bonzai_Utils::rscandir($dirname));
+
+        chmod("$dirname/$dirname2", 0777);
+        rmdir("$dirname/$dirname2");
+        rmdir($dirname);
+    }
+    // }}}
+
+    // {{{ testRscandir37
+    // WHAT: return the all directories & files into a directory
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testRscandir37()
+    {
+        $dirname = realpath(dirname(__FILE__) . '/../');
+
+        $files = Bonzai_Utils::rscandir($dirname);
+        sort($files);
+        foreach($files as $i => $file) {
+            $files[$i] = str_replace(realpath("$dirname/../../"), "", $file);
+        }
+
+        $realfiles = array(
+            '/src/cli/bonzai-cli',
+            '/src/cli/libs/',
+            '/src/cli/libs/Controller/',
+            '/src/cli/libs/Controller/Controller.php',
+            '/src/cli/libs/Encoder/',
+            '/src/cli/libs/Encoder/Encoder.php',
+            '/src/cli/libs/Exception/',
+            '/src/cli/libs/Exception/Exception.php',
+            '/src/cli/libs/Registry/',
+            '/src/cli/libs/Registry/Registry.php',
+            '/src/cli/libs/Task/',
+            '/src/cli/libs/Task/Task.php',
+            '/src/cli/libs/Tests/',
+            '/src/cli/libs/Tests/TestCase.php',
+            '/src/cli/libs/Utils/',
+            '/src/cli/libs/Utils/.Utils.php.swp',
+            '/src/cli/libs/Utils/Help.php',
+            '/src/cli/libs/Utils/Options.php',
+            '/src/cli/libs/Utils/Utils.php',
+            '/src/cli/tests/',
+            '/src/cli/tests/Bonzai_Controller_Test.php',
+            '/src/cli/tests/Bonzai_Encoder_Test.php',
+            '/src/cli/tests/Bonzai_Exception_Test.php',
+            '/src/cli/tests/Bonzai_Registry_Test.php',
+            '/src/cli/tests/Bonzai_Task_Test.php',
+            '/src/cli/tests/Bonzai_Utils_Help_Test.php',
+            '/src/cli/tests/Bonzai_Utils_Options_Test.php',
+            '/src/cli/tests/Bonzai_Utils_Test.php',
+            '/src/cli/tests/cliSuite.php',
+        );
+
+        $this->assertEquals($realfiles, $files);
+    }
+    // }}}
+
     // {{{ testGetFileContent1
     // WHAT: get the file's content
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -648,6 +762,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testGetFileContent2
     // WHAT: get the file's content
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -661,6 +776,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testGetFileContent3
     // WHAT: get the file's content
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -674,6 +790,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testGetFileContent4
     // WHAT: get the file's content
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -687,6 +804,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testGetFileContent5
     // WHAT: get the file's content
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -694,7 +812,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
-        chmod($filename, 0333);
+        chmod($filename, 0333); // -wx-wx-wx
 
         try {
             Bonzai_Utils::getFileContent($filename);
@@ -703,7 +821,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777);
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
@@ -711,6 +829,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testGetFileContent6
     // WHAT: get the file's content
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -718,11 +837,11 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
-        chmod($filename, 0555);
+        chmod($filename, 0555); // r-xr-xr-x
 
         $this->assertEmpty(Bonzai_Utils::getFileContent($filename));
 
-        chmod($filename, 0777);
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
@@ -730,6 +849,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testGetFileContent7
     // WHAT: get the file's content
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -747,6 +867,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent1
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -760,6 +881,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent2
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -773,6 +895,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent3
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -786,6 +909,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent4
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -799,6 +923,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent5
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -812,6 +937,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent6
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -825,6 +951,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent7
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -838,6 +965,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent8
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -851,6 +979,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent9
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -864,6 +993,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent10
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -877,6 +1007,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent11
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -890,6 +1021,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent12
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -903,6 +1035,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent13
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -917,6 +1050,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent14
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -931,6 +1065,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent15
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -945,6 +1080,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent16
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -959,6 +1095,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent17
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -977,6 +1114,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent18
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -995,6 +1133,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent19
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1013,6 +1152,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent20
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1031,6 +1171,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ testPutFileContent21
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1038,7 +1179,95 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
-        chmod($filename, 0555);
+        chmod($filename, 0333); // -wx-wx-wx
+
+        Bonzai_Utils::putFileContent($filename, null);
+
+        chmod($filename, 0777); // rwxrwxrwx
+        $this->assertEmpty(file_get_contents($filename));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testPutFileContent22
+    // WHAT: return the status of saving
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testPutFileContent22()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0333); // -wx-wx-wx
+
+        Bonzai_Utils::putFileContent($filename, '');
+
+        chmod($filename, 0777); // rwxrwxrwx
+        $this->assertEmpty(file_get_contents($filename));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testPutFileContent23
+    // WHAT: return the status of saving
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testPutFileContent23()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0333); // -wx-wx-wx
+
+        Bonzai_Utils::putFileContent($filename, ' ');
+
+        chmod($filename, 0777); // rwxrwxrwx
+        $this->assertEquals(' ', file_get_contents($filename));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testPutFileContent24
+    // WHAT: return the status of saving
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testPutFileContent24()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0333); // -wx-wx-wx
+
+        Bonzai_Utils::putFileContent($filename, 'a');
+
+        chmod($filename, 0777); // rwxrwxrwx
+        $this->assertEquals('a', file_get_contents($filename));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testPutFileContent25
+    // WHAT: return the status of saving
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testPutFileContent25()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, '');
+        chmod($filename, 0555); // r-xr-xr-x
 
         try {
             Bonzai_Utils::putFileContent($filename, null);
@@ -1047,22 +1276,23 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777);
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
 
-    // {{{ testPutFileContent22
+    // {{{ testPutFileContent26
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
-    public function testPutFileContent22()
+    public function testPutFileContent26()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
-        chmod($filename, 0555);
+        chmod($filename, 0555); // r-xr-xr-x
 
         try {
             Bonzai_Utils::putFileContent($filename, '');
@@ -1071,22 +1301,23 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777);
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
 
-    // {{{ testPutFileContent23
+    // {{{ testPutFileContent27
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
-    public function testPutFileContent23()
+    public function testPutFileContent27()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
-        chmod($filename, 0555);
+        chmod($filename, 0555); // r-xr-xr-x
 
         try {
             Bonzai_Utils::putFileContent($filename, ' ');
@@ -1095,22 +1326,23 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777);
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
 
-    // {{{ testPutFileContent24
+    // {{{ testPutFileContent28
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
-    public function testPutFileContent24()
+    public function testPutFileContent28()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
-        chmod($filename, 0555);
+        chmod($filename, 0555); // r-xr-xr-x
 
         try {
             Bonzai_Utils::putFileContent($filename, 'a');
@@ -1119,18 +1351,19 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777);
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
 
-    // {{{ testPutFileContent25
+    // {{{ testPutFileContent29
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
-    public function testPutFileContent25()
+    public function testPutFileContent29()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -1142,13 +1375,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testPutFileContent26
+    // {{{ testPutFileContent30
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
-    public function testPutFileContent26()
+    public function testPutFileContent30()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -1160,13 +1394,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testPutFileContent27
+    // {{{ testPutFileContent31
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
-    public function testPutFileContent27()
+    public function testPutFileContent31()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -1178,13 +1413,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testPutFileContent28
+    // {{{ testPutFileContent32
     // WHAT: return the status of saving
     /**
+     * @ignore
      * @access public
      * @return void
      */
-    public function testPutFileContent28()
+    public function testPutFileContent32()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -1198,6 +1434,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
 
 // {{{ testMessage
     /**
+     * @ignore
      * @access public
      * @return void
      */

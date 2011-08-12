@@ -140,35 +140,59 @@ PHP_FUNCTION(bonzai_credits)
  */
 PHP_FUNCTION(bonzai_exec)
 {
-    FILE *fp;
-    char *code, *plain, *tmpname = "BNZTMP2";
-    char hex[2];
-    int code_len, i, len, res;
-    struct stat finfo;
-    unsigned int chr;
 	zend_op_array *op_array;
+    FILE *fp;
+    char *code, *plain, *content, *checksum2, *tmpname = "BNZTMP2";
+    char hex[2], checksum[41];
+    int code_len, i, len, res;
+    unsigned int chr;
 
     if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &code, &code_len) == FAILURE) {
         RETURN_NULL();
     }
 
+    CHECK_BYTECODE(code_len == 0);
+    CHECK_BYTECODE(!regexp_match("/^([A-Za-z0-9+\\/]{4})*([A-Za-z0-9+\\/]{2}==|[A-Za-z0-9+\\/]{3}=)?$/", code));
+
+    plain = (char *)emalloc(strlen(code) * sizeof(char));
+    //plain[0] = '\0';
     plain = bonzai_base64_decode(code);
-    len   = strlen(plain);
 
-    fp = fopen(tmpname, "wb");
-    for(i = 0; i < len; i += 2) {
-        strncpy(hex, plain + i, 2);
-        hex[2] = '\0';
+    CHECK_BYTECODE(!regexp_match("/^[0-9A-F]+$/", plain));
 
-        chr = hex2int((char *)hex);
-        fputc(chr, fp);
-    }
-    fclose(fp);
+    strncpy(checksum, plain + 0, 40);
+    checksum[40] = '\0';
 
-    stat(tmpname, &finfo);
+    content = (char *)emalloc((code_len - 40) * sizeof(char));
+    content[0] = '\0';
+    strncpy(content, plain + 40, code_len - 41);
+    content[code_len - 41] = '\0';
+    len = strlen(content);
+
+    checksum2 = (char *)sha1(content);
+//    checksum2[0] = '\0';
+//    PHP_SHA1Init(&context);
+//    PHP_SHA1Update(&context, content, strlen(content));
+//    PHP_SHA1Final(digest, &context);
+//    make_digest_ex(checksum2, digest, 20);
+//    checksum2[40] = '\0';
+//
+//    len = strlen(checksum2);
+//    for(i = 0; i < len; i++) {
+//        if (checksum2[i] >= 97 && checksum2[i] <= 102) {
+//            checksum2[i] -= 32;
+//        }
+//    }
+
+    CHECK_BYTECODE(strcmp(checksum, checksum2) != 0);
+
+    file_put_binary(tmpname, content);
+
     fp  = fopen(tmpname, "rb");
     res = fread(&op_array, sizeof(op_array), 1, fp);
     fclose(fp);
+
+    CHECK_BYTECODE(!op_array);
 
 	zend_execute(op_array TSRMLS_CC);
 
@@ -181,6 +205,8 @@ PHP_FUNCTION(bonzai_exec)
 #endif
 	efree(op_array);
 
+    efree(checksum2);
+    efree(content);
     efree(plain);
 }
 // }}}
@@ -191,69 +217,87 @@ PHP_FUNCTION(bonzai_exec)
  */
 PHP_FUNCTION(bonzai_get_bytecode)
 {
-    FILE *fp;
-    char *filename, *real_path, *content, *base64, *tmpname = "BNZTMP";
-    char hex[2];
-    int filename_len, i = -1;
-    php_stream *stream;
-    struct stat finfo;
 	zend_file_handle file_handle = {0};
 	zend_op_array *op_array = NULL;
+    FILE *fp;
+    char *filename, *real_path, *content, *final_string, *base64, *checksum, *tmpname = "BNZTMP";
+    char hex[2];
+    int filename_len, len, max_len, i = -1;
+    php_stream *stream;
+    struct stat finfo;
+//    PHP_SHA1_CTX context;
+//    char sha1[41];
+//    unsigned char digest[20];
 
     if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &filename, &filename_len) == FAILURE) {
         RETURN_NULL();
     }
 
-    if (strlen(filename) == 0 || VCWD_ACCESS(filename, F_OK) == -1) {
-        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is invalid.", filename);
-        RETURN_NULL();
-    }
-
-    if (VCWD_ACCESS(filename, R_OK) == -1) {
-        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is not readable.", filename);
-        RETURN_NULL();
-    }
+    CHECK_FILE(strlen(filename) == 0 || VCWD_ACCESS(filename, F_OK) == -1, "The file `%s` is invalid.", filename);
+    CHECK_FILE(VCWD_ACCESS(filename, R_OK) == -1, "The file `%s` is not readable.", filename);
 
     stat(filename, &finfo);
-    if (finfo.st_size == 0) {
-        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The file `%s` is empty.", filename);
-        RETURN_NULL();
-    }
+    CHECK_FILE(filesize(filename) == 0, "The file `%s` is empty.", filename);
 
 	real_path = expand_filepath(filename, NULL TSRMLS_CC);
 	if (!real_path) {
-		RETURN_FALSE;
+        RETURN_NULL();
 	}
 
 	file_handle.filename      = real_path;
 	file_handle.free_filename = 0;
 	file_handle.type          = ZEND_HANDLE_FILENAME;
 	file_handle.opened_path   = NULL;
-	CG(zend_lineno) = 0;
+	//CG(zend_lineno) = 0; // ???
 
 	op_array = zend_compile_file(&file_handle, ZEND_INCLUDE TSRMLS_CC);
 	zend_destroy_file_handle(&file_handle TSRMLS_CC);
 
-	if (!op_array) {
-		efree(real_path);
-        return;
-	}
+	CHECK_COMPILING(!op_array, filename);
 
     fp = fopen(tmpname, "wb");
-    fwrite(&op_array, sizeof op_array, 99999, fp); // TODO: calculate the size of zend_op_array
+    CHECK_COMPILING(!fp, filename);
+    len = fwrite(&op_array, sizeof op_array, 99999, fp); // TODO: calculate the size of zend_op_array
+    CHECK_COMPILING(len < 0, filename);
     fclose(fp);
 
-    stat(tmpname, &finfo);
-    content = (char *)malloc((finfo.st_size * 2) * sizeof(char));
+    content = (char *)malloc(filesize(tmpname) * 2 * sizeof(char));
     fp = fopen(tmpname, "rb");
-    while (++i < finfo.st_size) {
+    CHECK_COMPILING(!fp, filename);
+    while (++i < filesize(tmpname)) {
         sprintf(hex, "%02X", fgetc(fp));
         hex[2] = '\0';
         strcat(content, (char *)hex);
     }
     fclose(fp);
 
-    base64 = bonzai_base64_encode(content);
+    checksum = (char *)sha1(content);
+//    checksum[0] = '\0';
+//    PHP_SHA1Init(&context);
+//    PHP_SHA1Update(&context, content, strlen(content));
+//    PHP_SHA1Final(digest, &context);
+//    make_digest_ex(checksum, digest, 20);
+//    checksum[40] = '\0';
+//
+//    len = strlen(checksum);
+//    for(i = 0; i < len; i++) {
+//        if (checksum[i] >= 97 && checksum[i] <= 102) {
+//            checksum[i] -= 32;
+//        }
+//    }
+
+    max_len = strlen(content) + 41 + 1;
+    final_string = (char *)emalloc(max_len * sizeof(char));
+    final_string[0] = '\0';
+    strcat(final_string, (char *)checksum);
+    final_string[40] = '\0';
+    strcat(final_string, (char *)content);
+    final_string[max_len] = '\0';
+
+    base64 = (char *)emalloc(max_len * 2 * sizeof(char));
+    base64[0] = '\0';
+    base64 = bonzai_base64_encode(final_string);
+    base64[max_len * 2] = '\0';
 
     unlink(tmpname);
 
@@ -266,7 +310,10 @@ PHP_FUNCTION(bonzai_get_bytecode)
 #endif
 	efree(op_array);
 
+    efree(real_path);
     efree(base64);
+    efree(final_string);
+    efree(checksum);
     efree(content);
 }
 // }}}
@@ -441,3 +488,61 @@ unsigned int hex2int(char *value) {
     return int_value;
 }
 // }}}
+
+bool regexp_match(char *regexp, char *string) {
+    int matches, preg_options = 0;
+    pcre_extra *pcre_extra = NULL;
+    pcre *re = pcre_get_compiled_regex(regexp, &pcre_extra, &preg_options TSRMLS_CC);
+    if (!re) {
+        return false;
+    }
+    matches = pcre_exec(re, NULL, string, strlen(string), 0, 0, NULL, 0);
+    if (matches < 0) {
+        return false;
+    }
+
+    return true;
+}
+
+char *sha1(char *string) {
+    PHP_SHA1_CTX context;
+    char *hash = (char *)emalloc(41 * sizeof(char));
+    unsigned char digest[20];
+    int i;
+
+    hash[0] = '\0';
+    PHP_SHA1Init(&context);
+    PHP_SHA1Update(&context, string, strlen(string));
+    PHP_SHA1Final(digest, &context);
+    make_digest_ex(hash, digest, 20);
+    hash[40] = '\0';
+
+    for(i = 0; i < 40; i++) {
+        if (hash[i] >= 97 && hash[i] <= 102) {
+            hash[i] -= 32;
+        }
+    }
+
+    return hash;
+}
+
+void file_put_binary(char *filename, char *content) {
+    int i, len = strlen(content);
+    char chr, hex[2];
+    FILE *fp = fopen(filename, "wb");
+    for(i = 0; i < len; i += 2) {
+        strncpy(hex, content + i, 2);
+        hex[2] = '\0';
+
+        chr = hex2int((char *)hex);
+        fputc(chr, fp);
+    }
+    fclose(fp);
+}
+
+int filesize(char *filename) {
+    struct stat finfo;
+    stat(filename, &finfo);
+
+    return finfo.st_size;
+}

@@ -78,6 +78,7 @@ class Bonzai_Utils_Options
     // }}}
 
     // {{{ parseOptions
+    // TODO: Cyclomatic Complexity 7
     /**
      * @access protected
      * @throws Bonzai_Exception

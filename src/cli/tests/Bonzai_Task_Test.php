@@ -41,6 +41,7 @@ class Bonzai_Task_Test extends Bonzai_TestCase
 {
     // {{{ testLoad
     /**
+     * @ignore
      * @access public
      * @return void
      */

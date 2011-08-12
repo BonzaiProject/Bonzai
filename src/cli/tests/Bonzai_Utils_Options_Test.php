@@ -41,6 +41,7 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
 {
     // {{{ testInit
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -52,6 +53,7 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
 
     // {{{ testParseOptions
     /**
+     * @ignore
      * @access public
      * @return void
      */

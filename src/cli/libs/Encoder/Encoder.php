@@ -99,8 +99,8 @@ class Bonzai_Encoder
         try {
             Bonzai_Utils::putFileContent($filename, $content);
         } catch (Bonzai_Exception $e) {
-             Bonzai_Utils::message('The file `%s` was skipped because cannot be able to save it.', $filename);
-             Bonzai_Registry::append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND);
+            Bonzai_Utils::message('The file `%s` was skipped because cannot be able to save it.', $filename);
+            Bonzai_Registry::append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND);
         }
     }
     // }}}
@@ -133,64 +133,21 @@ class Bonzai_Encoder
      */
     protected function expandPathsToFiles($files)
     {
-        $cloned = $files;
-        foreach($cloned as $key => $path) {
-            $files[$key] = realpath(getcwd() . '/' . $path);
-            $path        = $files[$key];
+        $cloned = $files; // TODO: Executed 0 times
+        foreach($cloned as $key => $path) { // TODO: Executed 0 times
+            $files[$key] = realpath(getcwd() . '/' . $path); // TODO: Executed 0 times
+            $path        = $files[$key]; // TODO: Executed 0 times
 
             try {
-                if (is_dir($path)) {
-                    unset($files[$key]);
-                    $new_files = preg_grep('/\.php$/', Bonzai_Utils::rscandir($path));
-                    array_merge($files, $new_files);
+                if (is_dir($path)) { // TODO: Executed 0 times
+                    unset($files[$key]); // TODO: Executed 0 times
+                    $new_files = preg_grep('/\.php$/', Bonzai_Utils::rscandir($path)); // TODO: Executed 0 times
+                    array_merge($files, $new_files); // TODO: Executed 0 times
                 }
             } catch (Bonzai_Exception $e) {
-                Bonzai_Utils::message('The directory `%s` was skipped because not readable.', $path);
+                Bonzai_Utils::message('The directory `%s` was skipped because not readable.', $path); // TODO: Executed 0 times
             }
         }
     }
     // }}}
-}
-
-#############################################################################################
-
-if (!function_exists('bonzai_get_bytecode')) {
-function bonzai_get_bytecode($filename) {
-    if (empty($filename) || !file_exists($filename)) {
-        $message = gettext('The file `%s` is invalid.');
-        throw new Bonzai_Exception(sprintf($message, $filename));
-    }
-
-    if (!is_readable($filename)) {
-        $message = gettext('The file `%s` is not readable.');
-        throw new Bonzai_Exception(sprintf($message, $filename));
-    }
-
-    if (filesize($filename) == 0) {
-        $message = gettext('The file `%s` is empty.');
-        throw new Bonzai_Exception(sprintf($message, $filename));
-    }
-
-    $fh = fopen('/tmp/phb.phb', 'w');
-    bcompiler_write_file($fh, $filename);
-    fclose($fh);
-
-    $content = Bonzai_Utils::getFileContent('/tmp/phb.phb');
-    unlink('/tmp/phb.phb');
-
-    $content = convert_to_hex(gzcompress($content, 9));
-    $content = base64_encode(gzcompress($content, 9));
-
-    return $content;
-}
-}
-
-function convert_to_hex($string) {
-  $hex = '';
-  $len = strlen($string);
-  for($i = 0; $i < $len; $i++) {
-    $hex .= str_pad(dechex(ord($string[$i])), 2, '0', STR_PAD_LEFT);
-  }
-
-  return strtoupper($hex);
 }

@@ -70,6 +70,7 @@ class Bonzai_Utils
     // }}}
 
     // {{{ rscandir
+    // TODO: Cyclomatic Complexity 8
     /**
      * @static
      * @access public
@@ -92,16 +93,17 @@ class Bonzai_Utils
         $array = array_diff(scandir($base), array('.', '..'));
 
         foreach($array as $value) {
-            try {
-                $path = $base . '/' . $value;
-                if (is_dir($path)) {
-                    $data[] = $path . '/';
-                    $data = Bonzai_Utils::rscandir($path, $data);
-                } elseif (is_file($path)) {
-                    $data[] = $path;
+            $path = $base . '/' . $value;
+            if (is_dir($path)) {
+                $data[] = $path . '/';
+                try {
+                    $res  = Bonzai_Utils::rscandir($path, $data);
+                    $data = $res;
+                } catch (Bonzai_Exception $e) {
+                    Bonzai_Utils::message('The directory `%s` was skipped because not readable.', $path);
                 }
-            } catch (Bonzai_Exception $e) {
-                Bonzai_Utils::message('The directory `%s` was skipped because not readable.', $path);
+            } elseif (is_file($path)) {
+                $data[] = $path;
             }
         }
 

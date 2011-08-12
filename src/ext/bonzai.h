@@ -37,6 +37,10 @@
 #else
     #define BONZAIG(v) (bonzai_globals.v)
 #endif
+
+    #define CHECK_BYTECODE(cond) { if (cond) { php_error_docref(NULL TSRMLS_CC, E_WARNING, "The compiled code is invalid."); RETURN_NULL(); } }
+    #define CHECK_FILE(cond, message, filename) { if (cond) { php_error_docref(NULL TSRMLS_CC, E_NOTICE, message, filename); RETURN_NULL(); } }
+    #define CHECK_COMPILING(cond, filename) { if (cond) { php_error_docref(NULL TSRMLS_CC, E_COMPILE_ERROR, "The file `%s` cannot be compiled.", filename); RETURN_NULL(); } }
     // }}}
 
 #ifdef HAVE_CONFIG_H
@@ -44,6 +48,7 @@
 #endif
 
     #include <fcntl.h>
+    #include <stdbool.h>
     #include <string.h>
     #include <sys/stat.h>
     #include <sys/types.h>
@@ -53,12 +58,14 @@
     #include "TSRM.h"
 #endif
     #include "zend_extensions.h"
-    #include "../standard/base64.h"
-    #include "../standard/css.h"
-    #include "../standard/file.h"
-    #include "../standard/head.h"
-    #include "../standard/html.h"
-    #include "../standard/php_var.h"
+    #include "ext/pcre/php_pcre.h"
+    #include "ext/standard/base64.h"
+    #include "ext/standard/css.h"
+    #include "ext/standard/file.h"
+    #include "ext/standard/head.h"
+    #include "ext/standard/html.h"
+    #include "ext/standard/php_var.h"
+    #include "ext/standard/sha1.h"
     #include "../../main/php_streams.h"
     #include "../../TSRM/tsrm_virtual_cwd.h"
     #include "logos.h"
@@ -81,7 +88,11 @@
 
     char *bonzai_base64_decode(char *data);
     char *bonzai_base64_encode(char *data);
+    void file_put_binary(char *filename, char *content);
+    int filesize(char *filename);
     unsigned int hex2int(char *value);
+    bool regexp_match(char *regexp, char *string);
+    char *sha1(char *string);
     // }}}
 
 #endif /* PHP_BONZAI_H */

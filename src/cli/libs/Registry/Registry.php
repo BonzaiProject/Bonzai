@@ -102,7 +102,7 @@ class Bonzai_Registry
      * @static
      * @access public
      * @param  string $key
-     * @return void
+     * @return boolean
      */
     public static function remove($key)
     {
@@ -115,6 +115,7 @@ class Bonzai_Registry
     // }}}
 
     // {{{ append
+    // TODO: Cyclomatic Complexity 6
     /**
      * @static
      * @access public
@@ -128,12 +129,14 @@ class Bonzai_Registry
         self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
-            if (is_array($value)) {
+            if (is_array($value) || is_array(self::$elements[$key])) {
                 self::$elements[$key][] = $value;
             } elseif (is_string(self::$elements[$key])) {
                 self::$elements[$key] .= $value;
             } elseif (is_numeric(self::$elements[$key]) && $type === self::INT_APPEND) {
                 self::$elements[$key] += $value;
+            } elseif (is_numeric(self::$elements[$key]) && $type !== self::INT_APPEND) {
+                self::$elements[$key] .= $value;
             }
         } else {
             self::add($key, $value, $type);
@@ -157,4 +160,5 @@ class Bonzai_Registry
             throw new Bonzai_Exception($message); // UNCATCHED
         }
     }
+    // }}}
 }

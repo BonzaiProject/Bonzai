@@ -42,6 +42,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName1
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -54,6 +55,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName2
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -66,6 +68,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName3
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -78,6 +81,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName4
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -90,6 +94,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName5
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -102,6 +107,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName6
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -114,6 +120,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName7
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -126,6 +133,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName8
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -138,6 +146,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testGetFileNameFromClassName9
     // WHAT: retrieve the class filename
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -150,6 +159,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testCheckFile1
     // WHAT: check if a file exists in a dir
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -162,6 +172,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testCheckFile2
     // WHAT: check if a file exists in a dir
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -174,6 +185,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testCheckFile3
     // WHAT: check if a file exists in a dir
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -186,6 +198,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testCheckFile4
     // WHAT: check if a file exists in a dir
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -198,6 +211,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ testCheckFile5
     // WHAT: check if a file exists in a dir
     /**
+     * @ignore
      * @access public
      * @return void
      */

@@ -41,6 +41,7 @@ class Bonzai_Utils_Help_Test extends Bonzai_TestCase
 {
     // {{{ testNothing
     /**
+     * @ignore
      * @access public
      * @return void
      */

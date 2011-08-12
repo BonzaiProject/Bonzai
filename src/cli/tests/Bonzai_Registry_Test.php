@@ -43,6 +43,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd1
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -56,6 +57,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd2
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -69,6 +71,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd3
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -82,6 +85,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd4
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -95,6 +99,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd5
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -108,6 +113,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd6
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -121,6 +127,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd7
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -134,6 +141,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd8
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -147,6 +155,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd9
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -160,6 +169,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd10
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -173,6 +183,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd11
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -186,6 +197,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd12
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -199,6 +211,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd13
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -211,6 +224,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd14
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -223,6 +237,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd15
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -235,6 +250,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd16
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -247,6 +263,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd17
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -259,6 +276,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd18
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -271,6 +289,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd19
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -284,6 +303,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd20
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -297,6 +317,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd21
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -310,6 +331,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd22
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -323,6 +345,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd23
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -336,6 +359,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAdd24
     // WHAT: add an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -349,6 +373,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testGet1
     // WHAT: return a saved object
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -362,6 +387,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testGet2
     // WHAT: return a saved object
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -375,30 +401,33 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testGet3
     // WHAT: return a saved object
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testGet3()
     {
-        $this->assertEmpty(Bonzai_Registry::get(' '));
+        $this->assertNull(Bonzai_Registry::get(' '));
     }
     // }}}
 
     // {{{ testGet4
     // WHAT: return a saved object
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testGet4()
     {
-        $this->assertEmpty(Bonzai_Registry::get('a'));
+        $this->assertNull(Bonzai_Registry::get('a'));
     }
     // }}}
 
     // {{{ testGet5
     // WHAT: return a saved object
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -412,18 +441,21 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testGet6
     // WHAT: return a saved object
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testGet6()
     {
-        $this->assertEmpty(Bonzai_Registry::get('EXIST'));
+        Bonzai_Registry::add('EXIST', 'content');
+        $this->assertEquals('content', Bonzai_Registry::get('EXIST'));
     }
     // }}}
 
     // {{{ testRemove1
     // WHAT: remove an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -437,6 +469,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testRemove2
     // WHAT: remove an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -450,30 +483,33 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testRemove3
     // WHAT: remove an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRemove3()
     {
-        $this->assertEmpty(Bonzai_Registry::remove(' '));
+        Bonzai_Registry::remove(' ');
     }
     // }}}
 
     // {{{ testRemove4
     // WHAT: remove an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRemove4()
     {
-        $this->assertEmpty(Bonzai_Registry::remove('a'));
+        Bonzai_Registry::remove('a');
     }
     // }}}
 
     // {{{ testRemove5
     // WHAT: remove an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -487,18 +523,22 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testRemove6
     // WHAT: remove an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
     public function testRemove6()
     {
-        $this->assertEmpty(Bonzai_Registry::remove('EXIST'));
+        Bonzai_Registry::add('EXIST', 'content');
+        Bonzai_Registry::remove('EXIST');
+        $this->assertNull(Bonzai_Registry::get('EXIST'));
     }
     // }}}
 
     // {{{ testAppend1
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -512,6 +552,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend2
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -525,6 +566,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend3
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -538,6 +580,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend4
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -551,6 +594,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend5
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -564,6 +608,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend6
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -577,6 +622,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend7
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -590,6 +636,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend8
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -603,6 +650,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend9
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -616,6 +664,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend10
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -629,6 +678,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend11
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -642,6 +692,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend12
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -655,6 +706,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend13
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -668,6 +720,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend14
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -681,6 +734,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend15
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -694,6 +748,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend16
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -707,6 +762,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend17
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -720,6 +776,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend18
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -733,6 +790,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend19
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -746,6 +804,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend20
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -759,6 +818,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend21
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -772,6 +832,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend22
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -785,6 +846,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend23
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -798,6 +860,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend24
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -811,6 +874,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend25
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -824,6 +888,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend26
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -837,6 +902,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend27
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -850,6 +916,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend28
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -863,6 +930,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend29
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -876,6 +944,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend30
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -889,6 +958,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend31
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -902,6 +972,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend32
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -915,6 +986,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend33
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -928,6 +1000,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend34
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -941,6 +1014,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend35
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -954,6 +1028,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend36
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -967,6 +1042,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend37
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -979,6 +1055,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend38
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -991,6 +1068,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend39
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1003,6 +1081,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend40
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1015,6 +1094,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend41
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1027,6 +1107,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend42
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1039,6 +1120,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend43
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1051,6 +1133,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend44
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1063,6 +1146,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend45
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1075,6 +1159,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend46
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1087,6 +1172,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend47
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1099,6 +1185,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend48
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1111,6 +1198,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend49
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1123,6 +1211,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend50
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1135,6 +1224,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend51
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1147,6 +1237,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend52
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1159,6 +1250,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend53
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1171,6 +1263,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend54
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      */
@@ -1183,6 +1276,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend55
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1196,6 +1290,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend56
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1209,6 +1304,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend57
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1222,6 +1318,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend58
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1235,6 +1332,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend59
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1248,6 +1346,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend60
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1261,6 +1360,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend61
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1274,6 +1374,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend62
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1287,6 +1388,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend63
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1300,6 +1402,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend64
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1313,6 +1416,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend65
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1326,6 +1430,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend66
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1339,6 +1444,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend67
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1352,6 +1458,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend68
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1365,6 +1472,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend69
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1378,6 +1486,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend70
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1391,6 +1500,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend71
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1404,6 +1514,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ testAppend72
     // WHAT: append an element
     /**
+     * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
@@ -1411,6 +1522,141 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     public function testAppend72()
     {
         Bonzai_Registry::append(array(), -1, Bonzai_Registry::INT_APPEND);
+    }
+    // }}}
+
+    // {{{ testAppend73
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend73()
+    {
+        Bonzai_Registry::add('test', 'a');
+        Bonzai_Registry::append('test', 'a');
+        $this->assertEquals('aa', Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ testAppend74
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend74()
+    {
+        Bonzai_Registry::add('test', 0);
+        Bonzai_Registry::append('test', 1);
+        $this->assertEquals(1, Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ testAppend75
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend75()
+    {
+        Bonzai_Registry::add('test', 0);
+        Bonzai_Registry::append('test', 1, Bonzai_Registry::INT_APPEND);
+        $this->assertEquals(1, Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ testAppend76
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend76()
+    {
+        Bonzai_Registry::add('test', 10);
+        Bonzai_Registry::append('test', 11);
+        $this->assertEquals(1011, Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ testAppend77
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend77()
+    {
+        Bonzai_Registry::add('test', 10);
+        Bonzai_Registry::append('test', 11, Bonzai_Registry::INT_APPEND);
+        $this->assertEquals(21, Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ testAppend78
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend78()
+    {
+        Bonzai_Registry::add('test', 10);
+        Bonzai_Registry::append('test', -11);
+        $this->assertEquals('10-11', Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ testAppend79
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend79()
+    {
+        Bonzai_Registry::add('test', 10);
+        Bonzai_Registry::append('test', -11, Bonzai_Registry::INT_APPEND);
+        $this->assertEquals(-1, Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ testAppend80
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend80()
+    {
+        Bonzai_Registry::add('test', array('a', 'b'));
+        Bonzai_Registry::append('test', array('c'));
+        $this->assertEquals(array('a', 'b', array('c')), Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ testAppend81
+    // WHAT: append an element
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testAppend81()
+    {
+        Bonzai_Registry::add('test', array('a', 'b'));
+        Bonzai_Registry::append('test', 'c');
+        $this->assertEquals(array('a', 'b', 'c'), Bonzai_Registry::get('test'));
     }
     // }}}
 }

@@ -111,6 +111,7 @@ class Bonzai_Controller
     // }}}
 
     // {{{ getFileNameFromClassName
+    // TODO: Cyclomatic Complexity 5
     /**
      * @access public
      * @param  string $name

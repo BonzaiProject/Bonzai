@@ -1,32 +1,7 @@
-Creazione team (min 15 persone):
-    3 sviluppatori (Conoscenze approfondite: HTML, PHP 4 e 5, C, CVS)
-    3 tester (Conoscenze standard: HTML, PHP 4 e 5, C, CVS)
-    5 traduttori (1 inglese, 1 francese, 1 tedesco, 1 spagnolo, 1 italiano)
-    1 grafico (Conoscenze: Illustrator, Photoshop, GIMP, Inkscape)
-    3 amministratori (1 per wiki, 1 per forum, 1 per sito)
+CLI - attivare EXT + lanciare test
+CLI - ottimizzare complessità ciclomatica
 
-TODO LIST:
-[ ]    completare la documentazione online nel wiki
-[ ]        tradurre la base, data da google translator, piano piano in inglese (ben)
-[ ]    creare i pacchetti .zip & .tar.gz
-[ ]    committare tutto su sourceforge.net
-
-bonzai-checker
-bonzai-profiler
-
-[ ] dare nomi significativi alle variabili
 [/] Enable support for Windows
-[ ] Enhance CLI with ncurses (or qt)
-[ ] Create a GUI for the CLI -> Java
-[ ] Add more test case to unittest
-[X] Create the execution benchmark report
-
-DIPENDENZE:
-	perfezionamento gettext cli (ben)
-	perfezionamento commenti cli, ext, class e server (ben)
-	traduzione e perfezionamento dello script di config (ben)
-	controllo grammatica italiana documentazione (natascia)
-	traduzione e perfezionamento della documentazione (ben)
 
 ---
 
@@ -48,26 +23,7 @@ DOCS
 [ ] sistemare tutta la documentazione inline
 [ ] scrivere documentazione
 
-WEB
-[ ] creare il sito web (o utilizzare wordpress e prevedere un migrazione)
-[ ] creare form contatti
-[ ] creare forum phpbb
-[ ] creare wiki
-
-----
-CLASS
-- recuperare la chiave da un altro vostro server (magari di un'altro provider) tramite una verifica addizionale (es: verifica referer, verifica ip) o una trasmissione codificata (es: ssl, oppure codificando o offuscando il file)
-- salvare il file su filesystem fuori dalla document root del web server rendendo vano l'accesso diretto al file da web.
-
-EXT
-- salvare il file su filesystem fuori dalla document root del web server rendendo vano l'accesso diretto al file da web.
 ---
-CLI -> Encode -> bonzai_convert
-	optimizing (remove tabulation, comments, line breaks)
----
-Script Class -> Decode -> Administration
-Script Class -> Decode -> Administration -> Logger
-
 
 NOTES
 ------
@@ -78,7 +34,3 @@ CLI
 PHP Ext
     install php with debug options
     ini_params
-
-First release
-    i18n -> IT, EN
-    docs -> IT, EN
