@@ -24,7 +24,7 @@
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
-require_once dirname(__FILE__) . '/../Exception/Exception.php';
+require_once __DIR__ . '/../Exception/Exception.php';
 
 /**
  * @category  Optimization & Security
@@ -69,8 +69,10 @@ class Bonzai_Controller
         try {
             $this->options->init($_SERVER['argv']);
         } catch (Bonzai_Exception $e) {
-            $this->options->init(array()); // TODO: NOT SURE FOR THIS
+            $this->options->init(array()); // Fallback behaviour: show the help
         }
+
+        Bonzai_Registry::add('options', $this->options);
 
         $this->handleTask();
     }
@@ -90,12 +92,12 @@ class Bonzai_Controller
 
     // {{{ __autoload
     /**
-     * @access public
+     * @access protected
      * @param  string $name
      * @throws Bonzai_Exception
      * @return void
      */
-    public function __autoload($name)
+    protected function __autoload($name)
     {
         if (strpos($name, 'Bonzai_') == 0) {
             $filename = $this->getFileNameFromClassName($name);
@@ -105,7 +107,7 @@ class Bonzai_Controller
                 throw new Bonzai_Exception(sprintf($message, $name));
             }
 
-            require_once dirname(__FILE__) . '/../' . $filename . '.php';
+            require_once __DIR__ . '/../' . $filename . '.php';
         }
     }
     // }}}
@@ -145,7 +147,7 @@ class Bonzai_Controller
      */
     public function checkFile($filename)
     {
-        return file_exists(dirname(__FILE__) . '/../' . $filename . '.php');
+        return file_exists(__DIR__ . '/../' . $filename . '.php');
     }
     // }}}
 }

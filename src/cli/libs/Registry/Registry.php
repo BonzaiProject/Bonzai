@@ -145,7 +145,6 @@ class Bonzai_Registry
     // }}}
 
     // {{{ checkKeyValidity
-    // TODO: ADD TO TEST
     /**
      * @static
      * @access protected
@@ -157,7 +156,7 @@ class Bonzai_Registry
     {
         if (empty($key) || (!is_string($key) && !is_numeric($key))) {
             $message = gettext('Invalid key type.');
-            throw new Bonzai_Exception($message); // UNCATCHED
+            throw new Bonzai_Exception($message); // Exception not catched
         }
     }
     // }}}

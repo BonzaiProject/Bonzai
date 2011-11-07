@@ -23,9 +23,10 @@ LICENSE:        MIT or GNU GPL 2
                 <http://www.opensource.org/licenses/gpl-2.0.php>
 
 DESCRIPTION
-Protect and track your PHP source code
+Protect your PHP source code
 
-This project allow you to protect effectively your sources, without losing performances.
-The only FREE, OPEN-SOURCE and EVERYONE ACCESSIBLE, solution that you can sleep soundly.
+This project allow you to protect effectively your sources, without losing
+performances. The only FREE, OPEN-SOURCE and EVERYONE ACCESSIBLE, solution
+that lets you sleep soundly.
 
 Look the CHANGELOG file for versioning informations.

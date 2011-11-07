@@ -48,9 +48,9 @@ class cliSuite extends PHPUnit_Framework_TestSuite
     {
         $this->setName('cliSuite');
 
-        $files = preg_grep('/^Bonzai_.+_Test.php$/', scandir(dirname(__FILE__)));
+        $files = preg_grep('/^Bonzai_.+_Test.php$/', scandir(__DIR__));
         foreach($files as $file) {
-            require_once dirname(__FILE__) . '/' . $file;
+            require_once __DIR__ . '/' . $file;
             $this->addTestSuite(substr($file, 0, -4));
         }
     }

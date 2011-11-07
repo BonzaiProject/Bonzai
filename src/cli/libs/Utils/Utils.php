@@ -49,23 +49,13 @@ class Bonzai_Utils
     /**
      * @static
      * @access public
-     * @param  string  $filename
-     * @param  boolean $backup
+     * @param  string $filename
      * @throws Bonzai_Exception
      * @return void
      */
-    public static function renameFile($filename, $backup = true) // TODO: UNUSED
+    public static function renameFile($filename)
     {
-        if ($backup) {
-            $backup_filename = $filename . '.orig';
-
-            if (!is_writable($backup_filename)) {
-                $message = gettext('The file `%s` cannot be written.');
-                throw new Bonzai_Exception(sprintf($message, $backup_filename)); // UNCATCHED
-            }
-
-            file_put_contents($backup_filename, self::getFileContent($filename));
-        }
+        return self::putFileContent($filename . '.orig', self::getFileContent($filename));
     }
     // }}}
 
@@ -119,7 +109,7 @@ class Bonzai_Utils
      * @throws Bonzai_Exception
      * @return string
      */
-    public static function getFileContent($filename) // TODO: UNUSED
+    public static function getFileContent($filename)
     {
         if (!is_readable($filename)) {
             $message = gettext('The file `%s` cannot be opened.');
@@ -152,22 +142,113 @@ class Bonzai_Utils
     }
     // }}}
 
-    // {{{ message
+    // {{{ checkFileValidity
+    /**
+     * @static
+     * @access public
+     * @param  string $filename
+     * @throws Bonzai_Exception
+     * @return void
+     */
+    public static function checkFileValidity($filename) // TODO: ADD TEST
+    {
+        if (empty($filename) || !file_exists($filename)) {
+            $message = gettext('The file `%s` is invalid.');
+            throw new Bonzai_Exception(sprintf($message, $filename));
+        }
+
+        if (!is_readable($filename)) {
+            $message = gettext('The file `%s` is not readable.');
+            throw new Bonzai_Exception(sprintf($message, $filename));
+        }
+
+        if (filesize($filename) == 0) {
+            $message = gettext('The file `%s` is empty.');
+            throw new Bonzai_Exception(sprintf($message, $filename));
+        }
+
+        $content = Bonzai_Utils::getFileContent($filename);
+        if (strpos($content, 'class Bonzai_') !== false) {
+            $message = gettext('The file `%s` is not able to be parsed.');
+            throw new Bonzai_Exception(sprintf($message, $filename));
+        }
+    }
+    // }}}
+
+    // {{{ info
     /**
      * @static
      * @access public
      * @return void
      */
+    public static function info()
+    {
+        $parameters = func_get_args();
+        array_unshift($parameters, 'info');
+
+        return call_user_func_array(array('Bonzai_Utils', 'message'), $parameters);
+    }
+    // }}}
+
+    // {{{ message
+    /**
+     * @static
+     * @access protected
+     * @return void
+     */
     public static function message()
     {
-        if (!self::$silenced) {
+        $options    = Bonzai_Registry::get('options');
+        $quiet_mode = ($options && $options->getOption('quiet') !== null);
+        if (!self::$silenced && !$quiet_mode) {
             $args = func_get_args();
+            $type = array_shift($args);
             $text = array_shift($args);
 
             $text = vsprintf(gettext($text), $args);
 
-            printf("[%d] %s" . PHP_EOL, time(), $text);
+            $prefix = '[' . date('H:i:s') . '] ';
+            $prefix_len = strlen($prefix);
+
+            $text = wordwrap($text, 80 - $prefix_len, PHP_EOL . str_repeat(' ', $prefix_len), true);
+
+            $use_stderr = ($options && $options->getOption('stderr') !== null);
+
+            $message = $prefix . $text . PHP_EOL;
+            $std = ($use_stderr && $type == 'error') ? 'php://stderr' : 'php://stdout';
+
+            file_put_contents($std, $message);
         }
+    }
+    // }}}
+
+    // {{{ warn
+    /**
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function warn()
+    {
+        $parameters = func_get_args();
+        array_unshift($parameters, 'warn');
+
+        return call_user_func_array(array('Bonzai_Utils', 'message'), $parameters);
+    }
+    // }}}
+
+    // {{{ error
+    /**
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function error()
+    {
+        $parameters = func_get_args();
+        array_unshift($parameters, 'error');
+
+        return call_user_func_array(array('Bonzai_Utils', 'message'), $parameters);
     }
     // }}}
 }

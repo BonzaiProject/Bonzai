@@ -61,7 +61,7 @@ class Bonzai_Task
         $this->parameters = $options;
 
         $options = $this->parameters->getNonOptions();
-        if (!empty($options)) {
+        if (!empty($options) && $this->parameters->getOption('help') === null && $this->parameters->getOption('version') === null) {
             $this->task       = 'Bonzai_Encoder';
             $this->parameters = $options;
         }
@@ -101,8 +101,8 @@ class Bonzai_Task
         try {
             return $this->execute();
         } catch (Bonzai_Exception $e) {
-            $faultback = new Bonzai_Utils_Help();
-            return $faultback->elaborate(new Bonzai_Utils_Options());
+            $fallback = new Bonzai_Utils_Help();
+            return $fallback->elaborate(new Bonzai_Utils_Options());
         }
     }
     // }}}

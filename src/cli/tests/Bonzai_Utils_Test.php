@@ -24,9 +24,9 @@
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
  **/
 
-require_once dirname(__FILE__) . '/../libs/Tests/TestCase.php';
-require_once dirname(__FILE__) . '/../libs/Exception/Exception.php';
-require_once dirname(__FILE__) . '/../libs/Utils/Utils.php';
+require_once __DIR__ . '/../libs/Tests/TestCase.php';
+require_once __DIR__ . '/../libs/Exception/Exception.php';
+require_once __DIR__ . '/../libs/Utils/Utils.php';
 
 Bonzai_Utils::$silenced = true;
 
@@ -55,8 +55,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir1
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -70,8 +70,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir2
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -85,8 +85,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir3
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -100,8 +100,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir4
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -115,8 +115,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir5
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -130,8 +130,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir6
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -145,8 +145,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir7
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -160,8 +160,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir8
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -175,8 +175,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir9
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -190,8 +190,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir10
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -205,8 +205,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir11
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -220,8 +220,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir12
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -235,8 +235,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir13
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -250,8 +250,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir14
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -265,8 +265,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir15
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -280,8 +280,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir16
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -295,8 +295,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir17
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -310,8 +310,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir18
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -325,8 +325,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir19
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -340,8 +340,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir20
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -355,8 +355,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir21
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -380,8 +380,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir22
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -405,8 +405,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir23
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -430,8 +430,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir24
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -455,8 +455,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir25
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -480,8 +480,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir26
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -500,8 +500,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir27
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -520,8 +520,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir28
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -540,8 +540,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir29
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -560,8 +560,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir30
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -580,8 +580,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir31
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -598,8 +598,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir32
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -616,8 +616,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir33
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -634,8 +634,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir34
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -652,8 +652,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir35
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -670,8 +670,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir36
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
@@ -693,18 +693,19 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testRscandir37
-    // WHAT: return the all directories & files into a directory
     /**
+     * Return the all directories & files into a directory
      * @ignore
      * @access public
      * @return void
      */
     public function testRscandir37()
     {
-        $dirname = realpath(dirname(__FILE__) . '/../');
+        $dirname = realpath(__DIR__ . '/../');
 
         $files = Bonzai_Utils::rscandir($dirname);
         sort($files);
+        $files = array_merge(preg_grep('#/tests/test_.+$|\.swp$#', $files, PREG_GREP_INVERT));
         foreach($files as $i => $file) {
             $files[$i] = str_replace(realpath("$dirname/../../"), "", $file);
         }
@@ -745,8 +746,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testGetFileContent1
-    // WHAT: get the file's content
     /**
+     * Get the file's content
      * @ignore
      * @access public
      * @return void
@@ -759,8 +760,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testGetFileContent2
-    // WHAT: get the file's content
     /**
+     * Get the file's content
      * @ignore
      * @access public
      * @return void
@@ -773,8 +774,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testGetFileContent3
-    // WHAT: get the file's content
     /**
+     * Get the file's content
      * @ignore
      * @access public
      * @return void
@@ -787,8 +788,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testGetFileContent4
-    // WHAT: get the file's content
     /**
+     * Get the file's content
      * @ignore
      * @access public
      * @return void
@@ -801,8 +802,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testGetFileContent5
-    // WHAT: get the file's content
     /**
+     * Get the file's content
      * @ignore
      * @access public
      * @return void
@@ -826,8 +827,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testGetFileContent6
-    // WHAT: get the file's content
     /**
+     * Get the file's content
      * @ignore
      * @access public
      * @return void
@@ -846,8 +847,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testGetFileContent7
-    // WHAT: get the file's content
     /**
+     * Get the file's content
      * @ignore
      * @access public
      * @return void
@@ -864,8 +865,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent1
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -878,8 +879,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent2
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -892,8 +893,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent3
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -906,8 +907,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent4
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -920,8 +921,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent5
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -934,8 +935,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent6
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -948,8 +949,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent7
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -962,8 +963,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent8
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -976,8 +977,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent9
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -990,8 +991,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent10
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1004,8 +1005,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent11
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1018,8 +1019,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent12
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1032,8 +1033,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent13
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1047,8 +1048,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent14
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1062,8 +1063,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent15
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1077,8 +1078,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent16
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1092,8 +1093,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent17
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1111,8 +1112,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent18
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1130,8 +1131,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent19
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1149,8 +1150,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent20
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1168,8 +1169,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent21
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1190,8 +1191,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent22
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1212,8 +1213,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent23
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1234,8 +1235,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent24
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1256,8 +1257,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent25
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1281,8 +1282,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent26
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1306,8 +1307,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent27
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1331,8 +1332,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent28
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1356,8 +1357,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent29
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1375,8 +1376,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent30
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1394,8 +1395,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent31
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1413,8 +1414,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ testPutFileContent32
-    // WHAT: return the status of saving
     /**
+     * Return the status of saving
      * @ignore
      * @access public
      * @return void
@@ -1431,13 +1432,61 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-// {{{ testMessage
+    // {{{ testCheckFileValidity
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public static function checkFileValidity()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+
+    // {{{ testMessage
     /**
      * @ignore
      * @access public
      * @return void
      */
     public function testMessage()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+
+    // {{{ testInfo
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testInfo()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+
+    // {{{ testWarn
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testWarn()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+
+    // {{{ testError
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testError()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

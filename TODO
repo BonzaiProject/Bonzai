@@ -1,35 +1,9 @@
-CLI - ottimizzare complessità ciclomatica
+TODO
 
-[/] Enable support for Windows
-
----
-
-DEVEL
-[ ] creare versioni codificate (wordpress*, phpmyadmin*, joomla*, phpbb*, egroupware, mapgpierss, nusoap)
-[ ] creare report (bechmark, dimensioni, velocità, ...) delle versioni codificate (wordpress*, phpmyadmin*, joomla*, phpbb*, egroupware, mapgpierss, nusoap)
-[ ] preparare il pannello di amministrazione
-    [ ] lettura da db
-    [ ] modifica tpl
-    [ ] controllo scrittura su db da ext e class
-    [ ] rimuovere codifica
-    [ ] rimuovere decodifica
-    [ ] controllare impostazioni
-        [ ] controllo automatico versione
-        [ ] caricamento template
-        [ ] caricamento lingua
-
-DOCS
-[ ] sistemare tutta la documentazione inline
-[ ] scrivere documentazione
-
----
-
-NOTES
-------
-CLI
-    ./configure
-    make
-    make install
-PHP Ext
-    install php with debug options
-    ini_params
+Use colors in output (--color)
+Print report (--report)
+Change the output file / directory
+Log to filesystem (--log=xx)
+Optimize the cyclomatic complexity
+Optimize the application through profiling (xhprof & xdebug)
+Use ncurses

@@ -47,8 +47,8 @@ class Bonzai_Utils_Help
         echo str_repeat('-', 80) . PHP_EOL;
         echo 'BONZAI' . str_repeat(' ', 50);
         echo gettext('(previously phpGuardian)') . PHP_EOL;
-
         echo str_repeat('-', 80) . PHP_EOL;
+
         echo gettext('Version') . ': 0.1' . PHP_EOL;
         echo 'Copyright (C) 2006 - ' . date('Y') . ' Bonzai (Fabio Cicerchia). '
                . gettext('All rights reserved.') . PHP_EOL;
@@ -56,21 +56,23 @@ class Bonzai_Utils_Help
         echo str_repeat('-', 80) . PHP_EOL;
 
         if (is_null($options->getOption('version'))) {
-            echo PHP_EOL . gettext('Usage') . ':' . PHP_EOL . $_SERVER['argv'][0] . ' [' . gettext('OPTIONS') . ']... [' . gettext('FILE') . '|' . gettext('DIRECTORY') . ']' . PHP_EOL . PHP_EOL;
+            echo PHP_EOL . gettext('Usage') . ':' . PHP_EOL . $_SERVER['argv'][0] . ' [' . gettext('OPTIONS') . ']... [' . gettext('FILES') . '|' . gettext('DIRECTORIES') . ']...' . PHP_EOL . PHP_EOL;
             echo gettext('Options') . ':' . PHP_EOL;
             foreach($options->getParameters() as $short => $long) {
-                $has_value = strpos($short, ':') > 0;
+                $has_value = strpos($long, ':') > 0;
+
+                $only_long = is_int($short);
 
                 $short = str_replace(':', '', $short);
                 $long  = str_replace(':', '', $long);
 
-                $info = "-$short, --$long";
+                $info = ($only_long ? '' : "-$short, ") . "--$long";
                 if ($has_value) {
                     $info .= '=<value>';
                 }
 
-                $row = sprintf('    ' . str_pad($info, 20, ' ') . '%s' . PHP_EOL, gettext($options->getLabelParameter($long)));
-                echo wordwrap($row, 80, PHP_EOL . str_repeat(' ', 24), true);
+                $row = sprintf('    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL, gettext($options->getLabelParameter($long)));
+                echo wordwrap($row, 80, PHP_EOL . str_repeat(' ', 25), true);
             }
             echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org') . PHP_EOL;
         }

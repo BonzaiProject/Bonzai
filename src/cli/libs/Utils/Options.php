@@ -43,6 +43,12 @@ class Bonzai_Utils_Options
      */
     protected $parameters = array(
         'b'  => 'backup',
+        'd'  => 'dry',
+        'r:' => 'report:',
+                'colors',
+                'log:',
+                'stderr',
+        'q'  => 'quiet',
         'h'  => 'help',
         'v'  => 'version');
 
@@ -52,8 +58,29 @@ class Bonzai_Utils_Options
      */
     protected $labels = array(
         'backup'  => 'Backup the original file, generate a .bak file (default: false)',
+        'dry'     => 'Perform a trial run with no changes made',
+        'colorf'  => 'Use colors in output',
+        'log'     => 'Log execution messages in textual format',
+        'stderr'  => 'Write to STDERR instead of STDOUT',
+        'report'  => 'Generate a full report',
+        'colors'  => 'Use colors in output',
+        'log'     => 'Log execution messages in textual format',
+        'stderr'  => 'Write to STDERR instead of STDOUT',
+        'quiet'   => 'Quiet mode. Don\'t output anything',
         'help'    => 'Show the help',
         'version' => 'Show the version');
+
+    /**
+     * @access protected
+     * @var    array $options
+     */
+    protected $options = array();
+
+    /**
+     * @access protected
+     * @var    array $non_options
+     */
+    protected $non_options = array();
     // }}}
 
     // {{{ init
@@ -70,10 +97,8 @@ class Bonzai_Utils_Options
             throw new Bonzai_Exception($message);
         }
 
-        $this->options     = getopt(implode('', array_keys($this->parameters)), $this->parameters);
-        $this->non_options = array_slice($argv, 1);
-
-        $this->parseOptions();
+        $this->options = getopt(implode('', array_keys($this->parameters)), $this->parameters);
+        $this->parseOptions($argv);
     }
     // }}}
 
@@ -81,27 +106,39 @@ class Bonzai_Utils_Options
     // TODO: Cyclomatic Complexity 7
     /**
      * @access protected
+     * @param  array $argv
      * @throws Bonzai_Exception
      * @return void
      */
-    protected function parseOptions()
+    protected function parseOptions($argv)
     {
-        if (!is_array($this->options) || !is_array($this->non_options)) {
+        if (!is_array($this->options)) {
             $message = gettext('Invalid parameters to be parsed.');
             throw new Bonzai_Exception($message);
         }
 
-        foreach($this->options as $key => $value) {
-            unset($this->non_options[array_search('-' . $key, $this->non_options)]);
+        $options = array_merge(array_keys($this->options), array_values($this->options));
+        $options = preg_grep('/.+/', $options);
 
-            $has_value = !$value ? '' : ':';
-            $new_key   = $key . $has_value;
-            if (!empty($this->parameters[$new_key])) {
-                $new_key = substr($this->parameters[$new_key], 0, strlen($this->parameters[$new_key]) - strlen($has_value));
-                if (empty($this->options[$new_key])) {
-                    $this->options[$new_key] = $value;
+        foreach($argv as $key => $value) {
+            if ($key == 0) continue;
+
+            if ($value[0] !== '-') {
+                $prev_key = preg_replace('/^-{1,2}/', '', $argv[$key - 1]) . ':';
+                if (!isset($this->parameters[$prev_key])) {
+                    $this->non_options[] = $value;
                 }
-                unset($this->options[$key]);
+            }
+        }
+
+        foreach($this->options as $key => $value) {
+            $suffix = ($value !== false) ? ':' : '';
+            $key .= $suffix;
+
+            if (isset($this->parameters[$key]) && !isset($this->options[$this->parameters[$key]])) {
+                $key_arr = $this->parameters[$key];
+                $key_arr = substr($key_arr, 0, strlen($key_arr)-strlen($suffix));
+                $this->options[$key_arr] = $value;
             }
         }
     }
