@@ -40,5 +40,5 @@ cp -r ../report/cli/docs ../release/docs/
 
 cd ../release/
 tar -zcf /tmp/bonzai_0.1.tar.gz *
-zip -q /tmp/bonzai_0.1.zip *
+zip -rq /tmp/bonzai_0.1.zip *
 mv /tmp/bonzai_0* .
