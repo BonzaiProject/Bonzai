@@ -44,7 +44,7 @@ Bonzai_Utils::$silenced = true;
  */
 class Bonzai_Encoder_Test extends Bonzai_TestCase
 {
-    // {{{ testProcessFile1
+    // {{{ test__ProcessFile__WithParam_Null__IsEmpty
     /**
      * Process a file
      * @ignore
@@ -52,13 +52,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testProcessFile1()
+    public function test__ProcessFile__WithParam_Null__IsEmpty()
     {
         $this->assertEmpty($this->object->processFile(null));
     }
     // }}}
 
-    // {{{ testProcessFile2
+    // {{{ test__ProcessFile__WithParam_EmptyString__IsEmpty
     /**
      * Process a file
      * @ignore
@@ -66,13 +66,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testProcessFile2()
+    public function test__ProcessFile__WithParam_EmptyString__IsEmpty()
     {
         $this->assertEmpty($this->object->processFile(''));
     }
     // }}}
 
-    // {{{ testProcessFile3
+    // {{{ test__ProcessFile__WithParam_SpacedString__IsEmpty
     /**
      * Process a file
      * @ignore
@@ -80,13 +80,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testProcessFile3()
+    public function test__ProcessFile__WithParam_SpacedString__IsEmpty()
     {
         $this->assertEmpty($this->object->processFile(' '));
     }
     // }}}
 
-    // {{{ testProcessFile4
+    // {{{ test__ProcessFile__WithParam_FileNotExists__IsEmpty
     /**
      * Process a file
      * @ignore
@@ -94,7 +94,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testProcessFile4()
+    public function test__ProcessFile__WithParam_FileNotExists__IsEmpty()
     {
         $this->assertEmpty($this->object->processFile('a'));
 
@@ -102,14 +102,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testProcessFile5
+    // {{{ test__ProcessFile__WithParam_EmptyFile__FileIsEmpty
     /**
      * Process a file
      * @ignore
      * @access public
      * @return void
      */
-    public function testProcessFile5()
+    public function test__ProcessFile__WithParam_EmptyFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -126,14 +126,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testProcessFile6
+    // {{{ test__ProcessFile__WithParam_SizedFile__FileIsNotReadable
     /**
      * Process a file
      * @ignore
      * @access public
      * @return void
      */
-    public function testProcessFile6()
+    public function test__ProcessFile__WithParam_SizedFile__FileIsNotReadable()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'aaa');
@@ -152,14 +152,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testProcessFile7
+    // {{{ test__ProcessFile__WithParam_NotWritableSizedFile__FileIsEmpty
     /**
      * Process a file
      * @ignore
      * @access public
      * @return void
      */
-    public function testProcessFile7()
+    public function test__ProcessFile__WithParam_NotWritableSizedFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'aaa');
@@ -172,14 +172,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testProcessFile7
+    // {{{ test__ProcessFile__WithParam_SizedFile__FileIsEmpty
     /**
      * Process a file
      * @ignore
      * @access public
      * @return void
      */
-    public function testProcessFile8()
+    public function test__ProcessFile__WithParam_SizedFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
@@ -190,14 +190,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetByteCode1
+    // {{{ test__GetByteCode__WithParam_Null__FileIsInvalid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetByteCode1()
+    public function test__GetByteCode__WithParam_Null__FileIsInvalid()
     {
         try {
             $this->object->getByteCode(null);
@@ -209,14 +209,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetByteCode2
+    // {{{ test__GetByteCode__WithParam_EmptyString__FileIsInvalid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetByteCode2()
+    public function test__GetByteCode__WithParam_EmptyString__FileIsInvalid()
     {
         try {
             $this->object->getByteCode('');
@@ -228,14 +228,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetByteCode3
+    // {{{ test__GetByteCode__WithParam_SpacedString__FileIsInvalid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetByteCode3()
+    public function test__GetByteCode__WithParam_SpacedString__FileIsInvalid()
     {
         try {
             $this->object->getByteCode(' ');
@@ -247,14 +247,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetByteCode4
+    // {{{ test__GetByteCode__WithParam_FileNotExists__FileIsInvalid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetByteCode4()
+    public function test__GetByteCode__WithParam_FileNotExists__FileIsInvalid()
     {
         try {
             $this->object->getByteCode('a');
@@ -266,14 +266,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetByteCode5
+    // {{{ test__GetByteCode__WithParam_EmptyFile__FileIsEmpty
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetByteCode5()
+    public function test__GetByteCode__WithParam_EmptyFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -290,14 +290,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetByteCode6
+    // {{{ test__GetByteCode__WithParam_SizedFile__FileIsNotReadable
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetByteCode6()
+    public function test__GetByteCode__WithParam_SizedFile__FileIsNotReadable()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -316,14 +316,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetByteCode7
+    // {{{ test__GetByteCode__WithParam_SizedFile__FileIsEmpty
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetByteCode7()
+    public function test__GetByteCode__WithParam_SizedFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -342,14 +342,14 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testGetByteCode8
+    // {{{ test__GetByteCode__WithParam_SizedFile__FileIsNotValid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetByteCode8()
+    public function test__GetByteCode__WithParam_SizedFile__FileIsNotValid()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
@@ -362,13 +362,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testExpandPathsToFiles
+    // {{{ test__ExpandPathsToFiles
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function testExpandPathsToFiles()
+    public function test__ExpandPathsToFiles()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

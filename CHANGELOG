@@ -1,114 +1,115 @@
 CHANGELOG
+===============================================================================
 
 v0.1        Bonzai
-* ADDED   - Bytecode compilation
-* ADDED   - New logo for the product
-* ADDED   - New website for the product
-* ADDED   - Project repository on github.com
-* CHANGED - CLI from C to PHP
-* CHANGED - Project name to Bonzai but kept the changelog history
-* REMOVED - CVS Server at sourceforge.net
-* REMOVED - Converting process
-* REMOVED - Encoding & Decoding process
-* REMOVED - PHP Library
-* REMOVED - Temporarily PHP Extension
-* REMOVED - Temporarily the Logging Server functionality
+  * ADDED   - Bytecode compilation
+  * ADDED   - New logo for the product
+  * ADDED   - New website for the product
+  * ADDED   - Project repository on github.com
+  * CHANGED - CLI from C to PHP
+  * CHANGED - Project name to Bonzai but kept the changelog history
+  * REMOVED - CVS Server at sourceforge.net
+  * REMOVED - Converting process
+  * REMOVED - Encoding & Decoding process
+  * REMOVED - PHP Library
+  * REMOVED - Temporarily PHP Extension
+  * REMOVED - Temporarily the Logging Server functionality
 
 -------------------------------------------------------------------------------
 
 v4.0dev     phpGuardian
-* ADDED   - CLI
-* ADDED   - Gettext support (it, en)
-* ADDED   - PHP Extension
-* ADDED   - PHP Library (as alternative to PHP Extension)
-* CHANGED - Logging Server
-* CHANGED - Project name to phpGuardian2 (new branch) but kept the history of versioning
-* REMOVED - Administration Panel
+  * ADDED   - CLI
+  * ADDED   - Gettext support (it, en)
+  * ADDED   - PHP Extension
+  * ADDED   - PHP Library (as alternative to PHP Extension)
+  * CHANGED - Logging Server
+  * CHANGED - Project name to phpGuardian2 (new branch) but kept the history of versioning
+  * REMOVED - Administration Panel
 
 v3.1        phpGuardian
-* ADDED   - 4 missing files
-* FIXED   - Error in Logger Server
+  * ADDED   - 4 missing files
+  * FIXED   - Error in Logger Server
 
 v3.0        phpGuardian
-* ADDED   - Administration Panel to configure all options
-* ADDED   - Delete function of site on logger module
-* ADDED   - Logout button
-* ADDED   - Percentual of access (related to the global traffic)
-* ADDED   - Ping IP on logger module
-* ADDED   - Report Exporting in CSV and TXT formats
-* ADDED   - Site's priority for logger module
-* ADDED   - Whois host on logger module
-* CHANGED - Improved the security of _GET and _POST variables
-* CHANGED - Layout
-* CHANGED - Obfuscator lists (variables, constants, functions)
-* CHANGED - Separation the layout from the code
-* CHANGED - Translated all text in italian and english
-* CHANGED - parse_file_* for better recursive parsing
-* CHANGED - several improvements on code
-* FIXED   - E_ALL errors
-* FIXED   - Several bugs
+  * ADDED   - Administration Panel to configure all options
+  * ADDED   - Delete function of site on logger module
+  * ADDED   - Logout button
+  * ADDED   - Percentual of access (related to the global traffic)
+  * ADDED   - Ping IP on logger module
+  * ADDED   - Report Exporting in CSV and TXT formats
+  * ADDED   - Site's priority for logger module
+  * ADDED   - Whois host on logger module
+  * CHANGED - Improved the security of _GET and _POST variables
+  * CHANGED - Layout
+  * CHANGED - Obfuscator lists (variables, constants, functions)
+  * CHANGED - Separation the layout from the code
+  * CHANGED - Translated all text in italian and english
+  * CHANGED - parse_file_* for better recursive parsing
+  * CHANGED - several improvements on code
+  * FIXED   - E_ALL errors
+  * FIXED   - Several bugs
 
 v2.0dev     phpGuardian
-* ADDED   - Database astraction
-* ADDED   - Documentation
-* ADDED   - More functionality to Logging Server
-* ADDED   - Obfuscator
-* ADDED   - Re-encode script process
-* ADDED   - Re-obfuscate script process
-* CHANGED - several improvements on code
-* FIXED   - Several bugs
+  * ADDED   - Database astraction
+  * ADDED   - Documentation
+  * ADDED   - More functionality to Logging Server
+  * ADDED   - Obfuscator
+  * ADDED   - Re-encode script process
+  * ADDED   - Re-obfuscate script process
+  * CHANGED - several improvements on code
+  * FIXED   - Several bugs
 
 v1.5dev3    phpGuardian
-* FIXED   - Several bugs
+  * FIXED   - Several bugs
 
 v1.5dev2    phpGuardian
-* CHANGED - Improved the Administration Panel
-* FIXED   - Several bugs
+  * CHANGED - Improved the Administration Panel
+  * FIXED   - Several bugs
 
 v1.5dev     phpGuardian
-* CHANGED - Improved the Administration Panel
-* CHANGED - Improved the Encoder Algorithm
-* FIXED   - Several bugs
+  * CHANGED - Improved the Administration Panel
+  * CHANGED - Improved the Encoder Algorithm
+  * FIXED   - Several bugs
 
 v1.0        phpGuardian
-* ADDED   - Support for the off-line encoding
-* CHANGED - Improved the Administration Panel
-* CHANGED - Improved the Encoder Algorithm
-* FIXED   - Several bugs
+  * ADDED   - Support for the off-line encoding
+  * CHANGED - Improved the Administration Panel
+  * CHANGED - Improved the Encoder Algorithm
+  * FIXED   - Several bugs
 
 v0.7        phpGuardian
-* CHANGED - Improved the Encoder Algorithm
-* CHANGED - Improved the Logger Management
+  * CHANGED - Improved the Encoder Algorithm
+  * CHANGED - Improved the Logger Management
 
 v0.6        phpGuardian
-* ADDED   - Logging of the path of the monitorized scripts
-* CHANGED - DB structure
-* CHANGED - Visualization of the path of the monitorized scripts
-* FIXED   - Several bugs
+  * ADDED   - Logging of the path of the monitorized scripts
+  * CHANGED - DB structure
+  * CHANGED - Visualization of the path of the monitorized scripts
+  * FIXED   - Several bugs
 
 v0.5.2      phpGuardian
-* FIXED   - Several bugs
+  * FIXED   - Several bugs
 
 v0.5        phpGuardian
-* ADDED   - Crypter
+  * ADDED   - Crypter
 
 v0.4        phpGuardian
-* ADDED   - Login form to Administration Panel
-* ADDED   - Visualization of user informations
+  * ADDED   - Login form to Administration Panel
+  * ADDED   - Visualization of user informations
 
 v0.3        phpGuardian
-* ADDED   - Administration Panel
-* ADDED   - Checking of last script version
-* ADDED   - Visualization of user list
-* CHANGED - DB structure
-* CHANGED - User state
+  * ADDED   - Administration Panel
+  * ADDED   - Checking of last script version
+  * ADDED   - Visualization of user list
+  * CHANGED - DB structure
+  * CHANGED - User state
 
 v0.2        phpGuardian
-* CHANGED - Improved the internal management
-* FIXED   - Bug #1 (Notice: Undefined variable: value) THANKS TO: nickang
-* FIXED   - Bug #2 (Error of general overwriting into database)
+  * CHANGED - Improved the internal management
+  * FIXED   - Bug #1 (Notice: Undefined variable: value) THANKS TO: nickang
+  * FIXED   - Bug #2 (Error of general overwriting into database)
 
 v0.1B       phpGuardian
-* ADDED   - Executing of additional code into the script
-* ADDED   - Logging IP and host of last user
-* ADDED   - Logging of global var $_SERVER
+  * ADDED   - Executing of additional code into the script
+  * ADDED   - Logging IP and host of last user
+  * ADDED   - Logging of global var $_SERVER

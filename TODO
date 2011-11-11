@@ -1,9 +1,11 @@
 TODO
+===============================================================================
 
-Use colors in output (--color)
-Print report (--report)
-Change the output file / directory
-Log to filesystem (--log=xx)
-Optimize the cyclomatic complexity
-Optimize the application through profiling (xhprof & xdebug)
-Use ncurses
+Command Line rewritten in C (in doubt)
+Create an Administration Panel for Android & iOS
+Create an installer (.deb, .rpm, .dmg, .exe)
+Custom PHP Extension (written in C)
+Drop dependence with bcompiler
+Graphical User Interface
+Logging Server & Web Administration Panel (also for mobile devices)
+Remote Execution of Arbitrary Code

@@ -1,0 +1,65 @@
+ROADMAP
+===============================================================================
+
+Version 0.1-alpha1
+EXPECTED DUE DATE: TDB
+TASKS:
+  * Write the unit test for `Bonzai_Encoder_Test::testExpandPathsToFiles`
+  * Write the unit test for `Bonzai_Registry_Test::testCheckKeyValidity`
+  * Write the unit test for `Bonzai_Task_Test::testLoad`
+  * Write the unit test for `Bonzai_Utils_Options_Test::testInit`
+  * Write the unit test for `Bonzai_Utils_Options_Test::testParseOptions`
+  * Write the unit test for `Bonzai_Utils_Test::testRenameFile`
+  * Write the unit test for `Bonzai_Utils_Test::checkFileValidity`
+  * Write the unit test for `Bonzai_Utils_Test::testMessage`
+  * Write the unit test for `Bonzai_Utils_Test::testInfo`
+  * Write the unit test for `Bonzai_Utils_Test::testWarn`
+  * Write the unit test for `Bonzai_Utils_Test::testError`
+
+-------------------------------------------------------------------------------
+
+Version 0.1-alpha2
+EXPECTED DUE DATE: TDB
+TASKS:
+  * Check _build.xml_
+  * Improve _release.sh_ script
+  * Remove useless parts from _build.sh_
+  * Create file _readme.md_
+  * Use colors in output (`--color`)
+  * Print the report of execution (`--report`)
+  * Change the output file / directory
+  * Log to filesystem (`--log=<file>`)
+
+-------------------------------------------------------------------------------
+
+Version 0.1-alpha3
+EXPECTED DUE DATE: TDB
+TASKS:
+  * Optimize the cyclomatic complexity
+  * Optimize the application through profiling (_xhprof_ & _xdebug_)
+
+-------------------------------------------------------------------------------
+
+Version 0.1-beta
+EXPECTED DUE DATE: TDB
+TASKS:
+  * Benchmark of bonzaied CMS (_Wordpress_, _Joomla_, _Drupal_)
+
+-------------------------------------------------------------------------------
+
+Version 0.1-RC1
+EXPECTED DUE DATE: TDB
+TASKS:
+  * Documentation
+
+-------------------------------------------------------------------------------
+
+Version 0.1-RC2
+EXPECTED DUE DATE: TDB
+TASKS:
+  * TDB
+
+-------------------------------------------------------------------------------
+
+Version 0.1
+EXPECTED DUE DATE: TDB

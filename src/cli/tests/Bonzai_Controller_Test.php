@@ -39,183 +39,183 @@ require_once __DIR__ . '/../libs/Controller/Controller.php';
  */
 class Bonzai_Controller_Test extends Bonzai_TestCase
 {
-    // {{{ testGetFileNameFromClassName1
+    // {{{ test__GetFileNameFromClassName__WithParam_EmptyString__ReturnsNull
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName1()
+    public function test__GetFileNameFromClassName__WithParam_EmptyString__ReturnsNull()
     {
         $this->assertNull($this->object->getFileNameFromClassName(''));
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName2
+    // {{{ test__GetFileNameFromClassName__WithParam_Null__ReturnsNull
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName2()
+    public function test__GetFileNameFromClassName__WithParam_Null__ReturnsNull()
     {
         $this->assertNull($this->object->getFileNameFromClassName(null));
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName3
+    // {{{ test__GetFileNameFromClassName__WithParam_SpacedString__ReturnsNull
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName3()
+    public function test__GetFileNameFromClassName__WithParam_SpacedString__ReturnsNull()
     {
         $this->assertNull($this->object->getFileNameFromClassName(' '));
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName4
+    // {{{ test__GetFileNameFromClassName__WithParam_Fake__ReturnsNull
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName4()
+    public function test__GetFileNameFromClassName__WithParam_Fake__ReturnsNull()
     {
         $this->assertNull($this->object->getFileNameFromClassName('aaa'));
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName5
+    // {{{ test__GetFileNameFromClassName__WithParam_BadFormatted__ReturnsNull
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName5()
+    public function test__GetFileNameFromClassName__WithParam_BadFormatted__ReturnsNull()
     {
         $this->assertNull($this->object->getFileNameFromClassName('Bonzai_'));
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName6
+    // {{{ test__GetFileNameFromClassName__WithParam_NotExistent__ReturnsNull
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName6()
+    public function test__GetFileNameFromClassName__WithParam_NotExistent__ReturnsNull()
     {
         $this->assertNull($this->object->getFileNameFromClassName('Bonzai_aaa'));
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName7
+    // {{{ test__GetFileNameFromClassName__WithParam_Real_AreEquals
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName7()
+    public function test__GetFileNameFromClassName__WithParam_Real_AreEquals()
     {
         $this->assertEquals('Controller/Controller', $this->object->getFileNameFromClassName('Bonzai_Controller'));
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName8
+    // {{{ test__GetFileNameFromClassName__WithParam_Real_AreEquals_2
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName8()
+    public function test__GetFileNameFromClassName__WithParam_Real_AreEquals_2()
     {
         $this->assertEquals('Utils/Utils', $this->object->getFileNameFromClassName('Bonzai_Utils'));
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassName9
+    // {{{ test__GetFileNameFromClassName__WithParam_Real_AreEquals_3
     /**
      * Retrieve the class filename
      * @ignore
      * @access public
      * @return void
      */
-    public function testGetFileNameFromClassName9()
+    public function test__GetFileNameFromClassName__WithParam_Real_AreEquals_3()
     {
         $this->assertEquals('Utils/Help', $this->object->getFileNameFromClassName('Bonzai_Utils_Help'));
     }
     // }}}
 
-    // {{{ testCheckFile1
+    // {{{ test__CheckFile__WithParam_EmptyString__ReturnsFalse
     /**
      * Check if a file exists in a dir
      * @ignore
      * @access public
      * @return void
      */
-    public function testCheckFile1()
+    public function test__CheckFile__WithParam_EmptyString__ReturnsFalse()
     {
         $this->assertFalse($this->object->checkFile(''));
     }
     // }}}
 
-    // {{{ testCheckFile2
+    // {{{ test__CheckFile__WithParam_Null__ReturnsFalse
     /**
      * Check if a file exists in a dir
      * @ignore
      * @access public
      * @return void
      */
-    public function testCheckFile2()
+    public function test__CheckFile__WithParam_Null__ReturnsFalse()
     {
         $this->assertFalse($this->object->checkFile(null));
     }
     // }}}
 
-    // {{{ testCheckFile3
+    // {{{ test__CheckFile__WithParam_SpacedString__ReturnsFalse
     /**
      * Check if a file exists in a dir
      * @ignore
      * @access public
      * @return void
      */
-    public function testCheckFile3()
+    public function test__CheckFile__WithParam_SpacedString__ReturnsFalse()
     {
         $this->assertFalse($this->object->checkFile(' '));
     }
     // }}}
 
-    // {{{ testCheckFile4
+    // {{{ test__CheckFile__WithParam_Wrong__ReturnsFalse
     /**
      * Check if a file exists in a dir
      * @ignore
      * @access public
      * @return void
      */
-    public function testCheckFile4()
+    public function test__CheckFile__WithParam_Wrong__ReturnsFalse()
     {
         $this->assertFalse($this->object->checkFile('Controller'));
     }
     // }}}
 
-    // {{{ testCheckFile5
+    // {{{ test__CheckFile__WithParam_Right__ReturnsTrue
     /**
      * Check if a file exists in a dir
      * @ignore
      * @access public
      * @return void
      */
-    public function testCheckFile5()
+    public function test__CheckFile__WithParam_Right__ReturnsTrue()
     {
         $this->assertTrue($this->object->checkFile('Controller/Controller'));
     }

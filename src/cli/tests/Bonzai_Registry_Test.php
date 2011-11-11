@@ -40,7 +40,7 @@ require_once __DIR__ . '/../libs/Registry/Registry.php';
  */
 class Bonzai_Registry_Test extends Bonzai_TestCase
 {
-    // {{{ testAdd1
+    // {{{ test__Add__WithParams_EmptyString_EmptyString_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -48,13 +48,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd1()
+    public function test__Add__WithParams_EmptyString_EmptyString_Null__ThrowException()
     {
         Bonzai_Registry::add('', '', null);
     }
     // }}}
 
-    // {{{ testAdd2
+    // {{{ test__Add__WithParams_EmptyString_EmptyString_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -62,13 +62,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd2()
+    public function test__Add__WithParams_EmptyString_EmptyString_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add('', '', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAdd3
+    // {{{ test__Add__WithParams_EmptyString_Null_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -76,13 +76,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd3()
+    public function test__Add__WithParams_EmptyString_Null_Null__ThrowException()
     {
         Bonzai_Registry::add('', null, null);
     }
     // }}}
 
-    // {{{ testAdd4
+    // {{{ test__Add__WithParams_EmptyString_Null_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -90,13 +90,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd4()
+    public function test__Add__WithParams_EmptyString_Null_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add('', null, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAdd5
+    // {{{ test__Add__WithParams_EmptyString_Fake_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -104,13 +104,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd5()
+    public function test__Add__WithParams_EmptyString_Fake_Null__ThrowException()
     {
         Bonzai_Registry::add('', 'aaa', null);
     }
     // }}}
 
-    // {{{ testAdd6
+    // {{{ test__Add__WithParams_EmptyString_Fake_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -118,13 +118,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd6()
+    public function test__Add__WithParams_EmptyString_Fake_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add('', 'aaa', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAdd7
+    // {{{ test__Add__WithParams_Null_EmptyString_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -132,13 +132,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd7()
+    public function test__Add__WithParams_Null_EmptyString_Null__ThrowException()
     {
         Bonzai_Registry::add(null, '', null);
     }
     // }}}
 
-    // {{{ testAdd8
+    // {{{ test__Add__WithParams_Null_EmptyString_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -146,13 +146,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd8()
+    public function test__Add__WithParams_Null_EmptyString_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add(null, '', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAdd9
+    // {{{ test__Add__WithParams_Null_Null_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -160,13 +160,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd9()
+    public function test__Add__WithParams_Null_Null_Null__ThrowException()
     {
         Bonzai_Registry::add(null, null, null);
     }
     // }}}
 
-    // {{{ testAdd10
+    // {{{ test__Add__WithParams_Null_Null_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -174,13 +174,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd10()
+    public function test__Add__WithParams_Null_Null_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add(null, null, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAdd11
+    // {{{ test__Add__WithParams_Null_Fake_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -188,13 +188,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd11()
+    public function test__Add__WithParams_Null_Fake_Null__ThrowException()
     {
         Bonzai_Registry::add(null, 'aaa', null);
     }
     // }}}
 
-    // {{{ testAdd12
+    // {{{ test__Add__WithParams_Null_Fake_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -202,91 +202,91 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd12()
+    public function test__Add__WithParams_Null_Fake_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add(null, 'aaa', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAdd13
+    // {{{ test__Add__WithParams_Fake_EmptyString_Null__IsEmpty
     /**
      * Add an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAdd13()
+    public function test__Add__WithParams_Fake_EmptyString_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::add('aaa', '', null));
     }
     // }}}
 
-    // {{{ testAdd14
+    // {{{ test__Add__WithParams_Fake_EmptyString_ArrayAppend__IsEmpty
     /**
      * Add an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAdd14()
+    public function test__Add__WithParams_Fake_EmptyString_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::add('aaa', '', Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAdd15
+    // {{{ test__Add__WithParams_Fake_Null_Null__IsEmpty
     /**
      * Add an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAdd15()
+    public function test__Add__WithParams_Fake_Null_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::add('aaa', null, null));
     }
     // }}}
 
-    // {{{ testAdd16
+    // {{{ test__Add__WithParams_Fake_Null_ArrayAppend__IsEmpty
     /**
      * Add an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAdd16()
+    public function test__Add__WithParams_Fake_Null_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::add('aaa', null, Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAdd17
+    // {{{ test__Add__WithParams_Fake_Fake_Null__IsEmpty
     /**
      * Add an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAdd17()
+    public function test__Add__WithParams_Fake_Fake_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::add('aaa', 'aaa', null));
     }
     // }}}
 
-    // {{{ testAdd18
+    // {{{ test__Add__WithParams_Fake_Fake_ArrayAppend__IsEmpty
     /**
      * Add an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAdd18()
+    public function test__Add__WithParams_Fake_Fake_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::add('aaa', 'aaa', Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAdd19
+    // {{{ test__Add__WithParams_EmptyArray_EmptyString_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -294,13 +294,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd19()
+    public function test__Add__WithParams_EmptyArray_EmptyString_Null__ThrowException()
     {
         Bonzai_Registry::add(array(), '', null);
     }
     // }}}
 
-    // {{{ testAdd20
+    // {{{ test__Add__WithParams_EmptyArray_EmptyString_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -308,13 +308,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd20()
+    public function test__Add__WithParams_EmptyArray_EmptyString_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add(array(), '', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAdd21
+    // {{{ test__Add__WithParams_EmptyArray_Null_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -322,13 +322,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd21()
+    public function test__Add__WithParams_EmptyArray_Null_Null__ThrowException()
     {
         Bonzai_Registry::add(array(), null, null);
     }
     // }}}
 
-    // {{{ testAdd22
+    // {{{ test__Add__WithParams_EmptyArray_Null_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -336,13 +336,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd22()
+    public function test__Add__WithParams_EmptyArray_Null_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add(array(), null, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAdd23
+    // {{{ test__Add__WithParams_EmptyArray_Fake_Null__ThrowException
     /**
      * Add an element
      * @ignore
@@ -350,13 +350,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd23()
+    public function test__Add__WithParams_EmptyArray_Fake_Null__ThrowException()
     {
         Bonzai_Registry::add(array(), 'aaa', null);
     }
     // }}}
 
-    // {{{ testAdd24
+    // {{{ test__Add__WithParams_EmptyArray_Fake_ArrayAppend__ThrowException
     /**
      * Add an element
      * @ignore
@@ -364,13 +364,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAdd24()
+    public function test__Add__WithParams_EmptyArray_Fake_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::add(array(), 'aaa', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testGet1
+    // {{{ test__Get_ParamIsNull__ThrowException
     /**
      * Return a saved object
      * @ignore
@@ -378,13 +378,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testGet1()
+    public function test__Get_ParamIsNull__ThrowException()
     {
         Bonzai_Registry::get(null);
     }
     // }}}
 
-    // {{{ testGet2
+    // {{{ test__Get_ParamIsEmptyString__ThrowException
     /**
      * Return a saved object
      * @ignore
@@ -392,39 +392,39 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testGet2()
+    public function test__Get_ParamIsEmptyString__ThrowException()
     {
         Bonzai_Registry::get('');
     }
     // }}}
 
-    // {{{ testGet3
+    // {{{ test__Get_ParamIsSpacedString__ReturnsNull
     /**
      * Return a saved object
      * @ignore
      * @access public
      * @return void
      */
-    public function testGet3()
+    public function test__Get_ParamIsSpacedString__ReturnsNull()
     {
         $this->assertNull(Bonzai_Registry::get(' '));
     }
     // }}}
 
-    // {{{ testGet4
+    // {{{ test__Get_ParamIsFake__ReturnsNull
     /**
      * Return a saved object
      * @ignore
      * @access public
      * @return void
      */
-    public function testGet4()
+    public function test__Get_ParamIsFake__ReturnsNull()
     {
         $this->assertNull(Bonzai_Registry::get('a'));
     }
     // }}}
 
-    // {{{ testGet5
+    // {{{ test__Get_ParamIsEmptyArray__ThrowException
     /**
      * Return a saved object
      * @ignore
@@ -432,27 +432,27 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testGet5()
+    public function test__Get_ParamIsEmptyArray__ThrowException()
     {
         Bonzai_Registry::get(array());
     }
     // }}}
 
-    // {{{ testGet6
+    // {{{ test__Get_ExistentKey__AreEquals
     /**
      * Return a saved object
      * @ignore
      * @access public
      * @return void
      */
-    public function testGet6()
+    public function test__Get_ExistentKey__AreEquals()
     {
         Bonzai_Registry::add('EXIST', 'content');
         $this->assertEquals('content', Bonzai_Registry::get('EXIST'));
     }
     // }}}
 
-    // {{{ testRemove1
+    // {{{ test__Remove_ParamIsNull__ThrowException
     /**
      * Remove an element
      * @ignore
@@ -460,13 +460,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testRemove1()
+    public function test__Remove_ParamIsNull__ThrowException()
     {
         Bonzai_Registry::remove(null);
     }
     // }}}
 
-    // {{{ testRemove2
+    // {{{ test__Remove_ParamIsEmptyString__ThrowException
     /**
      * Remove an element
      * @ignore
@@ -474,39 +474,39 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testRemove2()
+    public function test__Remove_ParamIsEmptyString__ThrowException()
     {
         Bonzai_Registry::remove('');
     }
     // }}}
 
-    // {{{ testRemove3
+    // {{{ test__Remove__WithParam_SpacedString
     /**
      * Remove an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testRemove3()
+    public function test__Remove__WithParam_SpacedString()
     {
         Bonzai_Registry::remove(' ');
     }
     // }}}
 
-    // {{{ testRemove4
+    // {{{ test__Remove__WithParam_String
     /**
      * Remove an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testRemove4()
+    public function test__Remove__WithParam_String()
     {
         Bonzai_Registry::remove('a');
     }
     // }}}
 
-    // {{{ testRemove5
+    // {{{ test__Remove_ParamIsEmptyArray__ThrowException
     /**
      * Remove an element
      * @ignore
@@ -514,20 +514,20 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testRemove5()
+    public function test__Remove_ParamIsEmptyArray__ThrowException()
     {
         Bonzai_Registry::remove(array());
     }
     // }}}
 
-    // {{{ testRemove6
+    // {{{ test__Remove_ExistentKey__ReturnsNull
     /**
      * Remove an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testRemove6()
+    public function test__Remove_ExistentKey__ReturnsNull()
     {
         Bonzai_Registry::add('EXIST', 'content');
         Bonzai_Registry::remove('EXIST');
@@ -535,7 +535,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testAppend1
+    // {{{ test__Append__WithParams_EmptyString_EmptyString_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -543,13 +543,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend1()
+    public function test__Append__WithParams_EmptyString_EmptyString_Null__ThrowException()
     {
         Bonzai_Registry::append('', '', null);
     }
     // }}}
 
-    // {{{ testAppend2
+    // {{{ test__Append__WithParams_EmptyString_EmptyString_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -557,13 +557,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend2()
+    public function test__Append__WithParams_EmptyString_EmptyString_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append('', '', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend3
+    // {{{ test__Append__WithParams_EmptyString_EmptyString_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -571,13 +571,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend3()
+    public function test__Append__WithParams_EmptyString_EmptyString_IntAppend__ThrowException()
     {
         Bonzai_Registry::append('', '', Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend4
+    // {{{ test__Append__WithParams_EmptyString_Null_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -585,13 +585,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend4()
+    public function test__Append__WithParams_EmptyString_Null_Null__ThrowException()
     {
         Bonzai_Registry::append('', null, null);
     }
     // }}}
 
-    // {{{ testAppend5
+    // {{{ test__Append__WithParams_EmptyString_Null_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -599,13 +599,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend5()
+    public function test__Append__WithParams_EmptyString_Null_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append('', null, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend6
+    // {{{ test__Append__WithParams_EmptyString_Null_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -613,13 +613,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend6()
+    public function test__Append__WithParams_EmptyString_Null_IntAppend__ThrowException()
     {
         Bonzai_Registry::append('', null, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend7
+    // {{{ test__Append__WithParams_EmptyString_Fake_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -627,13 +627,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend7()
+    public function test__Append__WithParams_EmptyString_Fake_Null__ThrowException()
     {
         Bonzai_Registry::append('', 'aaa', null);
     }
     // }}}
 
-    // {{{ testAppend8
+    // {{{ test__Append__WithParams_EmptyString_Fake_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -641,13 +641,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend8()
+    public function test__Append__WithParams_EmptyString_Fake_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append('', 'aaa', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend9
+    // {{{ test__Append__WithParams_EmptyString_Fake_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -655,13 +655,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend9()
+    public function test__Append__WithParams_EmptyString_Fake_IntAppend__ThrowException()
     {
         Bonzai_Registry::append('', 'aaa', Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend10
+    // {{{ test__Append__WithParams_EmptyString_Zero_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -669,13 +669,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend10()
+    public function test__Append__WithParams_EmptyString_Zero_Null__ThrowException()
     {
         Bonzai_Registry::append('', 0, null);
     }
     // }}}
 
-    // {{{ testAppend11
+    // {{{ test__Append__WithParams_EmptyString_Zero_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -683,13 +683,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend11()
+    public function test__Append__WithParams_EmptyString_Zero_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append('', 0, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend12
+    // {{{ test__Append__WithParams_EmptyString_Zero_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -697,13 +697,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend12()
+    public function test__Append__WithParams_EmptyString_Zero_IntAppend__ThrowException()
     {
         Bonzai_Registry::append('', 0, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend13
+    // {{{ test__Append__WithParams_EmptyString_One_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -711,13 +711,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend13()
+    public function test__Append__WithParams_EmptyString_One_Null__ThrowException()
     {
         Bonzai_Registry::append('', 1, null);
     }
     // }}}
 
-    // {{{ testAppend14
+    // {{{ test__Append__WithParams_EmptyString_One_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -725,13 +725,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend14()
+    public function test__Append__WithParams_EmptyString_One_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append('', 1, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend15
+    // {{{ test__Append__WithParams_EmptyString_One_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -739,13 +739,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend15()
+    public function test__Append__WithParams_EmptyString_One_IntAppend__ThrowException()
     {
         Bonzai_Registry::append('', 1, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend16
+    // {{{ test__Append__WithParams_EmptyString_Negative_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -753,13 +753,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend16()
+    public function test__Append__WithParams_EmptyString_Negative_Null__ThrowException()
     {
         Bonzai_Registry::append('', -1, null);
     }
     // }}}
 
-    // {{{ testAppend17
+    // {{{ test__Append__WithParams_EmptyString_Negative_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -767,13 +767,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend17()
+    public function test__Append__WithParams_EmptyString_Negative_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append('', -1, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend18
+    // {{{ test__Append__WithParams_EmptyString_NegativeOne_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -781,13 +781,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend18()
+    public function test__Append__WithParams_EmptyString_NegativeOne_IntAppend__ThrowException()
     {
         Bonzai_Registry::append('', -1, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend19
+    // {{{ test__Append__WithParams_Null_EmptyString_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -795,13 +795,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend19()
+    public function test__Append__WithParams_Null_EmptyString_Null__ThrowException()
     {
         Bonzai_Registry::append(null, '', null);
     }
     // }}}
 
-    // {{{ testAppend20
+    // {{{ test__Append__WithParams_Null_EmptyString_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -809,13 +809,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend20()
+    public function test__Append__WithParams_Null_EmptyString_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(null, '', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend21
+    // {{{ test__Append__WithParams_Null_EmptyString_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -823,13 +823,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend21()
+    public function test__Append__WithParams_Null_EmptyString_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(null, '', Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend22
+    // {{{ test__Append__WithParams_Null_Null_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -837,13 +837,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend22()
+    public function test__Append__WithParams_Null_Null_Null__ThrowException()
     {
         Bonzai_Registry::append(null, null, null);
     }
     // }}}
 
-    // {{{ testAppend23
+    // {{{ test__Append__WithParams_Null_Null_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -851,13 +851,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend23()
+    public function test__Append__WithParams_Null_Null_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(null, null, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend24
+    // {{{ test__Append__WithParams_Null_Null_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -865,13 +865,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend24()
+    public function test__Append__WithParams_Null_Null_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(null, null, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend25
+    // {{{ test__Append__WithParams_Null_Fake_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -879,13 +879,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend25()
+    public function test__Append__WithParams_Null_Fake_Null__ThrowException()
     {
         Bonzai_Registry::append(null, 'aaa', null);
     }
     // }}}
 
-    // {{{ testAppend26
+    // {{{ test__Append__WithParams_Null_Fake_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -893,13 +893,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend26()
+    public function test__Append__WithParams_Null_Fake_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(null, 'aaa', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend27
+    // {{{ test__Append__WithParams_Null_Fake_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -907,13 +907,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend27()
+    public function test__Append__WithParams_Null_Fake_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(null, 'aaa', Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend28
+    // {{{ test__Append__WithParams_Null_Zero_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -921,13 +921,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend28()
+    public function test__Append__WithParams_Null_Zero_Null__ThrowException()
     {
         Bonzai_Registry::append(null, 0, null);
     }
     // }}}
 
-    // {{{ testAppend29
+    // {{{ test__Append__WithParams_Null_Zero_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -935,13 +935,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend29()
+    public function test__Append__WithParams_Null_Zero_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(null, 0, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend30
+    // {{{ test__Append__WithParams_Null_Zero_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -949,13 +949,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend30()
+    public function test__Append__WithParams_Null_Zero_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(null, 0, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend31
+    // {{{ test__Append__WithParams_Null_One_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -963,13 +963,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend31()
+    public function test__Append__WithParams_Null_One_Null__ThrowException()
     {
         Bonzai_Registry::append(null, 1, null);
     }
     // }}}
 
-    // {{{ testAppend32
+    // {{{ test__Append__WithParams_Null_One_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -977,13 +977,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend32()
+    public function test__Append__WithParams_Null_One_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(null, 1, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend33
+    // {{{ test__Append__WithParams_Null_One_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -991,13 +991,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend33()
+    public function test__Append__WithParams_Null_One_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(null, 1, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend34
+    // {{{ test__Append__WithParams_Null_Negative_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1005,13 +1005,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend34()
+    public function test__Append__WithParams_Null_Negative_Null__ThrowException()
     {
         Bonzai_Registry::append(null, -1, null);
     }
     // }}}
 
-    // {{{ testAppend35
+    // {{{ test__Append__WithParams_Null_Negative_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1019,13 +1019,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend35()
+    public function test__Append__WithParams_Null_Negative_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(null, -1, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend36
+    // {{{ test__Append__WithParams_Null_Negative_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1033,247 +1033,247 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend36()
+    public function test__Append__WithParams_Null_Negative_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(null, -1, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend37
+    // {{{ test__Append__WithParams_Fake_EmptyString_Null__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend37()
+    public function test__Append__WithParams_Fake_EmptyString_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', '', null));
     }
     // }}}
 
-    // {{{ testAppend38
+    // {{{ test__Append__WithParams_Fake_EmptyString_ArrayAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend38()
+    public function test__Append__WithParams_Fake_EmptyString_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', '', Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAppend39
+    // {{{ test__Append__WithParams_Fake_EmptyString_IntAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend39()
+    public function test__Append__WithParams_Fake_EmptyString_IntAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', '', Bonzai_Registry::INT_APPEND));
     }
     // }}}
 
-    // {{{ testAppend40
+    // {{{ test__Append__WithParams_Fake_Null_Null__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend40()
+    public function test__Append__WithParams_Fake_Null_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', null, null));
     }
     // }}}
 
-    // {{{ testAppend41
+    // {{{ test__Append__WithParams_Fake_Null_ArrayAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend41()
+    public function test__Append__WithParams_Fake_Null_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', null, Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAppend42
+    // {{{ test__Append__WithParams_Fake_Null_IntAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend42()
+    public function test__Append__WithParams_Fake_Null_IntAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', null, Bonzai_Registry::INT_APPEND));
     }
     // }}}
 
-    // {{{ testAppend43
+    // {{{ test__Append__WithParams_Fake_Fake_Null__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend43()
+    public function test__Append__WithParams_Fake_Fake_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 'aaa', null));
     }
     // }}}
 
-    // {{{ testAppend44
+    // {{{ test__Append__WithParams_Fake_Fake_ArrayAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend44()
+    public function test__Append__WithParams_Fake_Fake_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 'aaa', Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAppend45
+    // {{{ test__Append__WithParams_Fake_Fake_IntAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend45()
+    public function test__Append__WithParams_Fake_Fake_IntAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 'aaa', Bonzai_Registry::INT_APPEND));
     }
     // }}}
 
-    // {{{ testAppend46
+    // {{{ test__Append__WithParams_Fake_Zero_Null__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend46()
+    public function test__Append__WithParams_Fake_Zero_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 0, null));
     }
     // }}}
 
-    // {{{ testAppend47
+    // {{{ test__Append__WithParams_Fake_Zero_ArrayAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend47()
+    public function test__Append__WithParams_Fake_Zero_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 0, Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAppend48
+    // {{{ test__Append__WithParams_Fake_Zero_IntAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend48()
+    public function test__Append__WithParams_Fake_Zero_IntAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 0, Bonzai_Registry::INT_APPEND));
     }
     // }}}
 
-    // {{{ testAppend49
+    // {{{ test__Append__WithParams_Fake_One_Null__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend49()
+    public function test__Append__WithParams_Fake_One_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 1, null));
     }
     // }}}
 
-    // {{{ testAppend50
+    // {{{ test__Append__WithParams_Fake_One_ArrayAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend50()
+    public function test__Append__WithParams_Fake_One_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 1, Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAppend51
+    // {{{ test__Append__WithParams_Fake_One_IntAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend51()
+    public function test__Append__WithParams_Fake_One_IntAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', 1, Bonzai_Registry::INT_APPEND));
     }
     // }}}
 
-    // {{{ testAppend52
+    // {{{ test__Append__WithParams_Fake_Negative_Null__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend52()
+    public function test__Append__WithParams_Fake_Negative_Null__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', -1, null));
     }
     // }}}
 
-    // {{{ testAppend53
+    // {{{ test__Append__WithParams_Fake_Negative_ArrayAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend53()
+    public function test__Append__WithParams_Fake_Negative_ArrayAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', -1, Bonzai_Registry::ARRAY_APPEND));
     }
     // }}}
 
-    // {{{ testAppend54
+    // {{{ test__Append__WithParams_Fake_Negative_IntAppend__IsEmpty
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend54()
+    public function test__Append__WithParams_Fake_Negative_IntAppend__IsEmpty()
     {
         $this->assertEmpty(Bonzai_Registry::append('aaa', -1, Bonzai_Registry::INT_APPEND));
     }
     // }}}
 
-    // {{{ testAppend55
+    // {{{ test__Append__WithParams_EmptyArray_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1281,13 +1281,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend55()
+    public function test__Append__WithParams_EmptyArray_Null__ThrowException()
     {
         Bonzai_Registry::append(array(), '', null);
     }
     // }}}
 
-    // {{{ testAppend56
+    // {{{ test__Append__WithParams_EmptyArray_EmptyString_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1295,13 +1295,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend56()
+    public function test__Append__WithParams_EmptyArray_EmptyString_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), '', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend57
+    // {{{ test__Append__WithParams_EmptyArray_EmptyString_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1309,13 +1309,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend57()
+    public function test__Append__WithParams_EmptyArray_EmptyString_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), '', Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend58
+    // {{{ test__Append__WithParams_EmptyArray_Null_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1323,13 +1323,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend58()
+    public function test__Append__WithParams_EmptyArray_Null_Null__ThrowException()
     {
         Bonzai_Registry::append(array(), null, null);
     }
     // }}}
 
-    // {{{ testAppend59
+    // {{{ test__Append__WithParams_EmptyArray_Null_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1337,13 +1337,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend59()
+    public function test__Append__WithParams_EmptyArray_Null_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), null, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend60
+    // {{{ test__Append__WithParams_EmptyArray_Null_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1351,13 +1351,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend60()
+    public function test__Append__WithParams_EmptyArray_Null_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), null, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend61
+    // {{{ test__Append__WithParams_EmptyArray_Fake_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1365,13 +1365,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend61()
+    public function test__Append__WithParams_EmptyArray_Fake_Null__ThrowException()
     {
         Bonzai_Registry::append(array(), 'aaa', null);
     }
     // }}}
 
-    // {{{ testAppend62
+    // {{{ test__Append__WithParams_EmptyArray_Fake_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1379,13 +1379,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend62()
+    public function test__Append__WithParams_EmptyArray_Fake_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), 'aaa', Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend63
+    // {{{ test__Append__WithParams_EmptyArray_Fake_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1393,13 +1393,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend63()
+    public function test__Append__WithParams_EmptyArray_Fake_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), 'aaa', Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend64
+    // {{{ test__Append__WithParams_EmptyArray_Zero_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1407,13 +1407,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend64()
+    public function test__Append__WithParams_EmptyArray_Zero_Null__ThrowException()
     {
         Bonzai_Registry::append(array(), 0, null);
     }
     // }}}
 
-    // {{{ testAppend65
+    // {{{ test__Append__WithParams_EmptyArray_Zero_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1421,13 +1421,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend65()
+    public function test__Append__WithParams_EmptyArray_Zero_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), 0, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend66
+    // {{{ test__Append__WithParams_EmptyArray_Zero_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1435,13 +1435,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend66()
+    public function test__Append__WithParams_EmptyArray_Zero_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), 0, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend67
+    // {{{ test__Append__WithParams_EmptyArray_One_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1449,13 +1449,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend67()
+    public function test__Append__WithParams_EmptyArray_One_Null__ThrowException()
     {
         Bonzai_Registry::append(array(), 1, null);
     }
     // }}}
 
-    // {{{ testAppend68
+    // {{{ test__Append__WithParams_EmptyArray_One_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1463,13 +1463,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend68()
+    public function test__Append__WithParams_EmptyArray_One_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), 1, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend69
+    // {{{ test__Append__WithParams_EmptyArray_One_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1477,13 +1477,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend69()
+    public function test__Append__WithParams_EmptyArray_One_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), 1, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend70
+    // {{{ test__Append__WithParams_EmptyArray_Negative_Null__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1491,13 +1491,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend70()
+    public function test__Append__WithParams_EmptyArray_Negative_Null__ThrowException()
     {
         Bonzai_Registry::append(array(), -1, null);
     }
     // }}}
 
-    // {{{ testAppend71
+    // {{{ test__Append__WithParams_EmptyArray_Negative_ArrayAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1505,13 +1505,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend71()
+    public function test__Append__WithParams_EmptyArray_Negative_ArrayAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), -1, Bonzai_Registry::ARRAY_APPEND);
     }
     // }}}
 
-    // {{{ testAppend72
+    // {{{ test__Append__WithParams_EmptyArray_Negative_IntAppend__ThrowException
     /**
      * Append an element
      * @ignore
@@ -1519,20 +1519,20 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function testAppend72()
+    public function test__Append__WithParams_EmptyArray_Negative_IntAppend__ThrowException()
     {
         Bonzai_Registry::append(array(), -1, Bonzai_Registry::INT_APPEND);
     }
     // }}}
 
-    // {{{ testAppend73
+    // {{{ test__Append_StringToExistent__AreEquals
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend73()
+    public function test__Append_StringToExistent__AreEquals()
     {
         Bonzai_Registry::add('test', 'a');
         Bonzai_Registry::append('test', 'a');
@@ -1540,14 +1540,14 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testAppend74
+    // {{{ test__Append_IntToExistent__AreEquals
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend74()
+    public function test__Append_IntToExistent__AreEquals()
     {
         Bonzai_Registry::add('test', 0);
         Bonzai_Registry::append('test', 1);
@@ -1555,14 +1555,14 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testAppend75
+    // {{{ test__Append_IntToExistentWithIntAppend__AreEquals
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend75()
+    public function test__Append_IntToExistentWithIntAppend__AreEquals()
     {
         Bonzai_Registry::add('test', 0);
         Bonzai_Registry::append('test', 1, Bonzai_Registry::INT_APPEND);
@@ -1570,29 +1570,14 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testAppend76
+    // {{{ test__Append_IntToExistent__AreEquals_2
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend76()
-    {
-        Bonzai_Registry::add('test', 10);
-        Bonzai_Registry::append('test', 11);
-        $this->assertEquals(1011, Bonzai_Registry::get('test'));
-    }
-    // }}}
-
-    // {{{ testAppend77
-    /**
-     * Append an element
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testAppend77()
+    public function test__Append_IntToExistent__AreEquals_2()
     {
         Bonzai_Registry::add('test', 10);
         Bonzai_Registry::append('test', 11, Bonzai_Registry::INT_APPEND);
@@ -1600,14 +1585,29 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testAppend78
+    // {{{ test__Append_StringIntToExistent__AreEquals
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend78()
+    public function test__Append_StringIntToExistent__AreEquals()
+    {
+        Bonzai_Registry::add('test', 10);
+        Bonzai_Registry::append('test', 11);
+        $this->assertEquals(1011, Bonzai_Registry::get('test'));
+    }
+    // }}}
+
+    // {{{ test__Append_StringIntToExistent__AreEquals_2
+    /**
+     * Append an element
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__Append_StringIntToExistent__AreEquals_2()
     {
         Bonzai_Registry::add('test', 10);
         Bonzai_Registry::append('test', -11);
@@ -1615,14 +1615,14 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testAppend79
+    // {{{ test__Append_NegativeIntToExistent__AreEquals
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend79()
+    public function test__Append_NegativeIntToExistent__AreEquals()
     {
         Bonzai_Registry::add('test', 10);
         Bonzai_Registry::append('test', -11, Bonzai_Registry::INT_APPEND);
@@ -1630,14 +1630,14 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testAppend80
+    // {{{ test__Append_ArrayToExistent__AreEquals
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend80()
+    public function test__Append_ArrayToExistent__AreEquals()
     {
         Bonzai_Registry::add('test', array('a', 'b'));
         Bonzai_Registry::append('test', array('c'));
@@ -1645,14 +1645,14 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testAppend81
+    // {{{ test__Append_StringToExistentArray__AreEquals
     /**
      * Append an element
      * @ignore
      * @access public
      * @return void
      */
-    public function testAppend81()
+    public function test__Append_StringToExistentArray__AreEquals()
     {
         Bonzai_Registry::add('test', array('a', 'b'));
         Bonzai_Registry::append('test', 'c');
@@ -1660,13 +1660,13 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testCheckKeyValidity
+    // {{{ test__CheckKeyValidity
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function testCheckKeyValidity()
+    public function test__CheckKeyValidity()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

@@ -39,25 +39,25 @@ require_once __DIR__ . '/../libs/Utils/Options.php';
  */
 class Bonzai_Utils_Options_Test extends Bonzai_TestCase
 {
-    // {{{ testInit
+    // {{{ test__Init
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function testInit()
+    public function test__Init()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
     // }}}
 
-    // {{{ testParseOptions
+    // {{{ test__ParseOptions
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function testParseOptions()
+    public function test__ParseOptions()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
