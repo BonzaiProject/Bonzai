@@ -58,18 +58,9 @@ class Bonzai_Task
      */
     public function loadAndExecute(Bonzai_Utils_Options $options = null)
     {
-        if (is_null($options)) {
-            $options = new Bonzai_Utils_Options;
-        }
-
         $this->load($options);
 
-        try {
-            return $this->execute();
-        } catch (Bonzai_Exception $e) {
-            $fallback = new Bonzai_Utils_Help();
-            return $fallback->elaborate(new Bonzai_Utils_Options());
-        }
+        return $this->execute();
     }
     // }}}
 
@@ -81,6 +72,10 @@ class Bonzai_Task
      */
     protected function load(Bonzai_Utils_Options $options = null)
     {
+        if (is_null($options)) {
+            $options = new Bonzai_Utils_Options;
+        }
+
         $this->parameters = $options;
 
         $options = $this->parameters->getOptionParams();

@@ -733,6 +733,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             '/src/cli/libs/Utils/Options.php',
             '/src/cli/libs/Utils/Utils.php',
             '/src/cli/tests/',
+            '/src/cli/tests/Bonzai_CLI_Test.php',
             '/src/cli/tests/Bonzai_Controller_Test.php',
             '/src/cli/tests/Bonzai_Encoder_Test.php',
             '/src/cli/tests/Bonzai_Exception_Test.php',
@@ -1379,15 +1380,15 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ info
-    // {{{ test__info
+    // {{{ test__info__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__info()
+    public function test__info__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->info();
     }
     // }}}
     // }}}
@@ -1407,29 +1408,29 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ warn
-    // {{{ test__warn
+    // {{{ test__warn__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__warn()
+    public function test__warn__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->warn();
     }
     // }}}
     // }}}
 
     // {{{ error
-    // {{{ test__error
+    // {{{ test__error__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__error()
+    public function test__error__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->error();
     }
     // }}}
     // }}}

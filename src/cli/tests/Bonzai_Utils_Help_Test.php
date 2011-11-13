@@ -40,15 +40,15 @@ require_once __DIR__ . '/../libs/Utils/Help.php';
 class Bonzai_Utils_Help_Test extends Bonzai_TestCase
 {
     // {{{ elaborate
-    // {{{ test__elaborate
+    // {{{ test__elaborate__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__elaborate()
+    public function test__elaborate__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->elaborate(new Bonzai_Utils_Options);
     }
     // }}}
     // }}}

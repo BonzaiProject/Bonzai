@@ -7,19 +7,12 @@ REMAINING TASKS:
   * Write the unit test for `Bonzai_Encoder_Test::elaborate`
   * Write the unit test for `Bonzai_Encoder_Test::saveOutput`
   * Write the unit test for `Bonzai_Encoder_Test::cleanSource`
-  * Write the unit test for `Bonzai_Task_Test::loadAndExecute`
-  * Write the unit test for `Bonzai_Task_Test::load`
   * Write the unit test for `Bonzai_Task_Test::execute`
-  * Write the unit test for `Bonzai_Utils_Help_Test::elaborate`
   * Write the unit test for `Bonzai_Utils_Options_Test::init`
   * Write the unit test for `Bonzai_Utils_Options_Test::parseOptions`
-  * Write the unit test for `Bonzai_Utils_Options_Test::getOption`
   * Write the unit test for `Bonzai_Utils_Test::renameFile`
   * Write the unit test for `Bonzai_Utils_Test::checkFileValidity`
-  * Write the unit test for `Bonzai_Utils_Test::info`
   * Write the unit test for `Bonzai_Utils_Test::message`
-  * Write the unit test for `Bonzai_Utils_Test::warn`
-  * Write the unit test for `Bonzai_Utils_Test::error`
 
 -------------------------------------------------------------------------------
 

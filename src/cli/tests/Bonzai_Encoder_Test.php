@@ -489,19 +489,29 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      */
     public function test__expandPathsToFiles__WithParam_Array__AreEquals_2()
     {
-        $files = array(
-            __DIR__ . '/Bonzai_Controller_Test.php',
-            __DIR__ . '/Bonzai_Encoder_Test.php',
-            __DIR__ . '/Bonzai_Exception_Test.php',
-            __DIR__ . '/Bonzai_Registry_Test.php',
-            __DIR__ . '/Bonzai_Task_Test.php',
-            __DIR__ . '/Bonzai_Utils_Help_Test.php',
-            __DIR__ . '/Bonzai_Utils_Options_Test.php',
-            __DIR__ . '/Bonzai_Utils_Test.php',
-            __DIR__ . '/cliSuite.php'
+        $dirname = realpath(__DIR__ . '/../');
+
+        $files = $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array(array(__DIR__)));
+        sort($files);
+        $files = array_merge(preg_grep('#/tests/test_.+$|\.swp$#', $files, PREG_GREP_INVERT));
+        foreach($files as $i => $file) {
+            $files[$i] = str_replace(realpath("$dirname/../../"), "", $file);
+        }
+
+        $realfiles = array(
+            '/src/cli/tests/Bonzai_CLI_Test.php',
+            '/src/cli/tests/Bonzai_Controller_Test.php',
+            '/src/cli/tests/Bonzai_Encoder_Test.php',
+            '/src/cli/tests/Bonzai_Exception_Test.php',
+            '/src/cli/tests/Bonzai_Registry_Test.php',
+            '/src/cli/tests/Bonzai_Task_Test.php',
+            '/src/cli/tests/Bonzai_Utils_Help_Test.php',
+            '/src/cli/tests/Bonzai_Utils_Options_Test.php',
+            '/src/cli/tests/Bonzai_Utils_Test.php',
+            '/src/cli/tests/cliSuite.php',
         );
 
-        $this->assertEquals($files, $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array(array(__DIR__))));
+        $this->assertEquals($realfiles, $files);
     }
     // }}}
     // }}}

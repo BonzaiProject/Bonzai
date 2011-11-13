@@ -96,15 +96,15 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getOption
-    // {{{ test__getOption
+    // {{{ test__getOption__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getOption()
+    public function test__getOption__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->getOption(null);
     }
     // }}}
     // }}}

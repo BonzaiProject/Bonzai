@@ -97,7 +97,7 @@ class Bonzai_Controller
      */
     protected function __autoload($name)
     {
-        if (strpos($name, 'Bonzai_') == 0 && !class_exists($name)) {
+        if (strpos($name, 'Bonzai_') == 0) {
             $filename = $this->getFileNameFromClassName($name);
 
             if (!$this->checkFile($filename)) {

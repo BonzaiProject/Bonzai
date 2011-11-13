@@ -43,7 +43,13 @@ class Bonzai_TestCase extends PHPUnit_Framework_TestCase
      * @access protected
      * @var    mixed
      */
-    protected $object;
+    protected $object = null;
+
+    /**
+     * @access protected
+     * @var    boolean
+     */
+    protected $auto_instance = true;
     // }}}
 
     // {{{ setUp
@@ -55,8 +61,10 @@ class Bonzai_TestCase extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $className    = substr(get_class($this), 0, -5); // Strip '_Test'
-        $this->object = new $className;
+        if ($this->auto_instance) {
+          $className    = substr(get_class($this), 0, -5); // Strip '_Test'
+          $this->object = new $className;
+        }
     }
     // }}}
 
