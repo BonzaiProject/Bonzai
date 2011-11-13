@@ -22,20 +22,33 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
  **/
 
 require_once __DIR__ . '/../Exception/Exception.php';
 
 /**
- * @category  Optimization & Security
+ * Bonzai_Controller
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
 class Bonzai_Controller
 {
     // {{{ PROPERTIES
@@ -53,12 +66,16 @@ class Bonzai_Controller
      */
     public function __construct()
     {
-        spl_autoload_register('Bonzai_Controller::__autoload');
+        spl_autoload_register('Bonzai_Controller::autoload');
     }
     // }}}
 
     // {{{ elaborate
     /**
+     * elaborate
+     *
+     * @param array $argv
+     *
      * @access public
      * @return void
      */
@@ -68,7 +85,9 @@ class Bonzai_Controller
 
         try {
             $this->options->init($argv);
-        } catch (Bonzai_Exception $e) { } // Fallback behaviour: show the help
+        } catch (Bonzai_Exception $e) {
+            // Fallback behaviour: show the help
+        }
 
         Bonzai_Registry::add('options', $this->options);
 
@@ -78,6 +97,8 @@ class Bonzai_Controller
 
     // {{{ handleTask
     /**
+     * handleTask
+     *
      * @access protected
      * @return void
      */
@@ -88,14 +109,17 @@ class Bonzai_Controller
     }
     // }}}
 
-    // {{{ __autoload
+    // {{{ autoload
     /**
+     * autoload
+     *
+     * @param string $name
+     *
      * @access protected
-     * @param  string $name
      * @throws Bonzai_Exception
      * @return void
      */
-    protected function __autoload($name)
+    protected function autoload($name)
     {
         if (strpos($name, 'Bonzai_') == 0) {
             $filename = $this->getFileNameFromClassName($name);
@@ -105,15 +129,18 @@ class Bonzai_Controller
                 throw new Bonzai_Exception(sprintf($message, $name));
             }
 
-            require_once __DIR__ . '/../' . $filename . '.php';
+            include_once __DIR__ . '/../' . $filename . '.php';
         }
     }
     // }}}
 
     // {{{ getFileNameFromClassName
     /**
+     * getFileNameFromClassName
+     *
+     * @param string $name
+     *
      * @access protected
-     * @param  string $name
      * @return string
      */
     protected function getFileNameFromClassName($name)
@@ -138,8 +165,11 @@ class Bonzai_Controller
 
     // {{{ checkFile
     /**
+     * checkFile
+     *
+     * @param string $filename
+     *
      * @access protected
-     * @param  string $filename
      * @return boolean
      */
     protected function checkFile($filename)

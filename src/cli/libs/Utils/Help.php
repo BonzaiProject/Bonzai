@@ -22,24 +22,40 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
- **/
-
-/**
- * @category  Optimization & Security
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
+
+/**
+ * Bonzai_Utils_Help
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
+ **/
 class Bonzai_Utils_Help
 {
     // {{{ elaborate
     /**
+     * elaborate
+     *
+     * @param Bonzai_Utils_Options $options
+     *
      * @access public
-     * @param  Bonzai_Utils_Options $options
      * @return void
      */
     public function elaborate(Bonzai_Utils_Options $options)
@@ -56,9 +72,12 @@ class Bonzai_Utils_Help
         echo str_repeat('-', 80) . PHP_EOL;
 
         if (is_null($options->getOption('version'))) {
-            echo PHP_EOL . gettext('Usage') . ':' . PHP_EOL . $_SERVER['argv'][0] . ' [' . gettext('OPTIONS') . ']... [' . gettext('FILES') . '|' . gettext('DIRECTORIES') . ']...' . PHP_EOL . PHP_EOL;
+            echo PHP_EOL . gettext('Usage') . ':' . PHP_EOL;
+            echo $_SERVER['argv'][0] . ' [' . gettext('OPTIONS');
+            echo ']... [' . gettext('FILES') . '|' . gettext('DIRECTORIES');
+            echo ']...' . PHP_EOL . PHP_EOL;
             echo gettext('Options') . ':' . PHP_EOL;
-            foreach($options->getParameters() as $short => $long) {
+            foreach ($options->getParameters() as $short => $long) {
                 $has_value = strpos($long, ':') > 0;
 
                 $only_long = is_int($short);
@@ -71,10 +90,12 @@ class Bonzai_Utils_Help
                     $info .= '=<value>';
                 }
 
-                $row = sprintf('    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL, gettext($options->getLabelParameter($long)));
+                $format = '    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL;
+                $row = sprintf($format, gettext($options->getLabelParameter($long)));
                 echo wordwrap($row, 80, PHP_EOL . str_repeat(' ', 25), true);
             }
-            echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org') . PHP_EOL;
+            echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org');
+            echo PHP_EOL;
         }
     }
     // }}}

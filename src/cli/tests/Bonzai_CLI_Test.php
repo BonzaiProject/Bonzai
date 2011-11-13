@@ -36,10 +36,9 @@
  **/
 
 require_once __DIR__ . '/../libs/Tests/TestCase.php';
-require_once __DIR__ . '/../libs/Utils/Help.php';
 
 /**
- * Bonzai_Utils_Help_Test
+ * Bonzai_CLI_Test
  *
  * @category  Optimization_&_Security
  * @package   Bonzai
@@ -50,20 +49,32 @@ require_once __DIR__ . '/../libs/Utils/Help.php';
  * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
  **/
-class Bonzai_Utils_Help_Test extends Bonzai_TestCase
+class Bonzai_CLI_Test extends Bonzai_TestCase
 {
-    // {{{ elaborate
-    // {{{ test__elaborate__JustCoverage
+    // {{{ PROPERTIES
     /**
+     * @access protected
+     * @var    boolean
+     */
+    protected $auto_instance = false;
+    // }}}
+
+    // {{{ run
+    // {{{ test__run__JustCoverage
+    /**
+     * Run the `bonzai-cli` script
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__elaborate__JustCoverage()
+    public function test__run__JustCoverage()
     {
-        $this->object->elaborate(new Bonzai_Utils_Options);
+        include_once __DIR__ . '/../libs/Controller/Controller.php';
+        $controller = new Bonzai_Controller();
+        $controller->elaborate(array("--help"));
     }
     // }}}
     // }}}
 }
+

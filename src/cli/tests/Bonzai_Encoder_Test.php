@@ -22,6 +22,17 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
  **/
 
 require_once __DIR__ . '/../libs/Tests/TestCase.php';
@@ -33,20 +44,23 @@ require_once __DIR__ . '/../libs/Encoder/Encoder.php';
 Bonzai_Utils::$silenced = true;
 
 /**
- * @category  Optimization & Security
+ * Bonzai_Encoder_Test
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
 class Bonzai_Encoder_Test extends Bonzai_TestCase
 {
     // {{{ elaborate
     // {{{ test__elaborate
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -62,6 +76,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__processFile__WithParam_Null__IsEmpty
     /**
      * Process a file
+     *
      * @ignore
      * @access public
      * @return void
@@ -76,6 +91,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__processFile__WithParam_EmptyString__IsEmpty
     /**
      * Process a file
+     *
      * @ignore
      * @access public
      * @return void
@@ -90,6 +106,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__processFile__WithParam_SpacedString__IsEmpty
     /**
      * Process a file
+     *
      * @ignore
      * @access public
      * @return void
@@ -104,6 +121,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__processFile__WithParam_FileNotExists__IsEmpty
     /**
      * Process a file
+     *
      * @ignore
      * @access public
      * @return void
@@ -120,6 +138,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__processFile__WithParam_EmptyFile__FileIsEmpty
     /**
      * Process a file
+     *
      * @ignore
      * @access public
      * @return void
@@ -144,6 +163,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__processFile__WithParam_SizedFile__FileIsNotReadable
     /**
      * Process a file
+     *
      * @ignore
      * @access public
      * @return void
@@ -170,6 +190,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__processFile__WithParam_NotWritableSizedFile__FileIsEmpty
     /**
      * Process a file
+     *
      * @ignore
      * @access public
      * @return void
@@ -190,6 +211,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__processFile__WithParam_SizedFile__FileIsEmpty
     /**
      * Process a file
+     *
      * @ignore
      * @access public
      * @return void
@@ -209,6 +231,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ saveOutout
     // {{{ test__saveOutput
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -224,6 +247,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__getByteCode__WithParam_Null__FileIsInvalid
     /**
      * Get the bytecode
+     *
      * @ignore
      * @access public
      * @return void
@@ -243,6 +267,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__getByteCode__WithParam_EmptyString__FileIsInvalid
     /**
      * Get the bytecode
+     *
      * @ignore
      * @access public
      * @return void
@@ -262,6 +287,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__getByteCode__WithParam_SpacedString__FileIsInvalid
     /**
      * Get the bytecode
+     *
      * @ignore
      * @access public
      * @return void
@@ -281,6 +307,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__getByteCode__WithParam_FileNotExists__FileIsInvalid
     /**
      * Get the bytecode
+     *
      * @ignore
      * @access public
      * @return void
@@ -300,6 +327,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__getByteCode__WithParam_EmptyFile__FileIsEmpty
     /**
      * Get the bytecode
+     *
      * @ignore
      * @access public
      * @return void
@@ -324,6 +352,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__getByteCode__WithParam_SizedFile__FileIsNotReadable
     /**
      * Get the bytecode
+     *
      * @ignore
      * @access public
      * @return void
@@ -350,6 +379,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__getByteCode__WithParam_SizedFile__FileIsEmpty
     /**
      * Get the bytecode
+     *
      * @ignore
      * @access public
      * @return void
@@ -376,6 +406,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ test__getByteCode__WithParam_SizedFile__FileIsNotValid
     /**
      * Get the bytecode
+     *
      * @ignore
      * @access public
      * @return void
@@ -397,6 +428,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ cleanSource
     // {{{ test__cleanSource
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -411,6 +443,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // {{{ expandPathsToFiles
     // {{{ test__expandPathsToFiles__WithParam_EmptyString__AreEquals
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -423,6 +456,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
     // {{{ test__expandPathsToFiles__WithParam_Null__AreEquals
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -435,6 +469,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
     // {{{ test__expandPathsToFiles__WithParam_Fake__AreEquals
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -447,6 +482,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
     // {{{ test__expandPathsToFiles__WithParam_SpacedString__AreEquals
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -459,6 +495,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
     // {{{ test__expandPathsToFiles__WithParam_EmptyArray__AreEquals
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -471,6 +508,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
     // {{{ test__expandPathsToFiles__WithParam_Array__AreEquals
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -483,6 +521,7 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
 
     // {{{ test__expandPathsToFiles__WithParam_Array__AreEquals
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -512,6 +551,39 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         );
 
         $this->assertEquals($realfiles, $files);
+    }
+    // }}}
+
+    // {{{ test__expandPathsToFiles__WithParam_Unreadable__AreEquals
+    /**
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__expandPathsToFiles__WithParam_Unreadable__AreEquals()
+    {
+        $dirname = realpath(__DIR__ . '/../');
+
+        $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
+        mkdir($dirname, 0777); // rwxrwxrwx
+        file_put_contents("$dirname/file.php", "test");
+        mkdir("$dirname/$dirname", 0222); // -w--w--w-
+
+        $files = $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array(array($dirname)));
+        sort($files);
+
+        $realfiles = array(
+            getcwd() . '/' . $dirname . '/file.php'
+        );
+
+        $this->assertEquals($realfiles, $files);
+
+        chmod("$dirname/$dirname", 0777); // rwxrwxrwx
+        chmod($dirname, 0777); // rwxrwxrwx
+        unlink("$dirname/file.php");
+        rmdir("$dirname/$dirname");
+        rmdir($dirname);
     }
     // }}}
     // }}}

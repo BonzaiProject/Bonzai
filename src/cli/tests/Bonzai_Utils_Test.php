@@ -22,6 +22,17 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
  **/
 
 require_once __DIR__ . '/../libs/Tests/TestCase.php';
@@ -31,20 +42,23 @@ require_once __DIR__ . '/../libs/Utils/Utils.php';
 Bonzai_Utils::$silenced = true;
 
 /**
- * @category  Optimization & Security
+ * Bonzai_Utils_Test
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
 class Bonzai_Utils_Test extends Bonzai_TestCase
 {
     // {{{ renameFile
     // {{{ test__renameFile
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -60,6 +74,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Null_Null__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -75,6 +90,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Null_EmptyString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -90,6 +106,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Null_SpacedString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -105,6 +122,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Null_EmptyArray__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -120,6 +138,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Null_Array__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -135,6 +154,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_EmptyString_Null__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -150,6 +170,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_EmptyString_EmptyString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -165,6 +186,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_EmptyString_SpacedString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -180,6 +202,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_EmptyString_EmptyArray__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -195,6 +218,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_EmptyString_Array__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -210,6 +234,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_SpacedString_Null__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -225,6 +250,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_SpacedString_EmptyString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -240,6 +266,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_SpacedString_SpacedString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -255,6 +282,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_SpacedString_EmptyArray__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -270,6 +298,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_SpacedString_Array__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -285,6 +314,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Fake_Null__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -300,6 +330,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Fake_EmptyString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -315,6 +346,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Fake_SpacedString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -330,6 +362,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Fake_EmptyArray__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -345,6 +378,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Fake_Array__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -360,6 +394,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotReadable_Null__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -385,6 +420,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotReadable_EmptyString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -410,6 +446,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotReadable_SpacedString__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -435,6 +472,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotReadable_EmptyArray__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -460,6 +498,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotReadable_Array__ThrowException
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -485,6 +524,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotWritable_Null__IsEmpty
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -505,6 +545,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotWritable_EmptyString__IsEmpty
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -525,6 +566,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotWritable_SpacedString__IsEmpty
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -545,6 +587,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotWritable_EmptyArray__IsEmpty
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -565,6 +608,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_NotWritable_Array__AreEquals
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -585,6 +629,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Writable_Null__IsEmpty
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -603,6 +648,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Writable_EmptyString__IsEmpty
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -621,6 +667,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Writable_SpacedString__IsEmpty
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -639,6 +686,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Writable_EmptyArray__IsEmpty
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -657,6 +705,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir__WithParams_Writable_Array__AreEquals
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -675,6 +724,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir_ComplexCompare__AreEquals
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -698,6 +748,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__rScanDir_CurrentDirectories__AreEquals
     /**
      * Return the all directories & files into a directory
+     *
      * @ignore
      * @access public
      * @return void
@@ -754,6 +805,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__getFileContent_ParamIsNull_ReturnsNull
     /**
      * Get the file's content
+     *
      * @ignore
      * @access public
      * @return void
@@ -768,6 +820,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__getFileContent_ParamIsEmptyString_ReturnsNull
     /**
      * Get the file's content
+     *
      * @ignore
      * @access public
      * @return void
@@ -782,6 +835,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__getFileContent_ParamIsSpacedString_ReturnsNull
     /**
      * Get the file's content
+     *
      * @ignore
      * @access public
      * @return void
@@ -796,6 +850,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__getFileContent__WithParams_Fake__ThrowException
     /**
      * Get the file's content
+     *
      * @ignore
      * @access public
      * @return void
@@ -810,6 +865,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__getFileContent__WithParams_NotReadable__ThrowException
     /**
      * Get the file's content
+     *
      * @ignore
      * @access public
      * @return void
@@ -835,6 +891,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__getFileContent__WithParams_NotWritable__IsEmpty
     /**
      * Get the file's content
+     *
      * @ignore
      * @access public
      * @return void
@@ -855,6 +912,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__getFileContent__WithParam_Temp
     /**
      * Get the file's content
+     *
      * @ignore
      * @access public
      * @return void
@@ -875,6 +933,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Null_Null__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -889,6 +948,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Null_EmptyString__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -903,6 +963,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Null_SpacedString__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -917,6 +978,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Null_Fake__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -931,6 +993,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_EmptyString_Null__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -945,6 +1008,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_EmptyString_EmptyString__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -959,6 +1023,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_EmptyString_SpacedString__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -973,6 +1038,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_EmptyString_Fake__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -987,6 +1053,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_SpacedString_Null__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1001,6 +1068,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_SpacedString_EmptyString__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1015,6 +1083,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_SpacedString_SpacedString__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1029,6 +1098,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_SpacedString_Fake__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1043,6 +1113,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Fake_Null__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1058,6 +1129,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Fake_EmptyString__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1073,6 +1145,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Fake_SpacedString__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1088,6 +1161,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Fake_Fake__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1103,6 +1177,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Temp_Null__IsEmpty
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1122,6 +1197,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Temp_EmptyString__IsEmpty
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1141,6 +1217,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Temp_SpacedString__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1160,6 +1237,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_Temp_String__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1179,6 +1257,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_NotReadable_Null__IsEmpty
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1201,6 +1280,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_NotReadable_EmptyString__IsEmpty
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1223,6 +1303,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_NotReadable_SpacedString__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1245,6 +1326,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_NotReadable_String__AreEquals
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1267,6 +1349,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_NotWritable_Null__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1292,6 +1375,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_NotWritable_EmptyString__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1317,6 +1401,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_NotWritable_SpacedString__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1342,6 +1427,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ test__putFileContent__WithParams_NotWritable_String__ThrowException
     /**
      * Return the status of saving
+     *
      * @ignore
      * @access public
      * @return void
@@ -1368,6 +1454,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ checkFileValidity
     // {{{ test___CheckFileValidity
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1382,6 +1469,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ info
     // {{{ test__info__JustCoverage
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1396,6 +1484,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ message
     // {{{ test__message
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1410,6 +1499,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ warn
     // {{{ test__warn__JustCoverage
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1424,6 +1514,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // {{{ error
     // {{{ test__error__JustCoverage
     /**
+     *
      * @ignore
      * @access public
      * @return void

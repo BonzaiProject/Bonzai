@@ -22,18 +22,31 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
- **/
-
-/**
- * @category  Optimization & Security
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
+
+/**
+ * Bonzai_Controller
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
+ **/
 class Bonzai_Utils
 {
     // {{{ PROPERTIES
@@ -47,24 +60,33 @@ class Bonzai_Utils
 
     // {{{ renameFile
     /**
+     * renameFile
+     *
+     * @param string $filename
+     *
      * @static
      * @access public
-     * @param  string $filename
      * @throws Bonzai_Exception
      * @return void
      */
     public static function renameFile($filename)
     {
-        return self::putFileContent($filename . '.orig', self::getFileContent($filename));
+        return self::putFileContent(
+            $filename . '.orig',
+            self::getFileContent($filename)
+        );
     }
     // }}}
 
     // {{{ rScanDir
     /**
+     * rScanDir
+     *
+     * @param string $base
+     * @param array  &$data
+     *
      * @static
      * @access public
-     * @param  string $base
-     * @param  array  $data
      * @throws Bonzai_Exception
      * @return array
      */
@@ -76,12 +98,12 @@ class Bonzai_Utils
         }
 
         if (!is_array($data)) {
-          $data = array();
+            $data = array();
         }
 
         $array = array_diff(scandir($base), array('.', '..'));
 
-        foreach($array as $value) {
+        foreach ($array as $value) {
             $path = $base . '/' . $value;
             if (is_dir($path)) {
                 $data[] = $path . '/';
@@ -89,7 +111,10 @@ class Bonzai_Utils
                     $res  = Bonzai_Utils::rScanDir($path, $data);
                     $data = $res;
                 } catch (Bonzai_Exception $e) {
-                    Bonzai_Utils::message('The directory `%s` was skipped because not readable.', $path);
+                    Bonzai_Utils::message(
+                        'The directory `%s` was skipped because not readable.',
+                        $path
+                    );
                 }
             } elseif (is_file($path)) {
                 $data[] = $path;
@@ -102,9 +127,12 @@ class Bonzai_Utils
 
     // {{{ getFileContent
     /**
+     * getFileContent
+     *
+     * @param string $filename
+     *
      * @static
      * @access public
-     * @param  string $filename
      * @throws Bonzai_Exception
      * @return string
      */
@@ -121,10 +149,13 @@ class Bonzai_Utils
 
     // {{{ putFileContent
     /**
+     * putFileContent
+     *
+     * @param string $filename
+     * @param string $content
+     *
      * @static
      * @access public
-     * @param  string $filename
-     * @param  string $content
      * @throws Bonzai_Exception
      * @return string
      */
@@ -132,7 +163,10 @@ class Bonzai_Utils
     {
         $filename = trim($filename);
 
-        if (empty($filename) || (file_exists($filename) && !is_writable($filename))) {
+        if (empty($filename)
+            || (file_exists($filename)
+            && !is_writable($filename))
+        ) {
             $message = gettext('The file `%s` cannot be written.');
             throw new Bonzai_Exception(sprintf($message, $filename));
         }
@@ -143,9 +177,12 @@ class Bonzai_Utils
 
     // {{{ checkFileValidity
     /**
+     * checkFileValidity
+     *
+     * @param string $filename
+     *
      * @static
      * @access public
-     * @param  string $filename
      * @throws Bonzai_Exception
      * @return void
      */
@@ -176,6 +213,8 @@ class Bonzai_Utils
 
     // {{{ info
     /**
+     * info
+     *
      * @static
      * @access public
      * @return void
@@ -191,6 +230,8 @@ class Bonzai_Utils
 
     // {{{ message
     /**
+     * message
+     *
      * @static
      * @access protected
      * @return void
@@ -209,12 +250,15 @@ class Bonzai_Utils
             $prefix = '[' . date('H:i:s') . '] ';
             $prefix_len = strlen($prefix);
 
-            $text = wordwrap($text, 80 - $prefix_len, PHP_EOL . str_repeat(' ', $prefix_len), true);
+            $string = PHP_EOL . str_repeat(' ', $prefix_len);
+            $text = wordwrap($text, 80 - $prefix_len, $string, true);
 
             $use_stderr = ($options && $options->getOption('stderr') !== null);
 
             $message = $prefix . $text . PHP_EOL;
-            $std = ($use_stderr && $type == 'error') ? 'php://stderr' : 'php://stdout';
+            $std = ($use_stderr && $type == 'error')
+                   ? 'php://stderr'
+                   : 'php://stdout';
 
             file_put_contents($std, $message);
         }
@@ -223,6 +267,8 @@ class Bonzai_Utils
 
     // {{{ warn
     /**
+     * warn
+     *
      * @static
      * @access public
      * @return void
@@ -238,6 +284,8 @@ class Bonzai_Utils
 
     // {{{ error
     /**
+     * error
+     *
      * @static
      * @access public
      * @return void

@@ -22,18 +22,31 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
- **/
-
-/**
- * @category  Optimization & Security
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
+
+/**
+ * Bonzai_Registry
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
+ **/
 class Bonzai_Registry
 {
     // {{{ PROPERTIES
@@ -59,11 +72,14 @@ class Bonzai_Registry
 
     // {{{ add
     /**
+     * add
+     *
+     * @param string  $key
+     * @param mixed   $value
+     * @param integer $type
+     *
      * @static
      * @access public
-     * @param  string  $key
-     * @param  mixed   $value
-     * @param  integer $type
      * @return void
      */
     public static function add($key, $value, $type = null)
@@ -80,9 +96,12 @@ class Bonzai_Registry
 
     // {{{ get
     /**
+     * get
+     *
+     * @param string $key
+     *
      * @static
      * @access public
-     * @param  string $key
      * @return mixed | null
      */
     public static function get($key)
@@ -99,9 +118,12 @@ class Bonzai_Registry
 
     // {{{ remove
     /**
+     * remove
+     *
+     * @param string $key
+     *
      * @static
      * @access public
-     * @param  string $key
      * @return boolean
      */
     public static function remove($key)
@@ -116,11 +138,14 @@ class Bonzai_Registry
 
     // {{{ append
     /**
+     * append
+     *
+     * @param string  $key
+     * @param mixed   $value
+     * @param integer $type
+     *
      * @static
      * @access public
-     * @param  string  $key
-     * @param  mixed   $value
-     * @param  integer $type
      * @return void
      */
     public static function append($key, $value, $type = null)
@@ -132,9 +157,11 @@ class Bonzai_Registry
                 self::$elements[$key][] = $value;
             } elseif (is_string(self::$elements[$key])) {
                 self::$elements[$key] .= $value;
-            } elseif (is_numeric(self::$elements[$key]) && $type === self::INT_APPEND) {
+            } elseif (is_numeric(self::$elements[$key])
+                      && $type === self::INT_APPEND) {
                 self::$elements[$key] += $value;
-            } elseif (is_numeric(self::$elements[$key]) && $type !== self::INT_APPEND) {
+            } elseif (is_numeric(self::$elements[$key])
+                      && $type !== self::INT_APPEND) {
                 self::$elements[$key] .= $value;
             }
         } else {
@@ -145,9 +172,12 @@ class Bonzai_Registry
 
     // {{{ checkKeyValidity
     /**
+     * checkKeyValidity
+     *
+     * @param string $key
+     *
      * @static
      * @access protected
-     * @param  string $key
      * @throws Bonzai_Exception
      * @return void
      */

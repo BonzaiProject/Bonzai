@@ -22,27 +22,41 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
  **/
 
 require_once __DIR__ . '/../libs/Tests/TestCase.php';
 require_once __DIR__ . '/../libs/Controller/Controller.php';
 
 /**
- * @category  Optimization & Security
+ * Bonzai_Controller_Test
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
 class Bonzai_Controller_Test extends Bonzai_TestCase
 {
     // {{{ elaborate
     // {{{ test__elaborate__JustCoverage
     /**
      * Check if a file exists in a dir
+     *
      * @ignore
      * @access public
      * @return void
@@ -57,6 +71,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ handleTask
     // {{{ test__handleTask__JustCoverage
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -68,42 +83,45 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // }}}
     // }}}
 
-    // {{{ __autoload
-    // {{{ test____autoload__WithParam_InvalidClass__ThrowException
+    // {{{ autoload
+    // {{{ test__autoload__WithParam_InvalidClass__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test____autoload__WithParam_InvalidClass__ThrowException()
+    public function test__autoload__WithParam_InvalidClass__ThrowException()
     {
-        $this->getMethod('__autoload')->invokeArgs($this->object, array('Bonzai'));
+        $this->getMethod('autoload')->invokeArgs($this->object, array('Bonzai'));
     }
     // }}}
 
-    // {{{ test____autoload__WithParam_Fake__ThrowException
+    // {{{ test__autoload__WithParam_Fake__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test____autoload__WithParam_Fake__ThrowException()
+    public function test__autoload__WithParam_Fake__ThrowException()
     {
-        $this->getMethod('__autoload')->invokeArgs($this->object, array('Bonzai_Fake'));
+        $this->getMethod('autoload')->invokeArgs($this->object, array('Bonzai_Fake'));
     }
     // }}}
 
-    // {{{ test____autoload__WithParam_LoadedClass__ReturnNothing
+    // {{{ test__autoload__WithParam_LoadedClass__ReturnNothing
     /**
+     *
      * @ignore
      * @access public
      * @return void
      */
-    public function test____autoload__WithParam_LoadedClass__ReturnNothing()
+    public function test__autoload__WithParam_LoadedClass__ReturnNothing()
     {
-        $this->getMethod('__autoload')->invokeArgs($this->object, array('Bonzai_Controller'));
+        $this->getMethod('autoload')->invokeArgs($this->object, array('Bonzai_Controller'));
     }
     // }}}
     // }}}
@@ -112,6 +130,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_EmptyString__ReturnsNull
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -125,6 +144,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_Null__ReturnsNull
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -138,6 +158,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_SpacedString__ReturnsNull
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -151,6 +172,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_Fake__ReturnsNull
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -164,6 +186,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_BadFormatted__ReturnsNull
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -177,6 +200,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_NotExistent__ReturnsNull
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -190,6 +214,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_Real_AreEquals
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -203,6 +228,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_Real_AreEquals_2
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -216,6 +242,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__getFileNameFromClassName__WithParam_Real_AreEquals_3
     /**
      * Retrieve the class filename
+     *
      * @ignore
      * @access public
      * @return void
@@ -231,6 +258,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__checkFile__WithParam_EmptyString__ReturnsFalse
     /**
      * Check if a file exists in a dir
+     *
      * @ignore
      * @access public
      * @return void
@@ -244,6 +272,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__checkFile__WithParam_Null__ReturnsFalse
     /**
      * Check if a file exists in a dir
+     *
      * @ignore
      * @access public
      * @return void
@@ -257,6 +286,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__checkFile__WithParam_SpacedString__ReturnsFalse
     /**
      * Check if a file exists in a dir
+     *
      * @ignore
      * @access public
      * @return void
@@ -270,6 +300,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__checkFile__WithParam_Wrong__ReturnsFalse
     /**
      * Check if a file exists in a dir
+     *
      * @ignore
      * @access public
      * @return void
@@ -283,6 +314,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // {{{ test__checkFile__WithParam_Right__ReturnsTrue
     /**
      * Check if a file exists in a dir
+     *
      * @ignore
      * @access public
      * @return void

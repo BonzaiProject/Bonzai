@@ -22,18 +22,31 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
- **/
-
-/**
- * @category  Optimization & Security
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
+
+/**
+ * Bonzai_Utils_Options
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
+ **/
 class Bonzai_Utils_Options
 {
     // {{{ PROPERTIES
@@ -57,7 +70,8 @@ class Bonzai_Utils_Options
      * @var    array $labels
      */
     protected $labels = array(
-        'backup'  => 'Backup the original file, generate a .bak file (default: false)',
+        'backup'  =>
+        'Backup the original file, generate a .bak file (default: false)',
         'dry'     => 'Perform a trial run with no changes made',
         'colorf'  => 'Use colors in output',
         'log'     => 'Log execution messages in textual format',
@@ -85,8 +99,11 @@ class Bonzai_Utils_Options
 
     // {{{ init
     /**
+     * init
+     *
+     * @param array $argv
+     *
      * @access public
-     * @param  array $argv
      * @throws Bonzai_Exception
      * @return void
      */
@@ -97,15 +114,19 @@ class Bonzai_Utils_Options
             throw new Bonzai_Exception($message);
         }
 
-        $this->options = getopt(implode('', array_keys($this->parameters)), $this->parameters);
+        $input = implode('', array_keys($this->parameters));
+        $this->options = getopt($input, $this->parameters);
         $this->parseOptions($argv);
     }
     // }}}
 
     // {{{ parseOptions
     /**
+     * parseOptions
+     *
+     * @param array $argv
+     *
      * @access protected
-     * @param  array $argv
      * @throws Bonzai_Exception
      * @return void
      */
@@ -116,11 +137,14 @@ class Bonzai_Utils_Options
             throw new Bonzai_Exception($message);
         }
 
-        $options = array_merge(array_keys($this->options), array_values($this->options));
+        $options = array_keys($this->options);
+        $options = array_merge($options, array_values($this->options));
         $options = preg_grep('/.+/', $options);
 
-        foreach($argv as $key => $value) {
-            if ($key == 0) continue;
+        foreach ($argv as $key => $value) {
+            if ($key == 0) {
+                continue;
+            }
 
             if ($value[0] !== '-') {
                 $prev_key = preg_replace('/^-{1,2}/', '', $argv[$key - 1]) . ':';
@@ -130,11 +154,13 @@ class Bonzai_Utils_Options
             }
         }
 
-        foreach($this->options as $key => $value) {
+        foreach ($this->options as $key => $value) {
             $suffix = ($value !== false) ? ':' : '';
             $key .= $suffix;
 
-            if (isset($this->parameters[$key]) && !isset($this->options[$this->parameters[$key]])) {
+            if (isset($this->parameters[$key])
+                && !isset($this->options[$this->parameters[$key]])
+            ) {
                 $key_arr = $this->parameters[$key];
                 $key_arr = substr($key_arr, 0, strlen($key_arr)-strlen($suffix));
                 $this->options[$key_arr] = $value;
@@ -145,6 +171,8 @@ class Bonzai_Utils_Options
 
     // {{{ getOptionParams
     /**
+     * getOptionParams
+     *
      * @access public
      * @return array
      */
@@ -156,6 +184,8 @@ class Bonzai_Utils_Options
 
     // {{{ getOptions
     /**
+     * getOptions
+     *
      * @access public
      * @return array
      */
@@ -167,8 +197,11 @@ class Bonzai_Utils_Options
 
     // {{{ getOption
     /**
+     * getOption
+     *
+     * @param string $key
+     *
      * @access public
-     * @param  string $key
      * @return string | null
      */
     public function getOption($key)
@@ -183,6 +216,8 @@ class Bonzai_Utils_Options
 
     // {{{ getParameters
     /**
+     * getParameters
+     *
      * @access public
      * @return array
      */
@@ -194,8 +229,11 @@ class Bonzai_Utils_Options
 
     // {{{ getLabelParameter
     /**
+     * getLabelParameter
+     *
+     * @param string $key
+     *
      * @access public
-     * @param  string $key
      * @return string | null
      */
     public function getLabelParameter($key)

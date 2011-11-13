@@ -22,18 +22,31 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
- **/
-
-/**
- * @category  Optimization & Security
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
+
+/**
+ * Bonzai_Task
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
+ **/
 class Bonzai_Task
 {
     // {{{ PROPERTIES
@@ -52,8 +65,11 @@ class Bonzai_Task
 
     // {{{ loadAndExecute
     /**
+     * loadAndExecute
+     *
+     * @param Bonzai_Utils_Options $options
+     *
      * @access public
-     * @param  Bonzai_Utils_Options $options
      * @return mixed
      */
     public function loadAndExecute(Bonzai_Utils_Options $options = null)
@@ -66,8 +82,11 @@ class Bonzai_Task
 
     // {{{ load
     /**
+     * load
+     *
+     * @param Bonzai_Utils_Options $options
+     *
      * @access protected
-     * @param  Bonzai_Utils_Options $options
      * @return void
      */
     protected function load(Bonzai_Utils_Options $options = null)
@@ -79,7 +98,10 @@ class Bonzai_Task
         $this->parameters = $options;
 
         $options = $this->parameters->getOptionParams();
-        if (!empty($options) && $this->parameters->getOption('help') === null && $this->parameters->getOption('version') === null) {
+        if (!empty($options)
+            && $this->parameters->getOption('help') === null
+            && $this->parameters->getOption('version') === null
+        ) {
             $this->task       = 'Bonzai_Encoder';
             $this->parameters = $options;
         }
@@ -88,6 +110,8 @@ class Bonzai_Task
 
     // {{{ execute
     /**
+     * execute
+     *
      * @access protected
      * @throws Bonzai_Exception
      * @return mixed

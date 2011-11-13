@@ -22,6 +22,17 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
  **/
 
 require_once __DIR__ . '/../libs/Tests/TestCase.php';
@@ -29,21 +40,24 @@ require_once __DIR__ . '/../libs/Exception/Exception.php';
 require_once __DIR__ . '/../libs/Registry/Registry.php';
 
 /**
- * @category  Optimization & Security
+ * Bonzai_Registry_Test
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
 class Bonzai_Registry_Test extends Bonzai_TestCase
 {
     // {{{ add
     // {{{ test__add__WithParams_EmptyString_EmptyString_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -58,6 +72,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyString_EmptyString_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -72,6 +87,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyString_Null_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -86,6 +102,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyString_Null_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -100,6 +117,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyString_Fake_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -114,6 +132,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyString_Fake_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -128,6 +147,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Null_EmptyString_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -142,6 +162,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Null_EmptyString_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -156,6 +177,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Null_Null_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -170,6 +192,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Null_Null_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -184,6 +207,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Null_Fake_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -198,6 +222,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Null_Fake_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -212,6 +237,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Fake_EmptyString_Null__IsEmpty
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -225,6 +251,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Fake_EmptyString_ArrayAppend__IsEmpty
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -238,6 +265,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Fake_Null_Null__IsEmpty
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -251,6 +279,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Fake_Null_ArrayAppend__IsEmpty
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -264,6 +293,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Fake_Fake_Null__IsEmpty
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -277,6 +307,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_Fake_Fake_ArrayAppend__IsEmpty
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -290,6 +321,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyArray_EmptyString_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -304,6 +336,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyArray_EmptyString_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -318,6 +351,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyArray_Null_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -332,6 +366,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyArray_Null_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -346,6 +381,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyArray_Fake_Null__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -360,6 +396,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__add__WithParams_EmptyArray_Fake_ArrayAppend__ThrowException
     /**
      * Add an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -376,6 +413,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__get_ParamIsNull__ThrowException
     /**
      * Return a saved object
+     *
      * @ignore
      * @access public
      * @return void
@@ -390,6 +428,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__get_ParamIsEmptyString__ThrowException
     /**
      * Return a saved object
+     *
      * @ignore
      * @access public
      * @return void
@@ -404,6 +443,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__get_ParamIsSpacedString__ReturnsNull
     /**
      * Return a saved object
+     *
      * @ignore
      * @access public
      * @return void
@@ -417,6 +457,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__get_ParamIsFake__ReturnsNull
     /**
      * Return a saved object
+     *
      * @ignore
      * @access public
      * @return void
@@ -430,6 +471,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__get_ParamIsEmptyArray__ThrowException
     /**
      * Return a saved object
+     *
      * @ignore
      * @access public
      * @return void
@@ -444,6 +486,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__get_ExistentKey__AreEquals
     /**
      * Return a saved object
+     *
      * @ignore
      * @access public
      * @return void
@@ -460,6 +503,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__remove_ParamIsNull__ThrowException
     /**
      * Remove an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -474,6 +518,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__remove_ParamIsEmptyString__ThrowException
     /**
      * Remove an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -488,6 +533,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__remove__WithParam_SpacedString
     /**
      * Remove an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -501,6 +547,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__remove__WithParam_String
     /**
      * Remove an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -514,6 +561,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__remove_ParamIsEmptyArray__ThrowException
     /**
      * Remove an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -528,6 +576,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__remove_ExistentKey__ReturnsNull
     /**
      * Remove an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -545,6 +594,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_EmptyString_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -559,6 +609,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_EmptyString_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -573,6 +624,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_EmptyString_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -587,6 +639,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Null_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -601,6 +654,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Null_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -615,6 +669,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Null_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -629,6 +684,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Fake_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -643,6 +699,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Fake_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -657,6 +714,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Fake_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -671,6 +729,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Zero_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -685,6 +744,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Zero_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -699,6 +759,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Zero_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -713,6 +774,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_One_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -727,6 +789,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_One_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -741,6 +804,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_One_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -755,6 +819,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Negative_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -769,6 +834,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_Negative_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -783,6 +849,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyString_NegativeOne_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -797,6 +864,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_EmptyString_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -811,6 +879,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_EmptyString_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -825,6 +894,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_EmptyString_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -839,6 +909,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Null_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -853,6 +924,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Null_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -867,6 +939,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Null_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -881,6 +954,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Fake_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -895,6 +969,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Fake_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -909,6 +984,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Fake_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -923,6 +999,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Zero_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -937,6 +1014,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Zero_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -951,6 +1029,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Zero_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -965,6 +1044,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_One_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -979,6 +1059,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_One_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -993,6 +1074,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_One_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1007,6 +1089,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Negative_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1021,6 +1104,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Negative_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1035,6 +1119,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Null_Negative_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1049,6 +1134,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_EmptyString_Null__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1062,6 +1148,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_EmptyString_ArrayAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1075,6 +1162,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_EmptyString_IntAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1088,6 +1176,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Null_Null__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1101,6 +1190,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Null_ArrayAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1114,6 +1204,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Null_IntAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1127,6 +1218,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Fake_Null__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1140,6 +1232,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Fake_ArrayAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1153,6 +1246,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Fake_IntAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1166,6 +1260,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Zero_Null__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1179,6 +1274,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Zero_ArrayAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1192,6 +1288,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Zero_IntAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1205,6 +1302,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_One_Null__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1218,6 +1316,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_One_ArrayAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1231,6 +1330,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_One_IntAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1244,6 +1344,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Negative_Null__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1257,6 +1358,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Negative_ArrayAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1270,6 +1372,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_Fake_Negative_IntAppend__IsEmpty
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1283,6 +1386,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1297,6 +1401,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_EmptyString_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1311,6 +1416,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_EmptyString_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1325,6 +1431,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Null_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1339,6 +1446,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Null_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1353,6 +1461,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Null_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1367,6 +1476,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Fake_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1381,6 +1491,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Fake_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1395,6 +1506,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Fake_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1409,6 +1521,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Zero_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1423,6 +1536,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Zero_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1437,6 +1551,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Zero_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1451,6 +1566,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_One_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1465,6 +1581,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_One_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1479,6 +1596,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_One_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1493,6 +1611,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Negative_Null__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1507,6 +1626,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Negative_ArrayAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1521,6 +1641,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append__WithParams_EmptyArray_Negative_IntAppend__ThrowException
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1535,6 +1656,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_StringToExistent__AreEquals
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1550,6 +1672,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_IntToExistent__AreEquals
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1565,6 +1688,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_IntToExistentWithIntAppend__AreEquals
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1580,6 +1704,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_IntToExistent__AreEquals_2
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1595,6 +1720,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_StringIntToExistent__AreEquals
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1610,6 +1736,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_StringIntToExistent__AreEquals_2
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1625,6 +1752,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_NegativeIntToExistent__AreEquals
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1640,6 +1768,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_ArrayToExistent__AreEquals
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1655,6 +1784,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ test__append_StringToExistentArray__AreEquals
     /**
      * Append an element
+     *
      * @ignore
      * @access public
      * @return void
@@ -1671,6 +1801,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
     // {{{ checkKeyValidity
     // {{{ test__checkKeyValidity__WithParam_EmptyString__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1684,6 +1815,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_SpacedString__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1696,6 +1828,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_Fake__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1708,6 +1841,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_Null__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1721,6 +1855,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_EmptyArray__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1734,6 +1869,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_Array__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1747,6 +1883,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_Zero__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1760,6 +1897,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_ZeroString__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1773,6 +1911,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_Negative__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void
@@ -1785,6 +1924,7 @@ class Bonzai_Registry_Test extends Bonzai_TestCase
 
     // {{{ test__checkKeyValidity__WithParam_Ojbect__ThrowException
     /**
+     *
      * @ignore
      * @access public
      * @return void

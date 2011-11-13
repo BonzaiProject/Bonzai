@@ -22,24 +22,40 @@
  *             long as the copyright header is left intact.
  *             <http://www.opensource.org/licenses/mit-license.php>
  *             <http://www.opensource.org/licenses/gpl-2.0.php>
- **/
-
-/**
- * @category  Optimization & Security
+ *
+ * PHP version 5
+ *
+ * @category  Optimization_&_Security
  * @package   Bonzai
- * @version   0.1
  * @author    Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @license   http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
- */
+ **/
+
+/**
+ * Bonzai_Encoder
+ *
+ * @category  Optimization_&_Security
+ * @package   Bonzai
+ * @author    Fabio Cicerchia <info@fabiocicerchia.it>
+ * @copyright 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ *            http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @version   Release: 0.1
+ * @link      http://www.bonzai-project.org
+ **/
 class Bonzai_Encoder
 {
     // {{{ elaborate
     /**
+     * elaborate
+     *
+     * @param array $files
+     *
      * @access public
-     * @param  array $files
      * @return void
      */
     public function elaborate($files)
@@ -56,11 +72,16 @@ class Bonzai_Encoder
         $files = $this->expandPathsToFiles($files);
         $files = array_unique($files);
 
-        foreach($files as $filename) {
+        foreach ($files as $filename) {
             try {
                 $this->processFile($filename);
             } catch (Bonzai_Exception $e) {
-                Bonzai_Registry::append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND);
+                Bonzai_Registry::append(
+                    'skipped_files',
+                    $filename,
+                    Bonzai_Registry::ARRAY_APPEND
+                );
+
                 Bonzai_Utils::error('Cannot handle the file `%s`.', $filename);
             }
         }
@@ -69,8 +90,11 @@ class Bonzai_Encoder
 
     // {{{ processFile
     /**
+     * processFile
+     *
+     * @param string $filename
+     *
      * @access protected
-     * @param  string $filename
      * @throws Bonzai_Exception
      * @return boolean
      */
@@ -105,9 +129,12 @@ class Bonzai_Encoder
 
     // {{{ saveOutput
     /**
+     * saveOutput
+     *
+     * @param string $filename
+     * @param string $bytecode
+     *
      * @access protected
-     * @param  string $filename
-     * @param  string $bytecode
      * @return void
      */
     protected function saveOutput($filename, $bytecode)
@@ -122,16 +149,27 @@ class Bonzai_Encoder
                 throw new Bonzai_Exception(sprintf($message, $filename));
             }
         } catch (Bonzai_Exception $e) {
-            Bonzai_Registry::append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND);
-            Bonzai_Utils::warn('The file `%s` was skipped because cannot be able to save it.', $filename);
+            Bonzai_Registry::append(
+                'skipped_files',
+                $filename,
+                Bonzai_Registry::ARRAY_APPEND
+            );
+
+            Bonzai_Utils::warn(
+                'The file `%s` was skipped because cannot be able to save it.',
+                $filename
+            );
         }
     }
     // }}}
 
     // {{{ getByteCode
     /**
+     * getByteCode
+     *
+     * @param string $filename
+     *
      * @access protected
-     * @param  string $filename
      * @return string
      */
     protected function getByteCode($filename)
@@ -153,7 +191,12 @@ class Bonzai_Encoder
             $bytecode = Bonzai_Utils::getFileContent($tempnam);
             unlink($tempnam);
         } catch (Bonzai_Exception $e) {
-            Bonzai_Registry::append('skipped_files', $filename, Bonzai_Registry::ARRAY_APPEND);
+            Bonzai_Registry::append(
+                'skipped_files',
+                $filename,
+                Bonzai_Registry::ARRAY_APPEND
+            );
+
             Bonzai_Utils::error('Cannot handle the file `%s`.', $filename);
         }
 
@@ -163,8 +206,11 @@ class Bonzai_Encoder
 
     // {{{ cleanSource
     /**
+     * cleanSource
+     *
+     * @param string $filename
+     *
      * @access protected
-     * @param  string $filename
      * @return string
      */
     protected function cleanSource($filename)
@@ -205,8 +251,11 @@ class Bonzai_Encoder
 
     // {{{ expandPathsToFiles
     /**
+     * expandPathsToFiles
+     *
+     * @param array $files
+     *
      * @access protected
-     * @param  array $files
      * @return array
      */
     protected function expandPathsToFiles($files)
@@ -216,8 +265,8 @@ class Bonzai_Encoder
         }
 
         $cloned = $files;
-        foreach($cloned as $key => $path) {
-            $path        = realpath(getcwd() . '/' . $path) ?: realpath($path);
+        foreach ($cloned as $key => $path) {
+            $path = realpath(getcwd() . '/' . $path) ?: realpath($path);
             if ($path == false) {
                 unset($files[$key]);
             } else {
@@ -226,11 +275,16 @@ class Bonzai_Encoder
                 try {
                     if (is_dir($path)) {
                         unset($files[$key]);
-                        $new_files = preg_grep('/\.php$/', Bonzai_Utils::rScanDir($path));
+
+                        $scandir = Bonzai_Utils::rScanDir($path);
+                        $new_files = preg_grep('/\.php$/', $scandir);
                         $files = array_merge($files, $new_files);
                     }
                 } catch (Bonzai_Exception $e) {
-                    Bonzai_Utils::warn('The directory `%s` was skipped because not readable.', $path);
+                    Bonzai_Utils::warn(
+                        'The directory `%s` was skipped because not readable.',
+                        $path
+                    );
                 }
             }
         }
