@@ -2,7 +2,7 @@ ROADMAP
 ===============================================================================
 
 Version 0.1-alpha1
-EXPECTED DUE DATE: 20 November 2011
+EXPECTED DUE DATE: 19 November 2011
 TASKS:
   * Write the unit test for `Bonzai_Controller_Test::handleTask`
   * Write the unit test for `Bonzai_Encoder_Test::elaborate`
@@ -29,7 +29,7 @@ TASKS:
 -------------------------------------------------------------------------------
 
 Version 0.1-alpha2
-EXPECTED DUE DATE: 26 November 2011
+EXPECTED DUE DATE: 24 November 2011
 TASKS:
   * Check _build.xml_
   * Improve _release.sh_ script
@@ -43,7 +43,7 @@ TASKS:
 -------------------------------------------------------------------------------
 
 Version 0.1-alpha3
-EXPECTED DUE DATE: 30 November 2011
+EXPECTED DUE DATE: 03 December 2011
 TASKS:
   * Optimize the cyclomatic complexity
   * Optimize the application through profiling (_xhprof_ & _xdebug_)
@@ -51,23 +51,16 @@ TASKS:
 -------------------------------------------------------------------------------
 
 Version 0.1-beta
-EXPECTED DUE DATE: 10 December 2011
+EXPECTED DUE DATE: 18 December 2011
 TASKS:
   * Benchmark of bonzaied CMS (_Wordpress_, _Joomla_, _Drupal_)
 
 -------------------------------------------------------------------------------
 
 Version 0.1-RC1
-EXPECTED DUE DATE: 16 December 2011
+EXPECTED DUE DATE: 28 December 2011
 TASKS:
   * Documentation
-
--------------------------------------------------------------------------------
-
-Version 0.1-RC2
-EXPECTED DUE DATE: 27 December 2011
-TASKS:
-  * TDB
 
 -------------------------------------------------------------------------------
 
