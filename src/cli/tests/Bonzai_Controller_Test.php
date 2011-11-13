@@ -40,30 +40,30 @@ require_once __DIR__ . '/../libs/Controller/Controller.php';
 class Bonzai_Controller_Test extends Bonzai_TestCase
 {
     // {{{ elaborate
-    // {{{ test__elaborate
+    // {{{ test__elaborate__JustCoverage
     /**
      * Check if a file exists in a dir
      * @ignore
      * @access public
      * @return void
      */
-    public function test__elaborate()
+    public function test__elaborate__JustCoverage()
     {
-        $this->object->elaborate(array());
+        $this->object->elaborate(null);
     }
     // }}}
     // }}}
 
     // {{{ handleTask
-    // {{{ test__handleTask
+    // {{{ test__handleTask__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__handleTask()
+    public function test__handleTask__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->getMethod('handleTask')->invoke($this->object);
     }
     // }}}
     // }}}

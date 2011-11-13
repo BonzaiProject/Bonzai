@@ -3,8 +3,7 @@ ROADMAP
 
 Version 0.1-alpha1
 EXPECTED DUE DATE: 19 November 2011
-TASKS:
-  * Write the unit test for `Bonzai_Controller_Test::handleTask`
+REMAINING TASKS:
   * Write the unit test for `Bonzai_Encoder_Test::elaborate`
   * Write the unit test for `Bonzai_Encoder_Test::saveOutput`
   * Write the unit test for `Bonzai_Encoder_Test::cleanSource`
@@ -14,11 +13,7 @@ TASKS:
   * Write the unit test for `Bonzai_Utils_Help_Test::elaborate`
   * Write the unit test for `Bonzai_Utils_Options_Test::init`
   * Write the unit test for `Bonzai_Utils_Options_Test::parseOptions`
-  * Write the unit test for `Bonzai_Utils_Options_Test::getOptionParams`
-  * Write the unit test for `Bonzai_Utils_Options_Test::getOptions`
   * Write the unit test for `Bonzai_Utils_Options_Test::getOption`
-  * Write the unit test for `Bonzai_Utils_Options_Test::getParameters`
-  * Write the unit test for `Bonzai_Utils_Options_Test::getLabelParameter`
   * Write the unit test for `Bonzai_Utils_Test::renameFile`
   * Write the unit test for `Bonzai_Utils_Test::checkFileValidity`
   * Write the unit test for `Bonzai_Utils_Test::info`
@@ -30,7 +25,7 @@ TASKS:
 
 Version 0.1-alpha2
 EXPECTED DUE DATE: 24 November 2011
-TASKS:
+REMAINING TASKS:
   * Check _build.xml_
   * Improve _release.sh_ script
   * Remove useless parts from _build.sh_
@@ -44,7 +39,7 @@ TASKS:
 
 Version 0.1-alpha3
 EXPECTED DUE DATE: 03 December 2011
-TASKS:
+REMAINING TASKS:
   * Optimize the cyclomatic complexity
   * Optimize the application through profiling (_xhprof_ & _xdebug_)
 
@@ -52,17 +47,17 @@ TASKS:
 
 Version 0.1-beta
 EXPECTED DUE DATE: 18 December 2011
-TASKS:
+REMAINING TASKS:
   * Benchmark of bonzaied CMS (_Wordpress_, _Joomla_, _Drupal_)
 
 -------------------------------------------------------------------------------
 
 Version 0.1-RC1
 EXPECTED DUE DATE: 28 December 2011
-TASKS:
+REMAINING TASKS:
   * Documentation
 
 -------------------------------------------------------------------------------
 
 Version 0.1
-EXPECTED DUE DATE: 1 January 2011
+EXPECTED DUE DATE: 01 January 2011

@@ -68,29 +68,29 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getOptionParams
-    // {{{ test__getOptionParams
+    // {{{ test__getOptionParams__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getOptionParams()
+    public function test__getOptionParams__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->getOptionParams();
     }
     // }}}
     // }}}
 
     // {{{ getOptions
-    // {{{ test__getOptions
+    // {{{ test__getOptions__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getOptions()
+    public function test__getOptions__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->getOptions();
     }
     // }}}
     // }}}
@@ -110,29 +110,41 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getParameters
-    // {{{ test__getParameters
+    // {{{ test__getParameters__JustCoverage
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getParameters()
+    public function test__getParameters__JustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->getParameters();
     }
     // }}}
     // }}}
 
     // {{{ getLabelParameter
-    // {{{ test__getLabelParameter
+    // {{{ test__getLabelParameter__WithParam_Existent__AreEquals
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getLabelParameter()
+    public function test__getLabelParameter__WithParam_Existent__AreEquals()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals('Show the help', $this->object->getLabelParameter('help'));
+    }
+    // }}}
+
+    // {{{ test__getLabelParameter__WithParam_NotExistent__IsNull
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__getLabelParameter__WithParam_NotExistent__IsNull()
+    {
+        $this->assertNull($this->object->getLabelParameter('a'));
     }
     // }}}
     // }}}

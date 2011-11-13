@@ -41,9 +41,9 @@ class Bonzai_Controller
     // {{{ PROPERTIES
     /**
      * @access protected
-     * @var    array
+     * @var    Bonzai_Utils_Options
      */
-    protected $options = array();
+    protected $options = null;
     // }}}
 
     // {{{ __construct

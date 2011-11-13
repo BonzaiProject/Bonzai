@@ -56,8 +56,12 @@ class Bonzai_Task
      * @param  Bonzai_Utils_Options $options
      * @return mixed
      */
-    public function loadAndExecute(Bonzai_Utils_Options $options)
+    public function loadAndExecute(Bonzai_Utils_Options $options = null)
     {
+        if (is_null($options)) {
+            $options = new Bonzai_Utils_Options;
+        }
+
         $this->load($options);
 
         try {
@@ -75,7 +79,7 @@ class Bonzai_Task
      * @param  Bonzai_Utils_Options $options
      * @return void
      */
-    protected function load(Bonzai_Utils_Options $options)
+    protected function load(Bonzai_Utils_Options $options = null)
     {
         $this->parameters = $options;
 
