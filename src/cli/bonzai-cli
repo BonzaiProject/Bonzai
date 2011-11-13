@@ -27,4 +27,4 @@
 
 require_once __DIR__ . '/libs/Controller/Controller.php';
 $controller = new Bonzai_Controller();
-$controller->elaborate();
+$controller->elaborate($_SERVER['argv']);

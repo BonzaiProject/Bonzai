@@ -69,12 +69,12 @@ class Bonzai_Encoder
 
     // {{{ processFile
     /**
-     * @access public
+     * @access protected
      * @param  string $filename
      * @throws Bonzai_Exception
-     * @return void
+     * @return boolean
      */
-    public function processFile($filename)
+    protected function processFile($filename)
     {
         if (empty($filename) || !file_exists($filename)) {
             $message = gettext('The file `%s` is invalid.');
@@ -130,11 +130,11 @@ class Bonzai_Encoder
 
     // {{{ getByteCode
     /**
-     * @access public
+     * @access protected
      * @param  string $filename
      * @return string
      */
-    public function getByteCode($filename)
+    protected function getByteCode($filename)
     {
         $bytecode = null;
 
@@ -167,7 +167,7 @@ class Bonzai_Encoder
      * @param  string $filename
      * @return string
      */
-    protected function cleanSource($filename) // TODO: ADD TEST
+    protected function cleanSource($filename)
     {
         $content = Bonzai_Utils::getFileContent($filename);
         $cleaned = '';
@@ -207,23 +207,31 @@ class Bonzai_Encoder
     /**
      * @access protected
      * @param  array $files
-     * @return void
+     * @return array
      */
     protected function expandPathsToFiles($files)
     {
+        if (!is_array($files)) {
+            return array();
+        }
+
         $cloned = $files;
         foreach($cloned as $key => $path) {
-            $files[$key] = realpath(getcwd() . '/' . $path);
-            $path        = $files[$key];
+            $path        = realpath(getcwd() . '/' . $path) ?: realpath($path);
+            if ($path == false) {
+                unset($files[$key]);
+            } else {
+                $files[$key] = $path;
 
-            try {
-                if (is_dir($path)) {
-                    unset($files[$key]);
-                    $new_files = preg_grep('/\.php$/', Bonzai_Utils::rscandir($path));
-                    $files = array_merge($files, $new_files);
+                try {
+                    if (is_dir($path)) {
+                        unset($files[$key]);
+                        $new_files = preg_grep('/\.php$/', Bonzai_Utils::rScanDir($path));
+                        $files = array_merge($files, $new_files);
+                    }
+                } catch (Bonzai_Exception $e) {
+                    Bonzai_Utils::warn('The directory `%s` was skipped because not readable.', $path);
                 }
-            } catch (Bonzai_Exception $e) {
-                Bonzai_Utils::warn('The directory `%s` was skipped because not readable.', $path);
             }
         }
 

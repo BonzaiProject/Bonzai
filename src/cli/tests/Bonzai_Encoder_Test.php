@@ -44,7 +44,22 @@ Bonzai_Utils::$silenced = true;
  */
 class Bonzai_Encoder_Test extends Bonzai_TestCase
 {
-    // {{{ test__ProcessFile__WithParam_Null__IsEmpty
+    // {{{ elaborate
+    // {{{ test__elaborate
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__elaborate()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+    // }}}
+
+    // {{{ processFile
+    // {{{ test__processFile__WithParam_Null__IsEmpty
     /**
      * Process a file
      * @ignore
@@ -52,13 +67,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__ProcessFile__WithParam_Null__IsEmpty()
+    public function test__processFile__WithParam_Null__IsEmpty()
     {
-        $this->assertEmpty($this->object->processFile(null));
+        $this->assertEmpty($this->getMethod('processFile')->invokeArgs($this->object, array(null)));
     }
     // }}}
 
-    // {{{ test__ProcessFile__WithParam_EmptyString__IsEmpty
+    // {{{ test__processFile__WithParam_EmptyString__IsEmpty
     /**
      * Process a file
      * @ignore
@@ -66,13 +81,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__ProcessFile__WithParam_EmptyString__IsEmpty()
+    public function test__processFile__WithParam_EmptyString__IsEmpty()
     {
-        $this->assertEmpty($this->object->processFile(''));
+        $this->assertEmpty($this->getMethod('processFile')->invokeArgs($this->object, array('')));
     }
     // }}}
 
-    // {{{ test__ProcessFile__WithParam_SpacedString__IsEmpty
+    // {{{ test__processFile__WithParam_SpacedString__IsEmpty
     /**
      * Process a file
      * @ignore
@@ -80,13 +95,13 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__ProcessFile__WithParam_SpacedString__IsEmpty()
+    public function test__processFile__WithParam_SpacedString__IsEmpty()
     {
-        $this->assertEmpty($this->object->processFile(' '));
+        $this->assertEmpty($this->getMethod('processFile')->invokeArgs($this->object, array(' ')));
     }
     // }}}
 
-    // {{{ test__ProcessFile__WithParam_FileNotExists__IsEmpty
+    // {{{ test__processFile__WithParam_FileNotExists__IsEmpty
     /**
      * Process a file
      * @ignore
@@ -94,28 +109,28 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__ProcessFile__WithParam_FileNotExists__IsEmpty()
+    public function test__processFile__WithParam_FileNotExists__IsEmpty()
     {
-        $this->assertEmpty($this->object->processFile('a'));
+        $this->assertEmpty($this->getMethod('processFile')->invokeArgs($this->object, array('a')));
 
         unlink('a');
     }
     // }}}
 
-    // {{{ test__ProcessFile__WithParam_EmptyFile__FileIsEmpty
+    // {{{ test__processFile__WithParam_EmptyFile__FileIsEmpty
     /**
      * Process a file
      * @ignore
      * @access public
      * @return void
      */
-    public function test__ProcessFile__WithParam_EmptyFile__FileIsEmpty()
+    public function test__processFile__WithParam_EmptyFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
 
         try {
-            $this->object->processFile($filename);
+            $this->getMethod('processFile')->invokeArgs($this->object, array($filename));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/', $e->getMessage());
@@ -126,21 +141,21 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__ProcessFile__WithParam_SizedFile__FileIsNotReadable
+    // {{{ test__processFile__WithParam_SizedFile__FileIsNotReadable
     /**
      * Process a file
      * @ignore
      * @access public
      * @return void
      */
-    public function test__ProcessFile__WithParam_SizedFile__FileIsNotReadable()
+    public function test__processFile__WithParam_SizedFile__FileIsNotReadable()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'aaa');
         chmod($filename, 0333); // -wx-wx-wx
 
         try {
-            $this->object->processFile($filename);
+            $this->getMethod('processFile')->invokeArgs($this->object, array($filename));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file `.+\/test_[a-zA-Z0-9]+` is not readable\.$/', $e->getMessage());
@@ -152,55 +167,71 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__ProcessFile__WithParam_NotWritableSizedFile__FileIsEmpty
+    // {{{ test__processFile__WithParam_NotWritableSizedFile__FileIsEmpty
     /**
      * Process a file
      * @ignore
      * @access public
      * @return void
      */
-    public function test__ProcessFile__WithParam_NotWritableSizedFile__FileIsEmpty()
+    public function test__processFile__WithParam_NotWritableSizedFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'aaa');
         chmod($filename, 0555); // r-xr-xr-x
 
-        $this->assertEmpty($this->object->processFile($filename));
+        $this->assertEmpty($this->getMethod('processFile')->invokeArgs($this->object, array($filename)));
 
         chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
 
-    // {{{ test__ProcessFile__WithParam_SizedFile__FileIsEmpty
+    // {{{ test__processFile__WithParam_SizedFile__FileIsEmpty
     /**
      * Process a file
      * @ignore
      * @access public
      * @return void
      */
-    public function test__ProcessFile__WithParam_SizedFile__FileIsEmpty()
+    public function test__processFile__WithParam_SizedFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
-        $this->assertEmpty($this->object->processFile($filename));
+        $this->assertEmpty($this->getMethod('processFile')->invokeArgs($this->object, array($filename)));
 
         unlink($filename);
     }
     // }}}
+    // }}}
 
-    // {{{ test__GetByteCode__WithParam_Null__FileIsInvalid
+    // {{{ saveOutout
+    // {{{ test__saveOutput
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__saveOutput()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+    // }}}
+
+    // {{{ getByteCode
+    // {{{ test__getByteCode__WithParam_Null__FileIsInvalid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function test__GetByteCode__WithParam_Null__FileIsInvalid()
+    public function test__getByteCode__WithParam_Null__FileIsInvalid()
     {
         try {
-            $this->object->getByteCode(null);
+            $this->getMethod('getByteCode')->invokeArgs($this->object, array(null));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file `` is invalid\.$/', $e->getMessage());
@@ -209,17 +240,17 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__GetByteCode__WithParam_EmptyString__FileIsInvalid
+    // {{{ test__getByteCode__WithParam_EmptyString__FileIsInvalid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function test__GetByteCode__WithParam_EmptyString__FileIsInvalid()
+    public function test__getByteCode__WithParam_EmptyString__FileIsInvalid()
     {
         try {
-            $this->object->getByteCode('');
+            $this->getMethod('getByteCode')->invokeArgs($this->object, array(''));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file `` is invalid\.$/', $e->getMessage());
@@ -228,17 +259,17 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__GetByteCode__WithParam_SpacedString__FileIsInvalid
+    // {{{ test__getByteCode__WithParam_SpacedString__FileIsInvalid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function test__GetByteCode__WithParam_SpacedString__FileIsInvalid()
+    public function test__getByteCode__WithParam_SpacedString__FileIsInvalid()
     {
         try {
-            $this->object->getByteCode(' ');
+            $this->getMethod('getByteCode')->invokeArgs($this->object, array(' '));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file ` ` is invalid\.$/', $e->getMessage());
@@ -247,17 +278,17 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__GetByteCode__WithParam_FileNotExists__FileIsInvalid
+    // {{{ test__getByteCode__WithParam_FileNotExists__FileIsInvalid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function test__GetByteCode__WithParam_FileNotExists__FileIsInvalid()
+    public function test__getByteCode__WithParam_FileNotExists__FileIsInvalid()
     {
         try {
-            $this->object->getByteCode('a');
+            $this->getMethod('getByteCode')->invokeArgs($this->object, array('a'));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file `a` is invalid\.$/', $e->getMessage());
@@ -266,20 +297,20 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__GetByteCode__WithParam_EmptyFile__FileIsEmpty
+    // {{{ test__getByteCode__WithParam_EmptyFile__FileIsEmpty
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function test__GetByteCode__WithParam_EmptyFile__FileIsEmpty()
+    public function test__getByteCode__WithParam_EmptyFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
 
         try {
-            $this->object->getByteCode($filename);
+            $this->getMethod('getByteCode')->invokeArgs($this->object, array($filename));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/', $e->getMessage());
@@ -290,21 +321,21 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__GetByteCode__WithParam_SizedFile__FileIsNotReadable
+    // {{{ test__getByteCode__WithParam_SizedFile__FileIsNotReadable
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function test__GetByteCode__WithParam_SizedFile__FileIsNotReadable()
+    public function test__getByteCode__WithParam_SizedFile__FileIsNotReadable()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
         chmod($filename, 0333); // -wx-wx-wx
 
         try {
-            $this->object->getByteCode($filename);
+            $this->getMethod('getByteCode')->invokeArgs($this->object, array($filename));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file `.+\/test_[a-zA-Z0-9]+` is not readable\.$/', $e->getMessage());
@@ -316,21 +347,21 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__GetByteCode__WithParam_SizedFile__FileIsEmpty
+    // {{{ test__getByteCode__WithParam_SizedFile__FileIsEmpty
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function test__GetByteCode__WithParam_SizedFile__FileIsEmpty()
+    public function test__getByteCode__WithParam_SizedFile__FileIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
         chmod($filename, 0555); // r-xr-xr-x
 
         try {
-            $this->object->getByteCode($filename);
+            $this->getMethod('getByteCode')->invokeArgs($this->object, array($filename));
             $this->assertTrue(false, "The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp('/^The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/', $e->getMessage());
@@ -342,35 +373,136 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__GetByteCode__WithParam_SizedFile__FileIsNotValid
+    // {{{ test__getByteCode__WithParam_SizedFile__FileIsNotValid
     /**
      * Get the bytecode
      * @ignore
      * @access public
      * @return void
      */
-    public function test__GetByteCode__WithParam_SizedFile__FileIsNotValid()
+    public function test__getByteCode__WithParam_SizedFile__FileIsNotValid()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
-        $bytecode = $this->object->getByteCode($filename);
+        $bytecode = $this->getMethod('getByteCode')->invokeArgs($this->object, array($filename));
 
         $this->assertRegExp('/bcompiler v/', $bytecode);
 
         unlink($filename);
     }
     // }}}
+    // }}}
 
-    // {{{ test__ExpandPathsToFiles
+    // {{{ cleanSource
+    // {{{ test__cleanSource
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__ExpandPathsToFiles()
+    public function test__cleanSource()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
+    // }}}
+    // }}}
+
+    // {{{ expandPathsToFiles
+    // {{{ test__expandPathsToFiles__WithParam_EmptyString__AreEquals
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__expandPathsToFiles__WithParam_EmptyString__AreEquals()
+    {
+        $this->assertEquals(array(), $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array('')));
+    }
+    // }}}
+
+    // {{{ test__expandPathsToFiles__WithParam_Null__AreEquals
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__expandPathsToFiles__WithParam_Null__AreEquals()
+    {
+        $this->assertEquals(array(), $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array(null)));
+    }
+    // }}}
+
+    // {{{ test__expandPathsToFiles__WithParam_Fake__AreEquals
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__expandPathsToFiles__WithParam_Fake__AreEquals()
+    {
+        $this->assertEquals(array(), $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array('a')));
+    }
+    // }}}
+
+    // {{{ test__expandPathsToFiles__WithParam_SpacedString__AreEquals
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__expandPathsToFiles__WithParam_SpacedString__AreEquals()
+    {
+        $this->assertEquals(array(), $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array(' ')));
+    }
+    // }}}
+
+    // {{{ test__expandPathsToFiles__WithParam_EmptyArray__AreEquals
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__expandPathsToFiles__WithParam_EmptyArray__AreEquals()
+    {
+        $this->assertEquals(array(), $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array(array())));
+    }
+    // }}}
+
+    // {{{ test__expandPathsToFiles__WithParam_Array__AreEquals
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__expandPathsToFiles__WithParam_Array__AreEquals()
+    {
+        $this->assertEquals(array(), $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array(array('a'))));
+    }
+    // }}}
+
+    // {{{ test__expandPathsToFiles__WithParam_Array__AreEquals
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__expandPathsToFiles__WithParam_Array__AreEquals_2()
+    {
+        $files = array(
+            __DIR__ . '/Bonzai_Controller_Test.php',
+            __DIR__ . '/Bonzai_Encoder_Test.php',
+            __DIR__ . '/Bonzai_Exception_Test.php',
+            __DIR__ . '/Bonzai_Registry_Test.php',
+            __DIR__ . '/Bonzai_Task_Test.php',
+            __DIR__ . '/Bonzai_Utils_Help_Test.php',
+            __DIR__ . '/Bonzai_Utils_Options_Test.php',
+            __DIR__ . '/Bonzai_Utils_Test.php',
+            __DIR__ . '/cliSuite.php'
+        );
+
+        $this->assertEquals($files, $this->getMethod('expandPathsToFiles')->invokeArgs($this->object, array(array(__DIR__))));
+    }
+    // }}}
     // }}}
 }

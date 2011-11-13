@@ -39,13 +39,13 @@ require_once __DIR__ . '/../libs/Exception/Exception.php';
  */
 class Bonzai_Exception_Test extends Bonzai_TestCase
 {
-    // {{{ test__Nothing
+    // {{{ test__nothing
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__Nothing()
+    public function test__nothing()
     {
         $this->markTestSkipped('There\'s nothing to be tested in this Testing Class.');
     }

@@ -39,15 +39,45 @@ require_once __DIR__ . '/../libs/Task/Task.php';
  */
 class Bonzai_Task_Test extends Bonzai_TestCase
 {
-    // {{{ test__Load
+    // {{{ loadAndExecute
+    // {{{ test__loadAndExecute
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__Load()
+    public function test__loadAndExecute()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
+    // }}}
+    // }}}
+
+    // {{{ load
+    // {{{ test__load
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__load()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+    // }}}
+
+    // {{{ execute
+    // {{{ test__execute
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__execute()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
     // }}}
 }

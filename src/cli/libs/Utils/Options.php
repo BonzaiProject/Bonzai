@@ -78,9 +78,9 @@ class Bonzai_Utils_Options
 
     /**
      * @access protected
-     * @var    array $non_options
+     * @var    array $option_params
      */
-    protected $non_options = array();
+    protected $option_params = array();
     // }}}
 
     // {{{ init
@@ -103,7 +103,6 @@ class Bonzai_Utils_Options
     // }}}
 
     // {{{ parseOptions
-    // TODO: Cyclomatic Complexity 7
     /**
      * @access protected
      * @param  array $argv
@@ -126,7 +125,7 @@ class Bonzai_Utils_Options
             if ($value[0] !== '-') {
                 $prev_key = preg_replace('/^-{1,2}/', '', $argv[$key - 1]) . ':';
                 if (!isset($this->parameters[$prev_key])) {
-                    $this->non_options[] = $value;
+                    $this->option_params[] = $value;
                 }
             }
         }
@@ -144,14 +143,14 @@ class Bonzai_Utils_Options
     }
     // }}}
 
-    // {{{ getNonOptions
+    // {{{ getOptionParams
     /**
      * @access public
      * @return array
      */
-    public function getNonOptions()
+    public function getOptionParams()
     {
-        return $this->non_options;
+        return $this->option_params;
     }
     // }}}
 
@@ -182,7 +181,7 @@ class Bonzai_Utils_Options
     }
     // }}}
 
-    // {{{ getScriptParameters
+    // {{{ getParameters
     /**
      * @access public
      * @return array

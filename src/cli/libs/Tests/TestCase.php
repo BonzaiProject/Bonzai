@@ -59,4 +59,18 @@ class Bonzai_TestCase extends PHPUnit_Framework_TestCase
         $this->object = new $className;
     }
     // }}}
+
+    // {{{ getMethod
+    /**
+     * @static
+     * @access protected
+     * @return method
+     */
+    public function getMethod($name) {
+        $method = new ReflectionMethod(get_class($this->object), $name);
+        $method->setAccessible(true);
+
+        return $method;
+    }
+    // }}}
 }

@@ -115,7 +115,6 @@ class Bonzai_Registry
     // }}}
 
     // {{{ append
-    // TODO: Cyclomatic Complexity 6
     /**
      * @static
      * @access public

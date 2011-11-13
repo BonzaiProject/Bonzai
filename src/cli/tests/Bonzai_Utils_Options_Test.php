@@ -39,27 +39,101 @@ require_once __DIR__ . '/../libs/Utils/Options.php';
  */
 class Bonzai_Utils_Options_Test extends Bonzai_TestCase
 {
-    // {{{ test__Init
+    // {{{ init
+    // {{{ test__init
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__Init()
+    public function test__init()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
     // }}}
+    // }}}
 
-    // {{{ test__ParseOptions
+    // {{{ parseOptions
+    // {{{ test__parseOptions
     /**
      * @ignore
      * @access public
      * @return void
      */
-    public function test__ParseOptions()
+    public function test__parseOptions()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
+    // }}}
+    // }}}
+
+    // {{{ getOptionParams
+    // {{{ test__getOptionParams
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__getOptionParams()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+    // }}}
+
+    // {{{ getOptions
+    // {{{ test__getOptions
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__getOptions()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+    // }}}
+
+    // {{{ getOption
+    // {{{ test__getOption
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__getOption()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+    // }}}
+
+    // {{{ getParameters
+    // {{{ test__getParameters
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__getParameters()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
+    // }}}
+
+    // {{{ getLabelParameter
+    // {{{ test__getLabelParameter
+    /**
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function test__getLabelParameter()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+    // }}}
     // }}}
 }

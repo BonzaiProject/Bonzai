@@ -59,8 +59,7 @@ class Bonzai_Utils
     }
     // }}}
 
-    // {{{ rscandir
-    // TODO: Cyclomatic Complexity 8
+    // {{{ rScanDir
     /**
      * @static
      * @access public
@@ -69,7 +68,7 @@ class Bonzai_Utils
      * @throws Bonzai_Exception
      * @return array
      */
-    public static function rscandir($base = '', &$data = array())
+    public static function rScanDir($base = '', &$data = array())
     {
         if (!is_readable($base) && !is_executable($base)) {
             $message = gettext('The directory `%s` cannot be opened.');
@@ -87,7 +86,7 @@ class Bonzai_Utils
             if (is_dir($path)) {
                 $data[] = $path . '/';
                 try {
-                    $res  = Bonzai_Utils::rscandir($path, $data);
+                    $res  = Bonzai_Utils::rScanDir($path, $data);
                     $data = $res;
                 } catch (Bonzai_Exception $e) {
                     Bonzai_Utils::message('The directory `%s` was skipped because not readable.', $path);
@@ -150,7 +149,7 @@ class Bonzai_Utils
      * @throws Bonzai_Exception
      * @return void
      */
-    public static function checkFileValidity($filename) // TODO: ADD TEST
+    public static function checkFileValidity($filename)
     {
         if (empty($filename) || !file_exists($filename)) {
             $message = gettext('The file `%s` is invalid.');
@@ -196,7 +195,7 @@ class Bonzai_Utils
      * @access protected
      * @return void
      */
-    public static function message()
+    protected static function message()
     {
         $options    = Bonzai_Registry::get('options');
         $quiet_mode = ($options && $options->getOption('quiet') !== null);

@@ -62,15 +62,13 @@ class Bonzai_Controller
      * @access public
      * @return void
      */
-    public function elaborate()
+    public function elaborate($argv)
     {
         $this->options = new Bonzai_Utils_Options();
 
         try {
-            $this->options->init($_SERVER['argv']);
-        } catch (Bonzai_Exception $e) {
-            $this->options->init(array()); // Fallback behaviour: show the help
-        }
+            $this->options->init($argv);
+        } catch (Bonzai_Exception $e) { } // Fallback behaviour: show the help
 
         Bonzai_Registry::add('options', $this->options);
 
@@ -99,7 +97,7 @@ class Bonzai_Controller
      */
     protected function __autoload($name)
     {
-        if (strpos($name, 'Bonzai_') == 0) {
+        if (strpos($name, 'Bonzai_') == 0 && !class_exists($name)) {
             $filename = $this->getFileNameFromClassName($name);
 
             if (!$this->checkFile($filename)) {
@@ -113,13 +111,12 @@ class Bonzai_Controller
     // }}}
 
     // {{{ getFileNameFromClassName
-    // TODO: Cyclomatic Complexity 5
     /**
-     * @access public
+     * @access protected
      * @param  string $name
      * @return string
      */
-    public function getFileNameFromClassName($name)
+    protected function getFileNameFromClassName($name)
     {
         $name = preg_replace('/^Bonzai_/', '', trim($name));
         if (empty($name)) {
@@ -141,11 +138,11 @@ class Bonzai_Controller
 
     // {{{ checkFile
     /**
-     * @access public
+     * @access protected
      * @param  string $filename
      * @return boolean
      */
-    public function checkFile($filename)
+    protected function checkFile($filename)
     {
         return file_exists(__DIR__ . '/../' . $filename . '.php');
     }

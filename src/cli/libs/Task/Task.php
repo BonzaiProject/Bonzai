@@ -50,44 +50,6 @@ class Bonzai_Task
     protected $parameters = null;
     // }}}
 
-    // {{{ load
-    /**
-     * @access public
-     * @param  Bonzai_Utils_Options $options
-     * @return void
-     */
-    public function load(Bonzai_Utils_Options $options)
-    {
-        $this->parameters = $options;
-
-        $options = $this->parameters->getNonOptions();
-        if (!empty($options) && $this->parameters->getOption('help') === null && $this->parameters->getOption('version') === null) {
-            $this->task       = 'Bonzai_Encoder';
-            $this->parameters = $options;
-        }
-    }
-    // }}}
-
-    // {{{ execute
-    /**
-     * @access public
-     * @throws Bonzai_Exception
-     * @return mixed
-     */
-    public function execute()
-    {
-        $class = $this->task;
-        $class = new $class();
-
-        if (!method_exists($class, 'elaborate')) {
-            $message = gettext('Cannot launch the task `%s`.');
-            throw new Bonzai_Exception(sprintf($message, $this->task));
-        }
-
-        return $class->elaborate($this->parameters);
-    }
-    // }}}
-
     // {{{ loadAndExecute
     /**
      * @access public
@@ -104,6 +66,44 @@ class Bonzai_Task
             $fallback = new Bonzai_Utils_Help();
             return $fallback->elaborate(new Bonzai_Utils_Options());
         }
+    }
+    // }}}
+
+    // {{{ load
+    /**
+     * @access protected
+     * @param  Bonzai_Utils_Options $options
+     * @return void
+     */
+    protected function load(Bonzai_Utils_Options $options)
+    {
+        $this->parameters = $options;
+
+        $options = $this->parameters->getOptionParams();
+        if (!empty($options) && $this->parameters->getOption('help') === null && $this->parameters->getOption('version') === null) {
+            $this->task       = 'Bonzai_Encoder';
+            $this->parameters = $options;
+        }
+    }
+    // }}}
+
+    // {{{ execute
+    /**
+     * @access protected
+     * @throws Bonzai_Exception
+     * @return mixed
+     */
+    protected function execute()
+    {
+        $class = $this->task;
+        $class = new $class();
+
+        if (!method_exists($class, 'elaborate')) {
+            $message = gettext('Cannot launch the task `%s`.');
+            throw new Bonzai_Exception(sprintf($message, $this->task));
+        }
+
+        return $class->elaborate($this->parameters);
     }
     // }}}
 }

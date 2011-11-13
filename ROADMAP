@@ -2,24 +2,34 @@ ROADMAP
 ===============================================================================
 
 Version 0.1-alpha1
-EXPECTED DUE DATE: TDB
+EXPECTED DUE DATE: 20 November 2011
 TASKS:
-  * Write the unit test for `Bonzai_Encoder_Test::testExpandPathsToFiles`
-  * Write the unit test for `Bonzai_Registry_Test::testCheckKeyValidity`
-  * Write the unit test for `Bonzai_Task_Test::testLoad`
-  * Write the unit test for `Bonzai_Utils_Options_Test::testInit`
-  * Write the unit test for `Bonzai_Utils_Options_Test::testParseOptions`
-  * Write the unit test for `Bonzai_Utils_Test::testRenameFile`
+  * Write the unit test for `Bonzai_Controller_Test::handleTask`
+  * Write the unit test for `Bonzai_Encoder_Test::elaborate`
+  * Write the unit test for `Bonzai_Encoder_Test::saveOutput`
+  * Write the unit test for `Bonzai_Encoder_Test::cleanSource`
+  * Write the unit test for `Bonzai_Task_Test::loadAndExecute`
+  * Write the unit test for `Bonzai_Task_Test::load`
+  * Write the unit test for `Bonzai_Task_Test::execute`
+  * Write the unit test for `Bonzai_Utils_Help_Test::elaborate`
+  * Write the unit test for `Bonzai_Utils_Options_Test::init`
+  * Write the unit test for `Bonzai_Utils_Options_Test::parseOptions`
+  * Write the unit test for `Bonzai_Utils_Options_Test::getOptionParams`
+  * Write the unit test for `Bonzai_Utils_Options_Test::getOptions`
+  * Write the unit test for `Bonzai_Utils_Options_Test::getOption`
+  * Write the unit test for `Bonzai_Utils_Options_Test::getParameters`
+  * Write the unit test for `Bonzai_Utils_Options_Test::getLabelParameter`
+  * Write the unit test for `Bonzai_Utils_Test::renameFile`
   * Write the unit test for `Bonzai_Utils_Test::checkFileValidity`
-  * Write the unit test for `Bonzai_Utils_Test::testMessage`
-  * Write the unit test for `Bonzai_Utils_Test::testInfo`
-  * Write the unit test for `Bonzai_Utils_Test::testWarn`
-  * Write the unit test for `Bonzai_Utils_Test::testError`
+  * Write the unit test for `Bonzai_Utils_Test::info`
+  * Write the unit test for `Bonzai_Utils_Test::message`
+  * Write the unit test for `Bonzai_Utils_Test::warn`
+  * Write the unit test for `Bonzai_Utils_Test::error`
 
 -------------------------------------------------------------------------------
 
 Version 0.1-alpha2
-EXPECTED DUE DATE: TDB
+EXPECTED DUE DATE: 26 November 2011
 TASKS:
   * Check _build.xml_
   * Improve _release.sh_ script
@@ -33,7 +43,7 @@ TASKS:
 -------------------------------------------------------------------------------
 
 Version 0.1-alpha3
-EXPECTED DUE DATE: TDB
+EXPECTED DUE DATE: 30 November 2011
 TASKS:
   * Optimize the cyclomatic complexity
   * Optimize the application through profiling (_xhprof_ & _xdebug_)
@@ -41,25 +51,25 @@ TASKS:
 -------------------------------------------------------------------------------
 
 Version 0.1-beta
-EXPECTED DUE DATE: TDB
+EXPECTED DUE DATE: 10 December 2011
 TASKS:
   * Benchmark of bonzaied CMS (_Wordpress_, _Joomla_, _Drupal_)
 
 -------------------------------------------------------------------------------
 
 Version 0.1-RC1
-EXPECTED DUE DATE: TDB
+EXPECTED DUE DATE: 16 December 2011
 TASKS:
   * Documentation
 
 -------------------------------------------------------------------------------
 
 Version 0.1-RC2
-EXPECTED DUE DATE: TDB
+EXPECTED DUE DATE: 27 December 2011
 TASKS:
   * TDB
 
 -------------------------------------------------------------------------------
 
 Version 0.1
-EXPECTED DUE DATE: TDB
+EXPECTED DUE DATE: 1 January 2011
