@@ -56,14 +56,15 @@ Bonzai_Utils::$silenced = true;
 class Bonzai_Utils_Test extends Bonzai_TestCase
 {
     // {{{ renameFile
-    // {{{ test__renameFile
+    // {{{ testRenameFile
     /**
+     * testRenameFile
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__renameFile()
+    public function testRenameFile()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -71,7 +72,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ rScanDir
-    // {{{ test__rScanDir__WithParams_Null_Null__ThrowException
+    // {{{ testRScanDirWithParamsNullNullThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -80,14 +81,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Null_Null__ThrowException()
+    public function testRScanDirWithParamsNullNullThrowException()
     {
         $value = null;
         Bonzai_Utils::rScanDir(null, $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Null_EmptyString__ThrowException
+    // {{{ testRScanDirWithParamsNullEmptyStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -96,14 +97,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Null_EmptyString__ThrowException()
+    public function testRScanDirWithParamsNullEmptyStringThrowException()
     {
         $value = '';
         Bonzai_Utils::rScanDir(null, $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Null_SpacedString__ThrowException
+    // {{{ testRScanDirWithParamsNullSpacedStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -112,14 +113,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Null_SpacedString__ThrowException()
+    public function testRScanDirWithParamsNullSpacedStringThrowException()
     {
         $value = ' ';
         Bonzai_Utils::rScanDir(null, $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Null_EmptyArray__ThrowException
+    // {{{ testRScanDirWithParamsNullEmptyArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -128,14 +129,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Null_EmptyArray__ThrowException()
+    public function testRScanDirWithParamsNullEmptyArrayThrowException()
     {
         $value = array();
         Bonzai_Utils::rScanDir(null, $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Null_Array__ThrowException
+    // {{{ testRScanDirWithParamsNullArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -144,14 +145,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Null_Array__ThrowException()
+    public function testRScanDirWithParamsNullArrayThrowException()
     {
         $value = array('a');
         Bonzai_Utils::rScanDir(null, $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_EmptyString_Null__ThrowException
+    // {{{ testRScanDirWithParamsEmptyStringNullThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -160,14 +161,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_EmptyString_Null__ThrowException()
+    public function testRScanDirWithParamsEmptyStringNullThrowException()
     {
         $value = null;
         Bonzai_Utils::rScanDir('', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_EmptyString_EmptyString__ThrowException
+    // {{{ testRScanDirWithParamsEmptyStringEmptyStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -176,14 +177,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_EmptyString_EmptyString__ThrowException()
+    public function testRScanDirWithParamsEmptyStringEmptyStringThrowException()
     {
         $value = '';
         Bonzai_Utils::rScanDir('', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_EmptyString_SpacedString__ThrowException
+    // {{{ testRScanDirWithParamsEmptyStringSpacedStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -192,14 +193,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_EmptyString_SpacedString__ThrowException()
+    public function testRScanDirWithParamsEmptyStringSpacedStringThrowException()
     {
         $value = ' ';
         Bonzai_Utils::rScanDir('', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_EmptyString_EmptyArray__ThrowException
+    // {{{ testRScanDirWithParamsEmptyStringEmptyArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -208,14 +209,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_EmptyString_EmptyArray__ThrowException()
+    public function testRScanDirWithParamsEmptyStringEmptyArrayThrowException()
     {
         $value = array();
         Bonzai_Utils::rScanDir('', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_EmptyString_Array__ThrowException
+    // {{{ testRScanDirWithParamsEmptyStringArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -224,14 +225,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_EmptyString_Array__ThrowException()
+    public function testRScanDirWithParamsEmptyStringArrayThrowException()
     {
         $value = array('a');
         Bonzai_Utils::rScanDir('', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_SpacedString_Null__ThrowException
+    // {{{ testRScanDirWithParamsSpacedStringNullThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -240,14 +241,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_SpacedString_Null__ThrowException()
+    public function testRScanDirWithParamsSpacedStringNullThrowException()
     {
         $value = null;
         Bonzai_Utils::rScanDir(' ', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_SpacedString_EmptyString__ThrowException
+    // {{{ testRScanDirWithParamsSpacedStringEmptyStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -256,14 +257,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_SpacedString_EmptyString__ThrowException()
+    public function testRScanDirWithParamsSpacedStringEmptyStringThrowException()
     {
         $value = '';
         Bonzai_Utils::rScanDir(' ', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_SpacedString_SpacedString__ThrowException
+    // {{{ testRScanDirWithParamsSpacedStringSpacedStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -272,14 +273,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_SpacedString_SpacedString__ThrowException()
+    public function testRScanDirWithParamsSpacedStringSpacedStringThrowException()
     {
         $value = ' ';
         Bonzai_Utils::rScanDir(' ', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_SpacedString_EmptyArray__ThrowException
+    // {{{ testRScanDirWithParamsSpacedStringEmptyArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -288,14 +289,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_SpacedString_EmptyArray__ThrowException()
+    public function testRScanDirWithParamsSpacedStringEmptyArrayThrowException()
     {
         $value = array();
         Bonzai_Utils::rScanDir(' ', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_SpacedString_Array__ThrowException
+    // {{{ testRScanDirWithParamsSpacedStringArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -304,14 +305,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_SpacedString_Array__ThrowException()
+    public function testRScanDirWithParamsSpacedStringArrayThrowException()
     {
         $value = array('a');
         Bonzai_Utils::rScanDir(' ', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Fake_Null__ThrowException
+    // {{{ testRScanDirWithParamsFakeNullThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -320,14 +321,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Fake_Null__ThrowException()
+    public function testRScanDirWithParamsFakeNullThrowException()
     {
         $value = null;
         Bonzai_Utils::rScanDir('a', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Fake_EmptyString__ThrowException
+    // {{{ testRScanDirWithParamsFakeEmptyStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -336,14 +337,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Fake_EmptyString__ThrowException()
+    public function testRScanDirWithParamsFakeEmptyStringThrowException()
     {
         $value = '';
         Bonzai_Utils::rScanDir('a', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Fake_SpacedString__ThrowException
+    // {{{ testRScanDirWithParamsFakeSpacedStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -352,14 +353,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Fake_SpacedString__ThrowException()
+    public function testRScanDirWithParamsFakeSpacedStringThrowException()
     {
         $value = ' ';
         Bonzai_Utils::rScanDir('a', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Fake_EmptyArray__ThrowException
+    // {{{ testRScanDirWithParamsFakeEmptyArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -368,14 +369,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Fake_EmptyArray__ThrowException()
+    public function testRScanDirWithParamsFakeEmptyArrayThrowException()
     {
         $value = array();
         Bonzai_Utils::rScanDir('a', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Fake_Array__ThrowException
+    // {{{ testRScanDirWithParamsFakeArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -384,14 +385,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__rScanDir__WithParams_Fake_Array__ThrowException()
+    public function testRScanDirWithParamsFakeArrayThrowException()
     {
         $value = array('a');
         Bonzai_Utils::rScanDir('a', $value);
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotReadable_Null__ThrowException
+    // {{{ testRScanDirWithParamsNotReadableNullThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -399,7 +400,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotReadable_Null__ThrowException()
+    public function testRScanDirWithParamsNotReadableNullThrowException()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0222); // -w--w--w-
@@ -417,7 +418,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotReadable_EmptyString__ThrowException
+    // {{{ testRScanDirWithParamsNotReadableEmptyStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -425,7 +426,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotReadable_EmptyString__ThrowException()
+    public function testRScanDirWithParamsNotReadableEmptyStringThrowException()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0222); // -w--w--w-
@@ -443,7 +444,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotReadable_SpacedString__ThrowException
+    // {{{ testRScanDirWithParamsNotReadableSpacedStringThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -451,7 +452,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotReadable_SpacedString__ThrowException()
+    public function testRScanDirWithParamsNotReadableSpacedStringThrowException()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0222); // -w--w--w-
@@ -469,7 +470,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotReadable_EmptyArray__ThrowException
+    // {{{ testRScanDirWithParamsNotReadableEmptyArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -477,7 +478,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotReadable_EmptyArray__ThrowException()
+    public function testRScanDirWithParamsNotReadableEmptyArrayThrowException()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0222); // -w--w--w-
@@ -495,7 +496,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotReadable_Array__ThrowException
+    // {{{ testRScanDirWithParamsNotReadableArrayThrowException
     /**
      * Return the all directories & files into a directory
      *
@@ -503,7 +504,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotReadable_Array__ThrowException()
+    public function testRScanDirWithParamsNotReadableArrayThrowException()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0222); // -w--w--w-
@@ -521,7 +522,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotWritable_Null__IsEmpty
+    // {{{ testRScanDirWithParamsNotWritableNullIsEmpty
     /**
      * Return the all directories & files into a directory
      *
@@ -529,7 +530,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotWritable_Null__IsEmpty()
+    public function testRScanDirWithParamsNotWritableNullIsEmpty()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0555); // r-xr-xr-x
@@ -542,7 +543,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotWritable_EmptyString__IsEmpty
+    // {{{ testRScanDirWithParamsNotWritableEmptyStringIsEmpty
     /**
      * Return the all directories & files into a directory
      *
@@ -550,7 +551,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotWritable_EmptyString__IsEmpty()
+    public function testRScanDirWithParamsNotWritableEmptyStringIsEmpty()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0555); // r-xr-xr-x
@@ -563,7 +564,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotWritable_SpacedString__IsEmpty
+    // {{{ testRScanDirWithParamsNotWritableSpacedStringIsEmpty
     /**
      * Return the all directories & files into a directory
      *
@@ -571,7 +572,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotWritable_SpacedString__IsEmpty()
+    public function testRScanDirWithParamsNotWritableSpacedStringIsEmpty()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0555); // r-xr-xr-x
@@ -584,7 +585,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotWritable_EmptyArray__IsEmpty
+    // {{{ testRScanDirWithParamsNotWritableEmptyArrayIsEmpty
     /**
      * Return the all directories & files into a directory
      *
@@ -592,7 +593,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotWritable_EmptyArray__IsEmpty()
+    public function testRScanDirWithParamsNotWritableEmptyArrayIsEmpty()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0555); // r-xr-xr-x
@@ -605,7 +606,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_NotWritable_Array__AreEquals
+    // {{{ testRScanDirWithParamsNotWritableArrayAreEquals
     /**
      * Return the all directories & files into a directory
      *
@@ -613,7 +614,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_NotWritable_Array__AreEquals()
+    public function testRScanDirWithParamsNotWritableArrayAreEquals()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0555); // r-xr-xr-x
@@ -626,7 +627,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Writable_Null__IsEmpty
+    // {{{ testRScanDirWithParamsWritableNullIsEmpty
     /**
      * Return the all directories & files into a directory
      *
@@ -634,7 +635,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_Writable_Null__IsEmpty()
+    public function testRScanDirWithParamsWritableNullIsEmpty()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0777); // rwxrwxrwx
@@ -645,7 +646,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Writable_EmptyString__IsEmpty
+    // {{{ testRScanDirWithParamsWritableEmptyStringIsEmpty
     /**
      * Return the all directories & files into a directory
      *
@@ -653,7 +654,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_Writable_EmptyString__IsEmpty()
+    public function testRScanDirWithParamsWritableEmptyStringIsEmpty()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0777); // rwxrwxrwx
@@ -664,7 +665,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Writable_SpacedString__IsEmpty
+    // {{{ testRScanDirWithParamsWritableSpacedStringIsEmpty
     /**
      * Return the all directories & files into a directory
      *
@@ -672,7 +673,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_Writable_SpacedString__IsEmpty()
+    public function testRScanDirWithParamsWritableSpacedStringIsEmpty()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0777); // rwxrwxrwx
@@ -683,7 +684,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Writable_EmptyArray__IsEmpty
+    // {{{ testRScanDirWithParamsWritableEmptyArrayIsEmpty
     /**
      * Return the all directories & files into a directory
      *
@@ -691,7 +692,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_Writable_EmptyArray__IsEmpty()
+    public function testRScanDirWithParamsWritableEmptyArrayIsEmpty()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0777); // rwxrwxrwx
@@ -702,7 +703,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir__WithParams_Writable_Array__AreEquals
+    // {{{ testRScanDirWithParamsWritableArrayAreEquals
     /**
      * Return the all directories & files into a directory
      *
@@ -710,7 +711,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir__WithParams_Writable_Array__AreEquals()
+    public function testRScanDirWithParamsWritableArrayAreEquals()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0777); // rwxrwxrwx
@@ -721,7 +722,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir_ComplexCompare__AreEquals
+    // {{{ testRScanDirComplexCompareAreEquals
     /**
      * Return the all directories & files into a directory
      *
@@ -729,7 +730,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir_ComplexCompare__AreEquals()
+    public function testRScanDirComplexCompareAreEquals()
     {
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0777); // rwxrwxrwx
@@ -737,7 +738,8 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
         $dirname2 = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir("$dirname/$dirname2", 0222); // -w--w--w-
 
-        $this->assertEquals(array("$dirname/$dirname2/"), Bonzai_Utils::rScanDir($dirname));
+        $value = Bonzai_Utils::rScanDir($dirname);
+        $this->assertEquals(array("$dirname/$dirname2/"), $value);
 
         chmod("$dirname/$dirname2", 0777);
         rmdir("$dirname/$dirname2");
@@ -745,7 +747,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__rScanDir_CurrentDirectories__AreEquals
+    // {{{ testRScanDirCurrentDirectoriesAreEquals
     /**
      * Return the all directories & files into a directory
      *
@@ -753,13 +755,14 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__rScanDir_CurrentDirectories__AreEquals()
+    public function testRScanDirCurrentDirectoriesAreEquals()
     {
         $dirname = realpath(__DIR__ . '/../');
 
         $files = Bonzai_Utils::rScanDir($dirname);
         sort($files);
-        $files = array_merge(preg_grep('#/tests/test_.+$|\.swp$#', $files, PREG_GREP_INVERT));
+        $files = preg_grep('#/tests/test_.+$|\.swp$#', $files, PREG_GREP_INVERT);
+        $files = array_merge($files);
         foreach($files as $i => $file) {
             $files[$i] = str_replace(realpath("$dirname/../../"), "", $file);
         }
@@ -793,7 +796,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
             '/src/cli/tests/Bonzai_Utils_Help_Test.php',
             '/src/cli/tests/Bonzai_Utils_Options_Test.php',
             '/src/cli/tests/Bonzai_Utils_Test.php',
-            '/src/cli/tests/cliSuite.php',
+            '/src/cli/tests/CliSuite.php',
         );
 
         $this->assertEquals($realfiles, $files);
@@ -802,7 +805,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getFileContent
-    // {{{ test__getFileContent_ParamIsNull_ReturnsNull
+    // {{{ testGetFileContentParamIsNullReturnsNull
     /**
      * Get the file's content
      *
@@ -811,13 +814,13 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__getFileContent_ParamIsNull_ReturnsNull()
+    public function testGetFileContentParamIsNullReturnsNull()
     {
         $this->assertNull(Bonzai_Utils::getFileContent(null));
     }
     // }}}
 
-    // {{{ test__getFileContent_ParamIsEmptyString_ReturnsNull
+    // {{{ testGetFileContentParamIsEmptyStringReturnsNull
     /**
      * Get the file's content
      *
@@ -826,13 +829,13 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__getFileContent_ParamIsEmptyString_ReturnsNull()
+    public function testGetFileContentParamIsEmptyStringReturnsNull()
     {
         $this->assertNull(Bonzai_Utils::getFileContent(''));
     }
     // }}}
 
-    // {{{ test__getFileContent_ParamIsSpacedString_ReturnsNull
+    // {{{ testGetFileContentParamIsSpacedStringReturnsNull
     /**
      * Get the file's content
      *
@@ -841,13 +844,13 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__getFileContent_ParamIsSpacedString_ReturnsNull()
+    public function testGetFileContentParamIsSpacedStringReturnsNull()
     {
         $this->assertNull(Bonzai_Utils::getFileContent(' '));
     }
     // }}}
 
-    // {{{ test__getFileContent__WithParams_Fake__ThrowException
+    // {{{ testGetFileContentWithParamsFakeThrowException
     /**
      * Get the file's content
      *
@@ -856,13 +859,13 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__getFileContent__WithParams_Fake__ThrowException()
+    public function testGetFileContentWithParamsFakeThrowException()
     {
         $this->assertEmpty(Bonzai_Utils::getFileContent('a'));
     }
     // }}}
 
-    // {{{ test__getFileContent__WithParams_NotReadable__ThrowException
+    // {{{ testGetFileContentWithParamsNotReadableThrowException
     /**
      * Get the file's content
      *
@@ -870,7 +873,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileContent__WithParams_NotReadable__ThrowException()
+    public function testGetFileContentWithParamsNotReadableThrowException()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -888,7 +891,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__getFileContent__WithParams_NotWritable__IsEmpty
+    // {{{ testGetFileContentWithParamsNotWritableIsEmpty
     /**
      * Get the file's content
      *
@@ -896,7 +899,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileContent__WithParams_NotWritable__IsEmpty()
+    public function testGetFileContentWithParamsNotWritableIsEmpty()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -909,7 +912,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ test__getFileContent__WithParam_Temp
+    // {{{ testGetFileContentWithParamTemp
     /**
      * Get the file's content
      *
@@ -917,7 +920,7 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileContent__WithParam_Temp()
+    public function testGetFileContentWithParamTemp()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
@@ -929,537 +932,18 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
     // }}}
 
-    // {{{ putFileContent
-    // {{{ test__putFileContent__WithParams_Null_Null__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_Null_Null__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent(null, null));
-    }
-    // }}}
 
-    // {{{ test__putFileContent__WithParams_Null_EmptyString__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_Null_EmptyString__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent(null, ''));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Null_SpacedString__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_Null_SpacedString__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent(null, ' '));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Null_Fake__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_Null_Fake__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent(null, 'a'));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_EmptyString_Null__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_EmptyString_Null__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent('', null));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_EmptyString_EmptyString__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_EmptyString_EmptyString__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent('', ''));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_EmptyString_SpacedString__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_EmptyString_SpacedString__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent('', ' '));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_EmptyString_Fake__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_EmptyString_Fake__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent('', 'a'));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_SpacedString_Null__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_SpacedString_Null__ThrowException()
-    {
-        $this->assertEmpty(Bonzai_Utils::putFileContent(' ', null));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_SpacedString_EmptyString__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_SpacedString_EmptyString__AreEquals()
-    {
-        $this->assertEquals(0, Bonzai_Utils::putFileContent(' ', ''));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_SpacedString_SpacedString__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_SpacedString_SpacedString__AreEquals()
-    {
-        $this->assertEquals(0, Bonzai_Utils::putFileContent(' ', ' '));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_SpacedString_Fake__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function test__putFileContent__WithParams_SpacedString_Fake__AreEquals()
-    {
-        $this->assertEquals(0, Bonzai_Utils::putFileContent(' ', 'a'));
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Fake_Null__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_Fake_Null__AreEquals()
-    {
-        $this->assertEquals(0, Bonzai_Utils::putFileContent('a', null));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Fake_EmptyString__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_Fake_EmptyString__AreEquals()
-    {
-        $this->assertEquals(0, Bonzai_Utils::putFileContent('a', ''));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Fake_SpacedString__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_Fake_SpacedString__AreEquals()
-    {
-        $this->assertEquals(1, Bonzai_Utils::putFileContent('a', ' '));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Fake_Fake__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_Fake_Fake__AreEquals()
-    {
-        $this->assertEquals(1, Bonzai_Utils::putFileContent('a', 'a'));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Temp_Null__IsEmpty
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_Temp_Null__IsEmpty()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-
-        Bonzai_Utils::putFileContent($filename, null);
-        $this->assertEmpty(file_get_contents($filename));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Temp_EmptyString__IsEmpty
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_Temp_EmptyString__IsEmpty()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-
-        Bonzai_Utils::putFileContent($filename, '');
-        $this->assertEmpty(file_get_contents($filename));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Temp_SpacedString__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_Temp_SpacedString__AreEquals()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-
-        Bonzai_Utils::putFileContent($filename, ' ');
-        $this->assertEquals(' ', file_get_contents($filename));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_Temp_String__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_Temp_String__AreEquals()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-
-        Bonzai_Utils::putFileContent($filename, 'a');
-        $this->assertEquals('a', file_get_contents($filename));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_NotReadable_Null__IsEmpty
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_NotReadable_Null__IsEmpty()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0333); // -wx-wx-wx
-
-        Bonzai_Utils::putFileContent($filename, null);
-
-        chmod($filename, 0777); // rwxrwxrwx
-        $this->assertEmpty(file_get_contents($filename));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_NotReadable_EmptyString__IsEmpty
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_NotReadable_EmptyString__IsEmpty()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0333); // -wx-wx-wx
-
-        Bonzai_Utils::putFileContent($filename, '');
-
-        chmod($filename, 0777); // rwxrwxrwx
-        $this->assertEmpty(file_get_contents($filename));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_NotReadable_SpacedString__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_NotReadable_SpacedString__AreEquals()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0333); // -wx-wx-wx
-
-        Bonzai_Utils::putFileContent($filename, ' ');
-
-        chmod($filename, 0777); // rwxrwxrwx
-        $this->assertEquals(' ', file_get_contents($filename));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_NotReadable_String__AreEquals
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_NotReadable_String__AreEquals()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0333); // -wx-wx-wx
-
-        Bonzai_Utils::putFileContent($filename, 'a');
-
-        chmod($filename, 0777); // rwxrwxrwx
-        $this->assertEquals('a', file_get_contents($filename));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_NotWritable_Null__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_NotWritable_Null__ThrowException()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0555); // r-xr-xr-x
-
-        try {
-            Bonzai_Utils::putFileContent($filename, null);
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
-
-        chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_NotWritable_EmptyString__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_NotWritable_EmptyString__ThrowException()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0555); // r-xr-xr-x
-
-        try {
-            Bonzai_Utils::putFileContent($filename, '');
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
-
-        chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_NotWritable_SpacedString__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_NotWritable_SpacedString__ThrowException()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0555); // r-xr-xr-x
-
-        try {
-            Bonzai_Utils::putFileContent($filename, ' ');
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
-
-        chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ test__putFileContent__WithParams_NotWritable_String__ThrowException
-    /**
-     * Return the status of saving
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function test__putFileContent__WithParams_NotWritable_String__ThrowException()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0555); // r-xr-xr-x
-
-        try {
-            Bonzai_Utils::putFileContent($filename, 'a');
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
-
-        chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
-    }
-    // }}}
-    // }}}
 
     // {{{ checkFileValidity
     // {{{ test___CheckFileValidity
     /**
+     * test___CheckFileValidity
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__checkFileValidity()
+    public function testCheckFileValidity()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -1467,14 +951,15 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ info
-    // {{{ test__info__JustCoverage
+    // {{{ testInfoJustCoverage
     /**
+     * testInfoJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__info__JustCoverage()
+    public function testInfoJustCoverage()
     {
         $this->object->info();
     }
@@ -1482,14 +967,15 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ message
-    // {{{ test__message
+    // {{{ testMessage
     /**
+     * testMessage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__message()
+    public function testMessage()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -1497,14 +983,15 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ warn
-    // {{{ test__warn__JustCoverage
+    // {{{ testWarnJustCoverage
     /**
+     * testWarnJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__warn__JustCoverage()
+    public function testWarnJustCoverage()
     {
         $this->object->warn();
     }
@@ -1512,14 +999,15 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ error
-    // {{{ test__error__JustCoverage
+    // {{{ testErrorJustCoverage
     /**
+     * testErrorJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__error__JustCoverage()
+    public function testErrorJustCoverage()
     {
         $this->object->error();
     }

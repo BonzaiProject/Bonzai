@@ -53,14 +53,15 @@ require_once __DIR__ . '/../libs/Task/Task.php';
 class Bonzai_Task_Test extends Bonzai_TestCase
 {
     // {{{ loadAndExecute
-    // {{{ test__loadAndExecute__JustCoverage
+    // {{{ testLoadAndExecuteJustCoverage
     /**
+     * testLoadAndExecuteJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__loadAndExecute__JustCoverage()
+    public function testLoadAndExecuteJustCoverage()
     {
         $this->object->loadAndExecute();
     }
@@ -68,31 +69,33 @@ class Bonzai_Task_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ load
-    // {{{ test__load__JustCoverage
+    // {{{ testLoadJustCoverage
     /**
+     * testLoadJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__load__JustCoverage()
+    public function testLoadJustCoverage()
     {
-        $this->getMethod('load')->invoke($this->object);
+        $this->callMethod('load');
     }
     // }}}
     // }}}
 
     // {{{ execute
-    // {{{ test__execute
+    // {{{ testExecute
     /**
+     * testExecute
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__execute()
+    public function testExecute()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->callMethod('execute');
     }
     // }}}
     // }}}

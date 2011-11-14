@@ -53,7 +53,7 @@ require_once __DIR__ . '/../libs/Controller/Controller.php';
 class Bonzai_Controller_Test extends Bonzai_TestCase
 {
     // {{{ elaborate
-    // {{{ test__elaborate__JustCoverage
+    // {{{ testElaborateJustCoverage
     /**
      * Check if a file exists in a dir
      *
@@ -61,7 +61,7 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__elaborate__JustCoverage()
+    public function testElaborateJustCoverage()
     {
         $this->object->elaborate(null);
     }
@@ -69,65 +69,69 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ handleTask
-    // {{{ test__handleTask__JustCoverage
+    // {{{ testHandleTaskJustCoverage
     /**
+     * testHandleTaskJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__handleTask__JustCoverage()
+    public function testHandleTaskJustCoverage()
     {
-        $this->getMethod('handleTask')->invoke($this->object);
+        $this->callMethod('handleTask');
     }
     // }}}
     // }}}
 
     // {{{ autoload
-    // {{{ test__autoload__WithParam_InvalidClass__ThrowException
+    // {{{ testAutoloadWithParamInvalidClassThrowException
     /**
+     * testAutoloadWithParamInvalidClassThrowException
      *
      * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__autoload__WithParam_InvalidClass__ThrowException()
+    public function testAutoloadWithParamInvalidClassThrowException()
     {
-        $this->getMethod('autoload')->invokeArgs($this->object, array('Bonzai'));
+        $this->callMethod('autoload', array('Bonzai'));
     }
     // }}}
 
-    // {{{ test__autoload__WithParam_Fake__ThrowException
+    // {{{ testAutoloadWithParamFakeThrowException
     /**
+     * testAutoloadWithParamFakeThrowException
      *
      * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
      */
-    public function test__autoload__WithParam_Fake__ThrowException()
+    public function testAutoloadWithParamFakeThrowException()
     {
-        $this->getMethod('autoload')->invokeArgs($this->object, array('Bonzai_Fake'));
+        $this->callMethod('autoload', array('Bonzai_Fake'));
     }
     // }}}
 
-    // {{{ test__autoload__WithParam_LoadedClass__ReturnNothing
+    // {{{ testAutoloadWithParamLoadedClassReturnNothing
     /**
+     * testAutoloadWithParamLoadedClassReturnNothing
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__autoload__WithParam_LoadedClass__ReturnNothing()
+    public function testAutoloadWithParamLoadedClassReturnNothing()
     {
-        $this->getMethod('autoload')->invokeArgs($this->object, array('Bonzai_Controller'));
+        $this->callMethod('autoload', array('Bonzai_Controller'));
     }
     // }}}
     // }}}
 
     // {{{ getFileNameFromClassName
-    // {{{ test__getFileNameFromClassName__WithParam_EmptyString__ReturnsNull
+    // {{{ testGetFileNameFromClassNameWithParamEmptyStringReturnsNull
     /**
      * Retrieve the class filename
      *
@@ -135,13 +139,14 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_EmptyString__ReturnsNull()
+    public function testGetFileNameFromClassNameWithParamEmptyStringReturnsNull()
     {
-        $this->assertNull($this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array('')));
+        $value = $this->callMethod('getFileNameFromClassName', array(''));
+        $this->assertNull($value);
     }
     // }}}
 
-    // {{{ test__getFileNameFromClassName__WithParam_Null__ReturnsNull
+    // {{{ testGetFileNameFromClassNameWithParamNullReturnsNull
     /**
      * Retrieve the class filename
      *
@@ -149,13 +154,14 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_Null__ReturnsNull()
+    public function testGetFileNameFromClassNameWithParamNullReturnsNull()
     {
-        $this->assertNull($this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array(null)));
+        $value = $this->callMethod('getFileNameFromClassName',array(null));
+        $this->assertNull($value);
     }
     // }}}
 
-    // {{{ test__getFileNameFromClassName__WithParam_SpacedString__ReturnsNull
+    // {{{ testGetFileNameFromClassNameWithParamSpacedStringReturnsNull
     /**
      * Retrieve the class filename
      *
@@ -163,13 +169,14 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_SpacedString__ReturnsNull()
+    public function testGetFileNameFromClassNameWithParamSpacedStringReturnsNull()
     {
-        $this->assertNull($this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array(' ')));
+        $value = $this->callMethod('getFileNameFromClassName', array(' '));
+        $this->assertNull($value);
     }
     // }}}
 
-    // {{{ test__getFileNameFromClassName__WithParam_Fake__ReturnsNull
+    // {{{ testGetFileNameFromClassNameWithParamFakeReturnsNull
     /**
      * Retrieve the class filename
      *
@@ -177,13 +184,14 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_Fake__ReturnsNull()
+    public function testGetFileNameFromClassNameWithParamFakeReturnsNull()
     {
-        $this->assertNull($this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array('aaa')));
+        $value = $this->callMethod('getFileNameFromClassName', array('aaa'));
+        $this->assertNull($value);
     }
     // }}}
 
-    // {{{ test__getFileNameFromClassName__WithParam_BadFormatted__ReturnsNull
+    // {{{ testGetFileNameFromClassNameWithParamBadFormattedReturnsNull
     /**
      * Retrieve the class filename
      *
@@ -191,13 +199,14 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_BadFormatted__ReturnsNull()
+    public function testGetFileNameFromClassNameWithParamBadFormattedReturnsNull()
     {
-        $this->assertNull($this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array('Bonzai_')));
+        $value = $this->callMethod('getFileNameFromClassName', array('Bonzai_'));
+        $this->assertNull($value);
     }
     // }}}
 
-    // {{{ test__getFileNameFromClassName__WithParam_NotExistent__ReturnsNull
+    // {{{ testGetFileNameFromClassNameWithParamNotExistentReturnsNull
     /**
      * Retrieve the class filename
      *
@@ -205,13 +214,14 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_NotExistent__ReturnsNull()
+    public function testGetFileNameFromClassNameWithParamNotExistentReturnsNull()
     {
-        $this->assertNull($this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array('Bonzai_aaa')));
+        $value = $this->callMethod('getFileNameFromClassName', array('Bonzai_aaa'));
+        $this->assertNull($value);
     }
     // }}}
 
-    // {{{ test__getFileNameFromClassName__WithParam_Real_AreEquals
+    // {{{ testGetFileNameFromClassNameWithParamRealAreEquals
     /**
      * Retrieve the class filename
      *
@@ -219,13 +229,15 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_Real_AreEquals()
+    public function testGetFileNameFromClassNameWithParamRealAreEquals()
     {
-        $this->assertEquals('Controller/Controller', $this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array('Bonzai_Controller')));
+        $params = array('Bonzai_Controller');
+        $value = $this->callMethod('getFileNameFromClassName', $params);
+        $this->assertEquals('Controller/Controller', $value);
     }
     // }}}
 
-    // {{{ test__getFileNameFromClassName__WithParam_Real_AreEquals_2
+    // {{{ testGetFileNameFromClassNameWithParamRealAreEquals2
     /**
      * Retrieve the class filename
      *
@@ -233,13 +245,15 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_Real_AreEquals_2()
+    public function testGetFileNameFromClassNameWithParamRealAreEquals2()
     {
-        $this->assertEquals('Utils/Utils', $this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array('Bonzai_Utils')));
+        $params = array('Bonzai_Utils');
+        $value = $this->callMethod('getFileNameFromClassName', $params);
+        $this->assertEquals('Utils/Utils', $value);
     }
     // }}}
 
-    // {{{ test__getFileNameFromClassName__WithParam_Real_AreEquals_3
+    // {{{ testGetFileNameFromClassNameWithParamRealAreEquals3
     /**
      * Retrieve the class filename
      *
@@ -247,15 +261,17 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__getFileNameFromClassName__WithParam_Real_AreEquals_3()
+    public function testGetFileNameFromClassNameWithParamRealAreEquals3()
     {
-        $this->assertEquals('Utils/Help', $this->getMethod('getFileNameFromClassName')->invokeArgs($this->object, array('Bonzai_Utils_Help')));
+        $params = array('Bonzai_Utils_Help');
+        $value = $this->callMethod('getFileNameFromClassName', $params);
+        $this->assertEquals('Utils/Help', $value);
     }
     // }}}
     // }}}
 
     // {{{ checkFile
-    // {{{ test__checkFile__WithParam_EmptyString__ReturnsFalse
+    // {{{ testCheckFileWithParamEmptyStringReturnsFalse
     /**
      * Check if a file exists in a dir
      *
@@ -263,13 +279,13 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__checkFile__WithParam_EmptyString__ReturnsFalse()
+    public function testCheckFileWithParamEmptyStringReturnsFalse()
     {
-        $this->assertFalse($this->getMethod('checkFile')->invokeArgs($this->object, array('')));
+        $this->assertFalse($this->callMethod('checkFile', array('')));
     }
     // }}}
 
-    // {{{ test__checkFile__WithParam_Null__ReturnsFalse
+    // {{{ testCheckFileWithParamNullReturnsFalse
     /**
      * Check if a file exists in a dir
      *
@@ -277,13 +293,13 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__checkFile__WithParam_Null__ReturnsFalse()
+    public function testCheckFileWithParamNullReturnsFalse()
     {
-        $this->assertFalse($this->getMethod('checkFile')->invokeArgs($this->object, array(null)));
+        $this->assertFalse($this->callMethod('checkFile', array(null)));
     }
     // }}}
 
-    // {{{ test__checkFile__WithParam_SpacedString__ReturnsFalse
+    // {{{ testCheckFileWithParamSpacedStringReturnsFalse
     /**
      * Check if a file exists in a dir
      *
@@ -291,13 +307,13 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__checkFile__WithParam_SpacedString__ReturnsFalse()
+    public function testCheckFileWithParamSpacedStringReturnsFalse()
     {
-        $this->assertFalse($this->getMethod('checkFile')->invokeArgs($this->object, array(' ')));
+        $this->assertFalse($this->callMethod('checkFile', array(' ')));
     }
     // }}}
 
-    // {{{ test__checkFile__WithParam_Wrong__ReturnsFalse
+    // {{{ testCheckFileWithParamWrongReturnsFalse
     /**
      * Check if a file exists in a dir
      *
@@ -305,13 +321,13 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__checkFile__WithParam_Wrong__ReturnsFalse()
+    public function testCheckFileWithParamWrongReturnsFalse()
     {
-        $this->assertFalse($this->getMethod('checkFile')->invokeArgs($this->object, array('Controller')));
+        $this->assertFalse($this->callMethod('checkFile', array('Controller')));
     }
     // }}}
 
-    // {{{ test__checkFile__WithParam_Right__ReturnsTrue
+    // {{{ testCheckFileWithParamRightReturnsTrue
     /**
      * Check if a file exists in a dir
      *
@@ -319,9 +335,10 @@ class Bonzai_Controller_Test extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function test__checkFile__WithParam_Right__ReturnsTrue()
+    public function testCheckFileWithParamRightReturnsTrue()
     {
-        $this->assertTrue($this->getMethod('checkFile')->invokeArgs($this->object, array('Controller/Controller')));
+        $value = $this->callMethod('checkFile', array('Controller/Controller'));
+        $this->assertTrue($value);
     }
     // }}}
     // }}}

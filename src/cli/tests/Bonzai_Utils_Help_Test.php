@@ -53,14 +53,15 @@ require_once __DIR__ . '/../libs/Utils/Help.php';
 class Bonzai_Utils_Help_Test extends Bonzai_TestCase
 {
     // {{{ elaborate
-    // {{{ test__elaborate__JustCoverage
+    // {{{ testElaborateJustCoverage
     /**
+     * testElaborateJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__elaborate__JustCoverage()
+    public function testElaborateJustCoverage()
     {
         $this->object->elaborate(new Bonzai_Utils_Options);
     }

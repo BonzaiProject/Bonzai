@@ -53,29 +53,31 @@ require_once __DIR__ . '/../libs/Utils/Options.php';
 class Bonzai_Utils_Options_Test extends Bonzai_TestCase
 {
     // {{{ init
-    // {{{ test__init
+    // {{{ testInitJustCoverage
     /**
+     * testInitJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__init()
+    public function testInitJustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->init(array('help'));
     }
     // }}}
     // }}}
 
     // {{{ parseOptions
-    // {{{ test__parseOptions
+    // {{{ testParseOptions
     /**
+     * testParseOptions
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__parseOptions()
+    public function testParseOptions()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -83,14 +85,15 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getOptionParams
-    // {{{ test__getOptionParams__JustCoverage
+    // {{{ testGetOptionParamsJustCoverage
     /**
+     * testGetOptionParamsJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getOptionParams__JustCoverage()
+    public function testGetOptionParamsJustCoverage()
     {
         $this->object->getOptionParams();
     }
@@ -98,14 +101,15 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getOptions
-    // {{{ test__getOptions__JustCoverage
+    // {{{ testGetOptionsJustCoverage
     /**
+     * testGetOptionsJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getOptions__JustCoverage()
+    public function testGetOptionsJustCoverage()
     {
         $this->object->getOptions();
     }
@@ -113,14 +117,15 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getOption
-    // {{{ test__getOption__JustCoverage
+    // {{{ testGetOptionJustCoverage
     /**
+     * testGetOptionJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getOption__JustCoverage()
+    public function testGetOptionJustCoverage()
     {
         $this->object->getOption(null);
     }
@@ -128,14 +133,15 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getParameters
-    // {{{ test__getParameters__JustCoverage
+    // {{{ testGetParametersJustCoverage
     /**
+     * testGetParametersJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getParameters__JustCoverage()
+    public function testGetParametersJustCoverage()
     {
         $this->object->getParameters();
     }
@@ -143,27 +149,30 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ getLabelParameter
-    // {{{ test__getLabelParameter__WithParam_Existent__AreEquals
+    // {{{ testGetLabelParameterWithParamExistentAreEquals
     /**
+     * testGetLabelParameterWithParam_ExistentAreEquals
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getLabelParameter__WithParam_Existent__AreEquals()
+    public function testGetLabelParameterWithParamExistentAreEquals()
     {
-        $this->assertEquals('Show the help', $this->object->getLabelParameter('help'));
+        $value = $this->object->getLabelParameter('help');
+        $this->assertEquals('Show the help', $value);
     }
     // }}}
 
-    // {{{ test__getLabelParameter__WithParam_NotExistent__IsNull
+    // {{{ testGetLabelParameterWithParamNotExistentIsNull
     /**
+     * testGetLabelParameterWithParam_NotExistentIsNull
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__getLabelParameter__WithParam_NotExistent__IsNull()
+    public function testGetLabelParameterWithParamNotExistentIsNull()
     {
         $this->assertNull($this->object->getLabelParameter('a'));
     }

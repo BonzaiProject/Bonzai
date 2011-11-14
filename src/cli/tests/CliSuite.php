@@ -38,7 +38,7 @@
 require_once 'PHPUnit/Framework/TestSuite.php';
 
 /**
- * cliSuite
+ * CliSuite
  *
  * @category  Optimization_&_Security
  * @package   Bonzai
@@ -49,10 +49,12 @@ require_once 'PHPUnit/Framework/TestSuite.php';
  * @version   Release: 0.1
  * @link      http://www.bonzai-project.org
  **/
-class cliSuite extends PHPUnit_Framework_TestSuite
+class CliSuite extends PHPUnit_Framework_TestSuite
 {
     // {{{ __construct
     /**
+     * __construct
+     *
      * @access public
      * @return void
      */
@@ -61,8 +63,8 @@ class cliSuite extends PHPUnit_Framework_TestSuite
         $this->setName('cliSuite');
 
         $files = preg_grep('/^Bonzai_.+_Test.php$/', scandir(__DIR__));
-        foreach($files as $file) {
-            require_once __DIR__ . '/' . $file;
+        foreach ($files as $file) {
+            include_once __DIR__ . '/' . $file;
             $this->addTestSuite(substr($file, 0, -4));
         }
     }
@@ -70,6 +72,8 @@ class cliSuite extends PHPUnit_Framework_TestSuite
 
     // {{{ suite
     /**
+     * suite
+     *
      * @static
      * @access public
      * @return cliSuite

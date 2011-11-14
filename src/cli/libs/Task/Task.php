@@ -126,7 +126,12 @@ class Bonzai_Task
             throw new Bonzai_Exception(sprintf($message, $this->task));
         }
 
-        return $class->elaborate($this->parameters);
+        $parameters = $this->parameters;
+        if (is_null($parameters)) {
+            $parameters = new Bonzai_Utils_Options;
+        }
+
+        return $class->elaborate($parameters);
     }
     // }}}
 }

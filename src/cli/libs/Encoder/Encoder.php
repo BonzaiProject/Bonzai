@@ -69,8 +69,7 @@ class Bonzai_Encoder
             echo str_repeat('-', 80) . PHP_EOL;
         }
 
-        $files = $this->expandPathsToFiles($files);
-        $files = array_unique($files);
+        $files = array_unique($this->expandPathsToFiles($files));
 
         foreach ($files as $filename) {
             try {

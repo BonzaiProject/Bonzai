@@ -52,16 +52,17 @@ require_once __DIR__ . '/../libs/Exception/Exception.php';
  **/
 class Bonzai_Exception_Test extends Bonzai_TestCase
 {
-    // {{{ test__nothing
+    // {{{ testNothing
     /**
+     * testNothing
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function test__nothing()
+    public function testNothing()
     {
-        $this->markTestSkipped('There\'s nothing to be tested in this Testing Class.');
+        $this->markTestSkipped('There\'s nothing to test this Testing Class.');
     }
     // }}}
 }

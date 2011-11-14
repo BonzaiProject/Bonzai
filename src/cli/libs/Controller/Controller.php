@@ -61,6 +61,8 @@ class Bonzai_Controller
 
     // {{{ __construct
     /**
+     * __construct
+     *
      * @access public
      * @return void
      */
