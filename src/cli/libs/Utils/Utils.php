@@ -185,6 +185,8 @@ class Bonzai_Utils
      */
     public static function checkFileValidity($filename, $file_exists = true)
     {
+        $file_exists = is_bool($file_exists) ? $file_exists : true;
+
         if (empty($filename) || !is_string($filename) || trim($filename) == '' || ($file_exists && !file_exists($filename))) {
             $message = gettext('The file `%s` is invalid.');
             throw new Bonzai_Exception(sprintf($message, $filename));

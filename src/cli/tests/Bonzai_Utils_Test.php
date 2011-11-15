@@ -1041,17 +1041,851 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ checkFileValidity
-    // {{{ test___CheckFileValidity
+    // {{{ testCheckFileValidityWithParamsEmptyStringEmptyStringThrowException
     /**
-     * test___CheckFileValidity
+     * testCheckFileValidityWithParamsEmptyStringEmptyStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyStringEmptyStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('', '');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyStringSpacedStringThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyStringSpacedStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyStringSpacedStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('', ' ');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyStringFakeThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyStringFakeThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyStringFakeThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('', 'a');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyStringNullThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyStringNullThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyStringNullThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('', null);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyStringEmptyArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyStringEmptyArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyStringEmptyArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('', array());
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyStringArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyStringArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyStringArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('', array('a'));
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyStringTrueThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyStringTrueThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyStringTrueThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('', true);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyStringFalseThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyStringFalseThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyStringFalseThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('', false);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsSpacedStringEmptyStringThrowException
+    /**
+     * testCheckFileValidityWithParamsSpacedStringEmptyStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsSpacedStringEmptyStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(' ', '');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsSpacedStringSpacedStringThrowException
+    /**
+     * testCheckFileValidityWithParamsSpacedStringSpacedStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsSpacedStringSpacedStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(' ', ' ');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsSpacedStringFakeThrowException
+    /**
+     * testCheckFileValidityWithParamsSpacedStringFakeThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsSpacedStringFakeThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(' ', 'a');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsSpacedStringNullThrowException
+    /**
+     * testCheckFileValidityWithParamsSpacedStringNullThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsSpacedStringNullThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(' ', null);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsSpacedStringEmptyArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsSpacedStringEmptyArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsSpacedStringEmptyArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(' ', array());
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsSpacedStringArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsSpacedStringArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsSpacedStringArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(' ', array('a'));
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsSpacedStringTrueThrowException
+    /**
+     * testCheckFileValidityWithParamsSpacedStringTrueThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsSpacedStringTrueThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(' ', true);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsSpacedStringFalseThrowException
+    /**
+     * testCheckFileValidityWithParamsSpacedStringFalseThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsSpacedStringFalseThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(' ', false);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsFakeEmptyStringThrowException
+    /**
+     * testCheckFileValidityWithParamsFakeEmptyStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsFakeEmptyStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('a', '');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsFakeSpacedStringThrowException
+    /**
+     * testCheckFileValidityWithParamsFakeSpacedStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsFakeSpacedStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('a', ' ');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsFakeFakeThrowException
+    /**
+     * testCheckFileValidityWithParamsFakeFakeThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsFakeFakeThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('a', 'a');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsFakeNullThrowException
+    /**
+     * testCheckFileValidityWithParamsFakeNullThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsFakeNullThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('a', null);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsFakeEmptyArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsFakeEmptyArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsFakeEmptyArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('a', array());
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsFakeArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsFakeArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsFakeArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('a', array('a'));
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsFakeTrueThrowException
+    /**
+     * testCheckFileValidityWithParamsFakeTrueThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsFakeTrueThrowException()
+    {
+        Bonzai_Utils::checkFileValidity('a', true);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsFakeFalseThrowException
+    /**
+     * testCheckFileValidityWithParamsFakeFalseThrowException
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testCheckFileValidity()
+    public function testCheckFileValidityWithParamsFakeFalseThrowException()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        Bonzai_Utils::checkFileValidity('a', false);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsNullEmptyStringThrowException
+    /**
+     * testCheckFileValidityWithParamsNullEmptyStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsNullEmptyStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(null, '');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsNullSpacedStringThrowException
+    /**
+     * testCheckFileValidityWithParamsNullSpacedStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsNullSpacedStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(null, ' ');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsNullFakeThrowException
+    /**
+     * testCheckFileValidityWithParamsNullFakeThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsNullFakeThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(null, 'a');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsNullNullThrowException
+    /**
+     * testCheckFileValidityWithParamsNullNullThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsNullNullThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(null, null);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsNullEmptyArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsNullEmptyArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsNullEmptyArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(null, array());
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsNullArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsNullArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsNullArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(null, array('a'));
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsNullTrueThrowException
+    /**
+     * testCheckFileValidityWithParamsNullTrueThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsNullTrueThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(null, true);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsNullFalseThrowException
+    /**
+     * testCheckFileValidityWithParamsNullFalseThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsNullFalseThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(null, false);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyArrayEmptyStringThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyArrayEmptyStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyArrayEmptyStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array(), '');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyArraySpacedStringThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyArraySpacedStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyArraySpacedStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array(), ' ');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyArrayFakeThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyArrayFakeThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyArrayFakeThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array(), 'a');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyArrayNullThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyArrayNullThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyArrayNullThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array(), null);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyArrayEmptyArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyArrayEmptyArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyArrayEmptyArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array(), array());
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyArrayArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyArrayArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyArrayArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array(), array('a'));
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyArrayTrueThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyArrayTrueThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyArrayTrueThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array(), true);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsEmptyArrayFalseThrowException
+    /**
+     * testCheckFileValidityWithParamsEmptyArrayFalseThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsEmptyArrayFalseThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array(), false);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsArrayEmptyStringThrowException
+    /**
+     * testCheckFileValidityWithParamsArrayEmptyStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsArrayEmptyStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array('a'), '');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsArraySpacedStringThrowException
+    /**
+     * testCheckFileValidityWithParamsArraySpacedStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsArraySpacedStringThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array('a'), ' ');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsArrayFakeThrowException
+    /**
+     * testCheckFileValidityWithParamsArrayFakeThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsArrayFakeThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array('a'), 'a');
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsArrayNullThrowException
+    /**
+     * testCheckFileValidityWithParamsArrayNullThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsArrayNullThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array('a'), null);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsArrayEmptyArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsArrayEmptyArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsArrayEmptyArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array('a'), array());
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsArrayArrayThrowException
+    /**
+     * testCheckFileValidityWithParamsArrayArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsArrayArrayThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array('a'), array('a'));
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsArrayTrueThrowException
+    /**
+     * testCheckFileValidityWithParamsArrayTrueThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsArrayTrueThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array('a'), true);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityWithParamsArrayFalseThrowException
+    /**
+     * testCheckFileValidityWithParamsArrayFalseThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityWithParamsArrayFalseThrowException()
+    {
+        Bonzai_Utils::checkFileValidity(array('a'), false);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityParamEmptyString
+    /**
+     * testCheckFileValidityParamEmptyString
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testCheckFileValidityParamEmptyString()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'a');
+
+        Bonzai_Utils::checkFileValidity($filename);
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityParamSpacedString
+    /**
+     * testCheckFileValidityParamSpacedString
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testCheckFileValidityParamSpacedString()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'a');
+
+        Bonzai_Utils::checkFileValidity($filename);
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityParamFake
+    /**
+     * testCheckFileValidityParamFake
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testCheckFileValidityParamFake()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'a');
+
+        Bonzai_Utils::checkFileValidity($filename);
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityParamNull
+    /**
+     * testCheckFileValidityParamNull
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testCheckFileValidityParamNull()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'a');
+
+        Bonzai_Utils::checkFileValidity($filename);
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityParamEmptyArray
+    /**
+     * testCheckFileValidityParamEmptyArray
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testCheckFileValidityParamEmptyArray()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'a');
+
+        Bonzai_Utils::checkFileValidity($filename);
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityParamArray
+    /**
+     * testCheckFileValidityParamArray
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testCheckFileValidityParamArray()
+    {
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'a');
+
+        Bonzai_Utils::checkFileValidity($filename);
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testCheckFileValidityParamCurrentFile
+    /**
+     * testCheckFileValidityParamCurrentFile
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testCheckFileValidityParamCurrentFile()
+    {
+        Bonzai_Utils::checkFileValidity(__FILE__);
     }
     // }}}
     // }}}
