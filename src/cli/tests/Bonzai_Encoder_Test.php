@@ -237,18 +237,622 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
     // }}}
     // }}}
 
-    // {{{ saveOutout
-    // {{{ testSaveOutput
+    // {{{ saveOutput
+    // {{{ testSaveOutputWithParamsNullNullJustCoverage
     /**
-     * testSaveOutput
+     * testSaveOutputWithParamsNullNullJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testSaveOutput()
+    public function testSaveOutputWithParamsNullNullJustCoverage()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->callMethod('saveOutput', array(null, null));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsNullEmptyStringJustCoverage
+    /**
+     * testSaveOutputWithParamsNullEmptyStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsNullEmptyStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(null, ''));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsNullSpacedStringJustCoverage
+    /**
+     * testSaveOutputWithParamsNullSpacedStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsNullSpacedStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(null, ' '));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsNullFakeJustCoverage
+    /**
+     * testSaveOutputWithParamsNullFakeJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsNullFakeJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(null, 'a'));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsNullEmptyArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsNullEmptyArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsNullEmptyArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(null, array()));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsNullArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsNullArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsNullArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(null, array('a')));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyStringNullJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyStringNullJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyStringNullJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('', null));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyStringEmptyStringJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyStringEmptyStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyStringEmptyStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('', ''));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyStringSpacedStringJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyStringSpacedStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyStringSpacedStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('', ' '));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyStringFakeJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyStringFakeJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyStringFakeJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('', 'a'));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyStringEmptyArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyStringEmptyArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyStringEmptyArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('', array()));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyStringArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyStringArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyStringArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('', array('a')));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsSpacedStringNullJustCoverage
+    /**
+     * testSaveOutputWithParamsSpacedStringNullJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsSpacedStringNullJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(' ', null));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsSpacedStringEmptyStringJustCoverage
+    /**
+     * testSaveOutputWithParamsSpacedStringEmptyStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsSpacedStringEmptyStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(' ', ''));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsSpacedStringSpacedStringJustCoverage
+    /**
+     * testSaveOutputWithParamsSpacedStringSpacedStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsSpacedStringSpacedStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(' ', ' '));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsSpacedStringFakeJustCoverage
+    /**
+     * testSaveOutputWithParamsSpacedStringFakeJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsSpacedStringFakeJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(' ', 'a'));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsSpacedStringEmptyArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsSpacedStringEmptyArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsSpacedStringEmptyArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(' ', array()));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsSpacedStringArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsSpacedStringArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsSpacedStringArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(' ', array('a')));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsFakeNullJustCoverage
+    /**
+     * testSaveOutputWithParamsFakeNullJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsFakeNullJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('a', null));
+
+        unlink('a');
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsFakeEmptyStringJustCoverage
+    /**
+     * testSaveOutputWithParamsFakeEmptyStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsFakeEmptyStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('a', ''));
+
+        unlink('a');
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsFakeSpacedStringJustCoverage
+    /**
+     * testSaveOutputWithParamsFakeSpacedStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsFakeSpacedStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('a', ' '));
+
+        unlink('a');
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsFakeFakeJustCoverage
+    /**
+     * testSaveOutputWithParamsFakeFakeJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsFakeFakeJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('a', 'a'));
+
+        unlink('a');
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsFakeEmptyArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsFakeEmptyArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsFakeEmptyArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('a', array()));
+
+        unlink('a');
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsFakeArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsFakeArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsFakeArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array('a', array('a')));
+
+        unlink('a');
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyArrayNullJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyArrayNullJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyArrayNullJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array(), null));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyArrayEmptyStringJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyArrayEmptyStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyArrayEmptyStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array(), ''));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyArraySpacedStringJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyArraySpacedStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyArraySpacedStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array(), ' '));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyArrayFakeJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyArrayFakeJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyArrayFakeJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array(), 'a'));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyArrayEmptyArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyArrayEmptyArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyArrayEmptyArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array(), array()));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsEmptyArrayArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsEmptyArrayArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsEmptyArrayArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array(), array('a')));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsArrayNullJustCoverage
+    /**
+     * testSaveOutputWithParamsArrayNullJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsArrayNullJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array('a'), null));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsArrayEmptyStringJustCoverage
+    /**
+     * testSaveOutputWithParamsArrayEmptyStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsArrayEmptyStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array('a'), ''));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsArraySpacedStringJustCoverage
+    /**
+     * testSaveOutputWithParamsArraySpacedStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsArraySpacedStringJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array('a'), ' '));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsArrayFakeJustCoverage
+    /**
+     * testSaveOutputWithParamsArrayFakeJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsArrayFakeJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array('a'), 'a'));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsArrayEmptyArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsArrayEmptyArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsArrayEmptyArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array('a'), array()));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsArrayArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsArrayArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsArrayArrayJustCoverage()
+    {
+        $this->callMethod('saveOutput', array(array('a'), array('a')));
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsTempNullJustCoverage
+    /**
+     * testSaveOutputWithParamsTempNullJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsTempNullJustCoverage()
+    {
+        $filename = tempnam('.', 'test_');
+        $this->callMethod('saveOutput', array($filename, null));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsTempEmptyStringJustCoverage
+    /**
+     * testSaveOutputWithParamsTempEmptyStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsTempEmptyStringJustCoverage()
+    {
+        $filename = tempnam('.', 'test_');
+        $this->callMethod('saveOutput', array($filename, ''));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsTempSpacedStringJustCoverage
+    /**
+     * testSaveOutputWithParamsTempSpacedStringJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsTempSpacedStringJustCoverage()
+    {
+        $filename = tempnam('.', 'test_');
+        $this->callMethod('saveOutput', array($filename, ' '));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsTempFakeJustCoverage
+    /**
+     * testSaveOutputWithParamsTempFakeJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsTempFakeJustCoverage()
+    {
+        $filename = tempnam('.', 'test_');
+        $this->callMethod('saveOutput', array($filename, 'a'));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsTempEmptyArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsTempEmptyArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsTempEmptyArrayJustCoverage()
+    {
+        $filename = tempnam('.', 'test_');
+        $this->callMethod('saveOutput', array($filename, array()));
+
+        unlink($filename);
+    }
+    // }}}
+
+    // {{{ testSaveOutputWithParamsTempArrayJustCoverage
+    /**
+     * testSaveOutputWithParamsTempArrayJustCoverage
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSaveOutputWithParamsTempArrayJustCoverage()
+    {
+        $filename = tempnam('.', 'test_');
+        $this->callMethod('saveOutput', array($filename, array('a')));
+
+        unlink($filename);
     }
     // }}}
     // }}}
@@ -443,22 +1047,6 @@ class Bonzai_Encoder_Test extends Bonzai_TestCase
         $this->assertRegExp('/bcompiler v/', $bytecode);
 
         unlink($filename);
-    }
-    // }}}
-    // }}}
-
-    // {{{ cleanSource
-    // {{{ testCleanSource
-    /**
-     * testCleanSource
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testCleanSource()
-    {
-        $this->markTestIncomplete('This test has not been implemented yet.');
     }
     // }}}
     // }}}

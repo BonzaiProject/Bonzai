@@ -182,7 +182,7 @@ class Bonzai_Encoder
             $fh = fopen($tempnam, 'w');
 
             bcompiler_write_header($fh);
-            bcompiler_write_file($fh, $this->cleanSource($filename));
+            bcompiler_write_file($fh, $filename);
             bcompiler_write_footer($fh);
 
             fclose($fh);
@@ -200,51 +200,6 @@ class Bonzai_Encoder
         }
 
         return $bytecode;
-    }
-    // }}}
-
-    // {{{ cleanSource
-    /**
-     * cleanSource
-     *
-     * @param string $filename
-     *
-     * @access protected
-     * @return string
-     */
-    protected function cleanSource($filename)
-    {
-        $content = Bonzai_Utils::getFileContent($filename);
-        $cleaned = '';
-
-        $commentTokens = array(T_COMMENT);
-
-        if (defined('T_DOC_COMMENT')) {
-            $commentTokens[] = T_DOC_COMMENT; // PHP 5
-        }
-
-        if (defined('T_ML_COMMENT')) {
-            $commentTokens[] = T_ML_COMMENT; // PHP 4
-        }
-
-        $tokens = token_get_all($content);
-
-        foreach ($tokens as $token) {
-            if (is_array($token)) {
-                if (in_array($token[0], $commentTokens)) {
-                    continue;
-                }
-
-                $token = $token[1];
-            }
-
-            $cleaned .= $token;
-        }
-
-        $tempnam = tempnam('/tmp', 'BNZ');
-        Bonzai_Utils::putFileContent($tempnam, $cleaned);
-
-        return $tempnam;
     }
     // }}}
 

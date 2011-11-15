@@ -56,17 +56,115 @@ Bonzai_Utils::$silenced = true;
 class Bonzai_Utils_Test extends Bonzai_TestCase
 {
     // {{{ renameFile
-    // {{{ testRenameFile
+    // {{{ testRenameFileParamEmptyStringThrowException
     /**
-     * testRenameFile
+     * testRenameFileParamEmptyStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testRenameFileParamEmptyStringThrowException()
+    {
+        Bonzai_Utils::renameFile("");
+    }
+    // }}}
+
+    // {{{ testRenameFileParamSpacedStringThrowException
+    /**
+     * testRenameFileParamSpacedStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testRenameFileParamSpacedStringThrowException()
+    {
+        Bonzai_Utils::renameFile(" ");
+    }
+    // }}}
+
+    // {{{ testRenameFileParamNullThrowException
+    /**
+     * testRenameFileParamNullThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testRenameFileParamNullThrowException()
+    {
+        Bonzai_Utils::renameFile(null);
+    }
+    // }}}
+
+    // {{{ testRenameFileParamEmptyArrayThrowException
+    /**
+     * testRenameFileParamEmptyArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testRenameFileParamEmptyArrayThrowException()
+    {
+        Bonzai_Utils::renameFile(array());
+    }
+    // }}}
+
+    // {{{ testRenameFileParamArrayThrowException
+    /**
+     * testRenameFileParamArrayThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testRenameFileParamArrayThrowException()
+    {
+        Bonzai_Utils::renameFile(array('a'));
+    }
+    // }}}
+
+    // {{{ testRenameFileParamFakeThrowException
+    /**
+     * testRenameFileParamFakeThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testRenameFileParamFakeThrowException()
+    {
+        Bonzai_Utils::renameFile('a');
+    }
+    // }}}
+
+    // {{{ testRenameFileParamExistentFileIsRenamed
+    /**
+     * testRenameFileParamExistentFileIsRenamed
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testRenameFile()
+    public function testRenameFileParamExistentFileIsRenamed()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $filename = tempnam('.', 'test_');
+        file_put_contents($filename, 'a');
+
+        Bonzai_Utils::renameFile($filename);
+
+        $this->assertFileExists("$filename.orig");
+        $this->assertFileNotExists($filename);
+
+        unlink("$filename.orig");
     }
     // }}}
     // }}}
@@ -905,7 +1003,12 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
         file_put_contents($filename, '');
         chmod($filename, 0555); // r-xr-xr-x
 
-        $this->assertEmpty(Bonzai_Utils::getFileContent($filename));
+        try {
+            Bonzai_Utils::getFileContent($filename);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
 
         chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
@@ -925,14 +1028,17 @@ class Bonzai_Utils_Test extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
 
-        Bonzai_Utils::getFileContent($filename);
+        try {
+            Bonzai_Utils::getFileContent($filename);
+            $this->assertTrue(false, "The exception was not threw.");
+        } catch (Exception $e) {
+            $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
 
         unlink($filename);
     }
     // }}}
     // }}}
-
-
 
     // {{{ checkFileValidity
     // {{{ test___CheckFileValidity

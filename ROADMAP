@@ -4,10 +4,7 @@ ROADMAP
 Version 0.1-alpha1
 EXPECTED DUE DATE: 19 November 2011
 REMAINING TASKS:
-  * Write the unit test for `Bonzai_Encoder_Test::saveOutput`
-  * Write the unit test for `Bonzai_Encoder_Test::cleanSource`
   * Write the unit test for `Bonzai_Utils_Options_Test::parseOptions`
-  * Write the unit test for `Bonzai_Utils_Test::renameFile`
   * Write the unit test for `Bonzai_Utils_Test::checkFileValidity`
   * Write the unit test for `Bonzai_Utils_Test::message`
 

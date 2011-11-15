@@ -71,10 +71,12 @@ class Bonzai_Utils
      */
     public static function renameFile($filename)
     {
-        return self::putFileContent(
+        self::putFileContent(
             $filename . '.orig',
             self::getFileContent($filename)
         );
+
+        unlink($filename);
     }
     // }}}
 
@@ -138,10 +140,7 @@ class Bonzai_Utils
      */
     public static function getFileContent($filename)
     {
-        if (!is_readable($filename)) {
-            $message = gettext('The file `%s` cannot be opened.');
-            throw new Bonzai_Exception(sprintf($message, $filename));
-        }
+        self::checkFileValidity($filename);
 
         return file_get_contents($filename);
     }
@@ -161,12 +160,9 @@ class Bonzai_Utils
      */
     public static function putFileContent($filename, $content)
     {
-        $filename = trim($filename);
+        self::checkFileValidity($filename, false);
 
-        if (empty($filename)
-            || (file_exists($filename)
-            && !is_writable($filename))
-        ) {
+        if (file_exists($filename) && !is_writable($filename)) {
             $message = gettext('The file `%s` cannot be written.');
             throw new Bonzai_Exception(sprintf($message, $filename));
         }
@@ -179,34 +175,37 @@ class Bonzai_Utils
     /**
      * checkFileValidity
      *
-     * @param string $filename
+     * @param string  $filename
+     * @param boolean $check_exists
      *
      * @static
      * @access public
      * @throws Bonzai_Exception
      * @return void
      */
-    public static function checkFileValidity($filename)
+    public static function checkFileValidity($filename, $file_exists = true)
     {
-        if (empty($filename) || !file_exists($filename)) {
+        if (empty($filename) || !is_string($filename) || trim($filename) == '' || ($file_exists && !file_exists($filename))) {
             $message = gettext('The file `%s` is invalid.');
             throw new Bonzai_Exception(sprintf($message, $filename));
         }
 
-        if (!is_readable($filename)) {
+        if ($file_exists && !is_readable($filename)) {
             $message = gettext('The file `%s` is not readable.');
             throw new Bonzai_Exception(sprintf($message, $filename));
         }
 
-        if (filesize($filename) == 0) {
+        if ($file_exists && filesize($filename) == 0) {
             $message = gettext('The file `%s` is empty.');
             throw new Bonzai_Exception(sprintf($message, $filename));
         }
 
-        $content = Bonzai_Utils::getFileContent($filename);
-        if (strpos($content, 'class Bonzai_') !== false) {
-            $message = gettext('The file `%s` is not able to be parsed.');
-            throw new Bonzai_Exception(sprintf($message, $filename));
+        if ($file_exists) {
+            $content = file_get_contents($filename);
+            if (strpos($content, 'class Bonzai_') !== false) {
+                $message = gettext('The file `%s` is not able to be parsed.');
+                throw new Bonzai_Exception(sprintf($message, $filename));
+            }
         }
     }
     // }}}
