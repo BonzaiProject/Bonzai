@@ -69,17 +69,105 @@ class Bonzai_Utils_Options_Test extends Bonzai_TestCase
     // }}}
 
     // {{{ parseOptions
-    // {{{ testParseOptions
+    // {{{ testParseOptionsParamEmptyStringThrowException
     /**
-     * testParseOptions
+     * testParseOptionsParamEmptyStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testParseOptionsParamEmptyStringThrowException()
+    {
+        $this->callMethod('parseOptions', array(''));
+    }
+    // }}}
+
+    // {{{ testParseOptionsParamSpacedStringThrowException
+    /**
+     * testParseOptionsParamSpacedStringThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testParseOptionsParamSpacedStringThrowException()
+    {
+        $this->callMethod('parseOptions', array(' '));
+    }
+    // }}}
+
+    // {{{ testParseOptionsParamFakeThrowException
+    /**
+     * testParseOptionsParamFakeThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testParseOptionsParamFakeThrowException()
+    {
+        $this->callMethod('parseOptions', array('a'));
+    }
+    // }}}
+
+    // {{{ testParseOptionsParamNullThrowException
+    /**
+     * testParseOptionsParamNullThrowException
+     *
+     * @ignore
+     * @access public
+     * @return void
+     * @expectedException Bonzai_Exception
+     */
+    public function testParseOptionsParamNullThrowException()
+    {
+        $this->callMethod('parseOptions', array(null));
+    }
+    // }}}
+
+    // {{{ testParseOptionsParamEmptyArrayThrowException
+    /**
+     * testParseOptionsParamEmptyArrayThrowException
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testParseOptions()
+    public function testParseOptionsParamEmptyArrayThrowException()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->callMethod('parseOptions', array(array()));
+    }
+    // }}}
+
+    // {{{ testParseOptionsParamArray
+    /**
+     * testParseOptionsParamArray
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testParseOptionsParamArray()
+    {
+        $this->callMethod('parseOptions', array(array('a', 'b')));
+    }
+    // }}}
+
+    // {{{ testParseOptionsParamFullOptions
+    /**
+     * testParseOptionsParamFullOptions
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testParseOptionsParamFullOptions()
+    {
+        $this->callMethod('parseOptions', array(array('-b', '--backup', '-d', '--dry', '--colors', '--stderr', '-q', '--quiet', '-h', '--help', '-v', '--version', '-r', 'report_file', '--report', 'report_file', '--log', 'log_file')));
     }
     // }}}
     // }}}

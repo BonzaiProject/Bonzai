@@ -4,7 +4,6 @@ ROADMAP
 Version 0.1-alpha1
 EXPECTED DUE DATE: 19 November 2011
 REMAINING TASKS:
-  * Write the unit test for `Bonzai_Utils_Options_Test::parseOptions`
   * Write the unit test for `Bonzai_Utils_Test::message`
 
 -------------------------------------------------------------------------------

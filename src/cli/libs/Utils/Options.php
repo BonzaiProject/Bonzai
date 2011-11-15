@@ -132,7 +132,7 @@ class Bonzai_Utils_Options
      */
     protected function parseOptions($argv)
     {
-        if (!is_array($this->options)) {
+        if (!is_array($this->options) || !is_array($argv)) {
             $message = gettext('Invalid parameters to be parsed.');
             throw new Bonzai_Exception($message);
         }
@@ -148,22 +148,10 @@ class Bonzai_Utils_Options
 
             if ($value[0] !== '-') {
                 $prev_key = preg_replace('/^-{1,2}/', '', $argv[$key - 1]) . ':';
-                if (!isset($this->parameters[$prev_key])) {
+                if (!isset($this->parameters[$prev_key])
+                    && !in_array($prev_key, $this->parameters)) {
                     $this->option_params[] = $value;
                 }
-            }
-        }
-
-        foreach ($this->options as $key => $value) {
-            $suffix = ($value !== false) ? ':' : '';
-            $key .= $suffix;
-
-            if (isset($this->parameters[$key])
-                && !isset($this->options[$this->parameters[$key]])
-            ) {
-                $key_arr = $this->parameters[$key];
-                $key_arr = substr($key_arr, 0, strlen($key_arr)-strlen($suffix));
-                $this->options[$key_arr] = $value;
             }
         }
     }
