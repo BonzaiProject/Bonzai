@@ -246,22 +246,41 @@ class Bonzai_Utils
             $type = array_shift($args);
             $text = array_shift($args);
 
-            $text = vsprintf(gettext($text), $args);
+            if (!is_string($text)) {
+                $message = 'Invalid message format';
+                throw new Bonzai_Exception($message);
+            }
 
-            $prefix = '[' . date('H:i:s') . '] ';
-            $prefix_len = strlen($prefix);
+            if (!empty($text)) {
+                $text = gettext($text);
 
-            $string = PHP_EOL . str_repeat(' ', $prefix_len);
-            $text = wordwrap($text, 80 - $prefix_len, $string, true);
+                $occurrences = substr_count($text, '%');
+                if ($occurrences > 0) {
+                    if ($occurrences != count($args)) {
+                        $message = 'Numbers of parameters doesn\'t match with the specifiers.';
+                        throw new Bonzai_Exception($message);
+                    }
 
-            $use_stderr = ($options && $options->getOption('stderr') !== null);
+                    $text = vsprintf($text, $args);
+                }
 
-            $message = $prefix . $text . PHP_EOL;
-            $std = ($use_stderr && $type == 'error')
-                   ? 'php://stderr'
-                   : 'php://stdout';
+                $prefix     = '[' . date('H:i:s') . '] ';
+                $prefix_len = strlen($prefix);
 
-            file_put_contents($std, $message);
+                $string = PHP_EOL . str_repeat(' ', $prefix_len);
+                $text   = wordwrap($text, 80 - $prefix_len, $string, true);
+
+                $use_stderr = ($options && $options->getOption('stderr') !== null);
+
+                $message = $prefix . $text . PHP_EOL;
+
+                if ($use_stderr && $type == 'error')
+                {
+                    file_put_contents('php://stderr', $message);
+                } else {
+                    echo $message;
+                }
+            }
         }
     }
     // }}}
