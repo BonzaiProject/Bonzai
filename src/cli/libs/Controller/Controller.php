@@ -89,6 +89,7 @@ class Bonzai_Controller
             $this->options->init($argv);
         } catch (Bonzai_Exception $e) {
             // Fallback behaviour: show the help
+            unset($e);
         }
 
         Bonzai_Registry::add('options', $this->options);
@@ -137,6 +138,7 @@ class Bonzai_Controller
     // }}}
 
     // {{{ getFileNameFromClassName
+    // TODO: Optimize cyclomatic complexity (5)
     /**
      * getFileNameFromClassName
      *

@@ -81,6 +81,7 @@ class Bonzai_Task
     // }}}
 
     // {{{ load
+    // TODO: Optimize cyclomatic complexity (5)
     /**
      * load
      *

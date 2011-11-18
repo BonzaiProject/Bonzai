@@ -40,10 +40,10 @@ BOTROW="$txtrst\n$txtblu========================================================
 
 echo -e "$TOPROW CLI - RUN PHPUNIT $BOTROW"
 mkdir -p ../report/cli/code_coverage
-phpunit --syntax-check --colors --coverage-html="../report/cli/code_coverage" "./cli/tests/cliSuite.php"
+phpunit --syntax-check --colors --coverage-html="../report/cli/code_coverage" "./cli/tests/CliSuite.php"
 
 echo -e "$TOPROW CLI - GENERATE VIOLATIONS $BOTROW"
-phpcs -s ./cli > ../report/cli.violations.txt
+phpcs -s ./cli --report-file=../report/cli.violations.txt --report-width=1000
 
 echo -e "$TOPROW CLI - GENERATE CODEBROWSER $BOTROW"
 mkdir -p ../report/cli/code_browser
@@ -56,24 +56,3 @@ phpdoc -d ./cli -t ../report/cli/docs -ti "Bonzai CLI Documentation" -dn "bonzai
 echo -e "$TOPROW EXT - GENERATING SOFTWARE'S METRICS $BOTROW"
 phploc --count-tests ./cli/ > ../report/cli.loc.txt
 phpcpd ./cli/ > ../report/cli.duplications.txt
-
-echo -e "$TOPROW EXT - BUILD ENVIRONMENT $BOTROW"
-cd ext
-phpize
-./configure --enable-bonzai
-make
-TEST_PHP_EXECUTABLE=`whereis php | cut -d " " -f 2`
-export NO_INTERACTION='1'
-
-echo -e "$TOPROW EXT - RUN PHPTESTS $BOTROW"
-php run-tests.php -m -p "$TEST_PHP_EXECUTABLE" -q "./tests/"
-cd ..
-
-echo -e "$TOPROW EXT - GENERATE DOXYGEN $BOTROW"
-echo ""
-mkdir -p ../report/ext/docs
-doxygen ./ext/Doxyfile
-
-echo -e "$TOPROW EXT - GENERATING SOFTWARE'S METRICS $BOTROW"
-sloccount ./ext/bonzai.? ./ext/config.m4 ./ext/tests/bonzai_*.phpt > ../report/ext.loc.txt
-

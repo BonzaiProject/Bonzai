@@ -50,6 +50,7 @@
 class Bonzai_Utils_Help
 {
     // {{{ elaborate
+    // TODO: Optimize cyclomatic complexity (5)
     /**
      * elaborate
      *

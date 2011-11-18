@@ -137,6 +137,7 @@ class Bonzai_Registry
     // }}}
 
     // {{{ append
+    // TODO: Optimize cyclomatic complexity (9)
     /**
      * append
      *

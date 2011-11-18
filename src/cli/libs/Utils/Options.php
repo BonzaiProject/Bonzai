@@ -121,6 +121,7 @@ class Bonzai_Utils_Options
     // }}}
 
     // {{{ parseOptions
+    // TODO: Optimize cyclomatic complexity (8)
     /**
      * parseOptions
      *

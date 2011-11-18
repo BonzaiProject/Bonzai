@@ -81,6 +81,7 @@ class Bonzai_Utils
     // }}}
 
     // {{{ rScanDir
+    // TODO: Optimize cyclomatic complexity (8)
     /**
      * rScanDir
      *
@@ -117,6 +118,8 @@ class Bonzai_Utils
                         'The directory `%s` was skipped because not readable.',
                         $path
                     );
+
+                    unset($e);
                 }
             } elseif (is_file($path)) {
                 $data[] = $path;
@@ -172,6 +175,7 @@ class Bonzai_Utils
     // }}}
 
     // {{{ checkFileValidity
+    // TODO: Optimize cyclomatic complexity (13)
     /**
      * checkFileValidity
      *

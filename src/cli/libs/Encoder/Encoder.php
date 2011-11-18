@@ -50,6 +50,7 @@
 class Bonzai_Encoder
 {
     // {{{ elaborate
+    // TODO: Optimize cyclomatic complexity (5)
     /**
      * elaborate
      *
@@ -82,12 +83,15 @@ class Bonzai_Encoder
                 );
 
                 Bonzai_Utils::error('Cannot handle the file `%s`.', $filename);
+
+                unset($e);
             }
         }
     }
     // }}}
 
     // {{{ processFile
+    // TODO: Optimize cyclomatic complexity (8)
     /**
      * processFile
      *
@@ -127,6 +131,7 @@ class Bonzai_Encoder
     // }}}
 
     // {{{ saveOutput
+    // TODO: Optimize cyclomatic complexity (5)
     /**
      * saveOutput
      *
@@ -158,6 +163,8 @@ class Bonzai_Encoder
                 'The file `%s` was skipped because cannot be able to save it.',
                 $filename
             );
+
+            unset($e);
         }
     }
     // }}}
@@ -197,6 +204,8 @@ class Bonzai_Encoder
             );
 
             Bonzai_Utils::error('Cannot handle the file `%s`.', $filename);
+
+            unset($e);
         }
 
         return $bytecode;
@@ -204,6 +213,7 @@ class Bonzai_Encoder
     // }}}
 
     // {{{ expandPathsToFiles
+    // TODO: Optimize cyclomatic complexity (7)
     /**
      * expandPathsToFiles
      *
@@ -239,6 +249,8 @@ class Bonzai_Encoder
                         'The directory `%s` was skipped because not readable.',
                         $path
                     );
+
+                    unset($e);
                 }
             }
         }

@@ -4,9 +4,7 @@ ROADMAP
 Version 0.1-alpha2
 EXPECTED DUE DATE: 24 November 2011
 REMAINING TASKS:
-  * Check _build.xml_
   * Improve _release.sh_ script
-  * Remove useless parts from _build.sh_
   * Create file _readme.md_
   * Use colors in output (`--color`)
   * Print the report of execution (`--report`)
