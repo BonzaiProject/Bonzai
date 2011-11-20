@@ -278,6 +278,14 @@ class Bonzai_Utils
 
                 $message = $prefix . $text . PHP_EOL;
 
+                if ($options->getOption('colors') !== null) {
+                    if ($type == 'error') {
+                        $message = "\033[0;37m\033[41m" . $message . "\033[0m";
+                    } elseif ($type == 'warn') {
+                        $message = "\033[0;30m\033[43m" . $message . "\033[0m";
+                    }
+                }
+
                 if ($use_stderr && $type == 'error')
                 {
                     file_put_contents('php://stderr', $message);

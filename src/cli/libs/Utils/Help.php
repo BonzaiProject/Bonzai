@@ -62,8 +62,14 @@ class Bonzai_Utils_Help
     public function elaborate(Bonzai_Utils_Options $options)
     {
         echo str_repeat('-', 80) . PHP_EOL;
+        if ($options->getOption('colors') !== null) {
+            echo "\033[1;37m";
+        }
         echo 'BONZAI' . str_repeat(' ', 50);
         echo gettext('(previously phpGuardian)') . PHP_EOL;
+        if ($options->getOption('colors') !== null) {
+            echo "\033[0m";
+        }
         echo str_repeat('-', 80) . PHP_EOL;
 
         echo gettext('Version') . ': 0.1' . PHP_EOL;
@@ -73,11 +79,25 @@ class Bonzai_Utils_Help
         echo str_repeat('-', 80) . PHP_EOL;
 
         if (is_null($options->getOption('version'))) {
+            if ($options->getOption('colors') !== null) {
+                echo "\033[1;37m";
+            }
             echo PHP_EOL . gettext('Usage') . ':' . PHP_EOL;
+            if ($options->getOption('colors') !== null) {
+                echo "\033[0m";
+            }
             echo $_SERVER['argv'][0] . ' [' . gettext('OPTIONS');
             echo ']... [' . gettext('FILES') . '|' . gettext('DIRECTORIES');
             echo ']...' . PHP_EOL . PHP_EOL;
+
+            if ($options->getOption('colors') !== null) {
+                echo "\033[1;37m";
+            }
             echo gettext('Options') . ':' . PHP_EOL;
+            if ($options->getOption('colors') !== null) {
+                echo "\033[0m";
+            }
+
             foreach ($options->getParameters() as $short => $long) {
                 $has_value = strpos($long, ':') > 0;
 

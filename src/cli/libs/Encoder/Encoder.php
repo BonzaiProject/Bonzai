@@ -65,8 +65,14 @@ class Bonzai_Encoder
         $quiet_mode = ($options && $options->getOption('quiet') !== null);
         if (!$quiet_mode) {
             echo str_repeat('-', 80) . PHP_EOL;
+            if ($options->getOption('colors') !== null) {
+                echo "\033[1;37m";
+            }
             echo 'BONZAI' . str_repeat(' ', 50);
             echo gettext('(previously phpGuardian)') . PHP_EOL;
+            if ($options->getOption('colors') !== null) {
+                echo "\033[0m";
+            }
             echo str_repeat('-', 80) . PHP_EOL;
         }
 
