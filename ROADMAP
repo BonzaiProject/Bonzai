@@ -5,10 +5,8 @@ Version 0.1-alpha2
 EXPECTED DUE DATE: 24 November 2011
 REMAINING TASKS:
   * Improve _release.sh_ script
-  * Create file _readme.md_
   * Print the report of execution (`--report`)
   * Change the output file / directory
-  * Log to filesystem (`--log=<file>`)
 
 -------------------------------------------------------------------------------
 

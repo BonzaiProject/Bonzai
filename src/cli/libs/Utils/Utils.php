@@ -56,6 +56,13 @@ class Bonzai_Utils
      * @var    boolean
      */
     public static $silenced = false;
+
+    /**
+     * @static
+     * @access public
+     * @var    array
+     */
+    public static $message_history = array();
     // }}}
 
     // {{{ renameFile
@@ -243,9 +250,10 @@ class Bonzai_Utils
      */
     protected static function message()
     {
-        $options    = Bonzai_Registry::get('options');
-        $quiet_mode = ($options && $options->getOption('quiet') !== null);
-        if (!self::$silenced && !$quiet_mode) {
+        if (!self::$silenced) {
+            $options    = Bonzai_Registry::get('options');
+            $quiet_mode = ($options && $options->getOption('quiet') !== null);
+
             $args = func_get_args();
             $type = array_shift($args);
             $text = array_shift($args);
@@ -277,6 +285,9 @@ class Bonzai_Utils
                 $use_stderr = ($options && $options->getOption('stderr') !== null);
 
                 $message = $prefix . $text . PHP_EOL;
+                if ($options->getOption('log') !== null) {
+                  self::$message_history[] = $prefix . $text;
+                }
 
                 if ($options->getOption('colors') !== null) {
                     if ($type == 'error') {
@@ -286,11 +297,12 @@ class Bonzai_Utils
                     }
                 }
 
-                if ($use_stderr && $type == 'error')
-                {
-                    file_put_contents('php://stderr', $message);
-                } else {
-                    echo $message;
+                if (!$quiet_mode) {
+                    if ($use_stderr && $type == 'error') {
+                        file_put_contents('php://stderr', $message);
+                    } else {
+                        echo $message;
+                    }
                 }
             }
         }

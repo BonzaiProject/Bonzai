@@ -132,7 +132,15 @@ class Bonzai_Task
             $parameters = new Bonzai_Utils_Options;
         }
 
-        return $class->elaborate($parameters);
+        $res = $class->elaborate($parameters);
+
+        $log_file = $parameters->getOption('log');
+        $contents = implode("\n", Bonzai_Utils::$message_history);
+        if ($log_file !== null && !empty($contents)) {
+            Bonzai_Utils::putFileContent($log_file, $contents);
+        }
+
+        return $res;
     }
     // }}}
 }
