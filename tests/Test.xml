@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    cacheTokens="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    forceCoversAnnotation="false"
+    mapTestClassNameToCoveredClassName="false"
+    processIsolation="true"
+    stopOnError="false"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    strict="false"
+    verbose="false">
+    <testsuites>
+        <testsuite name="BonzaiCLI">
+            <file>tests/Controller/ControllerTest.php</file>
+            <file>tests/Encoder/EncoderTest.php</file>
+            <file>tests/Exception/ExceptionTest.php</file>
+            <file>tests/Registry/RegistryTest.php</file>
+            <file>tests/Task/TaskTest.php</file>
+            <file>tests/Utils/HelpTest.php</file>
+            <file>tests/Utils/OptionsTest.php</file>
+            <file>tests/Utils/UtilsTest.php</file>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <blacklist>
+            <directory suffix=".php">tests</directory>
+        </blacklist>
+    </filter>
+</phpunit>
