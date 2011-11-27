@@ -25,9 +25,9 @@
  *
  * PHP version 5
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage TestCase
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
@@ -40,9 +40,9 @@ require_once 'PHPUnit/Framework/TestCase.php';
 /**
  * Bonzai_TestCase
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage TestCase
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
@@ -77,7 +77,7 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         if ($this->auto_instance) {
-            $className    = substr(get_class($this), 0, -4); // Strip 'Test'
+            $className = substr(get_class($this), 0, -4); // Strip 'Test'
             if (!class_exists($className)) {
                 $className = preg_replace('/_[^_]+$/', '', $className);
             }
@@ -100,7 +100,7 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
      */
     public function callMethod($name, array $parameters = array())
     {
-        $name = is_array($name) ? implode('', $name) : strval($name);
+        $name = strval($name);
 
         $method = new ReflectionMethod(get_class($this->object), $name);
         $method->setAccessible(true);

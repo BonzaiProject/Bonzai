@@ -25,9 +25,9 @@
  *
  * PHP version 5
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Registry
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
@@ -38,17 +38,16 @@
 /**
  * Bonzai_Registry
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Registry
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Registry
+class Bonzai_Registry extends Bonzai_Abstract
 {
     // {{{ PROPERTIES
     /**
@@ -72,7 +71,7 @@ class Bonzai_Registry
      */
     public static function add($key, $value)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = self::getStrVal($key);
 
         self::checkKeyValidity($key);
         self::$elements[$key] = $value;
@@ -91,7 +90,7 @@ class Bonzai_Registry
      */
     public static function get($key)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = self::getStrVal($key);
         self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
@@ -114,7 +113,7 @@ class Bonzai_Registry
      */
     public static function remove($key)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = self::getStrVal($key);
         self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
@@ -136,7 +135,7 @@ class Bonzai_Registry
      */
     public static function append($key, $value)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = self::getStrVal($key);
         self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
@@ -161,11 +160,9 @@ class Bonzai_Registry
      */
     protected static function appendAs($variable_type, $key, $value)
     {
-        $variable_type = is_array($variable_type)
-                         ? implode('', $variable_type)
-                         : strval($variable_type);
+        $variable_type = self::getStrVal($variable_type);
+        $key = self::getStrVal($key);
 
-        $key = is_array($key) ? implode('', $key) : strval($key);
         $method = 'appendAs' . ucfirst($variable_type);
 
         if (method_exists('Bonzai_Registry', $method)) {
@@ -187,7 +184,7 @@ class Bonzai_Registry
      */
     protected static function appendAsArray($key, $value)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = self::getStrVal($key);
 
         if (is_array(self::$elements[$key])) {
             self::$elements[$key][] = $value;
@@ -208,7 +205,7 @@ class Bonzai_Registry
      */
     protected static function appendAsString($key, $value)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = self::getStrVal($key);
 
         if (is_string(self::$elements[$key])) {
             self::$elements[$key] .= $value;
@@ -229,7 +226,7 @@ class Bonzai_Registry
      */
     protected static function appendAsInteger($key, $value)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = self::getStrVal($key);
 
         self::$elements[$key] += $value;
     }
@@ -248,12 +245,9 @@ class Bonzai_Registry
      */
     protected static function checkKeyValidity($key)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = self::getStrVal($key);
 
-        if (empty($key) || (!is_string($key) && !is_numeric($key))) {
-            $message = gettext('Invalid key type.');
-            throw new Bonzai_Exception($message); // Exception not catched
-        }
+        self::raiseExceptionIf(empty($key) || (!is_string($key) && !is_numeric($key)), 'Invalid key type.'); // Exception not catched
     }
     // }}}
 }

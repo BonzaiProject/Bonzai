@@ -25,9 +25,9 @@
  *
  * PHP version 5
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Options
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
@@ -38,17 +38,16 @@
 /**
  * Bonzai_Utils_Options
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Options
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Utils_Options
+class Bonzai_Utils_Options extends Bonzai_Abstract
 {
     // {{{ PROPERTIES
     /**
@@ -71,8 +70,7 @@ class Bonzai_Utils_Options
      * @var    array $labels
      */
     protected $labels = array(
-        'backup'  =>
-        'Backup the original file, generate a .bak file (default: false)',
+        'backup'  => 'Backup the original file, generate a .bak file (default: false)',
         'dry'     => 'Perform a trial run with no changes made',
         'colorf'  => 'Use colors in output',
         'log'     => 'Log execution messages in textual format',
@@ -110,10 +108,7 @@ class Bonzai_Utils_Options
      */
     public function init(array $arguments)
     {
-        if (empty($arguments) || !is_array($arguments)) {
-            $message = gettext('Missing the script arguments.');
-            throw new Bonzai_Exception($message);
-        }
+        $this->raiseExceptionIf(empty($arguments) || !is_array($arguments), 'Missing the script arguments.');
 
         $input = preg_grep('/^[a-z]:?$/', array_keys($this->parameters));
         $input = implode('', $input);
@@ -134,10 +129,7 @@ class Bonzai_Utils_Options
      */
     protected function parseOptions(array $arguments)
     {
-        if (!is_array($this->options)) {
-            $message = gettext('Invalid parameters to be parsed.');
-            throw new Bonzai_Exception($message);
-        }
+        $this->raiseExceptionIf(!is_array($this->options), 'Invalid parameters to be parsed.');
 
         $this->populateOptionParams($arguments);
     }
@@ -151,7 +143,6 @@ class Bonzai_Utils_Options
      * @param array $arguments
      *
      * @access protected
-     * @throws Bonzai_Exception
      * @return void
      */
     protected function populateOptionParams(array $arguments)
@@ -160,10 +151,7 @@ class Bonzai_Utils_Options
         $prev_value = '';
         foreach ($arguments as $value) {
             $prev_key = preg_replace('/^-{1,2}/', '', $prev_value) . ':';
-            if ($value[0] !== '-'
-                && !isset($this->parameters[$prev_key])
-                && !in_array($prev_key, $this->parameters)
-            ) {
+            if ($value[0] !== '-' && !isset($this->parameters[$prev_key]) && !in_array($prev_key, $this->parameters)) {
                 $this->option_params[] = $value;
             }
 
@@ -209,7 +197,7 @@ class Bonzai_Utils_Options
      */
     public function getOption($key)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = $this->getStrVal($key);
 
         if (isset($this->options[$key])) {
             return $this->options[$key];
@@ -243,7 +231,7 @@ class Bonzai_Utils_Options
      */
     public function getLabelParameter($key)
     {
-        $key = is_array($key) ? implode('', $key) : strval($key);
+        $key = $this->getStrVal($key);
 
         if (isset($this->labels[$key])) {
             return $this->labels[$key];

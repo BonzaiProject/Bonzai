@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -36,6 +36,8 @@
  **/
 
 require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
+require_once __DIR__ . '/../../src/libs/Abstract/Abstract.php';
+require_once __DIR__ . '/../../src/libs/Interface/Task.php';
 require_once __DIR__ . '/../../src/libs/Exception/Exception.php';
 require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
 require_once __DIR__ . '/../../src/libs/Utils/Options.php';
@@ -47,14 +49,13 @@ Bonzai_Utils::$silenced = true;
 /**
  * Bonzai_Encoder_Test
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
 class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase

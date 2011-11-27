@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -36,22 +36,25 @@
  **/
 
 require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
+require_once __DIR__ . '/../../src/libs/Abstract/Abstract.php';
 require_once __DIR__ . '/../../src/libs/Exception/Exception.php';
+require_once __DIR__ . '/../../src/libs/Registry/Registry.php';
+require_once __DIR__ . '/../../src/libs/Utils/Options.php';
 require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
 
 Bonzai_Utils::$silenced = true;
+Bonzai_Registry::add('options', new Bonzai_Utils_Options());
 
 /**
  * Bonzai_Utils_Test
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
 class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
@@ -91,7 +94,12 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRenameFileWithProviderThrowException($a)
     {
-        Bonzai_Utils::renameFile($a);
+        $this->object->renameFile($a);
+
+        $file = is_array($a) ? implode('', $a) : $a;
+        if (is_file("$file.orig")) {
+            unlink("$file.orig");
+        }
     }
     // }}}
 
@@ -108,7 +116,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'a');
 
-        Bonzai_Utils::renameFile($filename);
+        $this->object->renameFile($filename);
 
         $this->assertFileExists("$filename.orig");
         $this->assertFileNotExists($filename);
@@ -155,7 +163,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRScanDirWithProviderThrowException($a, $b)
     {
-        Bonzai_Utils::rScanDir($a, $b);
+        $this->object->rScanDir($a, $b);
     }
     // }}}
 
@@ -193,7 +201,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         mkdir($dirname, 0222); // -w--w--w-
 
         try {
-            Bonzai_Utils::rScanDir($dirname, $a);
+            $this->object->rScanDir($dirname, $a);
             $this->fail("The exception was not threw.");
         } catch (Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
@@ -236,7 +244,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0555); // r-xr-xr-x
 
-        $this->assertEmpty(Bonzai_Utils::rScanDir($dirname, $a));
+        $this->assertEmpty($this->object->rScanDir($dirname, $a));
 
         chmod($dirname, 0777); // rwxrwxrwx
         rmdir($dirname);
@@ -275,7 +283,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($dirname, 0777); // rwxrwxrwx
 
-        $this->assertEmpty(Bonzai_Utils::rScanDir($dirname, $a));
+        $this->assertEmpty($this->object->rScanDir($dirname, $a));
         rmdir($dirname);
     }
     // }}}
@@ -294,7 +302,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         mkdir($dirname, 0777); // rwxrwxrwx
 
         $value = array('a');
-        $this->assertEquals(array('a'), Bonzai_Utils::rScanDir($dirname, $value));
+        $this->assertEquals(array('a'), $this->object->rScanDir($dirname, $value));
         rmdir($dirname);
     }
     // }}}
@@ -315,7 +323,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $dirname2 = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir("$dirname/$dirname2", 0222); // -w--w--w-
 
-        $value = Bonzai_Utils::rScanDir($dirname);
+        $value = $this->object->rScanDir($dirname);
         $this->assertEquals(array("$dirname/$dirname2/"), $value);
 
         chmod("$dirname/$dirname2", 0777);
@@ -336,7 +344,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     {
         $dirname = realpath(__DIR__ . '/../../');
 
-        $files = Bonzai_Utils::rScanDir($dirname);
+        $files = $this->object->rScanDir($dirname);
         sort($files);
         $files = preg_grep('/\.(php|sh)$/', $files);
         $files = array_merge($files);
@@ -346,9 +354,11 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $realfiles = array(
             '/bin/build.sh',
+            '/src/libs/Abstract/Abstract.php',
             '/src/libs/Controller/Controller.php',
             '/src/libs/Encoder/Encoder.php',
             '/src/libs/Exception/Exception.php',
+            '/src/libs/Interface/Task.php',
             '/src/libs/Registry/Registry.php',
             '/src/libs/Task/Task.php',
             '/src/libs/Tests/TestCase.php',
@@ -404,7 +414,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testGetFileContentWithProviderThrowException($a)
     {
-        Bonzai_Utils::getFileContent($a);
+        $this->object->getFileContent($a);
     }
     // }}}
 
@@ -423,7 +433,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         chmod($filename, 0333); // -wx-wx-wx
 
         try {
-            Bonzai_Utils::getFileContent($filename);
+            $this->object->getFileContent($filename);
             $this->fail("The exception was not threw.");
         } catch (Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
@@ -449,7 +459,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         chmod($filename, 0555); // r-xr-xr-x
 
         try {
-            Bonzai_Utils::getFileContent($filename);
+            $this->object->getFileContent($filename);
             $this->fail("The exception was not threw.");
         } catch (Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
@@ -474,7 +484,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         file_put_contents($filename, '');
 
         try {
-            Bonzai_Utils::getFileContent($filename);
+            $this->object->getFileContent($filename);
             $this->fail("The exception was not threw.");
         } catch (Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
@@ -559,7 +569,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityWithParamsEmptyStringEmptyStringThrowException()
     {
-        Bonzai_Utils::checkFileValidity('', '');
+        $this->object->checkFileValidity('', '');
     }
     // }}}
 
@@ -576,7 +586,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty(Bonzai_Utils::checkFileValidity($filename));
+        $this->assertEmpty($this->object->checkFileValidity($filename));
 
         unlink($filename);
     }
@@ -595,7 +605,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty(Bonzai_Utils::checkFileValidity($filename));
+        $this->assertEmpty($this->object->checkFileValidity($filename));
 
         unlink($filename);
     }
@@ -614,7 +624,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty(Bonzai_Utils::checkFileValidity($filename));
+        $this->assertEmpty($this->object->checkFileValidity($filename));
 
         unlink($filename);
     }
@@ -633,7 +643,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty(Bonzai_Utils::checkFileValidity($filename));
+        $this->assertEmpty($this->object->checkFileValidity($filename));
 
         unlink($filename);
     }
@@ -652,7 +662,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty(Bonzai_Utils::checkFileValidity($filename));
+        $this->assertEmpty($this->object->checkFileValidity($filename));
 
         unlink($filename);
     }
@@ -671,7 +681,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty(Bonzai_Utils::checkFileValidity($filename));
+        $this->assertEmpty($this->object->checkFileValidity($filename));
 
         unlink($filename);
     }
@@ -688,7 +698,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamCurrentFile()
     {
-        Bonzai_Utils::checkFileValidity(__FILE__);
+        $this->object->checkFileValidity(__FILE__);
     }
     // }}}
     // }}}

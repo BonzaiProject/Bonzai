@@ -25,9 +25,9 @@
  *
  * PHP version 5
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Help
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
@@ -38,17 +38,16 @@
 /**
  * Bonzai_Utils_Help
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Help
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Utils_Help
+class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
 {
     // {{{ elaborate
     /**
@@ -61,11 +60,10 @@ class Bonzai_Utils_Help
      */
     public function elaborate(Bonzai_Utils_Options $options)
     {
-        Bonzai_Utils::printHeader($options, true);
+        $this->printScriptHeader($options, true);
 
         echo gettext('Version') . ': 0.1' . PHP_EOL;
-        echo 'Copyright (C) 2006 - ' . date('Y') . ' Bonzai (Fabio Cicerchia). '
-               . gettext('All rights reserved.') . PHP_EOL;
+        echo 'Copyright (C) 2006 - ' . date('Y') . ' Bonzai (Fabio Cicerchia). ' . gettext('All rights reserved.') . PHP_EOL;
         echo gettext('License MIT or GNU GPL 2') . PHP_EOL;
         echo str_repeat('-', 80) . PHP_EOL;
 
@@ -76,7 +74,6 @@ class Bonzai_Utils_Help
     // }}}
 
     // {{{ printAll
-    // TODO: Optimize Cyclomatic Complexity (5)
     /**
      * printAll
      *
@@ -120,8 +117,8 @@ class Bonzai_Utils_Help
      */
     protected function printOptionInfo(Bonzai_Utils_Options $options, $short, $long)
     {
-        $short = is_array($short) ? implode('', $short) : strval($short);
-        $long  = is_array($long)  ? implode('', $long)  : strval($long);
+        $short = $this->getStrVal($short);
+        $long = $this->getStrVal($long);
 
         $has_value = strpos($long, ':') > 0;
 

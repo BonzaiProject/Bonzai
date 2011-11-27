@@ -25,9 +25,9 @@
  *
  * PHP version 5
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Encoder
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
@@ -38,17 +38,16 @@
 /**
  * Bonzai_Encoder
  *
- * @category   Optimization_and_Security
+ * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Encoder
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Encoder
+class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
 {
     // {{{ elaborate
     /**
@@ -61,19 +60,36 @@ class Bonzai_Encoder
      */
     public function elaborate(Bonzai_Utils_Options $options) // TODO: MODIFIED
     {
-        Bonzai_Utils::printHeader($options);
+        $this->printScriptHeader($options);
 
         $files = $this->expandPathsToFiles($options->getOptionParams());
         $files = array_unique($files);
         Bonzai_Registry::add('total_files', count($files));
 
+        $this->processFileList($options, $files);
+    }
+    // }}}
+
+    // {{{ processFileList
+    // TODO: ADD TEST
+    /**
+     * processFileList
+     *
+     * @param Bonzai_Utils_Options $options
+     * @param array                $files
+     *
+     * @access protected
+     * @return void
+     */
+    protected function processFileList(Bonzai_Utils_Options $options, array $files)
+    {
         Bonzai_Registry::add('skipped_files', array());
         foreach ($files as $filename) {
             try {
                 $this->processFile($options, $filename);
             } catch (Bonzai_Exception $e) {
                 Bonzai_Registry::append('skipped_files', $filename);
-                Bonzai_Utils::error('Cannot handle the file `%s`.', $filename);
+                $this->error('Cannot handle the file `%s`.', $filename);
 
                 unset($e);
             }
@@ -83,7 +99,6 @@ class Bonzai_Encoder
 
     // {{{ processFile
     // TODO: MODIFIED
-    // TODO: Optimize Cyclomatic Complexity (7)
     /**
      * processFile
      *
@@ -96,24 +111,21 @@ class Bonzai_Encoder
      */
     protected function processFile(Bonzai_Utils_Options $options, $filename)
     {
-        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
+        $filename = $this->getStrVal($filename);
 
-        if (!is_file($filename)) {
-            $message = gettext('The file `%s` is invalid.');
-            throw new Bonzai_Exception(sprintf($message, $filename));
-        }
+        $this->raiseExceptionIf(!is_file($filename), array('The file `%s` is invalid.', $filename));
 
-        Bonzai_Utils::info('Start encoding file `%s\'.', $filename);
+        $this->info('Start encoding file `%s\'.', $filename);
 
         $bytecode = $this->getByteCode($filename);
 
         if ($options->getOption('backup') !== null) {
-            Bonzai_Utils::renameFile($filename);
+            $this->getUtils()->renameFile($filename);
         }
 
         if (!empty($bytecode)) {
             $this->saveOutput($options, $filename, $bytecode);
-            Bonzai_Utils::info("Saved encoded file to `%s'.", $filename);
+            $this->info("Saved encoded file to `%s'.", $filename);
         }
 
         if ($options->getOption('quiet') === null) {
@@ -124,7 +136,6 @@ class Bonzai_Encoder
 
     // {{{ saveOutput
     // TODO: MODIFIED
-    // TODO: Optimize Cyclomatic Complexity (5)
     /**
      * saveOutput
      *
@@ -137,22 +148,18 @@ class Bonzai_Encoder
      */
     protected function saveOutput(Bonzai_Utils_Options $options, $filename, $bytecode)
     {
-        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
-        $bytecode = is_array($bytecode) ? implode('', $bytecode) : strval($bytecode);
+        $filename = $this->getStrVal($filename);
+        $bytecode = $this->getStrVal($bytecode);
 
         try {
             if ($options->getOption('dry') === null) {
-                Bonzai_Utils::putFileContent($filename, $bytecode);
-            } elseif (!is_writable($filename)) {
-                $message = gettext('The file `%s` cannot be written.');
-                throw new Bonzai_Exception(sprintf($message, $filename));
+                $this->getUtils()->putFileContent($filename, $bytecode);
+            } else {
+                $this->raiseExceptionIf(!is_writable($filename), array('The file `%s` cannot be written.', $filename));
             }
         } catch (Bonzai_Exception $e) {
             Bonzai_Registry::append('skipped_files', $filename);
-            Bonzai_Utils::warn(
-                'The file `%s` was skipped because cannot be able to save it.',
-                $filename
-            );
+            $this->warn('The file `%s` was skipped because cannot be able to save it.', $filename);
 
             unset($e);
         }
@@ -172,23 +179,23 @@ class Bonzai_Encoder
     {
         $bytecode = null;
 
-        Bonzai_Utils::checkFileValidity($filename);
+        $this->getUtils()->checkFileValidity($filename);
 
         try {
             $tempnam = tempnam('/tmp', 'BNZ');
-            $fh = fopen($tempnam, 'w');
+            $filehandle = fopen($tempnam, 'w');
 
-            bcompiler_write_header($fh);
-            bcompiler_write_file($fh, $filename);
-            bcompiler_write_footer($fh);
+            bcompiler_write_header($filehandle);
+            bcompiler_write_file($filehandle, $filename);
+            bcompiler_write_footer($filehandle);
 
-            fclose($fh);
+            fclose($filehandle);
 
-            $bytecode = Bonzai_Utils::getFileContent($tempnam);
+            $bytecode = $this->getUtils()->getFileContent($tempnam);
             unlink($tempnam);
         } catch (Bonzai_Exception $e) {
             Bonzai_Registry::append('skipped_files', $filename);
-            Bonzai_Utils::error('Cannot handle the file `%s`.', $filename);
+            $this->error('Cannot handle the file `%s`.', $filename);
 
             unset($e);
         }
@@ -224,17 +231,14 @@ class Bonzai_Encoder
 
             if (is_dir($files[$key])) {
                 try {
-                    $scandir   = Bonzai_Utils::rScanDir($files[$key]);
+                    $scandir   = $this->getUtils()->rScanDir($files[$key]);
                     $new_files = preg_grep('/\.php$/', $scandir);
 
                     unset($files[$key]);
 
                     $files     = array_merge($files, $new_files);
                 } catch (Bonzai_Exception $e) {
-                    Bonzai_Utils::warn(
-                        'The directory `%s` was skipped because not readable.',
-                        $files[$key]
-                    );
+                    $this->warn('The directory `%s` was skipped because not readable.', $files[$key]);
 
                     unset($e);
                 }

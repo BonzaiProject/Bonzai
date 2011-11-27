@@ -35,10 +35,10 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once __DIR__ . '/../Abstract/Abstract.php';
+require_once __DIR__ . '/../Exception/Exception.php';
 
 /**
- * Bonzai_Controller
+ * Bonzai_Abstract
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -49,126 +49,133 @@ require_once __DIR__ . '/../Abstract/Abstract.php';
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Controller extends Bonzai_Abstract
+abstract class Bonzai_Abstract
 {
-    // {{{ __construct
+    // {{{ PROPERTIES
     /**
-     * __construct
-     *
-     * @access public
-     * @return void
+     * @static
+     * @access protected
+     * @var    Bonzai_Utils
      */
-    public function __construct()
-    {
-        spl_autoload_register('Bonzai_Controller::autoload');
-    }
+    protected static $utils = null;
     // }}}
 
-    // {{{ elaborate
-    // TODO: MODIFIED
+    // {{{ getUtils
+    // TODO: ADD TEST
     /**
-     * elaborate
-     *
-     * @param array                $arguments
-     * @param Bonzai_Utils_Options $options
+     * getUtils
      *
      * @access public
-     * @return void
+     * @return Bonzai_Utils
      */
-    public function elaborate(array $arguments, Bonzai_Utils_Options $options)
+    public function getUtils()
     {
-        try {
-            $options->init($arguments);
-        } catch (Bonzai_Exception $e) {
-            // Fallback behaviour: show the help
-            unset($e);
+        if (is_null(self::$utils)) {
+            self::$utils = new Bonzai_Utils();
         }
 
-        $this->handleTask($options);
+        return self::$utils;
     }
     // }}}
 
-    // {{{ handleTask
+    // {{{ raiseExceptionIf
+    // TODO: ADD TEST
     /**
-     * handleTask
+     * raiseExceptionIf
      *
-     * @param Bonzai_Utils_Options $options
-     *
-     * @access protected
-     * @return void
-     */
-    protected function handleTask(Bonzai_Utils_Options $options) // TODO: MODIFIED
-    {
-        $task = new Bonzai_Task();
-        $task->loadAndExecute($options);
-    }
-    // }}}
-
-    // {{{ autoload
-    /**
-     * autoload
-     *
-     * @param string $name
+     * @param boolean $condition
+     * @param mixed   $message
      *
      * @access protected
      * @throws Bonzai_Exception
      * @return void
      */
-    protected function autoload($name)
+    protected function raiseExceptionIf($condition, $message)
     {
-        $name = $this->getStrVal($name);
+        if (is_array($message)) {
+            $format = gettext(array_shift($message));
+            $message = vsprintf($format, $message);
+        } else {
+            $message = gettext(strval($message));
+        }
 
-        if (strpos($name, 'Bonzai_') === 0) {
-            $filename = $this->getFileNameFromClassName($name);
-
-            $this->raiseExceptionIf(!$this->checkFile($filename), array('The class `%s` cannot be loaded.', $name));
-
-            include_once __DIR__ . '/../' . $filename . '.php';
+        if ($condition) {
+            throw new Bonzai_Exception($message);
         }
     }
     // }}}
 
-    // {{{ getFileNameFromClassName
+    // {{{ getStrVal
+    // TODO: ADD TEST
     /**
-     * getFileNameFromClassName
+     * getStrVal
      *
-     * @param string $name
+     * @param mixed $variable
      *
      * @access protected
      * @return string
      */
-    protected function getFileNameFromClassName($name)
+    protected function getStrVal($variable)
     {
-        $name = $this->getStrVal($name);
-
-        $path = preg_replace('/^Bonzai_(.+?)(?:_(.+))?$/', '\1' . DIRECTORY_SEPARATOR . '\2', trim($name));
-
-        if (substr($path, -1, 1) == '/') {
-            $path = preg_replace('/(.+)\//', '\1' . DIRECTORY_SEPARATOR . '\1', $path);
-        }
-
-        if ($this->checkFile($path)) {
-            return $path;
-        }
-
-        return null;
+        return is_array($variable) ? implode('', $variable) : strval($variable);
     }
     // }}}
 
-    // {{{ checkFile
+    // {{{ info
+    // TODO: ADD TEST
     /**
-     * checkFile
-     *
-     * @param string $filename
+     * info
      *
      * @access protected
-     * @return boolean
+     * @return void
      */
-    protected function checkFile($filename)
+    protected function info()
     {
-        $filename = $this->getStrVal($filename);
+        call_user_func_array(array($this->getUtils(), 'info'), func_get_args());
+    }
+    // }}}
 
-        return file_exists(__DIR__ . '/../' . $filename . '.php');
+    // {{{ warn
+    // TODO: ADD TEST
+    /**
+     * warn
+     *
+     * @access protected
+     * @return void
+     */
+    protected function warn()
+    {
+        call_user_func_array(array($this->getUtils(), 'warn'), func_get_args());
+    }
+    // }}}
+
+    // {{{ error
+    // TODO: ADD TEST
+    /**
+     * error
+     *
+     * @access protected
+     * @return void
+     */
+    protected function error()
+    {
+        call_user_func_array(array($this->getUtils(), 'error'), func_get_args());
+    }
+    // }}}
+
+    // {{{ printScriptHeader
+    // TODO: ADD TEST
+    /**
+     * printScriptHeader
+     *
+     * @param Bonzai_Utils_Options $options
+     *
+     * @access protected
+     * @return void
+     */
+    protected function printScriptHeader(Bonzai_Utils_Options $options)
+    {
+        $this->getUtils()->printHeader($options);
     }
     // }}}
 }
