@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Task
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -38,7 +38,7 @@
 /**
  * Bonzai_Task
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Task
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -79,7 +79,7 @@ class Bonzai_Task
      * @access public
      * @return mixed
      */
-    public function loadAndExecute(Bonzai_Utils_Options $options = null)
+    public function loadAndExecute(Bonzai_Utils_Options $options)
     {
         $this->load($options);
 
@@ -88,7 +88,7 @@ class Bonzai_Task
     // }}}
 
     // {{{ load
-    // TODO: Optimize cyclomatic complexity (5)
+    // TODO: Optimize Cyclomatic Complexity (5)
     /**
      * load
      *
@@ -97,27 +97,21 @@ class Bonzai_Task
      * @access protected
      * @return void
      */
-    protected function load(Bonzai_Utils_Options $options = null)
+    protected function load(Bonzai_Utils_Options $options) // TODO: MODIFIED
     {
-        if (is_null($options)) {
-            $options = new Bonzai_Utils_Options;
-        }
+        $this->options = $options;
 
-        $this->options    = $options;
-        $this->parameters = $options;
-
-        $options = $this->options->getOptionParams();
-        if (!empty($options)
-            && $this->options->getOption('help') === null
-            && $this->options->getOption('version') === null
+        if ($options->getOptionParams()
+            && $options->getOption('help') === null
+            && $options->getOption('version') === null
         ) {
-            $this->task       = 'Bonzai_Encoder';
-            $this->parameters = $options;
+            $this->task = 'Bonzai_Encoder';
         }
     }
     // }}}
 
     // {{{ execute
+    // TODO: Optimize Cyclomatic Complexity (5)
     /**
      * execute
      *
@@ -127,28 +121,73 @@ class Bonzai_Task
      */
     protected function execute()
     {
-        $class = $this->task;
-        $class = new $class();
+        $class = new $this->task();
 
         if (!method_exists($class, 'elaborate')) {
             $message = gettext('Cannot launch the task `%s`.');
             throw new Bonzai_Exception(sprintf($message, $this->task));
         }
 
-        $parameters = $this->parameters;
-        if (is_null($parameters)) {
-            $parameters = new Bonzai_Utils_Options;
-        }
-
         $start = microtime(true);
-        $res   = $class->elaborate($parameters);
-        $time  = (microtime(true) - $start) / 1000000;
+        $res   = $class->elaborate($this->options);
+
+        $report = $this->generateReport((microtime(true) - $start) / 1000000);
+        if ($this->options->getOption('quiet') === null) {
+            echo $report;
+        }
+        $this->saveReportFile($report);
+
+        return $res;
+    }
+    // }}}
+
+    // {{{ saveReportFile
+    // TODO: Optimize Cyclomatic Complexity (5)
+    /**
+     * saveReportFile
+     *
+     * @param string $post
+     *
+     * @access protected
+     * @throws Bonzai_Exception
+     * @return mixed
+     */
+    protected function saveReportFile($post)
+    {
+        $post = is_array($post) ? implode('', $post) : strval($post);
+
+        $contents = implode(PHP_EOL, Bonzai_Utils::$message_history);
+        if ($this->options->getOption('log') !== null && !empty($contents)) {
+            $pre  = str_repeat('-', 80) . PHP_EOL;
+            $pre .= 'BONZAI' . str_repeat(' ', 50);
+            $pre .= gettext('(previously phpGuardian)') . PHP_EOL;
+            $pre .= str_repeat('-', 80) . PHP_EOL;
+
+            Bonzai_Utils::putFileContent($log_file, $pre . $contents . $post);
+        }
+    }
+    // }}}
+
+    // {{{ generateReport
+    // TODO: Optimize Cyclomatic Complexity (5)
+    /**
+     * generateReport
+     *
+     * @param int $time
+     *
+     * @access protected
+     * @throws Bonzai_Exception
+     * @return mixed
+     */
+    protected function generateReport($time)
+    {
+        $time = intval($time);
 
         $post = '';
-        if ($this->options && $this->options->getOption('report') !== null) {
+        if ($this->options->getOption('report') !== null) {
             ob_start();
             $skipped_files = Bonzai_Registry::get('skipped_files');
-            $skipped = count($skipped_files);
+            $skipped       = count($skipped_files);
 
             $total_files = Bonzai_Registry::get('total_files');
             printf(gettext('Total time:            %0.2fs') . PHP_EOL, $time);
@@ -161,24 +200,9 @@ class Bonzai_Task
                 }
             }
             $post = PHP_EOL . ob_get_clean();
-
-            if ($this->options->getOption('quiet') === null) {
-                echo $post;
-            }
         }
 
-        $log_file = $this->options ? $this->options->getOption('log') : null;
-        $contents = implode(PHP_EOL, Bonzai_Utils::$message_history);
-        if ($log_file !== null && !empty($contents)) {
-            $pre  = str_repeat('-', 80) . PHP_EOL;
-            $pre .= 'BONZAI' . str_repeat(' ', 50);
-            $pre .= gettext('(previously phpGuardian)') . PHP_EOL;
-            $pre .= str_repeat('-', 80) . PHP_EOL;
-
-            Bonzai_Utils::putFileContent($log_file, $pre . $contents . $post);
-        }
-
-        return $res;
+        return $post;
     }
     // }}}
 }

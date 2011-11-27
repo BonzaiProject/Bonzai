@@ -25,24 +25,25 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
 
 require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
+require_once __DIR__ . '/../../src/libs/Utils/Options.php';
+require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
 require_once __DIR__ . '/../../src/libs/Utils/Help.php';
 
 /**
  * Bonzai_Utils_Help_Test
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -65,7 +66,7 @@ class Bonzai_Utils_HelpTest extends Bonzai_TestCase
      */
     public function testElaborateJustCoverage()
     {
-        $this->object->elaborate(new Bonzai_Utils_Options);
+        $this->assertEmpty($this->object->elaborate(new Bonzai_Utils_Options));
     }
     // }}}
     // }}}

@@ -2,10 +2,15 @@ CHANGELOG
 ===============================================================================
 
 v0.1        Bonzai
-  * ADDED   - Bytecode compilation
+  * ADDED   - Build configuration for Jenkins
+  * ADDED   - Bytecode compilation (through bcompiler extension)
+  * ADDED   - Color support for CLI
+  * ADDED   - Log to filesystem the CLI report
   * ADDED   - New logo for the product
   * ADDED   - New website for the product
   * ADDED   - Project repository on github.com
+  * ADDED   - Shell build script with various report (coverage, violations, ecc)
+  * ADDED   - Test suite with PHPUnit
   * CHANGED - CLI from C to PHP
   * CHANGED - Project name to Bonzai but kept the changelog history
   * REMOVED - CVS Server at sourceforge.net

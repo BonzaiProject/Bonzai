@@ -25,14 +25,13 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
 
@@ -42,7 +41,7 @@ require_once __DIR__ . '/../../src/libs/Utils/Options.php';
 /**
  * Bonzai_Utils_Options_Test
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -65,83 +64,23 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testInitJustCoverage()
     {
-        $this->object->init(array('help'));
+        $this->assertEmpty($this->object->init(array('help')));
     }
     // }}}
     // }}}
 
     // {{{ parseOptions
-    // {{{ testParseOptionsParamEmptyStringThrowException
+    // {{{ testParseOptionsJustCoverage
     /**
-     * testParseOptionsParamEmptyStringThrowException
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testParseOptionsParamEmptyStringThrowException()
-    {
-        $this->callMethod('parseOptions', array(''));
-    }
-    // }}}
-
-    // {{{ testParseOptionsParamSpacedStringThrowException
-    /**
-     * testParseOptionsParamSpacedStringThrowException
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testParseOptionsParamSpacedStringThrowException()
-    {
-        $this->callMethod('parseOptions', array(' '));
-    }
-    // }}}
-
-    // {{{ testParseOptionsParamFakeThrowException
-    /**
-     * testParseOptionsParamFakeThrowException
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testParseOptionsParamFakeThrowException()
-    {
-        $this->callMethod('parseOptions', array('a'));
-    }
-    // }}}
-
-    // {{{ testParseOptionsParamNullThrowException
-    /**
-     * testParseOptionsParamNullThrowException
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testParseOptionsParamNullThrowException()
-    {
-        $this->callMethod('parseOptions', array(null));
-    }
-    // }}}
-
-    // {{{ testParseOptionsParamEmptyArrayThrowException
-    /**
-     * testParseOptionsParamEmptyArrayThrowException
+     * testParseOptionsJustCoverage
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testParseOptionsParamEmptyArrayThrowException()
+    public function testParseOptionsJustCoverage()
     {
-        $this->callMethod('parseOptions', array(array()));
+        $this->assertEmpty($this->callMethod('parseOptions', array(array())));
     }
     // }}}
 
@@ -155,7 +94,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testParseOptionsParamArray()
     {
-        $this->callMethod('parseOptions', array(array('a', 'b')));
+        $this->assertEmpty($this->callMethod('parseOptions', array(array('a', 'b'))));
     }
     // }}}
 
@@ -169,7 +108,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testParseOptionsParamFullOptions()
     {
-        $this->callMethod('parseOptions', array(array('-b', '--backup', '-d', '--dry', '--colors', '--stderr', '-q', '--quiet', '-h', '--help', '-v', '--version', '-r', 'report_file', '--report', 'report_file', '--log', 'log_file')));
+        $this->assertEmpty($this->callMethod('parseOptions', array(array('-b', '--backup', '-d', '--dry', '--colors', '--stderr', '-q', '--quiet', '-h', '--help', '-v', '--version', '-r', 'report_file', '--report', 'report_file', '--log', 'log_file'))));
     }
     // }}}
     // }}}
@@ -185,7 +124,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testGetOptionParamsJustCoverage()
     {
-        $this->object->getOptionParams();
+        $this->assertEmpty($this->object->getOptionParams());
     }
     // }}}
     // }}}
@@ -201,7 +140,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testGetOptionsJustCoverage()
     {
-        $this->object->getOptions();
+        $this->assertEmpty($this->object->getOptions());
     }
     // }}}
     // }}}
@@ -217,7 +156,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testGetOptionJustCoverage()
     {
-        $this->object->getOption(null);
+        $this->assertEmpty($this->object->getOption(null));
     }
     // }}}
     // }}}
@@ -233,7 +172,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testGetParametersJustCoverage()
     {
-        $this->object->getParameters();
+        $this->assertEquals('array', gettype($this->object->getParameters()));
     }
     // }}}
     // }}}
@@ -256,7 +195,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
 
     // {{{ testGetLabelParameterWithParamNotExistentIsNull
     /**
-     * testGetLabelParameterWithParam_NotExistentIsNull
+     * testGetLabelParameterWithParamNotExistentIsNull
      *
      * @ignore
      * @access public

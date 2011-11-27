@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage TestCase
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -40,7 +40,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
 /**
  * Bonzai_TestCase
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage TestCase
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -98,8 +98,10 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
      * @access protected
      * @return method
      */
-    public function callMethod($name, $parameters = array())
+    public function callMethod($name, array $parameters = array())
     {
+        $name = is_array($name) ? implode('', $name) : strval($name);
+
         $method = new ReflectionMethod(get_class($this->object), $name);
         $method->setAccessible(true);
 

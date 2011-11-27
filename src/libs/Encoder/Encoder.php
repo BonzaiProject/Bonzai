@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Encoder
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -38,7 +38,7 @@
 /**
  * Bonzai_Encoder
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Encoder
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -51,45 +51,28 @@
 class Bonzai_Encoder
 {
     // {{{ elaborate
-    // TODO: Optimize cyclomatic complexity (5)
     /**
      * elaborate
      *
-     * @param array $files
+     * @param Bonzai_Utils_Options $options
      *
      * @access public
      * @return void
      */
-    public function elaborate($files)
+    public function elaborate(Bonzai_Utils_Options $options) // TODO: MODIFIED
     {
-        $options    = Bonzai_Registry::get('options');
-        $quiet_mode = ($options && $options->getOption('quiet') !== null);
-        if (!$quiet_mode) {
-            echo str_repeat('-', 80) . PHP_EOL;
-            if ($options && $options->getOption('colors') !== null) {
-                echo "\033[1;37m";
-            }
-            echo 'BONZAI' . str_repeat(' ', 50);
-            echo gettext('(previously phpGuardian)') . PHP_EOL;
-            if ($options && $options->getOption('colors') !== null) {
-                echo "\033[0m";
-            }
-            echo str_repeat('-', 80) . PHP_EOL;
-        }
+        Bonzai_Utils::printHeader($options);
 
-        $files = array_unique($this->expandPathsToFiles($files));
+        $files = $this->expandPathsToFiles($options->getOptionParams());
+        $files = array_unique($files);
         Bonzai_Registry::add('total_files', count($files));
 
+        Bonzai_Registry::add('skipped_files', array());
         foreach ($files as $filename) {
             try {
-                $this->processFile($filename);
+                $this->processFile($options, $filename);
             } catch (Bonzai_Exception $e) {
-                Bonzai_Registry::append(
-                    'skipped_files',
-                    $filename,
-                    Bonzai_Registry::ARRAY_APPEND
-                );
-
+                Bonzai_Registry::append('skipped_files', $filename);
                 Bonzai_Utils::error('Cannot handle the file `%s`.', $filename);
 
                 unset($e);
@@ -99,19 +82,23 @@ class Bonzai_Encoder
     // }}}
 
     // {{{ processFile
-    // TODO: Optimize cyclomatic complexity (8)
+    // TODO: MODIFIED
+    // TODO: Optimize Cyclomatic Complexity (7)
     /**
      * processFile
      *
-     * @param string $filename
+     * @param Bonzai_Utils_Options $options
+     * @param string               $filename
      *
      * @access protected
      * @throws Bonzai_Exception
      * @return boolean
      */
-    protected function processFile($filename)
+    protected function processFile(Bonzai_Utils_Options $options, $filename)
     {
-        if (empty($filename) || !file_exists($filename)) {
+        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
+
+        if (!is_file($filename)) {
             $message = gettext('The file `%s` is invalid.');
             throw new Bonzai_Exception(sprintf($message, $filename));
         }
@@ -120,53 +107,48 @@ class Bonzai_Encoder
 
         $bytecode = $this->getByteCode($filename);
 
-        $options = Bonzai_Registry::get('options');
-        $backup  = ($options && $options->getOption('backup') !== null);
-        if ($backup) {
+        if ($options->getOption('backup') !== null) {
             Bonzai_Utils::renameFile($filename);
         }
 
         if (!empty($bytecode)) {
-            $this->saveOutput($filename, $bytecode);
+            $this->saveOutput($options, $filename, $bytecode);
             Bonzai_Utils::info("Saved encoded file to `%s'.", $filename);
         }
 
-        $quiet_mode = ($options && $options->getOption('quiet') !== null);
-        if (!$quiet_mode) {
+        if ($options->getOption('quiet') === null) {
             echo str_repeat('-', 80) . PHP_EOL;
         }
     }
     // }}}
 
     // {{{ saveOutput
-    // TODO: Optimize cyclomatic complexity (5)
+    // TODO: MODIFIED
+    // TODO: Optimize Cyclomatic Complexity (5)
     /**
      * saveOutput
      *
-     * @param string $filename
-     * @param string $bytecode
+     * @param Bonzai_Utils_Options $options
+     * @param string               $filename
+     * @param string               $bytecode
      *
      * @access protected
      * @return void
      */
-    protected function saveOutput($filename, $bytecode)
+    protected function saveOutput(Bonzai_Utils_Options $options, $filename, $bytecode)
     {
-        $options = Bonzai_Registry::get('options');
-        $dry_run = ($options && $options->getOption('dry') !== null);
+        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
+        $bytecode = is_array($bytecode) ? implode('', $bytecode) : strval($bytecode);
+
         try {
-            if (!$dry_run) {
+            if ($options->getOption('dry') === null) {
                 Bonzai_Utils::putFileContent($filename, $bytecode);
             } elseif (!is_writable($filename)) {
                 $message = gettext('The file `%s` cannot be written.');
                 throw new Bonzai_Exception(sprintf($message, $filename));
             }
         } catch (Bonzai_Exception $e) {
-            Bonzai_Registry::append(
-                'skipped_files',
-                $filename,
-                Bonzai_Registry::ARRAY_APPEND
-            );
-
+            Bonzai_Registry::append('skipped_files', $filename);
             Bonzai_Utils::warn(
                 'The file `%s` was skipped because cannot be able to save it.',
                 $filename
@@ -205,12 +187,7 @@ class Bonzai_Encoder
             $bytecode = Bonzai_Utils::getFileContent($tempnam);
             unlink($tempnam);
         } catch (Bonzai_Exception $e) {
-            Bonzai_Registry::append(
-                'skipped_files',
-                $filename,
-                Bonzai_Registry::ARRAY_APPEND
-            );
-
+            Bonzai_Registry::append('skipped_files', $filename);
             Bonzai_Utils::error('Cannot handle the file `%s`.', $filename);
 
             unset($e);
@@ -221,7 +198,7 @@ class Bonzai_Encoder
     // }}}
 
     // {{{ expandPathsToFiles
-    // TODO: Optimize cyclomatic complexity (7)
+    // TODO: Optimize Cyclomatic Complexity (7)
     /**
      * expandPathsToFiles
      *
@@ -238,24 +215,25 @@ class Bonzai_Encoder
 
         $cloned = $files;
         foreach ($cloned as $key => $path) {
-            $path = realpath(getcwd() . '/' . $path) ?: realpath($path);
-            if ($path == false) {
+            $files[$key] = realpath(getcwd() . '/' . $path) ?: realpath($path);
+
+            if ($files[$key] == false) {
                 unset($files[$key]);
-            } else {
-                $files[$key] = $path;
+                continue;
+            }
 
+            if (is_dir($files[$key])) {
                 try {
-                    if (is_dir($path)) {
-                        unset($files[$key]);
+                    $scandir   = Bonzai_Utils::rScanDir($files[$key]);
+                    $new_files = preg_grep('/\.php$/', $scandir);
 
-                        $scandir = Bonzai_Utils::rScanDir($path);
-                        $new_files = preg_grep('/\.php$/', $scandir);
-                        $files = array_merge($files, $new_files);
-                    }
+                    unset($files[$key]);
+
+                    $files     = array_merge($files, $new_files);
                 } catch (Bonzai_Exception $e) {
                     Bonzai_Utils::warn(
                         'The directory `%s` was skipped because not readable.',
-                        $path
+                        $files[$key]
                     );
 
                     unset($e);

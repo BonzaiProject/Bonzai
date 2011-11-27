@@ -25,24 +25,26 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
 
 require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
+require_once __DIR__ . '/../../src/libs/Utils/Options.php';
+require_once __DIR__ . '/../../src/libs/Utils/Help.php';
+require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
 require_once __DIR__ . '/../../src/libs/Task/Task.php';
 
 /**
  * Bonzai_Task_Test
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -65,39 +67,7 @@ class Bonzai_Task_TaskTest extends Bonzai_TestCase
      */
     public function testLoadAndExecuteJustCoverage()
     {
-        $this->object->loadAndExecute();
-    }
-    // }}}
-    // }}}
-
-    // {{{ load
-    // {{{ testLoadJustCoverage
-    /**
-     * testLoadJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testLoadJustCoverage()
-    {
-        $this->callMethod('load');
-    }
-    // }}}
-    // }}}
-
-    // {{{ execute
-    // {{{ testExecute
-    /**
-     * testExecute
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testExecute()
-    {
-        $this->callMethod('execute');
+        $this->assertEmpty($this->object->loadAndExecute(new Bonzai_Utils_Options()));
     }
     // }}}
     // }}}

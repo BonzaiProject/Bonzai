@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Help
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -38,7 +38,7 @@
 /**
  * Bonzai_Utils_Help
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Help
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -51,7 +51,6 @@
 class Bonzai_Utils_Help
 {
     // {{{ elaborate
-    // TODO: Optimize cyclomatic complexity (5)
     /**
      * elaborate
      *
@@ -62,16 +61,7 @@ class Bonzai_Utils_Help
      */
     public function elaborate(Bonzai_Utils_Options $options)
     {
-        echo str_repeat('-', 80) . PHP_EOL;
-        if ($options->getOption('colors') !== null) {
-            echo "\033[1;37m";
-        }
-        echo 'BONZAI' . str_repeat(' ', 50);
-        echo gettext('(previously phpGuardian)') . PHP_EOL;
-        if ($options->getOption('colors') !== null) {
-            echo "\033[0m";
-        }
-        echo str_repeat('-', 80) . PHP_EOL;
+        Bonzai_Utils::printHeader($options, true);
 
         echo gettext('Version') . ': 0.1' . PHP_EOL;
         echo 'Copyright (C) 2006 - ' . date('Y') . ' Bonzai (Fabio Cicerchia). '
@@ -80,45 +70,74 @@ class Bonzai_Utils_Help
         echo str_repeat('-', 80) . PHP_EOL;
 
         if (is_null($options->getOption('version'))) {
-            if ($options->getOption('colors') !== null) {
-                echo "\033[1;37m";
-            }
-            echo PHP_EOL . gettext('Usage') . ':' . PHP_EOL;
-            if ($options->getOption('colors') !== null) {
-                echo "\033[0m";
-            }
-            echo $_SERVER['argv'][0] . ' [' . gettext('OPTIONS');
-            echo ']... [' . gettext('FILES') . '|' . gettext('DIRECTORIES');
-            echo ']...' . PHP_EOL . PHP_EOL;
-
-            if ($options->getOption('colors') !== null) {
-                echo "\033[1;37m";
-            }
-            echo gettext('Options') . ':' . PHP_EOL;
-            if ($options->getOption('colors') !== null) {
-                echo "\033[0m";
-            }
-
-            foreach ($options->getParameters() as $short => $long) {
-                $has_value = strpos($long, ':') > 0;
-
-                $only_long = is_int($short);
-
-                $short = str_replace(':', '', $short);
-                $long  = str_replace(':', '', $long);
-
-                $info = ($only_long ? '' : "-$short, ") . "--$long";
-                if ($has_value) {
-                    $info .= '=<value>';
-                }
-
-                $format = '    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL;
-                $row = sprintf($format, gettext($options->getLabelParameter($long)));
-                echo wordwrap($row, 80, PHP_EOL . str_repeat(' ', 25), true);
-            }
-            echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org');
-            echo PHP_EOL;
+            $this->printAll($options);
         }
+    }
+    // }}}
+
+    // {{{ printAll
+    // TODO: Optimize Cyclomatic Complexity (5)
+    /**
+     * printAll
+     *
+     * @param Bonzai_Utils_Options $options
+     *
+     * @access public
+     * @return void
+     */
+    protected function printAll(Bonzai_Utils_Options $options) // TODO: MODIFIED
+    {
+        $use_colors  = ($options->getOption('colors') !== null);
+        $start_color = $use_colors ? "\033[1;37m" : '';
+        $end_color   = $use_colors ? "\033[0m"    : '';
+
+        echo PHP_EOL . $start_color . gettext('Usage') . ':' . $end_color . PHP_EOL;
+        echo $_SERVER['argv'][0] . ' [' . gettext('OPTIONS');
+        echo ']... [' . gettext('FILES') . '|' . gettext('DIRECTORIES');
+        echo ']...' . PHP_EOL . PHP_EOL;
+        echo $start_color . gettext('Options') . ':' . $end_color . PHP_EOL;
+
+        foreach ($options->getParameters() as $short => $long) {
+            $this->printOptionInfo($options, $short, $long);
+        }
+
+        echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org');
+        echo PHP_EOL;
+    }
+    // }}}
+
+    // {{{ printOptionInfo
+    // TODO: MODIFIED
+    /**
+     * printOptionInfo
+     *
+     * @param Bonzai_Utils_Options $options
+     * @param string               $short
+     * @param string               $long
+     *
+     * @access public
+     * @return void
+     */
+    protected function printOptionInfo(Bonzai_Utils_Options $options, $short, $long)
+    {
+        $short = is_array($short) ? implode('', $short) : strval($short);
+        $long  = is_array($long)  ? implode('', $long)  : strval($long);
+
+        $has_value = strpos($long, ':') > 0;
+
+        $only_long = is_int($short);
+
+        $short = str_replace(':', '', $short);
+        $long  = str_replace(':', '', $long);
+
+        $info = ($only_long ? '' : "-$short, ") . "--$long";
+        if ($has_value) {
+            $info .= '=<value>';
+        }
+
+        $format = '    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL;
+        $row = sprintf($format, gettext($options->getLabelParameter($long)));
+        echo wordwrap($row, 80, PHP_EOL . str_repeat(' ', 25), true);
     }
     // }}}
 }

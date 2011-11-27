@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Utils
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -38,7 +38,7 @@
 /**
  * Bonzai_Controller
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Utils
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -79,6 +79,8 @@ class Bonzai_Utils
      */
     public static function renameFile($filename)
     {
+        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
+
         self::putFileContent(
             $filename . '.orig',
             self::getFileContent($filename)
@@ -89,7 +91,7 @@ class Bonzai_Utils
     // }}}
 
     // {{{ rScanDir
-    // TODO: Optimize cyclomatic complexity (8)
+    // TODO: Optimize Cyclomatic Complexity (8)
     /**
      * rScanDir
      *
@@ -101,8 +103,10 @@ class Bonzai_Utils
      * @throws Bonzai_Exception
      * @return array
      */
-    public static function rScanDir($base = '', &$data = array())
+    public static function rScanDir($base = '', array &$data = array())
     {
+        $base = is_array($base) ? implode('', $base) : strval($base);
+
         if (!is_readable($base) && !is_executable($base)) {
             $message = gettext('The directory `%s` cannot be opened.');
             throw new Bonzai_Exception(sprintf($message, $base));
@@ -119,8 +123,7 @@ class Bonzai_Utils
             if (is_dir($path)) {
                 $data[] = $path . '/';
                 try {
-                    $res  = Bonzai_Utils::rScanDir($path, $data);
-                    $data = $res;
+                    $data = Bonzai_Utils::rScanDir($path, $data);
                 } catch (Bonzai_Exception $e) {
                     Bonzai_Utils::message(
                         'The directory `%s` was skipped because not readable.',
@@ -151,6 +154,7 @@ class Bonzai_Utils
      */
     public static function getFileContent($filename)
     {
+        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
         self::checkFileValidity($filename);
 
         return file_get_contents($filename);
@@ -171,6 +175,9 @@ class Bonzai_Utils
      */
     public static function putFileContent($filename, $content)
     {
+        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
+        $content = is_array($content) ? implode('', $content) : strval($content);
+
         self::checkFileValidity($filename, false);
 
         if (file_exists($filename) && !is_writable($filename)) {
@@ -183,7 +190,7 @@ class Bonzai_Utils
     // }}}
 
     // {{{ checkFileValidity
-    // TODO: Optimize cyclomatic complexity (13)
+    // TODO: Optimize Cyclomatic Complexity (13)
     /**
      * checkFileValidity
      *
@@ -197,6 +204,7 @@ class Bonzai_Utils
      */
     public static function checkFileValidity($filename, $file_exists = true)
     {
+        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
         $file_exists = is_bool($file_exists) ? $file_exists : true;
 
         if (empty($filename)
@@ -246,6 +254,7 @@ class Bonzai_Utils
     // }}}
 
     // {{{ message
+    // TODO: Optimize Cyclomatic Complexity (17)
     /**
      * message
      *
@@ -345,6 +354,37 @@ class Bonzai_Utils
         array_unshift($parameters, 'error');
 
         return call_user_func_array(array('Bonzai_Utils', 'message'), $parameters);
+    }
+    // }}}
+
+    // {{{ printHeader
+    // TODO: ADD TEST
+    // TODO: Optimize Cyclomatic Complexity (7)
+    /**
+     * printHeader
+     *
+     * @param Bonzai_Utils_Options $options
+     * @param boolean              $ignore_quiet
+     *
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function printHeader(Bonzai_Utils_Options $options, $ignore_quiet = false)
+    {
+        $ignore_quiet = (bool)$ignore_quiet;
+
+        $quiet_mode = ($options->getOption('quiet') !== null && !$ignore_quiet);
+        if (!$quiet_mode) {
+            $use_colors  = ($options->getOption('colors') !== null);
+            $start_color = $use_colors ? "\033[1;37m" : '';
+            $end_color   = $use_colors ? "\033[0m"    : '';
+
+            echo str_repeat('-', 80) . PHP_EOL;
+            echo $start_color . 'BONZAI' . str_repeat(' ', 50);
+            echo gettext('(previously phpGuardian)') . $end_color . PHP_EOL;
+            echo str_repeat('-', 80) . PHP_EOL;
+        }
     }
     // }}}
 }

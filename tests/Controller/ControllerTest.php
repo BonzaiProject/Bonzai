@@ -25,14 +25,13 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
 
@@ -42,7 +41,7 @@ require_once __DIR__ . '/../../src/libs/Controller/Controller.php';
 /**
  * Bonzai_Controller_Test
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -65,7 +64,7 @@ class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
      */
     public function testElaborateJustCoverage()
     {
-        $this->object->elaborate(null);
+        $this->assertEmpty($this->object->elaborate(array(), new Bonzai_Utils_Options()));
     }
     // }}}
     // }}}
@@ -81,24 +80,23 @@ class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
      */
     public function testHandleTaskJustCoverage()
     {
-        $this->callMethod('handleTask');
+        $this->assertEmpty($this->callMethod('handleTask', array(new Bonzai_Utils_Options())));
     }
     // }}}
     // }}}
 
     // {{{ autoload
-    // {{{ testAutoloadWithParamInvalidClassThrowException
+    // {{{ testAutoloadWithParamInvalidClass
     /**
-     * testAutoloadWithParamInvalidClassThrowException
+     * testAutoloadWithParamInvalidClass
      *
      * @ignore
      * @access public
      * @return void
-     * @expectedException Bonzai_Exception
      */
-    public function testAutoloadWithParamInvalidClassThrowException()
+    public function testAutoloadWithParamInvalidClass()
     {
-        $this->callMethod('autoload', array('Bonzai'));
+        $this->assertEmpty($this->callMethod('autoload', array('Bonzai')));
     }
     // }}}
 
@@ -127,68 +125,45 @@ class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
      */
     public function testAutoloadWithParamLoadedClassReturnNothing()
     {
-        $this->callMethod('autoload', array('Bonzai_Controller'));
+        $this->assertEmpty($this->callMethod('autoload', array('Bonzai_Controller')));
     }
     // }}}
     // }}}
 
     // {{{ getFileNameFromClassName
-    // {{{ testGetFileNameFromClassNameWithParamEmptyStringReturnsNull
+    // {{{ providerForGetFileNameFromClassName
     /**
-     * Retrieve the class filename
+     * providerForGetFileNameFromClassName
      *
      * @ignore
      * @access public
-     * @return void
+     * @return array
      */
-    public function testGetFileNameFromClassNameWithParamEmptyStringReturnsNull()
+    public function providerForGetFileNameFromClassName()
     {
-        $value = $this->callMethod('getFileNameFromClassName', array(''));
-        $this->assertNull($value);
+        return array(
+            array(''),
+            array(null),
+            array(' '),
+            array('aaa'),
+        );
     }
     // }}}
 
-    // {{{ testGetFileNameFromClassNameWithParamNullReturnsNull
+    // {{{ testGetFileNameFromClassNameWithProviderReturnsNull
     /**
      * Retrieve the class filename
+     *
+     * @param mixed $a
      *
      * @ignore
      * @access public
      * @return void
+     * @dataProvider providerForGetFileNameFromClassName
      */
-    public function testGetFileNameFromClassNameWithParamNullReturnsNull()
+    public function testGetFileNameFromClassNameWithProviderReturnsNull($a)
     {
-        $value = $this->callMethod('getFileNameFromClassName',array(null));
-        $this->assertNull($value);
-    }
-    // }}}
-
-    // {{{ testGetFileNameFromClassNameWithParamSpacedStringReturnsNull
-    /**
-     * Retrieve the class filename
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testGetFileNameFromClassNameWithParamSpacedStringReturnsNull()
-    {
-        $value = $this->callMethod('getFileNameFromClassName', array(' '));
-        $this->assertNull($value);
-    }
-    // }}}
-
-    // {{{ testGetFileNameFromClassNameWithParamFakeReturnsNull
-    /**
-     * Retrieve the class filename
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testGetFileNameFromClassNameWithParamFakeReturnsNull()
-    {
-        $value = $this->callMethod('getFileNameFromClassName', array('aaa'));
+        $value = $this->callMethod('getFileNameFromClassName', array($a));
         $this->assertNull($value);
     }
     // }}}
@@ -273,59 +248,39 @@ class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
     // }}}
 
     // {{{ checkFile
-    // {{{ testCheckFileWithParamEmptyStringReturnsFalse
+    // {{{ providerForCheckFile
     /**
-     * Check if a file exists in a dir
+     * providerForCheckFile
      *
      * @ignore
      * @access public
-     * @return void
+     * @return array
      */
-    public function testCheckFileWithParamEmptyStringReturnsFalse()
+    public function providerForCheckFile()
     {
-        $this->assertFalse($this->callMethod('checkFile', array('')));
+        return array(
+            array(''),
+            array(null),
+            array(' '),
+            array('aaa'),
+        );
     }
     // }}}
 
-    // {{{ testCheckFileWithParamNullReturnsFalse
+    // {{{ testCheckFileWithProviderReturnsFalse
     /**
      * Check if a file exists in a dir
+     *
+     * @param mixed $a
      *
      * @ignore
      * @access public
      * @return void
+     * @dataProvider providerForCheckFile
      */
-    public function testCheckFileWithParamNullReturnsFalse()
+    public function testCheckFileWithParamEmptyStringReturnsFalse($a)
     {
-        $this->assertFalse($this->callMethod('checkFile', array(null)));
-    }
-    // }}}
-
-    // {{{ testCheckFileWithParamSpacedStringReturnsFalse
-    /**
-     * Check if a file exists in a dir
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testCheckFileWithParamSpacedStringReturnsFalse()
-    {
-        $this->assertFalse($this->callMethod('checkFile', array(' ')));
-    }
-    // }}}
-
-    // {{{ testCheckFileWithParamWrongReturnsFalse
-    /**
-     * Check if a file exists in a dir
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testCheckFileWithParamWrongReturnsFalse()
-    {
-        $this->assertFalse($this->callMethod('checkFile', array('Controller')));
+        $this->assertFalse($this->callMethod('checkFile', array($a)));
     }
     // }}}
 

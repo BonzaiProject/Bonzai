@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Controller
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -35,12 +35,10 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once __DIR__ . '/../Exception/Exception.php';
-
 /**
  * Bonzai_Controller
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Controller
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -74,28 +72,25 @@ class Bonzai_Controller
     // }}}
 
     // {{{ elaborate
+    // TODO: MODIFIED
     /**
      * elaborate
      *
-     * @param array $argv
+     * @param array                $arguments
+     * @param Bonzai_Utils_Options $options
      *
      * @access public
      * @return void
      */
-    public function elaborate($argv)
+    public function elaborate(array $arguments, Bonzai_Utils_Options $options)
     {
-        $this->options = new Bonzai_Utils_Options();
-
         try {
-            $this->options->init($argv);
+            $options->init($arguments);
         } catch (Bonzai_Exception $e) {
             // Fallback behaviour: show the help
-            unset($e);
         }
 
-        Bonzai_Registry::add('options', $this->options);
-
-        $this->handleTask();
+        $this->handleTask($options);
     }
     // }}}
 
@@ -103,13 +98,15 @@ class Bonzai_Controller
     /**
      * handleTask
      *
+     * @param Bonzai_Utils_Options $options
+     *
      * @access protected
      * @return void
      */
-    protected function handleTask()
+    protected function handleTask(Bonzai_Utils_Options $options) // TODO: MODIFIED
     {
         $task = new Bonzai_Task();
-        $task->loadAndExecute($this->options);
+        $task->loadAndExecute($options);
     }
     // }}}
 
@@ -125,7 +122,9 @@ class Bonzai_Controller
      */
     protected function autoload($name)
     {
-        if (strpos($name, 'Bonzai_') == 0) {
+        $name = is_array($name) ? implode('', $name) : strval($name);
+
+        if (strpos($name, 'Bonzai_') === 0) {
             $filename = $this->getFileNameFromClassName($name);
 
             if (!$this->checkFile($filename)) {
@@ -139,7 +138,6 @@ class Bonzai_Controller
     // }}}
 
     // {{{ getFileNameFromClassName
-    // TODO: Optimize cyclomatic complexity (5)
     /**
      * getFileNameFromClassName
      *
@@ -150,18 +148,24 @@ class Bonzai_Controller
      */
     protected function getFileNameFromClassName($name)
     {
-        $name = preg_replace('/^Bonzai_/', '', trim($name));
-        if (empty($name)) {
-            return null;
+        $name = is_array($name) ? implode('', $name) : strval($name);
+
+        $path = preg_replace(
+            '/^Bonzai_(.+?)(?:_(.+))?$/',
+            '\1' . DIRECTORY_SEPARATOR . '\2',
+            trim($name)
+        );
+
+        if (substr($path, -1, 1) == '/') {
+            $path = preg_replace(
+                '/(.+)\//',
+                '\1' . DIRECTORY_SEPARATOR . '\1',
+                $path
+            );
         }
 
-        $filename = str_replace('_', DIRECTORY_SEPARATOR, $name);
-        if (!$this->checkFile($filename) && ($name == $filename)) {
-            $filename .= DIRECTORY_SEPARATOR . $name;
-        }
-
-        if ($this->checkFile($filename)) {
-            return $filename;
+        if ($this->checkFile($path)) {
+            return $path;
         }
 
         return null;
@@ -179,6 +183,8 @@ class Bonzai_Controller
      */
     protected function checkFile($filename)
     {
+        $filename = is_array($filename) ? implode('', $filename) : strval($filename);
+
         return file_exists(__DIR__ . '/../' . $filename . '.php');
     }
     // }}}

@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Options
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -38,7 +38,7 @@
 /**
  * Bonzai_Utils_Options
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Options
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -102,15 +102,15 @@ class Bonzai_Utils_Options
     /**
      * init
      *
-     * @param array $argv
+     * @param array $arguments
      *
      * @access public
      * @throws Bonzai_Exception
      * @return void
      */
-    public function init($argv)
+    public function init(array $arguments)
     {
-        if (empty($argv) || !is_array($argv)) {
+        if (empty($arguments) || !is_array($arguments)) {
             $message = gettext('Missing the script arguments.');
             throw new Bonzai_Exception($message);
         }
@@ -118,45 +118,56 @@ class Bonzai_Utils_Options
         $input = preg_grep('/^[a-z]:?$/', array_keys($this->parameters));
         $input = implode('', $input);
         $this->options = getopt($input, array_values($this->parameters));
-        $this->parseOptions($argv);
+        $this->parseOptions($arguments);
     }
     // }}}
 
     // {{{ parseOptions
-    // TODO: Optimize cyclomatic complexity (8)
     /**
      * parseOptions
      *
-     * @param array $argv
+     * @param array $arguments
      *
      * @access protected
      * @throws Bonzai_Exception
      * @return void
      */
-    protected function parseOptions($argv)
+    protected function parseOptions(array $arguments)
     {
-        if (!is_array($this->options) || !is_array($argv)) {
+        if (!is_array($this->options)) {
             $message = gettext('Invalid parameters to be parsed.');
             throw new Bonzai_Exception($message);
         }
 
-        $options = array_keys($this->options);
-        $options = array_merge($options, array_values($this->options));
-        $options = preg_grep('/.+/', $options);
+        $this->populateOptionParams($arguments);
+    }
+    // }}}
 
-        foreach ($argv as $key => $value) {
-            if ($key == 0) {
-                continue;
+    // {{{ populateOptionParams
+    // TODO: Optimize Cyclomatic Complexity (5)
+    /**
+     * populateOptionParams
+     *
+     * @param array $arguments
+     *
+     * @access protected
+     * @throws Bonzai_Exception
+     * @return void
+     */
+    protected function populateOptionParams(array $arguments)
+    {
+        $arguments = array_slice($arguments, 1);
+        $prev_value = '';
+        foreach ($arguments as $value) {
+            $prev_key = preg_replace('/^-{1,2}/', '', $prev_value) . ':';
+            if ($value[0] !== '-'
+                && !isset($this->parameters[$prev_key])
+                && !in_array($prev_key, $this->parameters)
+            ) {
+                $this->option_params[] = $value;
             }
 
-            if ($value[0] !== '-') {
-                $prev_key = preg_replace('/^-{1,2}/', '', $argv[$key - 1]) . ':';
-                if (!isset($this->parameters[$prev_key])
-                    && !in_array($prev_key, $this->parameters)
-                ) {
-                    $this->option_params[] = $value;
-                }
-            }
+            $prev_value = $value;
         }
     }
     // }}}
@@ -198,6 +209,8 @@ class Bonzai_Utils_Options
      */
     public function getOption($key)
     {
+        $key = is_array($key) ? implode('', $key) : strval($key);
+
         if (isset($this->options[$key])) {
             return $this->options[$key];
         }
@@ -230,6 +243,8 @@ class Bonzai_Utils_Options
      */
     public function getLabelParameter($key)
     {
+        $key = is_array($key) ? implode('', $key) : strval($key);
+
         if (isset($this->labels[$key])) {
             return $this->labels[$key];
         }

@@ -25,7 +25,7 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Registry
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -38,7 +38,7 @@
 /**
  * Bonzai_Registry
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Registry
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -57,40 +57,24 @@ class Bonzai_Registry
      * @var    array
      */
     public static $elements = array();
-
-    /**
-     * @static
-     * @var integer
-     */
-    const ARRAY_APPEND = 0;
-
-    /**
-     * @static
-     * @var integer
-     */
-    const INT_APPEND = 1;
     // }}}
 
     // {{{ add
     /**
      * add
      *
-     * @param string  $key
-     * @param mixed   $value
-     * @param integer $type
+     * @param string $key
+     * @param mixed  $value
      *
      * @static
      * @access public
      * @return void
      */
-    public static function add($key, $value, $type = null)
+    public static function add($key, $value)
     {
+        $key = is_array($key) ? implode('', $key) : strval($key);
+
         self::checkKeyValidity($key);
-
-        if ($type === self::ARRAY_APPEND) {
-            $value = array($value);
-        }
-
         self::$elements[$key] = $value;
     }
     // }}}
@@ -107,6 +91,7 @@ class Bonzai_Registry
      */
     public static function get($key)
     {
+        $key = is_array($key) ? implode('', $key) : strval($key);
         self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
@@ -129,6 +114,7 @@ class Bonzai_Registry
      */
     public static function remove($key)
     {
+        $key = is_array($key) ? implode('', $key) : strval($key);
         self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
@@ -138,37 +124,114 @@ class Bonzai_Registry
     // }}}
 
     // {{{ append
-    // TODO: Optimize cyclomatic complexity (9)
     /**
      * append
      *
-     * @param string  $key
-     * @param mixed   $value
-     * @param integer $type
+     * @param string $key
+     * @param mixed  $value
      *
      * @static
      * @access public
      * @return void
      */
-    public static function append($key, $value, $type = null)
+    public static function append($key, $value)
     {
+        $key = is_array($key) ? implode('', $key) : strval($key);
         self::checkKeyValidity($key);
 
         if (isset(self::$elements[$key])) {
-            if (is_array($value) || is_array(self::$elements[$key])) {
-                self::$elements[$key][] = $value;
-            } elseif (is_string(self::$elements[$key])) {
-                self::$elements[$key] .= $value;
-            } elseif (is_numeric(self::$elements[$key])
-                      && $type === self::INT_APPEND) {
-                self::$elements[$key] += $value;
-            } elseif (is_numeric(self::$elements[$key])
-                      && $type !== self::INT_APPEND) {
-                self::$elements[$key] .= $value;
-            }
+            self::appendAs(gettype(self::$elements[$key]), $key, $value);
         } else {
-            self::add($key, $value, $type);
+            self::add($key, $value);
         }
+    }
+    // }}}
+
+    // {{{ appendAs
+    /**
+     * appendAs
+     *
+     * @param string $variable_type
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @static
+     * @access public
+     * @return void
+     */
+    protected static function appendAs($variable_type, $key, $value)
+    {
+        $variable_type = is_array($variable_type)
+                         ? implode('', $variable_type)
+                         : strval($variable_type);
+
+        $key = is_array($key) ? implode('', $key) : strval($key);
+        $method = 'appendAs' . ucfirst($variable_type);
+
+        if (method_exists('Bonzai_Registry', $method)) {
+            self::$method($key, $value);
+        }
+    }
+    // }}}
+
+    // {{{ appendAsArray
+    /**
+     * appendAsArray
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @static
+     * @access public
+     * @return void
+     */
+    protected static function appendAsArray($key, $value)
+    {
+        $key = is_array($key) ? implode('', $key) : strval($key);
+
+        if (is_array(self::$elements[$key])) {
+            self::$elements[$key][] = $value;
+        }
+    }
+    // }}}
+
+    // {{{ appendAsString
+    /**
+     * appendAsString
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @static
+     * @access public
+     * @return void
+     */
+    protected static function appendAsString($key, $value)
+    {
+        $key = is_array($key) ? implode('', $key) : strval($key);
+
+        if (is_string(self::$elements[$key])) {
+            self::$elements[$key] .= $value;
+        }
+    }
+    // }}}
+
+    // {{{ appendAsInteger
+    /**
+     * appendAsInteger
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @static
+     * @access public
+     * @return void
+     */
+    protected static function appendAsInteger($key, $value)
+    {
+        $key = is_array($key) ? implode('', $key) : strval($key);
+
+        self::$elements[$key] += $value;
     }
     // }}}
 
@@ -185,6 +248,8 @@ class Bonzai_Registry
      */
     protected static function checkKeyValidity($key)
     {
+        $key = is_array($key) ? implode('', $key) : strval($key);
+
         if (empty($key) || (!is_string($key) && !is_numeric($key))) {
             $message = gettext('Invalid key type.');
             throw new Bonzai_Exception($message); // Exception not catched

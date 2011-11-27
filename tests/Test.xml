@@ -14,13 +14,12 @@
     stopOnFailure="false"
     stopOnIncomplete="false"
     stopOnSkipped="false"
-    strict="false"
+    strict="true"
     verbose="false">
     <testsuites>
         <testsuite name="BonzaiCLI">
             <file>tests/Controller/ControllerTest.php</file>
             <file>tests/Encoder/EncoderTest.php</file>
-            <file>tests/Exception/ExceptionTest.php</file>
             <file>tests/Registry/RegistryTest.php</file>
             <file>tests/Task/TaskTest.php</file>
             <file>tests/Utils/HelpTest.php</file>
@@ -30,7 +29,10 @@
     </testsuites>
     <filter>
         <blacklist>
-            <directory suffix=".php">tests</directory>
+            <directory>tests</directory>
         </blacklist>
     </filter>
+    <logging>
+        <log type="coverage-html" target="../report/cli/code_coverage" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70"/>
+    </logging>
 </phpunit>

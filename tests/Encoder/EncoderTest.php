@@ -25,20 +25,20 @@
  *
  * PHP version 5
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
- * @version    Release: 0.1
  * @link       http://www.bonzai-project.org
  **/
 
 require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
 require_once __DIR__ . '/../../src/libs/Exception/Exception.php';
 require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
+require_once __DIR__ . '/../../src/libs/Utils/Options.php';
 require_once __DIR__ . '/../../src/libs/Registry/Registry.php';
 require_once __DIR__ . '/../../src/libs/Encoder/Encoder.php';
 
@@ -47,7 +47,7 @@ Bonzai_Utils::$silenced = true;
 /**
  * Bonzai_Encoder_Test
  *
- * @category   Optimization_&_Security
+ * @category   Optimization_and_Security
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
@@ -70,71 +70,50 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testElaborateJustCoverage()
     {
-        $this->object->elaborate(array());
+        $this->assertEmpty($this->object->elaborate(new Bonzai_Utils_Options()));
     }
     // }}}
     // }}}
 
     // {{{ processFile
-    // {{{ testProcessFileWithParamNullIsEmpty
+    // {{{ providerForProcessFile
     /**
-     * Process a file
+     * providerForProcessFile
      *
      * @ignore
      * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
+     * @return array
      */
-    public function testProcessFileWithParamNullIsEmpty()
+    public function providerForProcessFile()
     {
-        $this->assertEmpty($this->callMethod('processFile', array(null)));
+        return array(
+            array(null),
+            array(''),
+            array('1'),
+            array(' '),
+        );
     }
     // }}}
 
-    // {{{ testProcessFileWithParamEmptyStringIsEmpty
+    // {{{ testProcessFileWithProviderThrowException
     /**
      * Process a file
+     *
+     * @param mixed $a
      *
      * @ignore
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
+     * @dataProvider providerForProcessFile
      */
-    public function testProcessFileWithParamEmptyStringIsEmpty()
+    public function testProcessFileWithProviderThrowException($a)
     {
-        $this->assertEmpty($this->callMethod('processFile', array('')));
-    }
-    // }}}
+        $this->callMethod('processFile', array(new Bonzai_Utils_Options(), $a));
 
-    // {{{ testProcessFileWithParamSpacedStringIsEmpty
-    /**
-     * Process a file
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testProcessFileWithParamSpacedStringIsEmpty()
-    {
-        $this->assertEmpty($this->callMethod('processFile', array(' ')));
-    }
-    // }}}
-
-    // {{{ testProcessFileWithParamFileNotExistsIsEmpty
-    /**
-     * Process a file
-     *
-     * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     */
-    public function testProcessFileWithParamFileNotExistsIsEmpty()
-    {
-        $this->assertEmpty($this->callMethod('processFile', array('a')));
-
-        unlink('a');
+        if (is_string($a) && is_file($a)) { // TODO: USARE OVUNQUE
+            unlink($a);
+        }
     }
     // }}}
 
@@ -152,8 +131,8 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         file_put_contents($filename, '');
 
         try {
-            $this->callMethod('processFile', array($filename));
-            $this->assertTrue(false, "The exception was not threw.");
+            $this->callMethod('processFile', array(new Bonzai_Utils_Options(), $filename));
+            $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
                 '/^The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/',
@@ -182,8 +161,8 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         chmod($filename, 0333); // -wx-wx-wx
 
         try {
-            $this->callMethod('processFile', array($filename));
-            $this->assertTrue(false, "The exception was not threw.");
+            $this->callMethod('processFile', array(new Bonzai_Utils_Options(), $filename));
+            $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
                 '/^The file `.+\/test_[a-zA-Z0-9]+` is not readable\.$/',
@@ -212,7 +191,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         file_put_contents($filename, 'aaa');
         chmod($filename, 0555); // r-xr-xr-x
 
-        $this->assertEmpty($this->callMethod('processFile', array($filename)));
+        $this->assertEmpty($this->callMethod('processFile', array(new Bonzai_Utils_Options(), $filename)));
 
         chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
@@ -232,7 +211,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
-        $this->assertEmpty($this->callMethod('processFile', array($filename)));
+        $this->assertEmpty($this->callMethod('processFile', array(new Bonzai_Utils_Options(), $filename)));
 
         unlink($filename);
     }
@@ -240,703 +219,148 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     // }}}
 
     // {{{ saveOutput
-    // {{{ testSaveOutputWithParamsNullNullJustCoverage
+    // {{{ providerForSaveOutput
     /**
-     * testSaveOutputWithParamsNullNullJustCoverage
+     * providerForSaveOutput
      *
      * @ignore
      * @access public
-     * @return void
+     * @return array
      */
-    public function testSaveOutputWithParamsNullNullJustCoverage()
+    public function providerForSaveOutput()
     {
-        $this->callMethod('saveOutput', array(null, null));
+        return array(
+            array(' ', ' '),
+            array(' ', ''),
+            array(' ', 'a'),
+            array(' ', array('a')),
+            array(' ', array()),
+            array(' ', null),
+            array('', ' '),
+            array('', ''),
+            array('', 'a'),
+            array('', array('a')),
+            array('', array()),
+            array('', null),
+            array('b', ' '),
+            array('c', ''),
+            array('d', 'a'),
+            array('e', array('a')),
+            array('f', array()),
+            array('g', null),
+            array(array('h'), ' '),
+            array(array('i'), ''),
+            array(array('j'), 'a'),
+            array(array('k'), array('a')),
+            array(array('l'), array()),
+            array(array('m'), null),
+            array(array(), ' '),
+            array(array(), ''),
+            array(array(), 'a'),
+            array(array(), array('a')),
+            array(array(), array()),
+            array(array(), null),
+            array(null, ' '),
+            array(null, ''),
+            array(null, 'a'),
+            array(null, array('a')),
+            array(null, array()),
+            array(null, null),
+            array(tempnam('.', 'test_'), ' '),
+            array(tempnam('.', 'test_'), ''),
+            array(tempnam('.', 'test_'), 'a'),
+            array(tempnam('.', 'test_'), array('a')),
+            array(tempnam('.', 'test_'), array()),
+            array(tempnam('.', 'test_'), null),
+        );
     }
     // }}}
 
-    // {{{ testSaveOutputWithParamsNullEmptyStringJustCoverage
+    // {{{ testSaveOutputWithProviderJustCoverage
     /**
-     * testSaveOutputWithParamsNullEmptyStringJustCoverage
+     * testSaveOutputWithProviderJustCoverage
+     *
+     * @param mixed $a
+     * @param mixed $b
      *
      * @ignore
      * @access public
      * @return void
+     * @dataProvider providerForSaveOutput
      */
-    public function testSaveOutputWithParamsNullEmptyStringJustCoverage()
+    public function testSaveOutputWithProviderJustCoverage($a, $b)
     {
-        $this->callMethod('saveOutput', array(null, ''));
-    }
-    // }}}
+        $this->assertEmpty($this->callMethod('saveOutput', array(new Bonzai_Utils_Options(), $a, $b)));
 
-    // {{{ testSaveOutputWithParamsNullSpacedStringJustCoverage
-    /**
-     * testSaveOutputWithParamsNullSpacedStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsNullSpacedStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(null, ' '));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsNullFakeJustCoverage
-    /**
-     * testSaveOutputWithParamsNullFakeJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsNullFakeJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(null, 'a'));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsNullEmptyArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsNullEmptyArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsNullEmptyArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(null, array()));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsNullArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsNullArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsNullArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(null, array('a')));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyStringNullJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyStringNullJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyStringNullJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('', null));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyStringEmptyStringJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyStringEmptyStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyStringEmptyStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('', ''));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyStringSpacedStringJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyStringSpacedStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyStringSpacedStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('', ' '));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyStringFakeJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyStringFakeJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyStringFakeJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('', 'a'));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyStringEmptyArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyStringEmptyArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyStringEmptyArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('', array()));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyStringArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyStringArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyStringArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('', array('a')));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsSpacedStringNullJustCoverage
-    /**
-     * testSaveOutputWithParamsSpacedStringNullJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsSpacedStringNullJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(' ', null));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsSpacedStringEmptyStringJustCoverage
-    /**
-     * testSaveOutputWithParamsSpacedStringEmptyStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsSpacedStringEmptyStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(' ', ''));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsSpacedStringSpacedStringJustCoverage
-    /**
-     * testSaveOutputWithParamsSpacedStringSpacedStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsSpacedStringSpacedStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(' ', ' '));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsSpacedStringFakeJustCoverage
-    /**
-     * testSaveOutputWithParamsSpacedStringFakeJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsSpacedStringFakeJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(' ', 'a'));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsSpacedStringEmptyArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsSpacedStringEmptyArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsSpacedStringEmptyArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(' ', array()));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsSpacedStringArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsSpacedStringArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsSpacedStringArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(' ', array('a')));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsFakeNullJustCoverage
-    /**
-     * testSaveOutputWithParamsFakeNullJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsFakeNullJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('a', null));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsFakeEmptyStringJustCoverage
-    /**
-     * testSaveOutputWithParamsFakeEmptyStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsFakeEmptyStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('a', ''));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsFakeSpacedStringJustCoverage
-    /**
-     * testSaveOutputWithParamsFakeSpacedStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsFakeSpacedStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('a', ' '));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsFakeFakeJustCoverage
-    /**
-     * testSaveOutputWithParamsFakeFakeJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsFakeFakeJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('a', 'a'));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsFakeEmptyArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsFakeEmptyArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsFakeEmptyArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('a', array()));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsFakeArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsFakeArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsFakeArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array('a', array('a')));
-
-        unlink('a');
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyArrayNullJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyArrayNullJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyArrayNullJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array(), null));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyArrayEmptyStringJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyArrayEmptyStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyArrayEmptyStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array(), ''));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyArraySpacedStringJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyArraySpacedStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyArraySpacedStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array(), ' '));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyArrayFakeJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyArrayFakeJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyArrayFakeJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array(), 'a'));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyArrayEmptyArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyArrayEmptyArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyArrayEmptyArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array(), array()));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsEmptyArrayArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsEmptyArrayArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsEmptyArrayArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array(), array('a')));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsArrayNullJustCoverage
-    /**
-     * testSaveOutputWithParamsArrayNullJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsArrayNullJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array('a'), null));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsArrayEmptyStringJustCoverage
-    /**
-     * testSaveOutputWithParamsArrayEmptyStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsArrayEmptyStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array('a'), ''));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsArraySpacedStringJustCoverage
-    /**
-     * testSaveOutputWithParamsArraySpacedStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsArraySpacedStringJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array('a'), ' '));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsArrayFakeJustCoverage
-    /**
-     * testSaveOutputWithParamsArrayFakeJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsArrayFakeJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array('a'), 'a'));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsArrayEmptyArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsArrayEmptyArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsArrayEmptyArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array('a'), array()));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsArrayArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsArrayArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsArrayArrayJustCoverage()
-    {
-        $this->callMethod('saveOutput', array(array('a'), array('a')));
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsTempNullJustCoverage
-    /**
-     * testSaveOutputWithParamsTempNullJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsTempNullJustCoverage()
-    {
-        $filename = tempnam('.', 'test_');
-        $this->callMethod('saveOutput', array($filename, null));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsTempEmptyStringJustCoverage
-    /**
-     * testSaveOutputWithParamsTempEmptyStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsTempEmptyStringJustCoverage()
-    {
-        $filename = tempnam('.', 'test_');
-        $this->callMethod('saveOutput', array($filename, ''));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsTempSpacedStringJustCoverage
-    /**
-     * testSaveOutputWithParamsTempSpacedStringJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsTempSpacedStringJustCoverage()
-    {
-        $filename = tempnam('.', 'test_');
-        $this->callMethod('saveOutput', array($filename, ' '));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsTempFakeJustCoverage
-    /**
-     * testSaveOutputWithParamsTempFakeJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsTempFakeJustCoverage()
-    {
-        $filename = tempnam('.', 'test_');
-        $this->callMethod('saveOutput', array($filename, 'a'));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsTempEmptyArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsTempEmptyArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsTempEmptyArrayJustCoverage()
-    {
-        $filename = tempnam('.', 'test_');
-        $this->callMethod('saveOutput', array($filename, array()));
-
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ testSaveOutputWithParamsTempArrayJustCoverage
-    /**
-     * testSaveOutputWithParamsTempArrayJustCoverage
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testSaveOutputWithParamsTempArrayJustCoverage()
-    {
-        $filename = tempnam('.', 'test_');
-        $this->callMethod('saveOutput', array($filename, array('a')));
-
-        unlink($filename);
+        $a = is_array($a) ? implode('', $a) : strval($a);
+        if (!empty($a) && is_file($a)) {
+            unlink($a);
+        }
     }
     // }}}
     // }}}
 
     // {{{ getByteCode
-    // {{{ testGetByteCodeWithParamNullFileIsInvalid
+    // {{{ providerForGetByteCode
+    /**
+     * providerForGetByteCode
+     *
+     * @ignore
+     * @access public
+     * @return array
+     */
+    public function providerForGetByteCode()
+    {
+        return array(
+            array(null),
+            array(''),
+            array(' '),
+            array('2'),
+        );
+    }
+    // }}}
+
+    // {{{ testGetByteCodeWithProviderIsInvalid
     /**
      * Get the bytecode
+     *
+     * @param mixed $a
      *
      * @ignore
      * @access public
      * @return void
+     * @dataProvider providerForGetByteCode
      */
-    public function testGetByteCodeWithParamNullFileIsInvalid()
+    public function testGetByteCodeWithProviderIsInvalid($a)
     {
         try {
-            $this->callMethod('getByteCode', array(null));
-            $this->assertTrue(false, "The exception was not threw.");
+            $this->callMethod('getByteCode', array($a));
+            $this->fail("The exception was not threw.");
         } catch(Exception $e) {
-            $this->assertRegExp('/^The file `` is invalid\.$/', $e->getMessage());
+            $this->assertRegExp('/^The file `' . strval($a) . '` is invalid\.$/', $e->getMessage());
             $this->assertInstanceOf('Bonzai_Exception', $e);
+        }
+
+        if (is_string($a) && is_file($a)) { // TODO: USARE OVUNQUE
+            unlink($a);
         }
     }
     // }}}
 
-    // {{{ testGetByteCodeWithParamEmptyStringFileIsInvalid
+    // {{{ providerForGetByteCode2
     /**
-     * Get the bytecode
+     * providerForGetByteCode2
      *
      * @ignore
      * @access public
-     * @return void
+     * @return array
      */
-    public function testGetByteCodeWithParamEmptyStringFileIsInvalid()
+    public function providerForGetByteCode2()
     {
-        try {
-            $this->callMethod('getByteCode', array(''));
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp('/^The file `` is invalid\.$/', $e->getMessage());
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
-    }
-    // }}}
-
-    // {{{ testGetByteCodeWithParamSpacedStringFileIsInvalid
-    /**
-     * Get the bytecode
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testGetByteCodeWithParamSpacedStringFileIsInvalid()
-    {
-        try {
-            $this->callMethod('getByteCode', array(' '));
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp('/^The file ` ` is invalid\.$/', $e->getMessage());
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
-    }
-    // }}}
-
-    // {{{ testGetByteCodeWithParamFileNotExistsFileIsInvalid
-    /**
-     * Get the bytecode
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testGetByteCodeWithParamFileNotExistsFileIsInvalid()
-    {
-        try {
-            $this->callMethod('getByteCode', array('a'));
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp('/^The file `a` is invalid\.$/', $e->getMessage());
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
+        return array(
+            array(0777), // rwxrwxrwx
+            array(0555), // r-xr-xr-x
+        );
     }
     // }}}
 
@@ -944,18 +368,22 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     /**
      * Get the bytecode
      *
+     * @param mixed $a
+     *
      * @ignore
      * @access public
      * @return void
+     * @dataProvider providerForGetByteCode2
      */
-    public function testGetByteCodeWithParamEmptyFileFileIsEmpty()
+    public function testGetByteCodeWithProviderIsEmpty($a)
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '');
+        chmod($filename, $a);
 
         try {
             $this->callMethod('getByteCode', array($filename));
-            $this->assertTrue(false, "The exception was not threw.");
+            $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
                 '/^The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/',
@@ -965,6 +393,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
+        chmod($filename, 0777); // rwxrwxrwx
         unlink($filename);
     }
     // }}}
@@ -985,41 +414,10 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         try {
             $this->callMethod('getByteCode', array($filename));
-            $this->assertTrue(false, "The exception was not threw.");
+            $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
                 '/^The file `.+\/test_[a-zA-Z0-9]+` is not readable\.$/',
-                $e->getMessage()
-            );
-
-            $this->assertInstanceOf('Bonzai_Exception', $e);
-        }
-
-        chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
-    }
-    // }}}
-
-    // {{{ testGetByteCodeWithParamSizedFileFileIsEmpty
-    /**
-     * Get the bytecode
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testGetByteCodeWithParamSizedFileFileIsEmpty()
-    {
-        $filename = tempnam('.', 'test_');
-        file_put_contents($filename, '');
-        chmod($filename, 0555); // r-xr-xr-x
-
-        try {
-            $this->callMethod('getByteCode', array($filename));
-            $this->assertTrue(false, "The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp(
-                '/^The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/',
                 $e->getMessage()
             );
 
@@ -1054,82 +452,44 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     // }}}
 
     // {{{ expandPathsToFiles
-    // {{{ testExpandPathsToFilesWithParamEmptyStringAreEquals
+    // {{{ providerForExpandPathsToFiles
     /**
-     * testExpandPathsToFilesWithParamEmptyStringAreEquals
+     * providerForExpandPathsToFiles
+     *
+     * @ignore
+     * @access public
+     * @return array
+     */
+    public function providerForExpandPathsToFiles()
+    {
+        return array(
+            array(''),
+            array(null),
+            array('3'),
+            array(' '),
+            array(array()),
+            array(array('4')),
+        );
+    }
+    // }}}
+
+    // {{{ testExpandPathsToFilesWithProviderAreEquals
+    /**
+     * testExpandPathsToFilesWithProviderAreEquals
      *
      * @ignore
      * @access public
      * @return void
+     * @dataProvider providerForExpandPathsToFiles
      */
-    public function testExpandPathsToFilesWithParamEmptyStringAreEquals()
+    public function testExpandPathsToFilesWithProviderAreEquals()
     {
         $value = $this->callMethod('expandPathsToFiles', array(''));
         $this->assertEquals(array(), $value);
     }
     // }}}
 
-    // {{{ testExpandPathsToFilesWithParamNullAreEquals
-    /**
-     * testExpandPathsToFilesWithParamNullAreEquals
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testExpandPathsToFilesWithParamNullAreEquals()
-    {
-        $value = $this->callMethod('expandPathsToFiles', array(null));
-        $this->assertEquals(array(), $value);
-    }
-    // }}}
-
-    // {{{ testExpandPathsToFilesWithParamFakeAreEquals
-    /**
-     * testExpandPathsToFilesWithParamFakeAreEquals
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testExpandPathsToFilesWithParamFakeAreEquals()
-    {
-        $value = $this->callMethod('expandPathsToFiles', array('a'));
-        $this->assertEquals(array(), $value);
-    }
-    // }}}
-
-    // {{{ testExpandPathsToFilesWithParamSpacedStringAreEquals
-    /**
-     * testExpandPathsToFilesWithParamSpacedStringAreEquals
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testExpandPathsToFilesWithParamSpacedStringAreEquals()
-    {
-        $value = $this->callMethod('expandPathsToFiles', array(' '));
-        $this->assertEquals(array(), $value);
-    }
-    // }}}
-
-    // {{{ testExpandPathsToFilesWithParamEmptyArrayAreEquals
-    /**
-     * testExpandPathsToFilesWithParamEmptyArrayAreEquals
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testExpandPathsToFilesWithParamEmptyArrayAreEquals()
-    {
-        $value = $this->callMethod('expandPathsToFiles', array(array()));
-        $this->assertEquals(array(), $value);
-    }
-    // }}}
-
-    // {{{ testExpandPathsToFilesWithParamArrayAreEquals
+    // {{{ testExpandPathsToFilesWithParamArrayAreEquals2
     /**
      * testExpandPathsToFilesWithParamArrayAreEquals
      *
@@ -1137,22 +497,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      * @access public
      * @return void
      */
-    public function testExpandPathsToFilesWithParamArrayAreEquals()
-    {
-        $value = $this->callMethod('expandPathsToFiles', array(array('a')));
-        $this->assertEquals(array(), $value);
-    }
-    // }}}
-
-    // {{{ testExpandPathsToFilesWithParamArrayAreEquals_2
-    /**
-     * testExpandPathsToFilesWithParamArrayAreEquals
-     *
-     * @ignore
-     * @access public
-     * @return void
-     */
-    public function testExpandPathsToFilesWithParamArrayAreEquals_2()
+    public function testExpandPathsToFilesWithParamArrayAreEquals2()
     {
         $dirname = realpath(__DIR__ . '/../../');
 
@@ -1167,7 +512,6 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         $realfiles = array(
             '/tests/Controller/ControllerTest.php',
             '/tests/Encoder/EncoderTest.php',
-            '/tests/Exception/ExceptionTest.php',
             '/tests/Registry/RegistryTest.php',
             '/tests/Task/TaskTest.php',
             '/tests/Test.php',
