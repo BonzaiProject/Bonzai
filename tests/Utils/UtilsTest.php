@@ -1294,6 +1294,25 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $this->assertEmpty($this->callMethod('message', array($a, $b, $c)));
     }
     // }}}
+
+    // {{{ testMessageRealUse
+    /**
+     * testMessageRealUse
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testMessageRealUse()
+    {
+        Bonzai_Utils::$silenced = false;
+        ob_start();
+          $this->callMethod('message', array('info', 'test'));
+        $output = ob_get_clean();
+        $this->assertRegExp('/^\[\d{2}:\d{2}:\d{2}\] test\n$/', $output);
+        Bonzai_Utils::$silenced = true;
+    }
+    // }}}
     // }}}
 
     // {{{ warn

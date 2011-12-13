@@ -99,6 +99,8 @@ class Bonzai_Controller extends Bonzai_Abstract
      */
     protected function handleTask(Bonzai_Utils_Options $options) // TODO: MODIFIED
     {
+        Bonzai_Registry::add('options', $options);
+
         $task = new Bonzai_Task();
         $task->loadAndExecute($options);
     }
