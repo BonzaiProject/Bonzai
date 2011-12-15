@@ -3,4 +3,10 @@ language: php
 php:
   - 5.3
 
+before_script:
+ - wget http://pecl.php.net/get/bcompiler-1.0.2.tgz
+ - tar -xzf bcompiler-1.0.2.tgz
+ - sh -c "cd bcompiler-1.0.2 && phpize && ./configure && make && sudo make install"
+ - echo "extension=bcompiler.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
 script: phpunit --configuration tests/Test.xml
