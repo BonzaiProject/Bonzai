@@ -3,25 +3,25 @@
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME:  phoenix
- * VERSION:    0.1
+ * CODE NAME: phoenix
+ * VERSION:   0.1
  *
- * URL:        http://www.bonzai-project.org
- * E-MAIL:     info@bonzai-project.org
+ * URL:       http://www.bonzai-project.org
+ * E-MAIL:    info@bonzai-project.org
  *
- * COPYRIGHT:  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
- * LICENSE:    MIT or GNU GPL 2
- *             The MIT License is recommended for most projects, it's simple and
- *             easy to understand  and it places  almost no restrictions on what
- *             you can do with Bonzai.
- *             If the GPL  suits your project  better you are  also free to  use
- *             Bonzai under that license.
- *             You don't have  to do anything  special to choose  one license or
- *             the other  and you don't have to notify  anyone which license you
- *             are using.  You are free  to use Bonzai in commercial projects as
- *             long as the copyright header is left intact.
- *             <http://www.opensource.org/licenses/mit-license.php>
- *             <http://www.opensource.org/licenses/gpl-2.0.php>
+ * COPYRIGHT: 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * LICENSE:   MIT or GNU GPL 2
+ *            The MIT License is recommended for most projects, it's simple and
+ *            easy to understand  and it places  almost no restrictions on what
+ *            you can do with Bonzai.
+ *            If the GPL  suits your project  better you are  also free to  use
+ *            Bonzai under that license.
+ *            You don't have  to do anything  special to choose  one license or
+ *            the other  and you don't have to notify  anyone which license you
+ *            are using.  You are free  to use Bonzai in commercial projects as
+ *            long as the copyright header is left intact.
+ *            <http://www.opensource.org/licenses/mit-license.php>
+ *            <http://www.opensource.org/licenses/gpl-2.0.php>
  *
  * PHP version 5
  *
@@ -97,7 +97,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $this->object->renameFile($a);
 
         $file = is_array($a) ? implode('', $a) : $a;
-        if (is_file("$file.orig")) {
+        if (is_string($file) && is_file("$file.orig")) {
             unlink("$file.orig");
         }
     }
@@ -121,7 +121,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $this->assertFileExists("$filename.orig");
         $this->assertFileNotExists($filename);
 
-        unlink("$filename.orig");
+        if (is_string($filename) && is_file("$filename.orig")) {
+            unlink("$filename.orig");
+        }
     }
     // }}}
     // }}}
@@ -302,7 +304,10 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         mkdir($dirname, 0777); // rwxrwxrwx
 
         $value = array('a');
-        $this->assertEquals(array('a'), $this->object->rScanDir($dirname, $value));
+        $this->assertEquals(
+            array('a'),
+            $this->object->rScanDir($dirname, $value)
+        );
         rmdir($dirname);
     }
     // }}}
@@ -440,7 +445,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         }
 
         chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -466,7 +473,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         }
 
         chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -490,7 +499,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
     // }}}
@@ -588,7 +599,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -607,7 +620,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -626,7 +641,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -645,7 +662,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -664,7 +683,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -683,7 +704,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -714,7 +737,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testInfoJustCoverage()
     {
-        $this->assertEmpty($this->object->info());
+        $this->assertEmpty($this->object->info(''));
     }
     // }}}
     // }}}
@@ -967,7 +990,6 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testMessageWithProviderThrowException($a, $b, $c)
     {
-        Bonzai_Utils::$silenced = false;
         $this->callMethod('message', array($a, $b, $c));
     }
     // }}}
@@ -1290,7 +1312,6 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testMessageWithProvider($a, $b, $c)
     {
-        Bonzai_Utils::$silenced = false;
         $this->assertEmpty($this->callMethod('message', array($a, $b, $c)));
     }
     // }}}

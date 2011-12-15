@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Bonzai</name>
+ <channel>pear.bonzai-project.org</channel>
+ <summary>Bonzai protect your PHP source code.</summary>
+ <description>Bonzai protect your PHP source code.</description>
+ <lead>
+  <name>Fabio Cicerchia</name>
+  <user>fabiocicerchia</user>
+  <email>info at fabiocicerchia.it</email>
+  <active>yes</active>
+ </lead>
+ <date>2011-12-12</date>
+ <time>18:41:05</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/mit-license.php">MIT</license>
+ <notes>
+-
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="c8f82bd206d8cd46afc7c3cb9cf3151f" name="bin/bonzai-cli" role="php" />
+   <file baseinstalldir="/" md5sum="2983e0e221e46101571efd8079dcfc53" name="bin/build.sh" role="data" />
+   <file baseinstalldir="/" md5sum="6bdeaffcf039caad7155a0c70bf931aa" name="build/phpmd.xml" role="data" />
+   <file baseinstalldir="/" md5sum="c8f82bd206d8cd46afc7c3cb9cf3151f" name="src/bonzai-cli" role="php" />
+   <file baseinstalldir="/" md5sum="8de07c4399061b1817cc38a0dc22a065" name="src/libs/Abstract/Abstract.php" role="php" />
+   <file baseinstalldir="/" md5sum="6923d949dddfcc4618246c7301993908" name="src/libs/Controller/Controller.php" role="php" />
+   <file baseinstalldir="/" md5sum="7f8799d1b983c05392fb9960a14a8218" name="src/libs/Encoder/Encoder.php" role="php" />
+   <file baseinstalldir="/" md5sum="32a693f5f56897450615e400e87e7c4f" name="src/libs/Exception/Exception.php" role="php" />
+   <file baseinstalldir="/" md5sum="716f77b68fe7faa77b8092451ac7e1ab" name="src/libs/Interface/Task.php" role="php" />
+   <file baseinstalldir="/" md5sum="f2db9267a7f21f2f48853fc95fbd5e74" name="src/libs/Registry/Registry.php" role="php" />
+   <file baseinstalldir="/" md5sum="e28e7962662337bd01fae5d1dc08f950" name="src/libs/Task/Task.php" role="php" />
+   <file baseinstalldir="/" md5sum="f2a1c0b1256d92a4261cac0e1a173a51" name="src/libs/Tests/TestCase.php" role="php" />
+   <file baseinstalldir="/" md5sum="9213e20e9f620614c09903e37da7dc97" name="src/libs/Utils/Help.php" role="php" />
+   <file baseinstalldir="/" md5sum="93cb539110a64cc78dc603ae4ef5d4d4" name="src/libs/Utils/Options.php" role="php" />
+   <file baseinstalldir="/" md5sum="946b39bbe318d6e0b2f153279a1fe5a5" name="src/libs/Utils/Utils.php" role="php" />
+   <file baseinstalldir="/" md5sum="60f3096f2c8eb502c3cf646eb65b3d78" name="tests/Test.php" role="test" />
+   <file baseinstalldir="/" md5sum="a27c7dda019db40d1393e92df2823ce4" name="tests/Test.xml" role="test" />
+   <file baseinstalldir="/" md5sum="129c75c31de40d4606d985ac87caf8d0" name="tests/Controller/ControllerTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="3b3ef132505ebdb37cbdfccaa7dcca57" name="tests/Encoder/EncoderTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="28391df6053894b4e8b94486736db0be" name="tests/Registry/RegistryTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="b49383c7842acf30d9e8827605803af2" name="tests/Task/TaskTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="27acff4e9a9b9912dda2f2a0ea74b6c4" name="tests/Utils/HelpTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="d28f25c0cd7bf54d9cf5766d9f53b215" name="tests/Utils/OptionsTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="a8aec8269efecc9206f612d4c07926fd" name="tests/Utils/UtilsTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="fdf5851764b4a9e2839f46e3a26b1b33" name="build.xml" role="data" />
+   <file baseinstalldir="/" md5sum="109e6655363720e9279a61440656cb22" name="CHANGELOG" role="data" />
+   <file baseinstalldir="/" md5sum="b783e81d7dbb29d54a97fab184d8df68" name="channel.xml" role="data" />
+   <file baseinstalldir="/" md5sum="39bba7d2cf0ba1036f2a6e2be52fe3f0" name="GPL-LICENSE" role="data" />
+   <file baseinstalldir="/" md5sum="47306190738597438cb8dca406dcb9e5" name="MIT-LICENSE" role="data" />
+   <file baseinstalldir="/" md5sum="4112e65e4baf69b02b1ff6c1b784cee7" name="README" role="data" />
+   <file baseinstalldir="/" md5sum="6fd7501dd3f560ae96f73609163f6dba" name="README.md" role="data" />
+   <file baseinstalldir="/" md5sum="16343b9cb06cabb0f8affa4f752fa0d2" name="TODO" role="data" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+   <extension>
+    <name>bcompiler</name>
+   </extension>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.1</release>
+    <api>0.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2011-12-12</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT</license>
+   <notes>
+-
+   </notes>
+  </release>
+ </changelog>
+</package>

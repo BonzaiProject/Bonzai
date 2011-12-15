@@ -1,13 +1,15 @@
 CHANGELOG
-===============================================================================
+================================================================================
 
-v0.1        Bonzai
+v0.1        Bonzai                                                           [-]
   * ADDED   - Build configuration for Jenkins
   * ADDED   - Bytecode compilation (through bcompiler extension)
   * ADDED   - Color support for CLI
+  * ADDED   - Continuos Integration based on Travis-CI
   * ADDED   - Log to filesystem the CLI report
   * ADDED   - New logo for the product
   * ADDED   - New website for the product
+  * ADDED   - PEAR Channel (self-hosted)
   * ADDED   - Project repository on github.com
   * ADDED   - Shell build script with various report (coverage, violations, ecc)
   * ADDED   - Test suite with PHPUnit
@@ -20,22 +22,23 @@ v0.1        Bonzai
   * REMOVED - Temporarily PHP Extension
   * REMOVED - Temporarily the Logging Server functionality
 
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-v4.0dev     phpGuardian
+v4.0dev     phpGuardian                                          [08 March 2009]
   * ADDED   - CLI
   * ADDED   - Gettext support (it, en)
   * ADDED   - PHP Extension
   * ADDED   - PHP Library (as alternative to PHP Extension)
   * CHANGED - Logging Server
-  * CHANGED - Project name to phpGuardian2 (new branch) but kept the history of versioning
+  * CHANGED - Project name to phpGuardian2 (new branch) but kept the history of
+              versioning
   * REMOVED - Administration Panel
 
-v3.1        phpGuardian
+v3.1        phpGuardian                                       [06 February 2008]
   * ADDED   - 4 missing files
   * FIXED   - Error in Logger Server
 
-v3.0        phpGuardian
+v3.0        phpGuardian                                       [01 February 2008]
   * ADDED   - Administration Panel to configure all options
   * ADDED   - Delete function of site on logger module
   * ADDED   - Logout button
@@ -54,7 +57,7 @@ v3.0        phpGuardian
   * FIXED   - E_ALL errors
   * FIXED   - Several bugs
 
-v2.0dev     phpGuardian
+v2.0dev     phpGuardian                                      [20 September 2006]
   * ADDED   - Database astraction
   * ADDED   - Documentation
   * ADDED   - More functionality to Logging Server
@@ -64,57 +67,57 @@ v2.0dev     phpGuardian
   * CHANGED - several improvements on code
   * FIXED   - Several bugs
 
-v1.5dev3    phpGuardian
+v1.5dev3    phpGuardian                                         [22 August 2006]
   * FIXED   - Several bugs
 
-v1.5dev2    phpGuardian
+v1.5dev2    phpGuardian                                                      [-]
   * CHANGED - Improved the Administration Panel
   * FIXED   - Several bugs
 
-v1.5dev     phpGuardian
+v1.5dev     phpGuardian                                         [16 August 2006]
   * CHANGED - Improved the Administration Panel
   * CHANGED - Improved the Encoder Algorithm
   * FIXED   - Several bugs
 
-v1.0        phpGuardian
+v1.0        phpGuardian                                         [08 August 2006]
   * ADDED   - Support for the off-line encoding
   * CHANGED - Improved the Administration Panel
   * CHANGED - Improved the Encoder Algorithm
   * FIXED   - Several bugs
 
-v0.7        phpGuardian
+v0.7        phpGuardian                                           [07 July 2006]
   * CHANGED - Improved the Encoder Algorithm
   * CHANGED - Improved the Logger Management
 
-v0.6        phpGuardian
+v0.6        phpGuardian                                           [06 July 2006]
   * ADDED   - Logging of the path of the monitorized scripts
   * CHANGED - DB structure
   * CHANGED - Visualization of the path of the monitorized scripts
   * FIXED   - Several bugs
 
-v0.5.2      phpGuardian
+v0.5.2      phpGuardian                                           [04 July 2006]
   * FIXED   - Several bugs
 
-v0.5        phpGuardian
+v0.5        phpGuardian                                           [01 July 2006]
   * ADDED   - Crypter
 
-v0.4        phpGuardian
+v0.4        phpGuardian                                           [28 June 2006]
   * ADDED   - Login form to Administration Panel
   * ADDED   - Visualization of user informations
 
-v0.3        phpGuardian
+v0.3        phpGuardian                                           [28 June 2006]
   * ADDED   - Administration Panel
   * ADDED   - Checking of last script version
   * ADDED   - Visualization of user list
   * CHANGED - DB structure
   * CHANGED - User state
 
-v0.2        phpGuardian
+v0.2        phpGuardian                                           [27 June 2006]
   * CHANGED - Improved the internal management
   * FIXED   - Bug #1 (Notice: Undefined variable: value) THANKS TO: nickang
   * FIXED   - Bug #2 (Error of general overwriting into database)
 
-v0.1B       phpGuardian
+v0.1B       phpGuardian                                           [26 June 2006]
   * ADDED   - Executing of additional code into the script
   * ADDED   - Logging IP and host of last user
   * ADDED   - Logging of global var $_SERVER

@@ -3,25 +3,25 @@
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME:  phoenix
- * VERSION:    0.1
+ * CODE NAME: phoenix
+ * VERSION:   0.1
  *
- * URL:        http://www.bonzai-project.org
- * E-MAIL:     info@bonzai-project.org
+ * URL:       http://www.bonzai-project.org
+ * E-MAIL:    info@bonzai-project.org
  *
- * COPYRIGHT:  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
- * LICENSE:    MIT or GNU GPL 2
- *             The MIT License is recommended for most projects, it's simple and
- *             easy to understand  and it places  almost no restrictions on what
- *             you can do with Bonzai.
- *             If the GPL  suits your project  better you are  also free to  use
- *             Bonzai under that license.
- *             You don't have  to do anything  special to choose  one license or
- *             the other  and you don't have to notify  anyone which license you
- *             are using.  You are free  to use Bonzai in commercial projects as
- *             long as the copyright header is left intact.
- *             <http://www.opensource.org/licenses/mit-license.php>
- *             <http://www.opensource.org/licenses/gpl-2.0.php>
+ * COPYRIGHT: 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * LICENSE:   MIT or GNU GPL 2
+ *            The MIT License is recommended for most projects, it's simple and
+ *            easy to understand  and it places  almost no restrictions on what
+ *            you can do with Bonzai.
+ *            If the GPL  suits your project  better you are  also free to  use
+ *            Bonzai under that license.
+ *            You don't have  to do anything  special to choose  one license or
+ *            the other  and you don't have to notify  anyone which license you
+ *            are using.  You are free  to use Bonzai in commercial projects as
+ *            long as the copyright header is left intact.
+ *            <http://www.opensource.org/licenses/mit-license.php>
+ *            <http://www.opensource.org/licenses/gpl-2.0.php>
  *
  * PHP version 5
  *
@@ -43,8 +43,6 @@ require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
 require_once __DIR__ . '/../../src/libs/Utils/Options.php';
 require_once __DIR__ . '/../../src/libs/Registry/Registry.php';
 require_once __DIR__ . '/../../src/libs/Encoder/Encoder.php';
-
-Bonzai_Utils::$silenced = true;
 
 /**
  * Bonzai_Encoder_Test
@@ -71,7 +69,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testElaborateJustCoverage()
     {
-        $this->assertEmpty($this->object->elaborate(new Bonzai_Utils_Options()));
+        $this->assertEmpty(
+            $this->object->elaborate(new Bonzai_Utils_Options())
+        );
     }
     // }}}
     // }}}
@@ -110,9 +110,12 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testProcessFileWithProviderThrowException($a)
     {
-        $this->callMethod('processFile', array(new Bonzai_Utils_Options(), $a));
+        $this->callMethod(
+            'processFile',
+            array(new Bonzai_Utils_Options(), $a)
+        );
 
-        if (is_string($a) && is_file($a)) { // TODO: USARE OVUNQUE
+        if (is_string($a) && is_file($a)) {
             unlink($a);
         }
     }
@@ -132,7 +135,10 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         file_put_contents($filename, '');
 
         try {
-            $this->callMethod('processFile', array(new Bonzai_Utils_Options(), $filename));
+            $this->callMethod(
+                'processFile',
+                array(new Bonzai_Utils_Options(), $filename)
+            );
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
@@ -143,7 +149,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -162,7 +170,10 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         chmod($filename, 0333); // -wx-wx-wx
 
         try {
-            $this->callMethod('processFile', array(new Bonzai_Utils_Options(), $filename));
+            $this->callMethod(
+                'processFile',
+                array(new Bonzai_Utils_Options(), $filename)
+            );
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
@@ -174,7 +185,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         }
 
         chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -192,10 +205,17 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         file_put_contents($filename, 'aaa');
         chmod($filename, 0555); // r-xr-xr-x
 
-        $this->assertEmpty($this->callMethod('processFile', array(new Bonzai_Utils_Options(), $filename)));
+        $this->assertEmpty(
+            $this->callMethod(
+                'processFile',
+                array(new Bonzai_Utils_Options(), $filename)
+            )
+        );
 
         chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -212,9 +232,16 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
-        $this->assertEmpty($this->callMethod('processFile', array(new Bonzai_Utils_Options(), $filename)));
+        $this->assertEmpty(
+            $this->callMethod(
+                'processFile',
+                array(new Bonzai_Utils_Options(), $filename)
+            )
+        );
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
     // }}}
@@ -291,7 +318,12 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testSaveOutputWithProviderJustCoverage($a, $b)
     {
-        $this->assertEmpty($this->callMethod('saveOutput', array(new Bonzai_Utils_Options(), $a, $b)));
+        $this->assertEmpty(
+            $this->callMethod(
+                'saveOutput',
+                array(new Bonzai_Utils_Options(), $a, $b)
+            )
+        );
 
         $a = is_array($a) ? implode('', $a) : strval($a);
         if (!empty($a) && is_file($a)) {
@@ -338,11 +370,14 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->callMethod('getByteCode', array($a));
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
-            $this->assertRegExp('/^The file `' . strval($a) . '` is invalid\.$/', $e->getMessage());
+            $this->assertRegExp(
+                '/^The file `' . strval($a) . '` is invalid\.$/',
+                $e->getMessage()
+            );
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        if (is_string($a) && is_file($a)) { // TODO: USARE OVUNQUE
+        if (is_string($a) && is_file($a)) {
             unlink($a);
         }
     }
@@ -395,7 +430,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         }
 
         chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -426,7 +463,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         }
 
         chmod($filename, 0777); // rwxrwxrwx
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
 
@@ -447,7 +486,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         $this->assertRegExp('/bcompiler v/', $bytecode);
 
-        unlink($filename);
+        if (is_string($filename) && is_file($filename)) {
+            unlink($filename);
+        }
     }
     // }}}
     // }}}
@@ -502,9 +543,16 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     {
         $dirname = realpath(__DIR__ . '/../../');
 
-        $files = $this->callMethod('expandPathsToFiles', array(array(__DIR__ . '/../')));
+        $files = $this->callMethod(
+            'expandPathsToFiles',
+            array(array(__DIR__ . '/../'))
+        );
         sort($files);
-        $files = preg_grep('#/test_.+$|\.swp$|\.git#', $files, PREG_GREP_INVERT);
+        $files = preg_grep(
+            '#/test_.+$|\.swp$|\.git#',
+            $files,
+            PREG_GREP_INVERT
+        );
         $files = array_merge($files);
         foreach ($files as $i => $file) {
             $files[$i] = str_replace(realpath("$dirname/"), "", $file);
@@ -542,7 +590,10 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         file_put_contents("$dirname/file.php", "test");
         mkdir("$dirname/$dirname", 0222); // -w--w--w-
 
-        $files = $this->callMethod('expandPathsToFiles', array(array($dirname)));
+        $files = $this->callMethod(
+            'expandPathsToFiles',
+            array(array($dirname))
+        );
         sort($files);
 
         $realfiles = array(
@@ -553,7 +604,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         chmod("$dirname/$dirname", 0777); // rwxrwxrwx
         chmod($dirname, 0777); // rwxrwxrwx
-        unlink("$dirname/file.php");
+        if (is_string("$dirname/file.php") && is_file("$dirname/file.php")) {
+            unlink("$dirname/file.php");
+        }
         rmdir("$dirname/$dirname");
         rmdir($dirname);
     }

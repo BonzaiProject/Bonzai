@@ -1,11 +1,14 @@
-TODO
+TODO (Ordered by Priorities)
 ===============================================================================
 
-Command Line rewritten in C (in doubt)
-Create an Administration Panel for Android & iOS
 Create an installer (.deb, .rpm, .dmg, .exe)
-Custom PHP Extension (written in C)
-Drop dependence with bcompiler
-Graphical User Interface
 Logging Server & Web Administration Panel (also for mobile devices)
 Remote Execution of Arbitrary Code
+Custom PHP Extension (written in C)
+Drop dependence with bcompiler
+Create an Administration Panel for Android & iOS
+Obfuscation of source code
+Remove comments from source code
+Command Line rewritten in C (in doubt)
+Use ncurses for CLI
+Graphical User Interface

@@ -3,25 +3,25 @@
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME:  phoenix
- * VERSION:    0.1
+ * CODE NAME: phoenix
+ * VERSION:   0.1
  *
- * URL:        http://www.bonzai-project.org
- * E-MAIL:     info@bonzai-project.org
+ * URL:       http://www.bonzai-project.org
+ * E-MAIL:    info@bonzai-project.org
  *
- * COPYRIGHT:  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
- * LICENSE:    MIT or GNU GPL 2
- *             The MIT License is recommended for most projects, it's simple and
- *             easy to understand  and it places  almost no restrictions on what
- *             you can do with Bonzai.
- *             If the GPL  suits your project  better you are  also free to  use
- *             Bonzai under that license.
- *             You don't have  to do anything  special to choose  one license or
- *             the other  and you don't have to notify  anyone which license you
- *             are using.  You are free  to use Bonzai in commercial projects as
- *             long as the copyright header is left intact.
- *             <http://www.opensource.org/licenses/mit-license.php>
- *             <http://www.opensource.org/licenses/gpl-2.0.php>
+ * COPYRIGHT: 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * LICENSE:   MIT or GNU GPL 2
+ *            The MIT License is recommended for most projects, it's simple and
+ *            easy to understand  and it places  almost no restrictions on what
+ *            you can do with Bonzai.
+ *            If the GPL  suits your project  better you are  also free to  use
+ *            Bonzai under that license.
+ *            You don't have  to do anything  special to choose  one license or
+ *            the other  and you don't have to notify  anyone which license you
+ *            are using.  You are free  to use Bonzai in commercial projects as
+ *            long as the copyright header is left intact.
+ *            <http://www.opensource.org/licenses/mit-license.php>
+ *            <http://www.opensource.org/licenses/gpl-2.0.php>
  *
  * PHP version 5
  *
@@ -77,7 +77,8 @@ class Bonzai_Utils extends Bonzai_Abstract
     {
         $filename = $this->getStrVal($filename);
 
-        $this->putFileContent($filename . '.orig', $this->getFileContent($filename));
+        $content = $this->getFileContent($filename);
+        $this->putFileContent($filename . '.orig', $content);
 
         unlink($filename);
     }
@@ -99,7 +100,10 @@ class Bonzai_Utils extends Bonzai_Abstract
     {
         $base = $this->getStrVal($base);
 
-        $this->raiseExceptionIf(!is_readable($base) && !is_executable($base), array('The directory `%s` cannot be opened.', $base));
+        $this->raiseExceptionIf(
+            !is_readable($base) && !is_executable($base),
+            array('The directory `%s` cannot be opened.', $base)
+        );
 
         if (!is_array($data)) {
             $data = array();
@@ -114,7 +118,10 @@ class Bonzai_Utils extends Bonzai_Abstract
                 try {
                     $data = $this->rScanDir($path, $data);
                 } catch (Bonzai_Exception $e) {
-                    $this->warn('The directory `%s` was skipped because not readable.', $path);
+                    $this->warn(
+                        'The directory `%s` was skipped because not readable.',
+                        $path
+                    );
 
                     unset($e);
                 }
@@ -163,7 +170,10 @@ class Bonzai_Utils extends Bonzai_Abstract
 
         $this->checkFileValidity($filename, false);
 
-        $this->raiseExceptionIf(file_exists($filename) && !is_writable($filename), array('The file `%s` cannot be written.', $filename));
+        $this->raiseExceptionIf(
+            file_exists($filename) && !is_writable($filename),
+            array('The file `%s` cannot be written.', $filename)
+        );
 
         return file_put_contents($filename, $content);
     }
@@ -186,13 +196,28 @@ class Bonzai_Utils extends Bonzai_Abstract
         $filename = $this->getStrVal($filename);
         $file_exists = is_bool($file_exists) ? $file_exists : true;
 
-        $this->raiseExceptionIf(empty($filename) || !is_string($filename) || trim($filename) == '' || ($file_exists && !file_exists($filename)), array('The file `%s` is invalid.', $filename));
-        $this->raiseExceptionIf($file_exists && !is_readable($filename), array('The file `%s` is not readable.', $filename));
-        $this->raiseExceptionIf($file_exists && filesize($filename) == 0, array('The file `%s` is empty.', $filename));
+        $this->raiseExceptionIf(
+            empty($filename) || !is_string($filename) || trim($filename) == ''
+            || ($file_exists && !file_exists($filename)),
+            array('The file `%s` is invalid.', $filename)
+        );
+
+        $this->raiseExceptionIf(
+            $file_exists && !is_readable($filename),
+            array('The file `%s` is not readable.', $filename)
+        );
+
+        $this->raiseExceptionIf(
+            $file_exists && filesize($filename) == 0,
+            array('The file `%s` is empty.', $filename)
+        );
 
         if ($file_exists) {
             $content = file_get_contents($filename);
-            $this->raiseExceptionIf(strpos($content, 'class Bonzai_') !== false, array('The file `%s` is not able to be parsed.', $filename));
+            $this->raiseExceptionIf(
+                strpos($content, 'class Bonzai_') !== false,
+                array('The file `%s` is not able to be parsed.', $filename)
+            );
         }
     }
     // }}}
@@ -209,7 +234,7 @@ class Bonzai_Utils extends Bonzai_Abstract
         $parameters = func_get_args();
         array_unshift($parameters, 'info');
 
-        return call_user_func_array(array('Bonzai_Utils', 'message'), $parameters);
+        return call_user_func_array(array($this, 'message'), $parameters);
     }
     // }}}
 
@@ -223,36 +248,40 @@ class Bonzai_Utils extends Bonzai_Abstract
      */
     protected function message()
     {
-        if (!self::$silenced) {
-            $options    = Bonzai_Registry::get('options');
-            $quiet_mode = ($options && $options->getOption('quiet') !== null);
+        $options    = Bonzai_Registry::get('options');
+        $quiet_mode = ($options && ($options->getOption('quiet') !== null || Bonzai_Utils::$silenced));
 
-            $args = func_get_args();
-            $type = array_shift($args);
-            $text = array_shift($args);
+        $args = func_get_args();
+        $type = array_shift($args);
+        $text = array_shift($args);
 
-            $this->raiseExceptionIf(!is_string($text), 'Invalid message format');
+        $this->raiseExceptionIf(
+            !is_string($text),
+            'Invalid message format'
+        );
 
-            if (!empty($text)) {
-                $text = gettext($text);
+        if (!empty($text)) {
+            $text = gettext($text);
 
-                $occurrences = substr_count($text, '%');
-                if ($occurrences > 0) {
-                    $this->raiseExceptionIf($occurrences != count($args), 'Numbers of parameters doesn\'t match.');
+            $occurrences = substr_count($text, '%');
+            if ($occurrences > 0) {
+                $this->raiseExceptionIf(
+                    $occurrences != count($args),
+                    'Numbers of parameters doesn\'t match.'
+                );
 
-                    $text = vsprintf($text, $args);
-                }
+                $text = vsprintf($text, $args);
+            }
 
-                $message = $this->composeMessage($options, $text, $type);
+            $message = $this->composeMessage($options, $text, $type);
 
-                $use_stderr = ($options && $options->getOption('stderr') !== null);
+            $use_stderr = ($options && $options->getOption('stderr') !== null);
 
-                if (!$quiet_mode) {
-                    if ($use_stderr && $type == 'error') {
-                        file_put_contents('php://stderr', $message);
-                    } else {
-                        echo $message;
-                    }
+            if (!$quiet_mode) {
+                if ($use_stderr && $type == 'error') {
+                    file_put_contents('php://stderr', $message);
+                } else {
+                    echo $message;
                 }
             }
         }
@@ -292,6 +321,8 @@ class Bonzai_Utils extends Bonzai_Abstract
                 $message = "\033[0;30m\033[43m" . $message . "\033[0m";
             }
         }
+
+        return $message;
     }
     // }}}
 
@@ -339,12 +370,15 @@ class Bonzai_Utils extends Bonzai_Abstract
      * @access public
      * @return void
      */
-    public function printHeader(Bonzai_Utils_Options $options, $ignore_quiet = false)
+    public function printHeader(
+        Bonzai_Utils_Options $options,
+        $ignore_quiet = false
+    )
     {
         $ignore_quiet = (bool)$ignore_quiet;
 
         $quiet_mode = ($options->getOption('quiet') !== null && !$ignore_quiet);
-        if (!$quiet_mode) {
+        if (!$quiet_mode && !self::$silenced) {
             $use_colors  = ($options->getOption('colors') !== null);
             $start_color = $use_colors ? "\033[1;37m" : '';
             $end_color   = $use_colors ? "\033[0m"    : '';
