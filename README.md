@@ -1,5 +1,11 @@
 ## BONZAI (previously phpGuardian)
 
+![Project Status](http://stillmaintained.com/BonzaiProject/Bonzai.png)
+
+[![Build Status](https://secure.travis-ci.org/BonzaiProject/Bonzai.png)](http://travis-ci.org/BonzaiProject/Bonzai)
+
+[![Click here to lend your support to: Bonzai and make a donation at www.pledgie.com !](http://www.pledgie.com/campaigns/16386.png?skin_name=chrome)](http://www.pledgie.com/campaigns/16386)
+
 **URL:** <http://www.bonzai-project.org>
 **E-MAIL:** <info@bonzai-project.org>
 
@@ -61,11 +67,9 @@ The only one dependencies is the PHP compiler
 [_bcompiler_](http://php.net/manual/en/book.bcompiler.php) to generate the
 bytecode.
 
-**DOCUMENTATION (TBW)**
+**DOCUMENTATION**
 
-The documentation available as of the date of this release is included in HTML
-format in the docs/manual/ directory.
-The most up-to-date documentation can be found at http://httpd.apache.org/docs/trunk/.
+TBW
 
 **INSTALL**
 
