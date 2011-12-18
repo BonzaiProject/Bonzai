@@ -8,5 +8,6 @@ before_script:
  - tar -xzf bcompiler-1.0.2.tgz
  - sh -c "cd bcompiler-1.0.2 && phpize && ./configure && make && sudo make install"
  - echo "extension=bcompiler.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+ - rm -rf "bcompiler-1.0.2"
 
 script: phpunit --configuration tests/Test.xml
