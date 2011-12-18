@@ -38,4 +38,5 @@
 
 require_once __DIR__ . '/libs/Controller/Controller.php';
 $controller = new Bonzai_Controller();
+// TODO: Is useful maintain divided the _SERVER and the Bonzai_Utils_Options?
 $controller->elaborate($_SERVER['argv'], new Bonzai_Utils_Options());

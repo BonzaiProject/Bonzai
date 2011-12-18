@@ -1,17 +1,11 @@
-## BONZAI (previously phpGuardian)
-
-![Project Status](http://stillmaintained.com/BonzaiProject/Bonzai.png)
-
-[![Build Status](https://secure.travis-ci.org/BonzaiProject/Bonzai.png)](http://travis-ci.org/BonzaiProject/Bonzai)
-
-[![Click here to lend your support to: Bonzai and make a donation at www.pledgie.com !](http://www.pledgie.com/campaigns/16386.png?skin_name=chrome)](http://www.pledgie.com/campaigns/16386)
+## BONZAI (previously phpGuardian) [![Build Status](https://secure.travis-ci.org/BonzaiProject/Bonzai.png)](http://travis-ci.org/BonzaiProject/Bonzai)
 
 **URL:** <http://www.bonzai-project.org>
 **E-MAIL:** <info@bonzai-project.org>
 
 **COPYRIGHT:** 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
 
-**LICENSING**
+**LICENSES**
 
 The MIT License is recommended for most projects, it's simple and easy to
 understand and it places almost no restrictions on what you can do with
@@ -32,6 +26,31 @@ Protect your PHP source code
 This project allow you to protect effectively your sources, without losing
 performances. The only FREE, OPEN-SOURCE and EVERYONE ACCESSIBLE, solution
 that lets you sleep soundly.
+
+**REQUIREMENTS & DEPENDENCIES**
+
+System requirements:
+
+* PHP 5.x
+
+The only one dependency is the PHP compiler
+[_bcompiler_](http://pecl.php.net/package/bcompiler) (a PECL extension) used to
+generate the bytecode.
+
+**INSTALL**
+
+No install process is needed. You can simply download the source code and run
+as-is.
+
+You can also use PEAR to install the package, to install using [our PEAR
+repository](http://pear.bonzai-project.org)) follow these two steps:
+
+* `pear channel-discover pear.bonzai-project.org`
+* `pear install bonzai/Bonzai`
+
+**CONFIGURATION**
+
+No configuration is needed.
 
 **USAGE**
 
@@ -61,35 +80,39 @@ Options:
 Report bugs to info@bonzai-project.org
 ```
 
-**DEPENDENCIES**
-
-The only one dependencies is the PHP compiler
-[_bcompiler_](http://php.net/manual/en/book.bcompiler.php) to generate the
-bytecode.
-
 **DOCUMENTATION**
 
-TBW
-
-**INSTALL**
-
-No install process is needed.
-
-**CONFIGURATION**
-
-No configuration is needed.
+The documentation available as of the date of this release is included in HTML
+format in the docs/ directory. The most up-to-date documentation can be found at
+[online](http://docs.bonzai-project.org).
 
 **SOURCE-CODE**
 
 To obtain the most recent source-code you can visit
-[the GitHub repository](https://github.com/BonzaiProject/Bonzai).
+[our GitHub repository](https://github.com/BonzaiProject/Bonzai).
 Or simply do `git clone git://github.com/BonzaiProject/Bonzai.git`.
 
 **AUTHORS**
 
 * Fabio Cicerchia <info@fabiocicerchia.it>
 
-**REQUEST**
+**SUPPORT**
 
-To submit bugs, feature-request or anything else please send an email to
-info@bonzai-project.org.
+For all support questions please use drop us a mail to info@bonzai-project.org.
+For bug reports and issues is available
+[the issue tracker](https://github.com/BonzaiProject/Bonzai/issues).
+Changes between versions are described in the
+[ChangeLog](https://github.com/BonzaiProject/Bonzai/blob/master/CHANGELOG).
+
+**DONATION**
+
+Bonzai is distributed for free and you can use it however you want(see the
+LICENSES section for more informations).
+If you really like it and want to support its developers or if you want to
+support a particular feature to be implemented, you can send a small donation
+using your credit/debit card by clicking on the button below.
+The actual amount is fully up to you.
+
+[![Click here to lend your support to: Bonzai and make a donation at www.pledgie.com](http://pledgie.com/campaigns/16386.png?skin_name=chrome)](http://www.pledgie.com/campaigns/16386)
+
+Thank you.

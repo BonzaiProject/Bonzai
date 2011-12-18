@@ -51,6 +51,8 @@ class Bonzai_Utils extends Bonzai_Abstract
 {
     // {{{ PROPERTIES
     /**
+     * Flag to decide whether silence all output messages.
+     *
      * @static
      * @access public
      * @var    boolean
@@ -58,6 +60,8 @@ class Bonzai_Utils extends Bonzai_Abstract
     public static $silenced = false;
 
     /**
+     * The message history.
+     *
      * @access public
      * @var    array
      */
@@ -65,10 +69,11 @@ class Bonzai_Utils extends Bonzai_Abstract
     // }}}
 
     // {{{ renameFile
+    // TODO: Just for coherence rename this method to backupFile.
     /**
-     * renameFile
+     * Backup a file with ".orig" extension.
      *
-     * @param string $filename
+     * @param string $filename The filename to be backup
      *
      * @access public
      * @return void
@@ -85,12 +90,12 @@ class Bonzai_Utils extends Bonzai_Abstract
     // }}}
 
     // {{{ rScanDir
-    // TODO: Optimize Cyclomatic Complexity (7)
+    // TODO: Optimize Cyclomatic Complexity (7).
     /**
-     * rScanDir
+     * Recursive scandir.
      *
-     * @param string $base
-     * @param array  &$data
+     * @param string $base  The base path where to start.
+     * @param array  &$data The container of elements of scandir.
      *
      * @access public
      * @throws Bonzai_Exception
@@ -136,9 +141,9 @@ class Bonzai_Utils extends Bonzai_Abstract
 
     // {{{ getFileContent
     /**
-     * getFileContent
+     * Retrieve the content of a file.
      *
-     * @param string $filename
+     * @param string $filename The file where read the content.
      *
      * @access public
      * @return string
@@ -154,10 +159,10 @@ class Bonzai_Utils extends Bonzai_Abstract
 
     // {{{ putFileContent
     /**
-     * putFileContent
+     * Save the content in a file.
      *
-     * @param string $filename
-     * @param string $content
+     * @param string $filename The file where put the content.
+     * @param string $content  The content to be saved.
      *
      * @access public
      * @throws Bonzai_Exception
@@ -180,12 +185,12 @@ class Bonzai_Utils extends Bonzai_Abstract
     // }}}
 
     // {{{ checkFileValidity
-    // TODO: Optimize Cyclomatic Complexity (9)
+    // TODO: Optimize Cyclomatic Complexity (9).
     /**
-     * checkFileValidity
+     * Check if a file is valid (validated, existent, readable, not-empty).
      *
-     * @param string  $filename
-     * @param boolean $file_exists
+     * @param string  $filename    The filename to be checked.
+     * @param boolean $file_exists Flag to determine whether some check will be ignored.
      *
      * @access public
      * @throws Bonzai_Exception
@@ -224,7 +229,7 @@ class Bonzai_Utils extends Bonzai_Abstract
 
     // {{{ info
     /**
-     * info
+     * Send a message in "info" mode.
      *
      * @access public
      * @return void
@@ -239,17 +244,19 @@ class Bonzai_Utils extends Bonzai_Abstract
     // }}}
 
     // {{{ message
-    // TODO: Optimize Cyclomatic Complexity (9)
+    // TODO: Optimize Cyclomatic Complexity (9).
     /**
-     * message
+     * Send a message to output.
      *
      * @access protected
      * @return void
      */
     protected function message()
     {
+        // TODO: Drop this dependency with Bonzai_Registry.
         $options    = Bonzai_Registry::get('options');
-        $quiet_mode = ($options && ($options->getOption('quiet') !== null || Bonzai_Utils::$silenced));
+        $quiet_mode = Bonzai_Utils::$silenced
+                      || ($options && $options->getOption('quiet') !== null);
 
         $args = func_get_args();
         $type = array_shift($args);
@@ -289,20 +296,22 @@ class Bonzai_Utils extends Bonzai_Abstract
     // }}}
 
     // {{{ composeMessage
-    // TODO: Optimize Cyclomatic Complexity (7)
-    // TODO: ADD TEST
+    // TODO: Write some test on this method for phpUnit.
+    // TODO: Optimize Cyclomatic Complexity (7).
     /**
-     * composeMessage
+     * Compose the message.
      *
-     * @param Bonzai_Utils_Options $options
-     * @param string               $text
-     * @param string               $type
+     * @param Bonzai_Utils_Options $options The options of the script.
+     * @param string               $text    The text to be outputted.
+     * @param string               $type    The type of message (info, warn or error).
      *
      * @access protected
      * @return void
      */
-    protected function composeMessage(Bonzai_Utils_Options $options, $text, $type)
-    {
+    protected function composeMessage(
+        Bonzai_Utils_Options $options,
+        $text, $type
+    ) {
         $prefix     = '[' . date('H:i:s') . '] ';
         $prefix_len = strlen($prefix);
 
@@ -328,7 +337,7 @@ class Bonzai_Utils extends Bonzai_Abstract
 
     // {{{ warn
     /**
-     * warn
+     * Send a message in "warn" mode.
      *
      * @access public
      * @return void
@@ -344,7 +353,7 @@ class Bonzai_Utils extends Bonzai_Abstract
 
     // {{{ error
     /**
-     * error
+     * Send a message in "error" mode.
      *
      * @access public
      * @return void
@@ -359,13 +368,13 @@ class Bonzai_Utils extends Bonzai_Abstract
     // }}}
 
     // {{{ printHeader
-    // TODO: Optimize Cyclomatic Complexity (5)
-    // TODO: ADD TEST
+    // TODO: Write some test on this method for phpUnit.
+    // TODO: Optimize Cyclomatic Complexity (5).
     /**
-     * printHeader
+     * Print the script header
      *
-     * @param Bonzai_Utils_Options $options
-     * @param boolean              $ignore_quiet
+     * @param Bonzai_Utils_Options $options      The options of the script.
+     * @param boolean              $ignore_quiet Flag to decide wheter ignore the quiet mode.
      *
      * @access public
      * @return void
@@ -373,8 +382,7 @@ class Bonzai_Utils extends Bonzai_Abstract
     public function printHeader(
         Bonzai_Utils_Options $options,
         $ignore_quiet = false
-    )
-    {
+    ) {
         $ignore_quiet = (bool)$ignore_quiet;
 
         $quiet_mode = ($options->getOption('quiet') !== null && !$ignore_quiet);

@@ -53,7 +53,7 @@ class Bonzai_Controller extends Bonzai_Abstract
 {
     // {{{ __construct
     /**
-     * __construct
+     * The __construct.
      *
      * @access public
      * @return void
@@ -65,12 +65,13 @@ class Bonzai_Controller extends Bonzai_Abstract
     // }}}
 
     // {{{ elaborate
-    // TODO: MODIFIED
+    // TODO: The method was modified, then re-check the tests.
+    // TODO: Find a way to save the Bonzai_Utils_Options somewhere and drop the transition of this value in each method.
     /**
-     * elaborate
+     * Starts the main elaboration of script.
      *
-     * @param array                $arguments
-     * @param Bonzai_Utils_Options $options
+     * @param array                $arguments The arguments of the script.
+     * @param Bonzai_Utils_Options $options   The options of the script.
      *
      * @access public
      * @return void
@@ -89,16 +90,18 @@ class Bonzai_Controller extends Bonzai_Abstract
     // }}}
 
     // {{{ handleTask
+    // TODO: The method was modified, then re-check the tests.
     /**
-     * handleTask
+     * Handle the right task based on options.
      *
-     * @param Bonzai_Utils_Options $options
+     * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access protected
      * @return void
      */
-    protected function handleTask(Bonzai_Utils_Options $options) // TODO: MODIFIED
+    protected function handleTask(Bonzai_Utils_Options $options)
     {
+        // TODO: Drop this dependency with Bonzai_Registry.
         Bonzai_Registry::add('options', $options);
 
         $task = new Bonzai_Task();
@@ -108,9 +111,9 @@ class Bonzai_Controller extends Bonzai_Abstract
 
     // {{{ autoload
     /**
-     * autoload
+     * Autoload "magically" each Bonzai_* class.
      *
-     * @param string $name
+     * @param string $name The name of class to be autoloaded.
      *
      * @access protected
      * @throws Bonzai_Exception
@@ -135,9 +138,9 @@ class Bonzai_Controller extends Bonzai_Abstract
 
     // {{{ getFileNameFromClassName
     /**
-     * getFileNameFromClassName
+     * Get the filename from the classname.
      *
-     * @param string $name
+     * @param string $name The classname that will be converted.
      *
      * @access protected
      * @return string
@@ -170,9 +173,9 @@ class Bonzai_Controller extends Bonzai_Abstract
 
     // {{{ checkFile
     /**
-     * checkFile
+     * Check if a file exists on filesystem.
      *
-     * @param string $filename
+     * @param string $filename The filename to be checked.
      *
      * @access protected
      * @return boolean

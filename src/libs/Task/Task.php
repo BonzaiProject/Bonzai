@@ -51,23 +51,19 @@ class Bonzai_Task extends Bonzai_Abstract
 {
     // {{{ PROPERTIES
     /**
+     * Task to be executed.
+     *
      * @access protected
      * @var    string $task
      */
     protected $task = 'Bonzai_Utils_Help';
-
-    /**
-     * @access protected
-     * @var    mixed $options
-     */
-    protected $options = null;
     // }}}
 
     // {{{ loadAndExecute
     /**
-     * loadAndExecute
+     * Load and Execute the task.
      *
-     * @param Bonzai_Utils_Options $options
+     * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access public
      * @return mixed
@@ -81,17 +77,19 @@ class Bonzai_Task extends Bonzai_Abstract
     // }}}
 
     // {{{ load
+    // TODO: The method was modified, then re-check the tests.
     /**
-     * load
+     * Load the task and setup the execution.
      *
-     * @param Bonzai_Utils_Options $options
+     * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access protected
      * @return void
      */
-    protected function load(Bonzai_Utils_Options $options) // TODO: MODIFIED
+    protected function load(Bonzai_Utils_Options $options)
     {
         $this->options = $options;
+        // TODO: Drop this dependency with Bonzai_Registry.
         Bonzai_Registry::add('options', $options);
 
         if ($options->getOptionParams()
@@ -105,7 +103,7 @@ class Bonzai_Task extends Bonzai_Abstract
 
     // {{{ execute
     /**
-     * execute
+     * Execute the task.
      *
      * @access protected
      * @throws Bonzai_Exception
@@ -135,16 +133,16 @@ class Bonzai_Task extends Bonzai_Abstract
 
     // {{{ saveReportFile
     /**
-     * saveReportFile
+     * Save to file the report.
      *
-     * @param string $post
+     * @param string $report The report generated previously.
      *
      * @access protected
      * @return mixed
      */
-    protected function saveReportFile($post)
+    protected function saveReportFile($report)
     {
-        $post = $this->getStrVal($post);
+        $report = $this->getStrVal($report);
 
         $contents = implode(PHP_EOL, $this->getUtils()->message_history);
         if ($this->options->getOption('log') !== null && !empty($contents)) {
@@ -155,7 +153,7 @@ class Bonzai_Task extends Bonzai_Abstract
 
             $this->getUtils()->putFileContent(
                 $this->options->getOption('log'),
-                $pre . $contents . $post
+                $pre . $contents . $report
             );
         }
     }
@@ -163,9 +161,9 @@ class Bonzai_Task extends Bonzai_Abstract
 
     // {{{ generateReport
     /**
-     * generateReport
+     * Generate the execution report.
      *
-     * @param int $time
+     * @param int $time Time of script execution.
      *
      * @access protected
      * @return mixed
@@ -177,9 +175,11 @@ class Bonzai_Task extends Bonzai_Abstract
         $post = '';
         if ($this->options->getOption('report') !== null) {
             ob_start();
+            // TODO: Drop this dependency with Bonzai_Registry.
             $skipped_files = Bonzai_Registry::get('skipped_files');
             $skipped       = count($skipped_files);
 
+            // TODO: Drop this dependency with Bonzai_Registry.
             $tot_files = Bonzai_Registry::get('total_files');
             printf(gettext('Total time:            %0.2fs') . PHP_EOL, $time);
             printf(gettext('Total files processed: %d') . PHP_EOL, $tot_files);

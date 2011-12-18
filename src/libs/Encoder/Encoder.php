@@ -50,20 +50,22 @@
 class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
 {
     // {{{ elaborate
+    // TODO: The method was modified, then re-check the tests.
     /**
-     * elaborate
+     * Starts the main elaboration of task.
      *
-     * @param Bonzai_Utils_Options $options
+     * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access public
      * @return void
      */
-    public function elaborate(Bonzai_Utils_Options $options) // TODO: MODIFIED
+    public function elaborate(Bonzai_Utils_Options $options)
     {
         $this->getUtils()->printHeader($options, false);
 
         $files = $this->expandPathsToFiles($options->getOptionParams());
         $files = array_unique($files);
+        // TODO: Drop this dependency with Bonzai_Registry.
         Bonzai_Registry::add('total_files', count($files));
 
         $this->processFileList($options, $files);
@@ -71,23 +73,27 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     // }}}
 
     // {{{ processFileList
-    // TODO: ADD TEST
+    // TODO: Write some test on this method for phpUnit.
     /**
-     * processFileList
+     * Process the list of all files to be encoded.
      *
-     * @param Bonzai_Utils_Options $options
-     * @param array                $files
+     * @param Bonzai_Utils_Options $options The options of the script.
+     * @param array                $files   The files to be encoded.
      *
      * @access protected
      * @return void
      */
-    protected function processFileList(Bonzai_Utils_Options $options, array $files)
-    {
+    protected function processFileList(
+        Bonzai_Utils_Options $options,
+        array $files
+    ) {
+        // TODO: Drop this dependency with Bonzai_Registry.
         Bonzai_Registry::add('skipped_files', array());
         foreach ($files as $filename) {
             try {
                 $this->processFile($options, $filename);
             } catch (Bonzai_Exception $e) {
+                // TODO: Drop this dependency with Bonzai_Registry.
                 Bonzai_Registry::append('skipped_files', $filename);
                 $this->getUtils()->error(
                     'Cannot handle the file `%s`.', $filename
@@ -100,16 +106,16 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     // }}}
 
     // {{{ processFile
-    // TODO: MODIFIED
+    // TODO: The method was modified, then re-check the tests.
     /**
-     * processFile
+     * Process a single file.
      *
-     * @param Bonzai_Utils_Options $options
-     * @param string               $filename
+     * @param Bonzai_Utils_Options $options  The options of the script.
+     * @param string               $filename The file to be encoded.
      *
      * @access protected
      * @throws Bonzai_Exception
-     * @return boolean
+     * @return void
      */
     protected function processFile(Bonzai_Utils_Options $options, $filename)
     {
@@ -142,13 +148,13 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     // }}}
 
     // {{{ saveOutput
-    // TODO: MODIFIED
+    // TODO: The method was modified, then re-check the tests.
     /**
-     * saveOutput
+     * Save the output to file.
      *
-     * @param Bonzai_Utils_Options $options
-     * @param string               $filename
-     * @param string               $bytecode
+     * @param Bonzai_Utils_Options $options  The options of the script.
+     * @param string               $filename The filename where save the output.
+     * @param string               $bytecode The content to be saved.
      *
      * @access protected
      * @return void
@@ -156,8 +162,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     protected function saveOutput(
         Bonzai_Utils_Options $options,
         $filename, $bytecode
-    )
-    {
+    ) {
         $filename = $this->getStrVal($filename);
         $bytecode = $this->getStrVal($bytecode);
 
@@ -171,6 +176,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
                 );
             }
         } catch (Bonzai_Exception $e) {
+            // TODO: Drop this dependency with Bonzai_Registry.
             Bonzai_Registry::append('skipped_files', $filename);
             $this->getUtils()->warn(
                 'The file `%s` was skipped because cannot be able to save it.',
@@ -184,9 +190,9 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
 
     // {{{ getByteCode
     /**
-     * getByteCode
+     * Retrieve the byte-code from a file.
      *
-     * @param string $filename
+     * @param string $filename The filename where extract the byte-code.
      *
      * @access protected
      * @return string
@@ -201,7 +207,6 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
             $tempnam = tempnam('/tmp', 'BNZ');
             $filehandle = fopen($tempnam, 'w');
 
-            //bcompiler_set_filename_handler('basename');
             bcompiler_write_header($filehandle);
             bcompiler_write_file($filehandle, $filename);
             bcompiler_write_footer($filehandle);
@@ -211,6 +216,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
             $bytecode = $this->getUtils()->getFileContent($tempnam);
             unlink($tempnam);
         } catch (Bonzai_Exception $e) {
+            // TODO: Drop this dependency with Bonzai_Registry.
             Bonzai_Registry::append('skipped_files', $filename);
             $this->getUtils()->error(
                 'Cannot handle the file `%s`.',
@@ -225,11 +231,11 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     // }}}
 
     // {{{ expandPathsToFiles
-    // TODO: Optimize Cyclomatic Complexity (7)
+    // TODO: Optimize Cyclomatic Complexity (7).
     /**
-     * expandPathsToFiles
+     * Convert a mixed array of files and directories in only files.
      *
-     * @param array $files
+     * @param array $files The array of mixed values to be converted.
      *
      * @access protected
      * @return array

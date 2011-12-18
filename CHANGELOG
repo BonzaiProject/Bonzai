@@ -5,12 +5,12 @@ v0.1        Bonzai                                                           [-]
   * ADDED   - Build configuration for Jenkins
   * ADDED   - Bytecode compilation (through bcompiler extension)
   * ADDED   - Color support for CLI
-  * ADDED   - Continuos Integration based on Travis-CI
+  * ADDED   - Continuous Integration based on Travis-CI
   * ADDED   - Log to filesystem the CLI report
   * ADDED   - New logo for the product
   * ADDED   - New website for the product
   * ADDED   - PEAR Channel (self-hosted)
-  * ADDED   - Project repository on github.com
+  * ADDED   - Project repository on GitHub
   * ADDED   - Shell build script with various report (coverage, violations, ecc)
   * ADDED   - Test suite with PHPUnit
   * CHANGED - CLI from C to PHP

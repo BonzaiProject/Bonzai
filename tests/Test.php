@@ -53,6 +53,8 @@ class Bonzai_CLI_Test extends Bonzai_TestCase
 {
     // {{{ PROPERTIES
     /**
+     * Flag to decide whether instantiate automatically the class to be tested.
+     *
      * @access protected
      * @var    boolean
      */

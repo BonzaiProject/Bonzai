@@ -51,6 +51,8 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 {
     // {{{ PROPERTIES
     /**
+     * The allowed script-parameters.
+     *
      * @access protected
      * @var    array $parameters
      */
@@ -66,6 +68,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
         'v'  => 'version');
 
     /**
+     * The description of each parameter.
      * @access protected
      * @var    array $labels
      */
@@ -84,12 +87,16 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
         'version' => 'Show the version');
 
     /**
+     * The container of script parameter called at runtime.
+     *
      * @access protected
      * @var    array $options
      */
     protected $options = array();
 
     /**
+     * The container of script optional parameter called at runtime.
+     *
      * @access protected
      * @var    array $option_params
      */
@@ -98,9 +105,9 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
     // {{{ init
     /**
-     * init
+     * Initialize the script-options.
      *
-     * @param array $arguments
+     * @param array $arguments The array of script-parameter.
      *
      * @access public
      * @throws Bonzai_Exception
@@ -122,9 +129,9 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
     // {{{ parseOptions
     /**
-     * parseOptions
+     * Parse the script-options to populate the array.
      *
-     * @param array $arguments
+     * @param array $arguments The array of script-parameter.
      *
      * @access protected
      * @throws Bonzai_Exception
@@ -142,11 +149,11 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
     // }}}
 
     // {{{ populateOptionParams
-    // TODO: Optimize Cyclomatic Complexity (5)
+    // TODO: Optimize Cyclomatic Complexity (5).
     /**
-     * populateOptionParams
+     * Populate the array of script-options called at runtime.
      *
-     * @param array $arguments
+     * @param array $arguments The array of script-parameter.
      *
      * @access protected
      * @return void
@@ -171,7 +178,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
     // {{{ getOptionParams
     /**
-     * getOptionParams
+     * The get method to retrieve the $option_params protected properties.
      *
      * @access public
      * @return array
@@ -184,7 +191,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
     // {{{ getOptions
     /**
-     * getOptions
+     * The get method to retrieve the $options protected properties.
      *
      * @access public
      * @return array
@@ -197,9 +204,10 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
     // {{{ getOption
     /**
-     * getOption
+     * The get method to retrieve the single value from the array of $options
+     * protected properties.
      *
-     * @param string $key
+     * @param string $key The key of option.
      *
      * @access public
      * @return string | null
@@ -218,7 +226,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
     // {{{ getParameters
     /**
-     * getParameters
+     * The get method to retrieve the $parameters protected properties.
      *
      * @access public
      * @return array
@@ -231,9 +239,10 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
     // {{{ getLabelParameter
     /**
-     * getLabelParameter
+     * The get method to retrieve the single value from the array of $labels
+     * protected properties.
      *
-     * @param string $key
+     * @param string $key The key of option.
      *
      * @access public
      * @return string | null

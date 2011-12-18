@@ -51,6 +51,8 @@ class Bonzai_Registry extends Bonzai_Abstract
 {
     // {{{ PROPERTIES
     /**
+     * Storage Container for the Registry.
+     *
      * @static
      * @access public
      * @var    array
@@ -60,10 +62,10 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ add
     /**
-     * add
+     * Add an element to the Storage Container.
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param string $key   The key of element of Storage Container.
+     * @param mixed  $value The value of element of Storage Container.
      *
      * @static
      * @access public
@@ -80,9 +82,9 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ get
     /**
-     * get
+     * Get an element from the Storage Container.
      *
-     * @param string $key
+     * @param string $key The key of element of Storage Container.
      *
      * @static
      * @access public
@@ -103,9 +105,9 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ remove
     /**
-     * remove
+     * Remove an element from the Storage Container.
      *
-     * @param string $key
+     * @param string $key The key of element of Storage Container.
      *
      * @static
      * @access public
@@ -124,10 +126,11 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ append
     /**
-     * append
+     * Append an element to the Storage Container
+     * (only if not exists, otherwise will be created).
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param string $key   The key of element of Storage Container.
+     * @param mixed  $value The value of element of Storage Container.
      *
      * @static
      * @access public
@@ -148,11 +151,11 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ appendAs
     /**
-     * appendAs
+     * Append an element based on variable-type.
      *
-     * @param string $variable_type
-     * @param string $key
-     * @param mixed  $value
+     * @param string $variable_type The type of variable to be saved.
+     * @param string $key           The key of element of Storage Container.
+     * @param mixed  $value         The value of element of Storage Container.
      *
      * @static
      * @access public
@@ -173,10 +176,10 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ appendAsArray
     /**
-     * appendAsArray
+     * Append an array-element to the Storage Container
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param string $key   The key of element of Storage Container.
+     * @param mixed  $value The value of element of Storage Container.
      *
      * @static
      * @access public
@@ -194,10 +197,10 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ appendAsString
     /**
-     * appendAsString
+     * Append a string-element to the Storage Container.
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param string $key   The key of element of Storage Container.
+     * @param mixed  $value The value of element of Storage Container.
      *
      * @static
      * @access public
@@ -215,10 +218,10 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ appendAsInteger
     /**
-     * appendAsInteger
+     * Append an integer-element to the Storage Container.
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param string $key   The key of element of Storage Container.
+     * @param mixed  $value The value of element of Storage Container.
      *
      * @static
      * @access public
@@ -234,9 +237,9 @@ class Bonzai_Registry extends Bonzai_Abstract
 
     // {{{ checkKeyValidity
     /**
-     * checkKeyValidity
+     * Check the validity of an access-key.
      *
-     * @param string $key
+     * @param string $key The key of element of Storage Container.
      *
      * @static
      * @access protected

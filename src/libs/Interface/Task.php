@@ -51,9 +51,9 @@ interface Bonzai_Interface_Task
 {
     // {{{ elaborate
     /**
-     * elaborate
+     * Starts the main elaboration of task.
      *
-     * @param Bonzai_Utils_Options $options
+     * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access public
      * @return void

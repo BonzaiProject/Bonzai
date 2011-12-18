@@ -55,12 +55,16 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
 {
     // {{{ PROPERTIES
     /**
+     * The instance of class to be tested.
+     *
      * @access protected
      * @var    mixed
      */
     protected $object = null;
 
     /**
+     * Flag to decide whether instantiate automatically the class to be tested.
+     *
      * @access protected
      * @var    boolean
      */
@@ -69,7 +73,7 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
 
     // {{{ setUp
     /**
-     * setUp
+     * PHPUnit setUp: instance the class if needed.
      *
      * @access protected
      * @return void
@@ -93,10 +97,10 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
 
     // {{{ callMethod
     /**
-     * callMethod
+     * Workaround to test the protected methods.
      *
-     * @param string $name
-     * @param array  $parameters
+     * @param string $name       The name of protected method.
+     * @param array  $parameters The parameters to be passed to method.
      *
      * @static
      * @access protected

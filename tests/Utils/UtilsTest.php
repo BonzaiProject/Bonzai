@@ -352,10 +352,11 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $files = $this->object->rScanDir($dirname);
         sort($files);
         $files = preg_grep('/\.(php|sh)$/', $files);
-        $files = array_merge($files);
         foreach ($files as $i => $file) {
             $files[$i] = str_replace(realpath("$dirname/"), "", $file);
         }
+        $files = preg_grep('/^\/(src|tests|bin)/', $files);
+        $files = array_merge($files);
 
         $realfiles = array(
             '/bin/build.sh',

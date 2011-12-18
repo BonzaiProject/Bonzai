@@ -53,6 +53,8 @@ abstract class Bonzai_Abstract
 {
     // {{{ PROPERTIES
     /**
+     * The instance of Bonzai_Utils.
+     *
      * @static
      * @access protected
      * @var    Bonzai_Utils
@@ -61,9 +63,9 @@ abstract class Bonzai_Abstract
     // }}}
 
     // {{{ getUtils
-    // TODO: ADD TEST
+    // TODO: Write some test on this method for phpUnit.
     /**
-     * getUtils
+     * The get method to retrieve the $utils protected properties.
      *
      * @access public
      * @return Bonzai_Utils
@@ -79,13 +81,16 @@ abstract class Bonzai_Abstract
     // }}}
 
     // {{{ raiseExceptionIf
-    // TODO: ADD TEST
+    // TODO: Write some test on this method for phpUnit.
+    // TODO: Remove the static attribute to this method.
     /**
-     * raiseExceptionIf
+     * Raise an exception, with custom message, only when the condition is
+     * satisfied.
      *
-     * @param boolean $condition
-     * @param mixed   $message
+     * @param boolean $condition The condition to be checked.
+     * @param mixed   $message   The message to be passed to exception.
      *
+     * @static
      * @access protected
      * @throws Bonzai_Exception
      * @return void
@@ -106,12 +111,14 @@ abstract class Bonzai_Abstract
     // }}}
 
     // {{{ getStrVal
-    // TODO: ADD TEST
+    // TODO: Write some test on this method for phpUnit.
+    // TOD: remove the static attribute to this method.
     /**
-     * getStrVal
+     * Retrieve the string value from a mixed value.
      *
-     * @param mixed $var
+     * @param mixed $var The mixed value to be converted.
      *
+     * @static
      * @access protected
      * @return string
      */
