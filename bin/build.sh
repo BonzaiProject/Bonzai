@@ -77,7 +77,7 @@ fi
 echo -en "Generate violations ..........................."
 RFILE="$REPORT/cli.violations.txt"
 XML="$REPORT/cli/log/phpcs.xml"
-CMD06=`phpcs -s -v --report-file="$RFILE" --report-xml="$XML" "$SRC" 2>&1`
+CMD06=`phpcs --standard=PEAR -s -v --report-file="$RFILE" --report-xml="$XML" "$SRC" 2>&1`
 RULES="codesize,design,naming,unusedcode"
 XML="$REPORT/cli/log/phpmd.xml"
 CMD07=`phpmd "$SRC" xml $RULES --reportfile "$XML" 2>&1`
