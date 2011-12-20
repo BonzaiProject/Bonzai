@@ -1,0 +1,352 @@
+<html>
+    <head>
+        <title>Bonzai | Documentation</title>
+        <style type="text/css">
+            * {
+                margin: 0px;
+                padding: 0px;
+                cursor: default;
+            }
+
+            body {
+                background-color: #3B3B3B;
+                font-size: 11px;
+                font-family: sans-serif;
+                text-align: center;
+            }
+
+            a, a * {
+                color: #3B3B3B;
+                cursor: pointer;
+            }
+
+            p {
+                margin-bottom: 5px;
+            }
+
+            ul {
+                list-style-type: none;
+                margin-bottom: 5px;
+            }
+
+            ul li {
+                margin-bottom: 5px;
+                padding: 0px 5px;
+            }
+
+            ul li:before {
+                content: "- ";
+                margin-left: 10px;
+            }
+
+            hr {
+                margin: 15px 0px 15px 0px;
+                border: 0px;
+                height: 1px;
+                background-color: #3B3B3B;
+            }
+
+            h1 {
+                text-indent: -9999px;
+                background: url(logo.png) no-repeat center center;
+                height: 123px;
+                width: 88px;
+                overflow: hidden;
+                display: inline-block;
+            }
+
+            h1 a {
+                display: block;
+                height: 100%;
+            }
+
+            h2 {
+                text-transform: uppercase;
+                font-size: 13px;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            h3 {
+                text-transform: uppercase;
+                font-size: 11px;
+                margin-bottom: 10px;
+            }
+
+            code {
+                border: 1px solid #888;
+                padding: 3px;
+            }
+
+            #main {
+                width: 400px;
+                margin-left: -200px;
+                left: 50%;
+                position: relative;
+            }
+
+            #header {
+                margin: 20px 0px 20px 0px;
+            }
+
+            #content {
+                border: 1px solid #AAAAAA;
+                border-radius: 15px;
+                background-color: #AAAAAA;
+                padding: 20px;
+            }
+
+            #content img {
+                margin: 10px;
+            }
+
+            #footer {
+                border: 1px solid #AAAAAA;
+                border-radius: 15px;
+                background-color: #AAAAAA;
+                padding: 10px;
+                font-size: 10px;
+                margin: 20px 0px;
+                letter-spacing: 0.05em;
+            }
+
+
+            #download ul li:before, ul.linear li:before {
+                content: "";
+                margin-left: 0px;
+            }
+
+            #download ul li, #download ul li a {
+                display: inline-block;
+            }
+
+            #download ul em {
+                font-family: monospace;
+            }
+
+            ul.linear li {
+                display: inline-block;
+                width: 45%;
+                text-transform: uppercase;
+                font-size: 0.9em;
+            }
+
+
+            #documentation h1 {
+                background-image: url(../media/logo_bonzai_white.png);
+            }
+
+            #documentation #main {
+                width: 800px;
+                margin-left: -400px;
+            }
+
+            #documentation h3 {
+                border-bottom: 1px solid #000000;
+                margin-top: 15px;
+            }
+
+            #documentation #content {
+                text-align: left;
+                line-height: 1.8em;
+            }
+
+            .bordered {
+                border: 1px solid #888888;
+                padding: 3px;
+                font-size: 0.8em;
+                background-color: #CCCCCC;
+            }
+
+            .centered {
+                text-align: center;
+            }
+
+            table {
+                width: 100%;
+                font-size: 10px;
+                border-spacing: 0;
+                border: 1px solid #888888;
+                border-left: 0px;
+                border-top: 0px;
+            }
+
+            th, td {
+                text-align: center;
+                width: 100px !important;
+                border: 1px solid #888888;
+                padding: 3px;
+                border-bottom: 0px;
+                border-right: 0px;
+            }
+
+            tr th:first-child {
+                width: auto !important;
+            }
+
+            tr td:first-child {
+                text-align: left;
+                width: auto !important;
+            }
+        </style>
+    </head>
+    <body id="documentation">
+        <a href="https://github.com/BonzaiProject/Bonzai" target="_blank">
+            <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/c641758e06304bc53ae7f633269018169e7e5851/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub">
+        </a>
+
+        <div id="main">
+            <div id="header">
+                <h1><a href="http://www.bonzai-project.org">BONZAI</a></h1>
+            </div>
+            <div id="content">
+                <h2>Documentazione</h2>
+
+                <h3>Disclaimer</h3>
+                <div class="bordered">
+                    <h4>Marchi Registrati</h4>
+                    <p>Tutti i termini menzionati nella presente documentazione che sono noti per essere marchi registrati o marchi di
+                    servizio sono stati adeguatamente scritti in maiuscolo. Il Team di Bonzai non pu&ograve; attestare l'accuratezza di
+                    queste informazioni. L'uso di un termine in questa documentazione non deve essere considerato come un attentato alla
+                    validit&agrave; di qualsiasi marchio registrato o marchio di servizio.</p>
+                    <h4>Note e Disclaimer</h4>
+                    <p>Ogni sforzo &egrave; stato fatto per rendere questa documentazione pi&ugrave; completa e quanto pi&ugrave; precisa
+                    possibile, ma nessuna garanzia o idoneit&agrave; &egrave; implicita. Le informazioni fornite sono "cos&igrave; come sono".
+                    L'autore e l'editore non avr&agrave; né responsabilit&agrave; né responsabilit&agrave; di qualsiasi persona o entit&agrave;
+                    in relazione a qualsiasi perdita o danno derivante dalle informazioni contenute nella presente documentazione.</p>
+                </div>
+
+                <h3>Sostegno</h3>
+                <p>Per tutte le domande di supporto, utilizza scrivici una mail a info@bonzai-project.org. Per segnalazioni di bug e problemi
+                &egrave; disponibile <a href="https://github.com/BonzaiProject/Bonzai/issues" target="_blank">il tracciamento delle segnalazioni</a>.
+                I cambiamenti tra le versioni sono descritte nel <a href="https://github.com/BonzaiProject/Bonzai/blob/master/CHANGELOG" target="_blank">ChangeLog</a>.</p>
+                <p><strong>Stiamo facendo tutto il possibile per rendere questa documentazione dettagliata e stiamo aumentando il livello di
+                qualit&agrave; del progetto. Il tuo aiuto &egrave; prezioso!</strong></p>
+                <p>Se si vuol fare di pi&ugrave; e partecipare attivamente al progetto sarete i benvenuti.</p>
+
+                <h3>Requisiti e Dipendenze</h3>
+                <p>Requisiti di sistema:</p>
+                <ul>
+                    <li>PHP 5.x</li>
+                </ul>
+                <p>L'unica dipendenza &egrave; il compilatore PHP <a href="http://pecl.php.net/package/bcompiler" target="_blank">bcompiler</a>
+                utilizzato per generare il bytecode.</p>
+
+                <h3>Installazione</h3>
+                <p>Nessun processo di installazione &egrave; necessario. Si pu&ograve; semplicemente scaricare il codice sorgente ed eseguirlo
+                cos&igrave; com'&egrave;.</p>
+                <p>&egrave; inoltre possibile utilizzare PEAR per installare il pacchetto, per installare usando il
+                <a href="http://pear.bonzai-project.org" target="_blank">nostro repository PEAR</a> seguire questi due passi:</p>
+                <ul>
+                    <li><code>pear channel-discover pear.bonzai-project.org</code></li>
+                    <li><code>pear install bonzai/Bonzai</code></li>
+                </ul>
+
+                <h3>Configurazione</h3>
+                <p>Non &egrave; necessaria alcuna configurazione.</p>
+
+                <h3>Utilizzo</h3>
+                <pre>
+                --------------------------------------------------------------------------------
+                Bonzai                                               (in precedenza phpGuardian)
+                --------------------------------------------------------------------------------
+                Versione: 0.1
+                Copyright (C) 2006 - 2011 Bonzai (Fabio Cicerchia). Tutti i diritti riservati.
+                Licenza MIT o GNU GPL 2
+                --------------------------------------------------------------------------------
+
+                Utilizzo:
+                ./bonzai-cli [OPZIONI]... [FILE|DIRECTORY]...
+
+                Opzioni:
+                -b, --backup         Backup del file originale, generare un file con estensione .bak
+                -d, --dry            Esegue un giro di prova senza effettuare modifiche
+                -r, --report         Genera un rapporto completo
+                    --color          Usare i colori nei messaggi in uscita
+                    --log=&lt;valore&gt;   Salva i messaggi di esecuzione in formato testuale
+                    --stderr         Scrive nello STDERR invece dello STDOUT
+                -q, --quiet          Modalit&agrave; silenziosa. Non scrive nulla
+                -h, --help           Mostra l'aiuto
+                -v, --version        Mostra la versione
+
+                Segnala i bug a info@bonzai-project.org
+                </pre>
+
+                <h3>Codice sorgente</h3>
+                <p>Per ottenere il pi&ugrave; recente codice sorgente si pu&ograve; visitare il
+                <a href="https://github.com/BonzaiProject/Bonzai" target="_blank">nostro repository GitHub</a>.<br />
+                O semplicemente fare un <code>git clone git://github.com/BonzaiProject/Bonzai.git</code>.</p>
+
+                <h3>Collaborare allo sviluppo</h3>
+                <h4>Standard di Codifica</h4>
+                <p>Abbiamo adottato interamente gli <a href="http://pear.php.net/manual/en/standards.php" target="_blank">standard
+                di codifica PEAR</a>.</p>
+
+                <h4>Configurare l'ambiente di sviluppo</h4>
+                <p>Per essere pronti e pienamente operativa a questo progetto &egrave; necessario un software:</p>
+                <table>
+                    <tr>
+                        <th>-</th>
+                        <th>Scarica</th>
+                        <th>Documentazione</th>
+                    </tr>
+                    <tr>
+                        <td>PHP 5.x</td>
+                        <td><a href="http://www.php.net/downloads.php" target="_blank">Scarica</a></td>
+                        <td><a href="http://www.php.net/docs.php" target="_blank">Documentazione</a></td>
+                    </tr>
+                    <tr>
+                        <td>PHPUnit</td>
+                        <td><a href="http://pear.phpunit.de/" target="_blank">Scarica</a></td>
+                        <td><a href="http://www.phpunit.de/manual/current/en/index.html" target="_blank">Documentazione</a></td>
+                    </tr>
+                    <tr>
+                        <td>Docblox</td>
+                        <td><a href="http://pear.docblox-project.org/" target="_blank">Scarica</a></td>
+                        <td><a href="http://docs.docblox-project.org/" target="_blank">Documentazione</a></td>
+                    </tr>
+                    <tr>
+                        <td>phploc</td>
+                        <td><a href="http://sebastianbergmann.github.com/phploc/" target="_blank">Scarica</a></td>
+                        <td><a href="https://github.com/sebastianbergmann/phploc/blob/master/README.markdown" target="_blank">Documentazione</a></td>
+                    </tr>
+                    <tr>
+                        <td>PHP Depend</td>
+                        <td><a href="http://pdepend.org/download/index.html" target="_blank">Scarica</a></td>
+                        <td><a href="http://pdepend.org/documentation/getting-started.html" target="_blank">Documentazione</a></td>
+                    </tr>
+                    <tr>
+                        <td>PHP Mess Detector</td>
+                        <td><a href="http://phpmd.org/download/index.html" target="_blank">Scarica</a></td>
+                        <td><a href="http://phpmd.org/documentation/index.html" target="_blank">Documentazione</a></td>
+                    </tr>
+                    <tr>
+                        <td>PHP_CodeSniffer</td>
+                        <td><a href="http://pear.php.net/package/PHP_CodeSniffer/download" target="_blank">Scarica</a></td>
+                        <td><a href="http://pear.php.net/manual/en/package.php.php-codesniffer.php" target="_blank">Documentazione</a></td>
+                    </tr>
+                    <tr>
+                        <td>PHP_CodeBrowser</td>
+                        <td><a href="https://github.com/Mayflower/PHP_CodeBrowser" target="_blank">Scarica</a></td>
+                        <td><a href="https://github.com/Mayflower/PHP_CodeBrowser/blob/master/README.markdown" target="_blank">Documentazione</a></td>
+                    </tr>
+                </table>
+
+                <h4>Traduzioni</h4>
+                <p>TBW</p>
+
+                <h3>Autori</h3>
+                <ul>
+                    <li>Fabio Cicerchia &lt;<a href="mailto:info@fabiocicerchia.it">info@fabiocicerchia.it</a>&gt;</li>
+                </ul>
+            </div>
+            <div id="footer">
+                &copy; 2006 - 2011 Bonzai &mdash; Fabio Cicerchia. Tutti i diritti riservati.<br />
+                Per informazioni ci si pu&ograve; scrivere una mail a <a href="mailto:info@bonzai-project.org">info@bonzai-project.org</a>.<br />
+                Ci potete seguire via Twitter: <a href="http://twitter.com/bonzai_project" target="_blank">BonzaiProject</a>.<br />
+                Progetto rilasciato sotto le licenze <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">MIT</a> o
+                <a href="http://www.opensource.org/licenses/gpl-2.0.php" target="_blank">GNU GPL 2</a>.
+            </div>
+        </div>
+    </body>
+</html>
