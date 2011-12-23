@@ -94,7 +94,7 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
             $end_color   = $use_colors ? "\033[0m"    : '';
 
             echo PHP_EOL . $start_color . gettext('Usage') . ':' . $end_color;
-            echo PHP_EOL . $_SERVER['argv'][0] . ' [' . gettext('OPTIONS');
+            echo PHP_EOL . $_SERVER['argv'][0] . ' [' . strtoupper(gettext('Options'));
             echo ']... [' . gettext('FILES') . '|' . gettext('DIRECTORIES');
             echo ']...' . PHP_EOL . PHP_EOL;
             echo $start_color . gettext('Options') . ':' . $end_color . PHP_EOL;
@@ -137,7 +137,7 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
 
         $info = ($only_long ? '    ' : "-$short, ") . "--$long";
         if ($has_value) {
-            $info .= '=<value>';
+            $info .= '=<' . gettext('value') . '>';
         }
 
         $format = '    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL;

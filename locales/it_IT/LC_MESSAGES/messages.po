@@ -1,0 +1,141 @@
+# Bonzai Gettext.
+# Copyright (C) 2006 - 2011 Bonzai (Fabio Cicerchia)
+# This file is distributed under the same license as the Bonzai package.
+# Fabio Cicerchia <info@fabiocicerchia.it>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: info@bonzai-project.org\n"
+"POT-Creation-Date: 2011-12-20 22:03+0100\n"
+"PO-Revision-Date: 2011-12-22 23:55+0100\n"
+"Last-Translator: Fabio Cicerchia <info@fabiocicerchia.it>\n"
+"Language-Team: LANGUAGE <info@bonzai-project.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "The class `%s` cannot be loaded."
+msgstr "La classe `%s` non può essere caricata."
+
+msgid "Cannot handle the file `%s`."
+msgstr "Impossibile gestire il file `%s`."
+
+msgid "The file `%s` is invalid."
+msgstr "Il file `%s` non e' valido."
+
+msgid "Start encoding file `%s'."
+msgstr "Inizio codifica file `%s`."
+
+msgid "Saved encoded file to `%s'."
+msgstr "Salvataggio file codificato `%s`."
+
+msgid "The file `%s` cannot be written."
+msgstr "Il file `%s` non può essere scritto."
+
+msgid "The file `%s` was skipped because cannot be able to save it."
+msgstr "Il file `%s` e' stato saltato perche' non e' stato possibile salvarlo."
+
+msgid "The directory `%s` was skipped because not readable."
+msgstr "La cartella `%s` e' stata saltata perche' non leggibile."
+
+msgid "Invalid key type."
+msgstr "Tipologia della chiave non valida."
+
+msgid "Cannot launch the task `%s`."
+msgstr "Impossibile lanciare l'attività `%s`."
+
+msgid "(previously phpGuardian)"
+msgstr "(in precedenza phpGuardian)"
+
+msgid "Total time:            %0.2fs"
+msgstr "Tempo totale:          %0.2fs"
+
+msgid "Total files processed: %d"
+msgstr "Totale files elaborati: %d"
+
+msgid "Total files skipped:   %d"
+msgstr "Totale files saltati:  %d"
+
+msgid "Skipped files:"
+msgstr "File saltati:"
+
+msgid "Version"
+msgstr "Versione"
+
+msgid "All rights reserved."
+msgstr "Tutti i diritti riservati."
+
+msgid "License MIT or GNU GPL 2"
+msgstr "Licenza MIT o GNU GPL 2"
+
+msgid "Usage"
+msgstr "Utilizzo"
+
+msgid "FILES"
+msgstr "FILES"
+
+msgid "DIRECTORIES"
+msgstr "CARTELLE"
+
+msgid "Options"
+msgstr "Opzioni"
+
+msgid "Report bugs to info@bonzai-project.org"
+msgstr "Segnalare i problemi a info@bonzai-project.org"
+
+msgid "value"
+msgstr "valore"
+
+msgid "Backup the original file, generate a .bak file"
+msgstr "Backup del file originale, generare un file con estensione .bak"
+
+msgid "Perform a trial run with no changes made"
+msgstr "Esegue un giro di prova senza effettuare modifiche"
+
+msgid "Use colors in output"
+msgstr "Usare i colori nei messaggi in uscita"
+
+msgid "Log execution messages in textual format"
+msgstr "Salva i messaggi di esecuzione in formato testuale"
+
+msgid "Write to STDERR instead of STDOUT"
+msgstr "Scrive nello STDERR invece dello STDOUT"
+
+msgid "Generate a full report"
+msgstr "Genera un rapporto completo"
+
+msgid "Quiet mode. Don't output anything"
+msgstr "Modalità silenziosa. Non scrive nulla"
+
+msgid "Show the help"
+msgstr "Mostra l'aiuto"
+
+msgid "Show the version"
+msgstr "Mostra la versione"
+
+msgid "Missing the script arguments."
+msgstr "Mancanza degli argomenti dello script."
+
+msgid "Invalid parameters to be parsed."
+msgstr "Parametri da elaborare non validi."
+
+msgid "The directory `%s` cannot be opened."
+msgstr "La cartella `%s` non può essere aperta."
+
+msgid "The file `%s` is not readable."
+msgstr "Il file `%s` non e' leggibile."
+
+msgid "The file `%s` is empty."
+msgstr "Il file `%s` e' vuoto."
+
+msgid "The file `%s` is not able to be parsed."
+msgstr "Il file `%s` non può essere elaborato."
+
+msgid "Invalid message format."
+msgstr "Formato del messaggio non valido."
+
+msgid "Numbers of parameters doesn't match."
+msgstr "Il numero dei parametri non coincide."
+

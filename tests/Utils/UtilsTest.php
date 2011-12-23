@@ -42,9 +42,6 @@ require_once __DIR__ . '/../../src/libs/Registry/Registry.php';
 require_once __DIR__ . '/../../src/libs/Utils/Options.php';
 require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
 
-Bonzai_Utils::$silenced = true;
-Bonzai_Registry::add('options', new Bonzai_Utils_Options());
-
 /**
  * Bonzai_Utils_Test
  *

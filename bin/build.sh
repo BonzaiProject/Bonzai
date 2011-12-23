@@ -104,12 +104,16 @@ echo -en "Generate codebrowser .........................."
 CMD12=`phpcb --log="$REPORT/cli/log" --source="$SRC" --output="$REPORT/cli/code_browser" 2>&1`
 echo "$txtgrn done$txtrst"
 
+echo -en "Generate gettext .............................."
+CMD13=`msgfmt "$FULL_PATH/locales/it_IT/LC_MESSAGES/messages.po" -o "$FULL_PATH/locales/it_IT/LC_MESSAGES/messages.mo"`
+echo "$txtgrn done$txtrst"
+
 ### RELEASING #################################################################
 echo ""
 echo -e "${txtbld}RELEASING CLI --------------------------------------$txtrst"
 
 echo -en "Generate PEAR package ........................."
-CMD13=`pear package 2>&1`
+CMD14=`pear package 2>&1`
 echo "$txtgrn done$txtrst"
 
 END_TIME=$(date +%s)

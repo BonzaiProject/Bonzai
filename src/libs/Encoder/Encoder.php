@@ -138,7 +138,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
 
         if (!empty($bytecode)) {
             $this->saveOutput($options, $filename, $bytecode);
-            $this->getUtils()->info("Saved encoded file to `%s'.", $filename);
+            $this->getUtils()->info('Saved encoded file to `%s`.', $filename);
         }
 
         if ($options->getOption('quiet') === null && !Bonzai_Utils::$silenced) {

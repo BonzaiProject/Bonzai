@@ -142,7 +142,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/',
+                '/^' . sprintf(gettext('The file `%s` is empty.'), '.+\/test_[a-zA-Z0-9]+') . '$/',
                 $e->getMessage()
             );
 
@@ -177,7 +177,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^The file `.+\/test_[a-zA-Z0-9]+` is not readable\.$/',
+                '/^' . sprintf(gettext('The file `%s` is not readable.'), '.+\/test_[a-zA-Z0-9]+') . '$/',
                 $e->getMessage()
             );
 
@@ -371,7 +371,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^The file `' . strval($a) . '` is invalid\.$/',
+                '/^' . sprintf(gettext('The file `%s` is invalid.'), strval($a)) . '$/',
                 $e->getMessage()
             );
             $this->assertInstanceOf('Bonzai_Exception', $e);
@@ -422,7 +422,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^The file `.+\/test_[a-zA-Z0-9]+` is empty\.$/',
+                '/^' . sprintf(gettext('The file `%s` is empty.'), '.+\/test_[a-zA-Z0-9]+') . '$/',
                 $e->getMessage()
             );
 
@@ -455,7 +455,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^The file `.+\/test_[a-zA-Z0-9]+` is not readable\.$/',
+                '/^' . sprintf(gettext('The file `%s` is not readable.'), '.+\/test_[a-zA-Z0-9]+') . '$/',
                 $e->getMessage()
             );
 

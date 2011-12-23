@@ -262,10 +262,7 @@ class Bonzai_Utils extends Bonzai_Abstract
         $type = array_shift($args);
         $text = array_shift($args);
 
-        $this->raiseExceptionIf(
-            !is_string($text),
-            'Invalid message format'
-        );
+        $this->raiseExceptionIf(!is_string($text), 'Invalid message format.');
 
         if (!empty($text)) {
             $text = gettext($text);
@@ -391,9 +388,11 @@ class Bonzai_Utils extends Bonzai_Abstract
             $start_color = $use_colors ? "\033[1;37m" : '';
             $end_color   = $use_colors ? "\033[0m"    : '';
 
+            $previously = gettext('(previously phpGuardian)');
+
             echo str_repeat('-', 80) . PHP_EOL;
-            echo $start_color . 'BONZAI' . str_repeat(' ', 50);
-            echo gettext('(previously phpGuardian)') . $end_color . PHP_EOL;
+            echo $start_color . 'BONZAI' . str_repeat(' ', 74 - strlen($previously));
+            echo $previously . $end_color . PHP_EOL;
             echo str_repeat('-', 80) . PHP_EOL;
         }
     }

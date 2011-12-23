@@ -60,6 +60,18 @@ class Bonzai_Controller extends Bonzai_Abstract
      */
     public function __construct()
     {
+        // Init the gettext support with the current locale (in use)
+        if (getenv('LANG')) {
+            $lang   = getenv('LANG');
+            $domain = 'messages';
+
+            $res = putenv('LC_ALL=' . $lang);
+            $res = setlocale(LC_ALL, $lang);
+            $res = bindtextdomain($domain, __DIR__ . '/../../../locales/');
+            $res = bind_textdomain_codeset($domain, 'UTF-8');
+            $res = textdomain($domain);
+        }
+
         spl_autoload_register('Bonzai_Controller::autoload');
     }
     // }}}
