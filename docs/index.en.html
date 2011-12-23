@@ -1,205 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <html>
     <head>
-        <title>Bonzai | Documentation</title>
+        <title>Bonzai | Documenzione</title>
         <style type="text/css">
-            * {
-                margin: 0px;
-                padding: 0px;
-                cursor: default;
-            }
+            * { margin: 0px; padding: 0px; }
+            body { font-family: sans-serif; }
+            a { color: #333; }
+            #top_bar { height: 40px; background-color: #333; width: 100%; position: fixed; font-size: 13px; z-index: 3; -moz-box-shadow: 0px 5px 15px #AAA; -webkit-box-shadow: 0px 5px 15px #AAA; box-shadow: 0px 5px 15px #AAA; }
+            #top_bar ul { text-align: center; height: 100%; }
+            #top_bar ul li { display: inline-block; color: #AAA; }
+            #top_bar a { color: #AAA; text-decoration: none; display: block; padding: 11px 15px; }
+            #top_bar select { position: relative; float: right; margin: -32px 10px 0px 0px; height: 23px; font-size: 11px; width: 100px; }
+            #center { width: 800px; margin-left: -400px; position: absolute; min-height: 100%; left: 50%; background-color: #EEE; -moz-box-shadow: 0px 0px 30px #333; -webkit-box-shadow: 0px 0px 30px #333; box-shadow: 0px 0px 30px #333; }
+            #content { padding: 60px 10px 20px 10px; font-size: 12px; line-height: 2em; text-align: justify; }
+            #content h1 { text-indent: -9999px; background: url(logo_bonzai_default.png) no-repeat center center; height: 123px; width: 88px; margin: 20px 20px 40px -44px; left: 50%; position: relative; overflow: hidden; display: inline-block; }
+            #content ul { margin-left: 30px; }
+            #content p { width: 80%; margin-left: 10%; }
+            #content hr { margin: 20px 0px; }
+            #content h2 { text-align: center; }
+            #content h3 { background-color: #AAA; color: #EEE; padding: 0px 0px 0px 10px; margin: 10px 0px 10px 0px; clear: both; }
+            #footer { background-color: #333; width: 100%; color: #AAA; font-size: 11px; padding: 33px 0px; z-index: 2; }
+            #www #footer, #pear #footer { bottom: 0px; position: absolute; }
+            #footer a { color: #AAA; }
+            #footer ul a { text-decoration: none; }
+            #footer div.center { width: 700px; margin-left: -350px; left: 50%; position: relative; }
+            #footer ul { float: left; width: 175px; list-style-type: none; }
+            .clear { clear: both; }
 
-            body {
-                background-color: #3B3B3B;
-                font-size: 11px;
-                font-family: sans-serif;
-                text-align: center;
-            }
+            .hot_links { text-align: center; }
+            .hot_links strong { font-size: 14px; text-transform: uppercase; text-align: center; }
+            .hot_links a { width: 48%; display: inline-block; }
+            a.donate { margin-top: 20px; display: block; text-align: center; }
 
-            a, a * {
-                color: #3B3B3B;
-                cursor: pointer;
-            }
+            #docs h1 { background: url(../media/logo_bonzai_default.png); }
+            #docs #content { padding-top: 20px; }
+            #docs #content ul { margin-left: 110px; list-style-type: none; }
+            #docs #content ul li:before { content: "- "; }
+            code { border: 1px solid #888; padding: 3px; font-family: monospace; }
+            pre { font-family: monospace; }
+            table { width: 100%; font-size: 10px; border-spacing: 0; border: 1px solid #888888; border-left: 0px; border-top: 0px; }
+            th, td { text-align: center; width: 100px !important; border: 1px solid #888888; padding: 3px; border-bottom: 0px; border-right: 0px; }
+            tr th:first-child { width: auto !important; }
+            tr td:first-child { text-align: left; width: auto !important; }
 
-            p {
-                margin-bottom: 5px;
-            }
+            #lang { float: right; margin: -33px 5px 0px 0px; }
+            #lang dd { position: relative; }
+            #lang a:hover { color: #FFFFFF; }
+            #lang dt a:hover, #langs dt a:focus { color: #FFFFFF; border: 1px solid #FFFFFF; }
+            #lang dt a { background: #333 url(arrow.png) no-repeat scroll 135px center; display: block; padding: 3px; border: 1px solid #AAA; width: 150px; }
+            #lang dt a span { cursor: pointer; display: block; padding: 0px; }
+            #lang dd ul { text-align: left; background: #333 none repeat scroll 0 0; border: 1px solid #AAA; color: #AAA; display:none; height: auto; left: 0px; padding: 5px; position: absolute; top: 2px; width: auto; min-width: 150px; list-style: none; }
+            #lang span.value { display: none; }
+            #lang dd ul li { display: block; }
+            #lang dd ul li a { padding: 5px 5px; display: block; }
+            #lang dd ul li a:hover { background-color: #FFF; color: #333; }
+            #lang img.flag { border: none; vertical-align: middle; margin: 0px 10px; }
 
-            ul {
-                list-style-type: none;
-                margin-bottom: 5px;
-            }
+            #status #content ul { list-style-type: none; width: 48%; float: left; font-family: monospace; }
+            #status #content ul.full { width: 100%; }
+            #status #content ul li, #status #content ul li * { margin: 0px !important; padding: 0px; text-align: left; }
+            #status #content ul li:before { content: ""; }
+            #status #content ul li span { color: #999; }
 
-            ul li {
-                margin-bottom: 5px;
-                padding: 0px 5px;
-            }
+            #pear #doc { width: 80%; margin-left: 10%; }
+            #pear code { border: 0px; padding: 0px; }
+            #pear pre { border: 1px solid #888; padding: 3px; }
+            #pear table tr th { width: 70px !important; }
 
-            ul li:before {
-                content: "- ";
-                margin-left: 10px;
-            }
-
-            hr {
-                margin: 15px 0px 15px 0px;
-                border: 0px;
-                height: 1px;
-                background-color: #3B3B3B;
-            }
-
-            h1 {
-                text-indent: -9999px;
-                background: url(logo.png) no-repeat center center;
-                height: 123px;
-                width: 88px;
-                overflow: hidden;
-                display: inline-block;
-            }
-
-            h1 a {
-                display: block;
-                height: 100%;
-            }
-
-            h2 {
-                text-transform: uppercase;
-                font-size: 13px;
-                margin-bottom: 10px;
-                text-align: center;
-            }
-
-            h3 {
-                text-transform: uppercase;
-                font-size: 11px;
-                margin-bottom: 10px;
-            }
-
-            code {
-                border: 1px solid #888;
-                padding: 3px;
-            }
-
-            #main {
-                width: 400px;
-                margin-left: -200px;
-                left: 50%;
-                position: relative;
-            }
-
-            #header {
-                margin: 20px 0px 20px 0px;
-            }
-
-            #content {
-                border: 1px solid #AAAAAA;
-                border-radius: 15px;
-                background-color: #AAAAAA;
-                padding: 20px;
-            }
-
-            #content img {
-                margin: 10px;
-            }
-
-            #footer {
-                border: 1px solid #AAAAAA;
-                border-radius: 15px;
-                background-color: #AAAAAA;
-                padding: 10px;
-                font-size: 10px;
-                margin: 20px 0px;
-                letter-spacing: 0.05em;
-            }
-
-
-            #download ul li:before, ul.linear li:before {
-                content: "";
-                margin-left: 0px;
-            }
-
-            #download ul li, #download ul li a {
-                display: inline-block;
-            }
-
-            #download ul em {
-                font-family: monospace;
-            }
-
-            ul.linear li {
-                display: inline-block;
-                width: 45%;
-                text-transform: uppercase;
-                font-size: 0.9em;
-            }
-
-
-            #documentation h1 {
-                background-image: url(../media/logo_bonzai_white.png);
-            }
-
-            #documentation #main {
-                width: 800px;
-                margin-left: -400px;
-            }
-
-            #documentation h3 {
-                border-bottom: 1px solid #000000;
-                margin-top: 15px;
-            }
-
-            #documentation #content {
-                text-align: left;
-                line-height: 1.8em;
-            }
-
-            .bordered {
-                border: 1px solid #888888;
-                padding: 3px;
-                font-size: 0.8em;
-                background-color: #CCCCCC;
-            }
-
-            .centered {
-                text-align: center;
-            }
-
-            table {
-                width: 100%;
-                font-size: 10px;
-                border-spacing: 0;
-                border: 1px solid #888888;
-                border-left: 0px;
-                border-top: 0px;
-            }
-
-            th, td {
-                text-align: center;
-                width: 100px !important;
-                border: 1px solid #888888;
-                padding: 3px;
-                border-bottom: 0px;
-                border-right: 0px;
-            }
-
-            tr th:first-child {
-                width: auto !important;
-            }
-
-            tr td:first-child {
-                text-align: left;
-                width: auto !important;
-            }
+            #ohloh > div { border-radius: 0px !important; border: 0px !important; float: left; width: 47% !important; background-color: transparent !important; }
+            #ohloh ul { width: 100%; }
+            #ohloh ul img { background-color: transparent; border: 0px; }
+            #ohloh table { width: auto !important; }
+            #ohloh img { border: 1px solid #888888; padding: 3px; background-color: #FFFFFF; }
+            #ohloh h2 { font-size: 1.1em !important; }
+            #ohloh div > div:last-child { display: none; }
         </style>
     </head>
-    <body id="documentation">
+    <body id="docs">
         <a href="https://github.com/BonzaiProject/Bonzai" target="_blank">
-            <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/c641758e06304bc53ae7f633269018169e7e5851/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub">
+            <img style="position: absolute; top: 0px; left: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/c641758e06304bc53ae7f633269018169e7e5851/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub">
         </a>
 
-        <div id="main">
-            <div id="header">
-                <h1><a href="http://www.bonzai-project.org">BONZAI</a></h1>
-            </div>
+        <div id="center">
             <div id="content">
+                <h1><a href="http://www.bonzai-project.org">BONZAI</a></h1>
+
                 <h2>Documentation</h2>
 
                 <h3>Disclaimer</h3>
@@ -333,19 +219,27 @@
                 </table>
 
                 <h4>Translations</h4>
-                <p>TBW</p>
+                <p>To translate the documentation you need create a new file from the <code>docs/index.en.html</code> and translating it in the file
+                <code>docs/index.[CODE].html</code> where <code>[CODE]</code> is the two-letter language code.</p>
+                <p>To translate the script you need copy the file <code>messages.pot</code> in the file <code>locales/[CODE]/LC_MESSAGES/messages.po</code>
+                (obviously the directory must be created before) where <code>[CODE]</code> is the extended code of the language (eg: <code>en_US</code>).
+                Then you can use a tool to edit the file (eg: poEdit) or you can manually edit. Then generate the file <code>messages.mo</code>.</p>
 
                 <h3>Authors</h3>
                 <ul>
                     <li>Fabio Cicerchia &lt;<a href="mailto:info@fabiocicerchia.it">info@fabiocicerchia.it</a>&gt;</li>
                 </ul>
+                <div class="clear"></div>
             </div>
+
             <div id="footer">
-                &copy; 2006 - 2011 Bonzai &mdash; Fabio Cicerchia. All rights reserved.<br />
-                For informations you can drop us a line to <a href="mailto:info@bonzai-project.org">info@bonzai-project.org</a>.<br />
-                You can follow us via Twitter: <a href="http://twitter.com/bonzai_project" target="_blank">BonzaiProject</a>.<br />
-                Project released under the <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">MIT</a> or
-                <a href="http://www.opensource.org/licenses/gpl-2.0.php" target="_blank">GNU GPL 2</a> Licenses.
+                <div class="center">
+                    &copy; 2006 - 2011 Bonzai &mdash; Fabio Cicerchia. All rights reserved.<br />
+                    For informations you can drop us a line to <a href="mailto:info@bonzai-project.org">info@bonzai-project.org</a>.
+                    You can follow us via Twitter: <a href="http://twitter.com/bonzai_project" target="_blank">BonzaiProject</a>.<br />
+                    Project released under the <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">MIT</a> or
+                    <a href="http://www.opensource.org/licenses/gpl-2.0.php" target="_blank">GNU GPL 2</a> Licenses.
+                </div>
             </div>
         </div>
     </body>

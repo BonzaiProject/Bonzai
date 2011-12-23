@@ -17,124 +17,124 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "The class `%s` cannot be loaded."
-msgstr "La classe `%s` non può essere caricata."
+msgstr ""
 
 msgid "Cannot handle the file `%s`."
-msgstr "Impossibile gestire il file `%s`."
+msgstr ""
 
 msgid "The file `%s` is invalid."
-msgstr "Il file `%s` non e' valido."
+msgstr ""
 
 msgid "Start encoding file `%s'."
-msgstr "Inizio codifica file `%s`."
+msgstr ""
 
 msgid "Saved encoded file to `%s'."
-msgstr "Salvataggio file codificato `%s`."
+msgstr ""
 
 msgid "The file `%s` cannot be written."
-msgstr "Il file `%s` non può essere scritto."
+msgstr ""
 
 msgid "The file `%s` was skipped because cannot be able to save it."
-msgstr "Il file `%s` e' stato saltato perche' non e' stato possibile salvarlo."
+msgstr ""
 
 msgid "The directory `%s` was skipped because not readable."
-msgstr "La cartella `%s` e' stata saltata perche' non leggibile."
+msgstr ""
 
 msgid "Invalid key type."
-msgstr "Tipologia della chiave non valida."
+msgstr ""
 
 msgid "Cannot launch the task `%s`."
-msgstr "Impossibile lanciare l'attività `%s`."
+msgstr ""
 
 msgid "(previously phpGuardian)"
-msgstr "(in precedenza phpGuardian)"
+msgstr ""
 
 msgid "Total time:            %0.2fs"
-msgstr "Tempo totale:          %0.2fs"
+msgstr ""
 
 msgid "Total files processed: %d"
-msgstr "Totale files elaborati: %d"
+msgstr ""
 
 msgid "Total files skipped:   %d"
-msgstr "Totale files saltati:  %d"
+msgstr ""
 
 msgid "Skipped files:"
-msgstr "File saltati:"
+msgstr ""
 
 msgid "Version"
-msgstr "Versione"
+msgstr ""
 
 msgid "All rights reserved."
-msgstr "Tutti i diritti riservati."
+msgstr ""
 
 msgid "License MIT or GNU GPL 2"
-msgstr "Licenza MIT o GNU GPL 2"
+msgstr ""
 
 msgid "Usage"
-msgstr "Utilizzo"
+msgstr ""
 
 msgid "FILES"
-msgstr "FILES"
+msgstr ""
 
 msgid "DIRECTORIES"
-msgstr "CARTELLE"
+msgstr ""
 
 msgid "Options"
-msgstr "Opzioni"
+msgstr ""
 
 msgid "Report bugs to info@bonzai-project.org"
-msgstr "Segnalare i problemi a info@bonzai-project.org"
+msgstr ""
 
 msgid "value"
-msgstr "valore"
+msgstr ""
 
 msgid "Backup the original file, generate a .bak file"
-msgstr "Backup del file originale, generare un file con estensione .bak"
+msgstr ""
 
 msgid "Perform a trial run with no changes made"
-msgstr "Esegue un giro di prova senza effettuare modifiche"
+msgstr ""
 
 msgid "Use colors in output"
-msgstr "Usare i colori nei messaggi in uscita"
+msgstr ""
 
 msgid "Log execution messages in textual format"
-msgstr "Salva i messaggi di esecuzione in formato testuale"
+msgstr ""
 
 msgid "Write to STDERR instead of STDOUT"
-msgstr "Scrive nello STDERR invece dello STDOUT"
+msgstr ""
 
 msgid "Generate a full report"
-msgstr "Genera un rapporto completo"
+msgstr ""
 
 msgid "Quiet mode. Don't output anything"
-msgstr "Modalità silenziosa. Non scrive nulla"
+msgstr ""
 
 msgid "Show the help"
-msgstr "Mostra l'aiuto"
+msgstr ""
 
 msgid "Show the version"
-msgstr "Mostra la versione"
+msgstr ""
 
 msgid "Missing the script arguments."
-msgstr "Mancanza degli argomenti dello script."
+msgstr ""
 
 msgid "Invalid parameters to be parsed."
-msgstr "Parametri da elaborare non validi."
+msgstr ""
 
 msgid "The directory `%s` cannot be opened."
-msgstr "La cartella `%s` non può essere aperta."
+msgstr ""
 
 msgid "The file `%s` is not readable."
-msgstr "Il file `%s` non e' leggibile."
+msgstr ""
 
 msgid "The file `%s` is empty."
-msgstr "Il file `%s` e' vuoto."
+msgstr ""
 
 msgid "The file `%s` is not able to be parsed."
-msgstr "Il file `%s` non può essere elaborato."
+msgstr ""
 
 msgid "Invalid message format."
-msgstr "Formato del messaggio non valido."
+msgstr ""
 
 msgid "Numbers of parameters doesn't match."
-msgstr "Il numero dei parametri non coincide."
+msgstr ""
