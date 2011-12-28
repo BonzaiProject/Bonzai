@@ -71,7 +71,7 @@ Options:
 -d, --dry            Perform a trial run with no changes made
 -r, --report         Generate a full report
     --colors         Use colors in output
-    --log=<value>    Log execution messages in textual format
+    --log=&lt;value&gt;    Log execution messages in textual format
     --stderr         Write to STDERR instead of STDOUT
 -q, --quiet          Quiet mode. Don't output anything
 -h, --help           Show the help
@@ -103,6 +103,11 @@ For bug reports and issues is available
 [the issue tracker](https://github.com/BonzaiProject/Bonzai/issues).
 Changes between versions are described in the
 [ChangeLog](https://github.com/BonzaiProject/Bonzai/blob/master/CHANGELOG).
+
+*We are doing everything possible to make this documentation detailed and we are increasing the project's
+quality level. Your help is invaluable!*
+
+If you want to do more and to participate actively in the project you'll be welcome.
 
 **DONATION**
 
