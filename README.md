@@ -3,7 +3,7 @@
 **URL:** <http://www.bonzai-project.org>
 **E-MAIL:** <info@bonzai-project.org>
 
-**COPYRIGHT:** 2006-2011 Bonzai - Fabio Cicerchia. All rights reserved.
+**COPYRIGHT:** 2006-2012 Bonzai - Fabio Cicerchia. All rights reserved.
 
 **LICENSES**
 
@@ -59,7 +59,7 @@ No configuration is needed.
 BONZAI                                                  (previously phpGuardian)
 --------------------------------------------------------------------------------
 Version: 0.1
-Copyright (C) 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+Copyright (C) 2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
 License MIT or GNU GPL 2
 --------------------------------------------------------------------------------
 

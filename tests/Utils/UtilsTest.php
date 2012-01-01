@@ -9,7 +9,7 @@
  * URL:       http://www.bonzai-project.org
  * E-MAIL:    info@bonzai-project.org
  *
- * COPYRIGHT: 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * COPYRIGHT: 2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
  * LICENSE:   MIT or GNU GPL 2
  *            The MIT License is recommended for most projects, it's simple and
  *            easy to understand  and it places  almost no restrictions on what
@@ -29,7 +29,7 @@
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
- * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @copyright  2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
@@ -49,7 +49,7 @@ require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
  * @package    Bonzai
  * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
- * @copyright  2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+ * @copyright  2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org

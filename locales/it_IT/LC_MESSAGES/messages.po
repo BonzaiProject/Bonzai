@@ -1,7 +1,7 @@
 # Bonzai Gettext.
-# Copyright (C) 2006 - 2011 Bonzai (Fabio Cicerchia)
+# Copyright (C) 2006 - 2012 Bonzai (Fabio Cicerchia)
 # This file is distributed under the same license as the Bonzai package.
-# Fabio Cicerchia <info@fabiocicerchia.it>, 2011.
+# Fabio Cicerchia <info@fabiocicerchia.it>, 2012.
 #
 msgid ""
 msgstr ""

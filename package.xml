@@ -17,8 +17,8 @@
   <api>0.1.0</api>
  </version>
  <stability>
-  <release>RC</release>
-  <api>RC</api>
+  <release>stable</release>
+  <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT</license>
  <notes>
@@ -91,8 +91,8 @@
     <api>0.1</api>
    </version>
    <stability>
-    <release>RC</release>
-    <api>RC</api>
+    <release>stable</release>
+    <api>stable</api>
    </stability>
    <date>2011-12-28</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT</license>

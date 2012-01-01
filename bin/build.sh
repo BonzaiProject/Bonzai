@@ -9,7 +9,7 @@
 # URL:       http://www.bonzai-project.org
 # E-MAIL:    info@bonzai-project.org
 #
-# COPYRIGHT: 2006 - 2011 Bonzai (Fabio Cicerchia). All rights reserved.
+# COPYRIGHT: 2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
 # LICENSE:   MIT or GNU GPL 2
 #            The MIT License is recommended for most projects, it's simple and
 #            easy to understand  and it places  almost no restrictions on what
