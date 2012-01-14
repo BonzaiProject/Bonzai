@@ -1,7 +1,10 @@
 CHANGELOG
 ================================================================================
 
-v0.1        Bonzai                                                           [-]
+v0.2        Bonzai                                                           [-]
+  * FIXED   - Issue #1: Parameter was rejected by getopt
+
+v0.1        Bonzai                                             [01 January 2012]
   * ADDED   - Build configuration for Jenkins
   * ADDED   - Bytecode compilation (through bcompiler extension)
   * ADDED   - Color support for CLI

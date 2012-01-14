@@ -75,9 +75,6 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
     protected $labels = array(
         'backup'  => 'Backup the original file, generate a .bak file',
         'dry'     => 'Perform a trial run with no changes made',
-        'colorf'  => 'Use colors in output',
-        'log'     => 'Log execution messages in textual format',
-        'stderr'  => 'Write to STDERR instead of STDOUT',
         'report'  => 'Generate a full report',
         'colors'  => 'Use colors in output',
         'log'     => 'Log execution messages in textual format',
@@ -120,14 +117,12 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
             'Missing the script arguments.'
         );
 
-        $input = preg_grep('/^[a-z]:?$/', array_keys($this->parameters));
-        $input = implode('', $input);
-        $this->options = getopt($input, array_values($this->parameters));
         $this->parseOptions($arguments);
     }
     // }}}
 
     // {{{ parseOptions
+    // TODO: CALCULATE CYCLOMATIC COMPLEXITY
     /**
      * Parse the script-options to populate the array.
      *
@@ -139,42 +134,44 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      */
     protected function parseOptions(array $arguments)
     {
-        $this->raiseExceptionIf(
-            !is_array($this->options),
-            'Invalid parameters to be parsed.'
-        );
+        $this->options = array();
 
-        $this->populateOptionParams($arguments);
-    }
-    // }}}
+        unset($arguments[0]);
+        $parameters = array_merge(array_keys($this->parameters), array_values($this->parameters));
 
-    // {{{ populateOptionParams
-    // TODO: Optimize Cyclomatic Complexity (5).
-    /**
-     * Populate the array of script-options called at runtime.
-     *
-     * @param array $arguments The array of script-parameter.
-     *
-     * @access protected
-     * @return void
-     */
-    protected function populateOptionParams(array $arguments)
-    {
-        $arguments = array_slice($arguments, 1);
-        $prev_value = '';
-        foreach ($arguments as $value) {
-            $prev_key = preg_replace('/^-{1,2}/', '', $prev_value) . ':';
-            if ($value[0] !== '-'
-                && !isset($this->parameters[$prev_key])
-                && !in_array($prev_key, $this->parameters)
-            ) {
-                $this->option_params[] = $value;
+        foreach($parameters as $option) {
+            $has_value = substr($option, -1, 1) == ':';
+
+            $key = $option;
+            if ($has_value) {
+                $key = substr($option, 0, -1);
             }
 
-            $prev_value = $value;
+            $prefix   = '--';
+            $long_key = $key;
+            if (strlen($key) == 1) {
+                $prefix   = '-';
+                $long_key = array_key_exists($key, $this->parameters) ? $this->parameters[$key] : null;
+            }
+
+            $exists = array_search("$prefix$key", $arguments, true);
+
+            if ($exists) {
+                $this->options[$long_key] = true;
+                if ($has_value) {
+                    $this->options[$long_key] = $arguments[$exists + 1];
+                    unset($arguments[$exists + 1]);
+                }
+
+                unset($arguments[$exists]);
+            }
         }
+
+        $this->option_params = $arguments;
     }
     // }}}
+
+    // populateOptionParams -> REMOVED!!!
 
     // {{{ getOptionParams
     /**

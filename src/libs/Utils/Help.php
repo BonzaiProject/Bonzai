@@ -70,7 +70,7 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
             echo str_repeat('-', 80) . PHP_EOL;
         }
 
-        if (is_null($options->getOption('version'))) {
+        if ($options->getOption('version') === null) {
             $this->printAll($options);
         }
     }
