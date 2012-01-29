@@ -38,7 +38,6 @@
 require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
 require_once __DIR__ . '/../../src/libs/Abstract/Abstract.php';
 require_once __DIR__ . '/../../src/libs/Exception/Exception.php';
-require_once __DIR__ . '/../../src/libs/Registry/Registry.php';
 require_once __DIR__ . '/../../src/libs/Utils/Options.php';
 require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
 
@@ -56,16 +55,16 @@ require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
  **/
 class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 {
-    // {{{ renameFile
-    // {{{ providerForRenameFile
+    // {{{ backupFile
+    // {{{ providerForBackupFile
     /**
-     * providerForRenameFile
+     * providerForBackupFile
      *
      * @ignore
      * @access public
      * @return array
      */
-    public function providerForRenameFile()
+    public function providerForBackupFile()
     {
         return array(
             array(' '),
@@ -77,9 +76,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testRenameFileWithProviderThrowException
+    // {{{ testBackupFileWithProviderThrowException
     /**
-     * testRenameFileWithProviderThrowException
+     * testBackupFileWithProviderThrowException
      *
      * @param mixed $a
      *
@@ -87,11 +86,11 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      * @access public
      * @return void
      * @expectedException Bonzai_Exception
-     * @dataProvider providerForRenameFile
+     * @dataProvider providerForBackupFile
      */
-    public function testRenameFileWithProviderThrowException($a)
+    public function testBackupFileWithProviderThrowException($a)
     {
-        $this->object->renameFile($a);
+        $this->object->backupFile($a);
 
         $file = is_array($a) ? implode('', $a) : $a;
         if (is_string($file) && is_file("$file.orig")) {
@@ -100,20 +99,20 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testRenameFileParamExistentFileIsRenamed
+    // {{{ testBackupFileParamExistentFileIsRenamed
     /**
-     * testRenameFileParamExistentFileIsRenamed
+     * testBackupFileParamExistentFileIsRenamed
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testRenameFileParamExistentFileIsRenamed()
+    public function testBackupFileParamExistentFileIsRenamed()
     {
         $filename = tempnam('.', 'test_');
         file_put_contents($filename, 'a');
 
-        $this->object->renameFile($filename);
+        $this->object->backupFile($filename);
 
         $this->assertFileExists("$filename.orig");
         $this->assertFileNotExists($filename);
@@ -362,7 +361,6 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
             '/src/libs/Encoder/Encoder.php',
             '/src/libs/Exception/Exception.php',
             '/src/libs/Interface/Task.php',
-            '/src/libs/Registry/Registry.php',
             '/src/libs/Task/Task.php',
             '/src/libs/Tests/TestCase.php',
             '/src/libs/Utils/Help.php',
@@ -370,7 +368,6 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
             '/src/libs/Utils/Utils.php',
             '/tests/Controller/ControllerTest.php',
             '/tests/Encoder/EncoderTest.php',
-            '/tests/Registry/RegistryTest.php',
             '/tests/Task/TaskTest.php',
             '/tests/Test.php',
             '/tests/Utils/HelpTest.php',

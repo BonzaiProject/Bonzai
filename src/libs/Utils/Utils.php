@@ -66,10 +66,16 @@ class Bonzai_Utils extends Bonzai_Abstract
      * @var    array
      */
     public $message_history = array();
+
+    protected $options = null;
     // }}}
 
-    // {{{ renameFile
-    // TODO: Just for coherence rename this method to backupFile.
+    public function __construct(Bonzai_Utils_Options $options = null)
+    {
+        $this->options = $options;
+    }
+
+    // {{{ backupFile
     /**
      * Backup a file with ".orig" extension.
      *
@@ -78,7 +84,7 @@ class Bonzai_Utils extends Bonzai_Abstract
      * @access public
      * @return void
      */
-    public function renameFile($filename)
+    public function backupFile($filename)
     {
         $filename = $this->getStrVal($filename);
 
@@ -253,10 +259,8 @@ class Bonzai_Utils extends Bonzai_Abstract
      */
     protected function message()
     {
-        // TODO: Drop this dependency with Bonzai_Registry.
-        $options    = Bonzai_Registry::get('options');
         $quiet_mode = Bonzai_Utils::$silenced
-                      || ($options && $options->getOption('quiet') !== null);
+                      || ($this->options && $this->options->getOption('quiet') !== null);
 
         $args = func_get_args();
         $type = array_shift($args);
@@ -277,9 +281,9 @@ class Bonzai_Utils extends Bonzai_Abstract
                 $text = vsprintf($text, $args);
             }
 
-            $message = $this->composeMessage($options, $text, $type);
+            $message = $this->composeMessage($text, $type);
 
-            $use_stderr = ($options && $options->getOption('stderr') !== null);
+            $use_stderr = ($this->options && $this->options->getOption('stderr') !== null);
 
             if (!$quiet_mode) {
                 if ($use_stderr && $type == 'error') {
@@ -298,17 +302,13 @@ class Bonzai_Utils extends Bonzai_Abstract
     /**
      * Compose the message.
      *
-     * @param Bonzai_Utils_Options $options The options of the script.
-     * @param string               $text    The text to be outputted.
-     * @param string               $type    The type of message (info, warn or error).
+     * @param string $text The text to be outputted.
+     * @param string $type The type of message (info, warn or error).
      *
      * @access protected
      * @return void
      */
-    protected function composeMessage(
-        Bonzai_Utils_Options $options,
-        $text, $type
-    ) {
+    protected function composeMessage($text, $type) {
         $prefix     = '[' . date('H:i:s') . '] ';
         $prefix_len = strlen($prefix);
 
@@ -316,11 +316,11 @@ class Bonzai_Utils extends Bonzai_Abstract
         $text   = wordwrap($text, 80 - $prefix_len, $string, true);
 
         $message = $prefix . $text . PHP_EOL;
-        if ($options && $options->getOption('log') !== null) {
+        if ($this->options && $this->options->getOption('log') !== null) {
             $this->message_history[] = $prefix . $text;
         }
 
-        if ($options && $options->getOption('colors') !== null) {
+        if ($this->options && $this->options->getOption('colors') !== null) {
             if ($type == 'error') {
                 $message = "\033[0;37m\033[41m" . $message . "\033[0m";
             } elseif ($type == 'warn') {

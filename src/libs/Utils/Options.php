@@ -98,26 +98,43 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      * @var    array $option_params
      */
     protected $option_params = array();
+
+    /**
+     * ...
+     *
+     * @access protected
+     * @var    array $arguments
+     */
+    protected $arguments = array();
+    // }}}
+
+    // {{{ __construct
+    /**
+     *
+     * @param array $arguments ...
+     */
+    public function __construct(array $arguments = array())
+    {
+        $this->arguments = $arguments;
+    }
     // }}}
 
     // {{{ init
     /**
      * Initialize the script-options.
      *
-     * @param array $arguments The array of script-parameter.
-     *
      * @access public
      * @throws Bonzai_Exception
      * @return void
      */
-    public function init(array $arguments)
+    public function init()
     {
         $this->raiseExceptionIf(
-            empty($arguments) || !is_array($arguments),
+            empty($this->arguments) || !is_array($this->arguments),
             'Missing the script arguments.'
         );
 
-        $this->parseOptions($arguments);
+        $this->parseOptions($this->arguments);
     }
     // }}}
 
@@ -170,8 +187,6 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
         $this->option_params = $arguments;
     }
     // }}}
-
-    // populateOptionParams -> REMOVED!!!
 
     // {{{ getOptionParams
     /**

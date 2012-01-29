@@ -49,8 +49,11 @@
  **/
 class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
 {
+    protected $total_files = 0;
+    protected $skipped_files = array();
+    protected $options = null;
+
     // {{{ elaborate
-    // TODO: The method was modified, then re-check the tests.
     /**
      * Starts the main elaboration of task.
      *
@@ -61,14 +64,15 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
      */
     public function elaborate(Bonzai_Utils_Options $options)
     {
-        $this->getUtils()->printHeader($options, false);
+        $this->options = $options;
+        $this->getUtils($this->options)->printHeader($options, false);
 
-        $files = $this->expandPathsToFiles($options->getOptionParams());
+        $files = $this->expandPathsToFiles($this->options->getOptionParams());
         $files = array_unique($files);
-        // TODO: Drop this dependency with Bonzai_Registry.
-        Bonzai_Registry::add('total_files', count($files));
 
-        $this->processFileList($options, $files);
+        $this->total_files = count($files);
+
+        $this->processFileList($files);
     }
     // }}}
 
@@ -77,24 +81,18 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     /**
      * Process the list of all files to be encoded.
      *
-     * @param Bonzai_Utils_Options $options The options of the script.
-     * @param array                $files   The files to be encoded.
+     * @param array $files The files to be encoded.
      *
      * @access protected
      * @return void
      */
-    protected function processFileList(
-        Bonzai_Utils_Options $options,
-        array $files
-    ) {
-        // TODO: Drop this dependency with Bonzai_Registry.
-        Bonzai_Registry::add('skipped_files', array());
+    protected function processFileList(array $files)
+    {
         foreach ($files as $filename) {
             try {
-                $this->processFile($options, $filename);
+                $this->processFile($filename);
             } catch (Bonzai_Exception $e) {
-                // TODO: Drop this dependency with Bonzai_Registry.
-                Bonzai_Registry::append('skipped_files', $filename);
+                array_push($this->skipped_files, $filename);
                 $this->getUtils()->error(
                     'Cannot handle the file `%s`.', $filename
                 );
@@ -106,18 +104,16 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     // }}}
 
     // {{{ processFile
-    // TODO: The method was modified, then re-check the tests.
     /**
      * Process a single file.
      *
-     * @param Bonzai_Utils_Options $options  The options of the script.
-     * @param string               $filename The file to be encoded.
+     * @param string $filename The file to be encoded.
      *
      * @access protected
      * @throws Bonzai_Exception
      * @return void
      */
-    protected function processFile(Bonzai_Utils_Options $options, $filename)
+    protected function processFile($filename)
     {
         $filename = $this->getStrVal($filename);
 
@@ -130,44 +126,41 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
 
         $bytecode = $this->getByteCode($filename);
 
-        if ($options->getOption('backup') !== null
-            && $options->getOption('dry') === null
+        if ($this->options
+            && $this->options->getOption('backup') !== null
+            && $this->options->getOption('dry') === null
         ) {
-            $this->getUtils()->renameFile($filename);
+            $this->getUtils()->backupFile($filename);
         }
 
         if (!empty($bytecode)) {
-            $this->saveOutput($options, $filename, $bytecode);
+            $this->saveOutput($this->options, $filename, $bytecode);
             $this->getUtils()->info('Saved encoded file to `%s`.', $filename);
         }
 
-        if ($options->getOption('quiet') === null && !Bonzai_Utils::$silenced) {
+        if ($this->options && $this->options->getOption('quiet') === null && !Bonzai_Utils::$silenced) {
             echo str_repeat('-', 80) . PHP_EOL;
         }
     }
     // }}}
 
     // {{{ saveOutput
-    // TODO: The method was modified, then re-check the tests.
     /**
      * Save the output to file.
      *
-     * @param Bonzai_Utils_Options $options  The options of the script.
-     * @param string               $filename The filename where save the output.
-     * @param string               $bytecode The content to be saved.
+     * @param string $filename The filename where save the output.
+     * @param string $bytecode The content to be saved.
      *
      * @access protected
      * @return void
      */
-    protected function saveOutput(
-        Bonzai_Utils_Options $options,
-        $filename, $bytecode
-    ) {
+    protected function saveOutput($filename, $bytecode)
+    {
         $filename = $this->getStrVal($filename);
         $bytecode = $this->getStrVal($bytecode);
 
         try {
-            if ($options->getOption('dry') === null) {
+            if ($this->options && $this->options->getOption('dry') === null) {
                 $this->getUtils()->putFileContent($filename, $bytecode);
             } else {
                 $this->raiseExceptionIf(
@@ -176,8 +169,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
                 );
             }
         } catch (Bonzai_Exception $e) {
-            // TODO: Drop this dependency with Bonzai_Registry.
-            Bonzai_Registry::append('skipped_files', $filename);
+            array_push($this->skipped_files, $filename);
             $this->getUtils()->warn(
                 'The file `%s` was skipped because cannot be able to save it.',
                 $filename
@@ -216,8 +208,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
             $bytecode = $this->getUtils()->getFileContent($tempnam);
             unlink($tempnam);
         } catch (Bonzai_Exception $e) {
-            // TODO: Drop this dependency with Bonzai_Registry.
-            Bonzai_Registry::append('skipped_files', $filename);
+            array_push($this->skipped_files, $filename);
             $this->getUtils()->error(
                 'Cannot handle the file `%s`.',
                 $filename
@@ -277,4 +268,14 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
         return $files;
     }
     // }}}
+
+    public function getTotalFiles()
+    {
+        return $this->total_files;
+    }
+
+    public function getSkippedFiles()
+    {
+        return $this->skipped_files;
+    }
 }

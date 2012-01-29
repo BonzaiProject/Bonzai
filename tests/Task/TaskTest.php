@@ -41,7 +41,6 @@ require_once __DIR__ . '/../../src/libs/Interface/Task.php';
 require_once __DIR__ . '/../../src/libs/Utils/Options.php';
 require_once __DIR__ . '/../../src/libs/Utils/Help.php';
 require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
-require_once __DIR__ . '/../../src/libs/Registry/Registry.php';
 require_once __DIR__ . '/../../src/libs/Task/Task.php';
 
 /**

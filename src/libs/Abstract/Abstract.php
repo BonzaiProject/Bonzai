@@ -70,10 +70,10 @@ abstract class Bonzai_Abstract
      * @access public
      * @return Bonzai_Utils
      */
-    public function getUtils()
+    public function getUtils(Bonzai_Utils_Options $options = null)
     {
         if (is_null(self::$utils)) {
-            self::$utils = new Bonzai_Utils();
+            self::$utils = new Bonzai_Utils($options);
         }
 
         return self::$utils;
@@ -82,7 +82,6 @@ abstract class Bonzai_Abstract
 
     // {{{ raiseExceptionIf
     // TODO: Write some test on this method for phpUnit.
-    // TODO: Remove the static attribute to this method.
     /**
      * Raise an exception, with custom message, only when the condition is
      * satisfied.
@@ -90,12 +89,11 @@ abstract class Bonzai_Abstract
      * @param boolean $condition The condition to be checked.
      * @param mixed   $message   The message to be passed to exception.
      *
-     * @static
      * @access protected
      * @throws Bonzai_Exception
      * @return void
      */
-    protected static function raiseExceptionIf($condition, $message)
+    protected function raiseExceptionIf($condition, $message)
     {
         if (is_array($message)) {
             $format = gettext(array_shift($message));

@@ -61,10 +61,11 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      * @ignore
      * @access public
      * @return void
+     * @expectedException Bonzai_Exception
      */
     public function testInitJustCoverage()
     {
-        $this->assertEmpty($this->object->init(array('help')));
+        $this->assertEmpty($this->object->init());
     }
     // }}}
     // }}}

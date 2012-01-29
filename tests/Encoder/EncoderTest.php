@@ -41,7 +41,6 @@ require_once __DIR__ . '/../../src/libs/Interface/Task.php';
 require_once __DIR__ . '/../../src/libs/Exception/Exception.php';
 require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
 require_once __DIR__ . '/../../src/libs/Utils/Options.php';
-require_once __DIR__ . '/../../src/libs/Registry/Registry.php';
 require_once __DIR__ . '/../../src/libs/Encoder/Encoder.php';
 
 /**
@@ -112,7 +111,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     {
         $this->callMethod(
             'processFile',
-            array(new Bonzai_Utils_Options(), $a)
+            array($a)
         );
 
         if (is_string($a) && is_file($a)) {
@@ -137,7 +136,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         try {
             $this->callMethod(
                 'processFile',
-                array(new Bonzai_Utils_Options(), $filename)
+                array($filename)
             );
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
@@ -172,7 +171,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         try {
             $this->callMethod(
                 'processFile',
-                array(new Bonzai_Utils_Options(), $filename)
+                array($filename)
             );
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
@@ -206,10 +205,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         chmod($filename, 0555); // r-xr-xr-x
 
         $this->assertEmpty(
-            $this->callMethod(
-                'processFile',
-                array(new Bonzai_Utils_Options(), $filename)
-            )
+            $this->callMethod('processFile', array($filename))
         );
 
         chmod($filename, 0777); // rwxrwxrwx
@@ -235,7 +231,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         $this->assertEmpty(
             $this->callMethod(
                 'processFile',
-                array(new Bonzai_Utils_Options(), $filename)
+                array($filename)
             )
         );
 
@@ -321,7 +317,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         $this->assertEmpty(
             $this->callMethod(
                 'saveOutput',
-                array(new Bonzai_Utils_Options(), $a, $b)
+                array($a, $b)
             )
         );
 
@@ -561,7 +557,6 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         $realfiles = array(
             '/tests/Controller/ControllerTest.php',
             '/tests/Encoder/EncoderTest.php',
-            '/tests/Registry/RegistryTest.php',
             '/tests/Task/TaskTest.php',
             '/tests/Test.php',
             '/tests/Utils/HelpTest.php',

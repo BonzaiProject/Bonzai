@@ -83,7 +83,6 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         Bonzai_Utils::$silenced = true;
-        Bonzai_Registry::add('options', new Bonzai_Utils_Options());
 
         if ($this->auto_instance) {
             $className = substr(get_class($this), 0, -4); // Strip 'Test'

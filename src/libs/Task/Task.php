@@ -57,6 +57,8 @@ class Bonzai_Task extends Bonzai_Abstract
      * @var    string $task
      */
     protected $task = 'Bonzai_Utils_Help';
+
+    protected $class = null;
     // }}}
 
     // {{{ loadAndExecute
@@ -68,7 +70,7 @@ class Bonzai_Task extends Bonzai_Abstract
      * @access public
      * @return mixed
      */
-    public function loadAndExecute(Bonzai_Utils_Options $options)
+    public function loadAndExecute(Bonzai_Utils_Options $options = null)
     {
         $this->load($options);
 
@@ -77,24 +79,27 @@ class Bonzai_Task extends Bonzai_Abstract
     // }}}
 
     // {{{ load
-    // TODO: The method was modified, then re-check the tests.
     /**
      * Load the task and setup the execution.
      *
      * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access protected
+     * @throws Bonzai_Exception
      * @return void
      */
-    protected function load(Bonzai_Utils_Options $options)
+    protected function load(Bonzai_Utils_Options $options = null)
     {
-        $this->options = $options;
-        // TODO: Drop this dependency with Bonzai_Registry.
-        Bonzai_Registry::add('options', $options);
+        $this->raiseExceptionIf(
+            is_null($options),
+            array('Argument 1 passed to Bonzai_Task::load() must be an instance of Bonzai_Utils_Options, null given.')
+        );
 
-        if ($options->getOptionParams()
-            && $options->getOption('help') === null
-            && $options->getOption('version') === null
+        $this->options = $options;
+
+        if ($this->options->getOptionParams()
+            && $this->options->getOption('help') === null
+            && $this->options->getOption('version') === null
         ) {
             $this->task = 'Bonzai_Encoder';
         }
@@ -111,15 +116,15 @@ class Bonzai_Task extends Bonzai_Abstract
      */
     protected function execute()
     {
-        $class = new $this->task();
+        $this->class = new $this->task();
 
         $this->raiseExceptionIf(
-            !method_exists($class, 'elaborate'),
+            !method_exists($this->class, 'elaborate'),
             array('Cannot launch the task `%s`.', $this->task)
         );
 
         $start = microtime(true);
-        $res   = $class->elaborate($this->options);
+        $res   = $this->class->elaborate($this->options);
 
         $report = $this->generateReport(microtime(true) - $start);
         if ($this->options->getOption('quiet') === null) {
@@ -175,14 +180,11 @@ class Bonzai_Task extends Bonzai_Abstract
         $post = '';
         if ($this->options->getOption('report') !== null) {
             ob_start();
-            // TODO: Drop this dependency with Bonzai_Registry.
-            $skipped_files = Bonzai_Registry::get('skipped_files');
+            $skipped_files = $this->class->getSkippedFiles();
             $skipped       = count($skipped_files);
 
-            // TODO: Drop this dependency with Bonzai_Registry.
-            $tot_files = Bonzai_Registry::get('total_files');
             printf(gettext('Total time:            %0.2fs') . PHP_EOL, $time);
-            printf(gettext('Total files processed: %d') . PHP_EOL, $tot_files);
+            printf(gettext('Total files processed: %d') . PHP_EOL, $this->class->getTotalFiles());
             printf(gettext('Total files skipped:   %d') . PHP_EOL, $skipped);
             if ($skipped > 0) {
                 echo "\t" . gettext('Skipped files:') . PHP_EOL;

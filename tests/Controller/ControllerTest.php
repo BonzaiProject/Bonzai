@@ -66,7 +66,7 @@ class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
     public function testElaborateJustCoverage()
     {
         $this->assertEmpty(
-            $this->object->elaborate(array(), new Bonzai_Utils_Options())
+            $this->object->elaborate(new Bonzai_Utils_Options())
         );
     }
     // }}}
@@ -79,13 +79,12 @@ class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
      *
      * @ignore
      * @access public
+     * @expectedException Bonzai_Exception
      * @return void
      */
     public function testHandleTaskJustCoverage()
     {
-        $this->assertEmpty(
-            $this->callMethod('handleTask', array(new Bonzai_Utils_Options()))
-        );
+        $this->callMethod('handleTask', array());
     }
     // }}}
     // }}}
@@ -111,8 +110,8 @@ class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
      *
      * @ignore
      * @access public
-     * @return void
      * @expectedException Bonzai_Exception
+     * @return void
      */
     public function testAutoloadWithParamFakeThrowException()
     {
@@ -316,3 +315,4 @@ class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
     // }}}
     // }}}
 }
+

@@ -49,6 +49,8 @@
  **/
 class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
 {
+    protected $options = null;
+
     // {{{ elaborate
     /**
      * Starts the main elaboration of task.
@@ -60,9 +62,10 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
      */
     public function elaborate(Bonzai_Utils_Options $options)
     {
-        $this->getUtils()->printHeader($options, false);
+        $this->options = $options;
+        $this->getUtils($this->options)->printHeader($this->options, false);
 
-        if ($options->getOption('quiet') == null && !Bonzai_Utils::$silenced) {
+        if ($this->options->getOption('quiet') == null && !Bonzai_Utils::$silenced) {
             echo gettext('Version') . ': 0.1' . PHP_EOL;
             echo 'Copyright (C) 2006 - ' . date('Y');
             echo ' Bonzai (Fabio Cicerchia). ' . gettext('All rights reserved.');
@@ -77,19 +80,17 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
     // }}}
 
     // {{{ printAll
-    // TODO: The method was modified, then re-check the tests.
+    // TODO: Write some test on this method for phpUnit.
     /**
      * Print the whole informations.
-     *
-     * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access public
      * @return void
      */
-    protected function printAll(Bonzai_Utils_Options $options)
+    protected function printAll()
     {
         if (!Bonzai_Utils::$silenced) {
-            $use_colors  = ($options->getOption('colors') !== null);
+            $use_colors  = ($this->options->getOption('colors') !== null);
             $start_color = $use_colors ? "\033[1;37m" : '';
             $end_color   = $use_colors ? "\033[0m"    : '';
 
@@ -99,8 +100,8 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
             echo ']...' . PHP_EOL . PHP_EOL;
             echo $start_color . gettext('Options') . ':' . $end_color . PHP_EOL;
 
-            foreach ($options->getParameters() as $short => $long) {
-                $this->printOptionInfo($options, $short, $long);
+            foreach ($this->options->getParameters() as $short => $long) {
+                $this->printOptionInfo($short, $long);
             }
 
             echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org');
@@ -110,21 +111,18 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
     // }}}
 
     // {{{ printOptionInfo
-    // TODO: The method was modified, then re-check the tests.
+    // TODO: Write some test on this method for phpUnit.
     /**
      * Print the single line of "Usage" section.
      *
-     * @param Bonzai_Utils_Options $options The options of the script.
-     * @param string               $short   The short version of parameter.
-     * @param string               $long    The long version of parameter.
+     * @param string $short The short version of parameter.
+     * @param string $long  The long version of parameter.
      *
      * @access public
      * @return void
      */
-    protected function printOptionInfo(
-        Bonzai_Utils_Options $options,
-        $short, $long
-    ) {
+    protected function printOptionInfo($short, $long)
+    {
         $only_long = is_int($short);
 
         $short = $this->getStrVal($short);
@@ -141,7 +139,7 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
         }
 
         $format = '    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL;
-        $row = sprintf($format, gettext($options->getLabelParameter($long)));
+        $row = sprintf($format, gettext($this->options->getLabelParameter($long)));
         echo wordwrap($row, 80, PHP_EOL . str_repeat(' ', 25), true);
     }
     // }}}

@@ -51,6 +51,8 @@ require_once __DIR__ . '/../Abstract/Abstract.php';
  **/
 class Bonzai_Controller extends Bonzai_Abstract
 {
+    protected $options = null;
+
     // {{{ __construct
     /**
      * The __construct.
@@ -77,47 +79,39 @@ class Bonzai_Controller extends Bonzai_Abstract
     // }}}
 
     // {{{ elaborate
-    // TODO: The method was modified, then re-check the tests.
-    // TODO: Find a way to save the Bonzai_Utils_Options somewhere and drop the transition of this value in each method.
     /**
      * Starts the main elaboration of script.
      *
-     * @param array                $arguments The arguments of the script.
-     * @param Bonzai_Utils_Options $options   The options of the script.
+     * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access public
      * @return void
      */
-    public function elaborate(array $arguments, Bonzai_Utils_Options $options)
+    public function elaborate(Bonzai_Utils_Options $options)
     {
         try {
-            $options->init($arguments);
+            $this->options = $options;
+            $this->options->init();
         } catch (Bonzai_Exception $e) {
             // Fallback behaviour: show the help
             unset($e);
         }
 
-        $this->handleTask($options);
+        $this->handleTask();
     }
     // }}}
 
     // {{{ handleTask
-    // TODO: The method was modified, then re-check the tests.
     /**
      * Handle the right task based on options.
-     *
-     * @param Bonzai_Utils_Options $options The options of the script.
      *
      * @access protected
      * @return void
      */
-    protected function handleTask(Bonzai_Utils_Options $options)
+    protected function handleTask()
     {
-        // TODO: Drop this dependency with Bonzai_Registry.
-        Bonzai_Registry::add('options', $options);
-
         $task = new Bonzai_Task();
-        $task->loadAndExecute($options);
+        $task->loadAndExecute($this->options);
     }
     // }}}
 

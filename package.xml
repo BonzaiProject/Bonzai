@@ -53,7 +53,6 @@
    <file baseinstalldir="/" name="src/libs/Encoder/Encoder.php" role="php" />
    <file baseinstalldir="/" name="src/libs/Exception/Exception.php" role="php" />
    <file baseinstalldir="/" name="src/libs/Interface/Task.php" role="php" />
-   <file baseinstalldir="/" name="src/libs/Registry/Registry.php" role="php" />
    <file baseinstalldir="/" name="src/libs/Task/Task.php" role="php" />
    <file baseinstalldir="/" name="src/libs/Tests/TestCase.php" role="php" />
    <file baseinstalldir="/" name="src/libs/Utils/Help.php" role="php" />
@@ -61,7 +60,6 @@
    <file baseinstalldir="/" name="src/libs/Utils/Utils.php" role="php" />
    <file baseinstalldir="/" name="tests/Controller/ControllerTest.php" role="test" />
    <file baseinstalldir="/" name="tests/Encoder/EncoderTest.php" role="test" />
-   <file baseinstalldir="/" name="tests/Registry/RegistryTest.php" role="test" />
    <file baseinstalldir="/" name="tests/Task/TaskTest.php" role="test" />
    <file baseinstalldir="/" name="tests/Test.php" role="test" />
    <file baseinstalldir="/" name="tests/Test.xml" role="test" />

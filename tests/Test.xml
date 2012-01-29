@@ -9,7 +9,7 @@
     convertWarningsToExceptions="true"
     forceCoversAnnotation="false"
     mapTestClassNameToCoveredClassName="false"
-    processIsolation="false"
+    processIsolation="true"
     stopOnError="false"
     stopOnFailure="false"
     stopOnIncomplete="false"
@@ -20,7 +20,6 @@
         <testsuite name="BonzaiCLI">
             <file>tests/Controller/ControllerTest.php</file>
             <file>tests/Encoder/EncoderTest.php</file>
-            <file>tests/Registry/RegistryTest.php</file>
             <file>tests/Task/TaskTest.php</file>
             <file>tests/Utils/HelpTest.php</file>
             <file>tests/Utils/OptionsTest.php</file>
