@@ -36,7 +36,7 @@
  **/
 
 if (!defined('BONZAI_PATH_LIBS')) {
-    define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
+    define('BONZAI_PATH_LIBS', realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 }
 
 require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
@@ -505,9 +505,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testExpandPathsToFilesWithParamArrayAreEquals2()
     {
-        $dirname = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+        $dirname = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 
-        $files = $this->callMethod('expandPathsToFiles', array(array(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR)));
+        $files = $this->callMethod('expandPathsToFiles', array(array(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR)));
         sort($files);
         $files = preg_grep('#/test_.+$|\.swp$|\.git#', $files, PREG_GREP_INVERT);
         $files = array_merge($files);
@@ -546,7 +546,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         $this->expectOutputRegex('/^\[\d{2}:\d{2}:\d{2}\] The directory .* was skipped because not readable/');
 
-        $dirname = realpath(__DIR__ . '/../');
+        $dirname = realpath(dirname(__FILE__) . '/../');
 
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
