@@ -28,7 +28,7 @@ language: php
 php:
   - 5.2
   - 5.3
-  - 5.4
+#  - 5.4
 
 before_script:
  - wget http://pecl.php.net/get/bcompiler-1.0.2.tgz
