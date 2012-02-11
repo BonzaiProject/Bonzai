@@ -95,7 +95,7 @@ abstract class Bonzai_Abstract
         switch(strtolower(PHP_OS))
         {
             case 'linux':
-                return "/tmp/";
+                return '/tmp/';
                 break;
             case 'winnt':
             case 'win32':

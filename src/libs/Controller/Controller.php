@@ -112,11 +112,11 @@ class Bonzai_Controller_Controller extends Bonzai_Abstract
      *
      * @param string $name The name of class to be autoloaded.
      *
-     * @access protected
+     * @access public
      * @throws Bonzai_Exception
      * @return void
      */
-    protected function autoload($name)
+    public function autoload($name)
     {
         if (strpos($name, 'Bonzai_') === 0) {
             $filename = preg_replace('/^Bonzai_(.+)_(.+)$/U', '\1/\2', $name);

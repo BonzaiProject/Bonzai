@@ -78,7 +78,7 @@ class Bonzai_CLI_Test extends Bonzai_TestCase
     {
         include_once BONZAI_PATH_LIBS . 'Controller' . DIRECTORY_SEPARATOR . 'Controller.php';
         $controller = new Bonzai_Controller_Controller();
-        $controller->elaborate(array("--help"));
+        $controller->elaborate(array('--help'));
     }
     // }}}
     // }}}

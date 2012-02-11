@@ -175,7 +175,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
                             : null;
             }
 
-            $exists = array_search("$prefix$key", $arguments, true);
+            $exists = array_search($prefix . $key, $arguments, true);
 
             if ($exists) {
                 $this->options[$long_key] = true;

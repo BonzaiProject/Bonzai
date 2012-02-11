@@ -180,7 +180,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         try {
             $this->callMethod('processFile', array($filename));
-            $this->fail("The exception was not threw.");
+            $this->fail('The exception was not threw.');
         } catch(Bonzai_Exception $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
@@ -213,7 +213,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         try {
             $this->callMethod('processFile', array($filename));
-            $this->fail("The exception was not threw. $filename");
+            $this->fail('The exception was not threw. ' . $filename);
         } catch(Bonzai_Exception $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
@@ -347,7 +347,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     {
         try {
             $this->callMethod('getByteCode', array($filename));
-            $this->fail("The exception was not threw.");
+            $this->fail('The exception was not threw.');
         } catch(Bonzai_Exception $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is invalid.'), strval($filename)) . '$/', $e->getMessage());
             $this->assertInstanceOf('Bonzai_Exception', $e);
@@ -394,7 +394,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         try {
             $this->callMethod('getByteCode', array($filename));
-            $this->fail("The exception was not threw.");
+            $this->fail('The exception was not threw.');
         } catch(Bonzai_Exception $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
@@ -425,7 +425,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         try {
             $this->callMethod('getByteCode', array($filename));
-            $this->fail("The exception was not threw.");
+            $this->fail('The exception was not threw.');
         } catch(Bonzai_Exception $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
@@ -563,7 +563,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         chmod($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname, 0777); // rwxrwxrwx
         chmod($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
 
-        $this->removeFile($this->getTempDir() . "$dirname/file.php");
+        $this->removeFile($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . 'file.php');
 
         rmdir($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname);
         rmdir($this->getTempDir() . $dirname);

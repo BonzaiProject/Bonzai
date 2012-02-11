@@ -124,6 +124,11 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
      */
     protected function callMethod($name, array $parameters = array())
     {
+        $PHP_VERSION = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION;
+        if (version_compare($PHP_VERSION, '5.3.2') < 0) {
+            $this->markTestSkipped('The current PHP version (' . $PHP_VERSION . ') doesn\'t support the `setAccessible` method of `ReflectionMethod`.');
+        }
+
         $method = new ReflectionMethod(get_class($this->object), $name);
         $method->setAccessible(true);
 

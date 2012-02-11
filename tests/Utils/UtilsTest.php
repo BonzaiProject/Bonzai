@@ -128,7 +128,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $file = is_array($filename)
                 ? implode('', $filename)
                 : $filename;
-        $this->removeFile("$file.orig");
+        $this->removeFile($file . '.orig');
     }
     // }}}
 
@@ -147,10 +147,10 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $this->object->backupFile($filename);
 
-        $this->assertFileExists("$filename.orig");
+        $this->assertFileExists($filename . '.orig');
         $this->assertFileNotExists($filename);
 
-        $this->removeFile("$filename.orig");
+        $this->removeFile($filename . '.orig');
     }
     // }}}
     // }}}
@@ -229,7 +229,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         try {
             $this->object->recursiveScanDir($dirname, $data);
-            $this->fail("The exception was not threw.");
+            $this->fail('The exception was not threw.');
         } catch (Bonzai_Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
@@ -481,7 +481,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         try {
             $this->object->getFileContent($filename);
-            $this->fail("The exception was not threw.");
+            $this->fail('The exception was not threw.');
         } catch (Bonzai_Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
@@ -510,7 +510,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         try {
             $this->object->getFileContent($filename);
-            $this->fail("The exception was not threw.");
+            $this->fail('The exception was not threw.');
         } catch (Bonzai_Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
@@ -534,7 +534,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         try {
             $this->object->getFileContent($filename);
-            $this->fail("The exception was not threw.");
+            $this->fail('The exception was not threw.');
         } catch (Bonzai_Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
