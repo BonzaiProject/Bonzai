@@ -35,11 +35,14 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
-require_once __DIR__ . '/../../src/libs/Abstract/Abstract.php';
-require_once __DIR__ . '/../../src/libs/Exception/Exception.php';
-require_once __DIR__ . '/../../src/libs/Utils/Options.php';
-require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
+if (!defined('BONZAI_PATH_LIBS')) {
+    define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
+}
+
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
 
 /**
  * Bonzai_Utils_Test
@@ -109,7 +112,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testBackupFileParamExistentFileIsRenamed()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
         $this->object->backupFile($filename);
@@ -195,8 +198,12 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRScanDirWithProviderThrowException2($a)
     {
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0222); // -w--w--w-
+        mkdir($this->getTempDir() . $dirname, 0222); // -w--w--w-
 
         try {
             $this->object->rScanDir($dirname, $a);
@@ -205,8 +212,8 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($dirname, 0777); // rwxrwxrwx
-        rmdir($dirname);
+        chmod($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
+        rmdir($this->getTempDir() . $dirname);
     }
     // }}}
 
@@ -239,13 +246,17 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRScanDirWithProviderIsEmpty($a)
     {
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0555); // r-xr-xr-x
+        mkdir($this->getTempDir() . $dirname, 0555); // r-xr-xr-x
 
         $this->assertEmpty($this->object->rScanDir($dirname, $a));
 
-        chmod($dirname, 0777); // rwxrwxrwx
-        rmdir($dirname);
+        chmod($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
+        rmdir($this->getTempDir() . $dirname);
     }
     // }}}
 
@@ -278,11 +289,15 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRScanDirWithProviderIsEmpty2($a)
     {
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777); // rwxrwxrwx
+        mkdir($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
 
         $this->assertEmpty($this->object->rScanDir($dirname, $a));
-        rmdir($dirname);
+        rmdir($this->getTempDir() . $dirname);
     }
     // }}}
 
@@ -296,15 +311,19 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRScanDirWithParamsWritableArrayAreEquals()
     {
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777); // rwxrwxrwx
+        mkdir($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
 
         $value = array('a');
         $this->assertEquals(
             array('a'),
             $this->object->rScanDir($dirname, $value)
         );
-        rmdir($dirname);
+        rmdir($this->getTempDir() . $dirname);
     }
     // }}}
 
@@ -318,18 +337,22 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRScanDirComplexCompareAreEquals()
     {
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777); // rwxrwxrwx
+        mkdir($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
 
         $dirname2 = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir("$dirname/$dirname2", 0222); // -w--w--w-
+        mkdir($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname2, 0222); // -w--w--w-
 
-        $value = $this->object->rScanDir($dirname);
-        $this->assertEquals(array("$dirname/$dirname2/"), $value);
+        $value = $this->object->rScanDir($this->getTempDir() . $dirname);
+        $this->assertEquals(array($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname2), $value);
 
-        chmod("$dirname/$dirname2", 0777);
-        rmdir("$dirname/$dirname2");
-        rmdir($dirname);
+        chmod($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname2, 0777);
+        rmdir($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname2);
+        rmdir($this->getTempDir() . $dirname);
     }
     // }}}
 
@@ -343,36 +366,37 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRScanDirCurrentDirectoriesAreEquals()
     {
-        $dirname = realpath(__DIR__ . '/../../');
+        $dirname = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 
         $files = $this->object->rScanDir($dirname);
         sort($files);
         $files = preg_grep('/\.(php|sh)$/', $files);
         foreach ($files as $i => $file) {
-            $files[$i] = str_replace(realpath("$dirname/"), "", $file);
+            $files[$i] = str_replace(realpath($dirname . DIRECTORY_SEPARATOR), '', $file);
         }
-        $files = preg_grep('/^\/(src|tests|bin)/', $files);
+        $files = preg_grep('/^[\\\\\/](src|tests|bin)/', $files);
         $files = array_merge($files);
 
         $realfiles = array(
-            '/bin/build.sh',
-            '/src/libs/Abstract/Abstract.php',
-            '/src/libs/Controller/Controller.php',
-            '/src/libs/Encoder/Encoder.php',
-            '/src/libs/Exception/Exception.php',
-            '/src/libs/Interface/Task.php',
-            '/src/libs/Task/Task.php',
-            '/src/libs/Tests/TestCase.php',
-            '/src/libs/Utils/Help.php',
-            '/src/libs/Utils/Options.php',
-            '/src/libs/Utils/Utils.php',
-            '/tests/Controller/ControllerTest.php',
-            '/tests/Encoder/EncoderTest.php',
-            '/tests/Task/TaskTest.php',
-            '/tests/Test.php',
-            '/tests/Utils/HelpTest.php',
-            '/tests/Utils/OptionsTest.php',
-            '/tests/Utils/UtilsTest.php'
+            DIRECTORY_SEPARATOR . 'bin'   . DIRECTORY_SEPARATOR . 'build.sh',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Abstract'   . DIRECTORY_SEPARATOR . 'Abstract.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'Controller.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Encoder'    . DIRECTORY_SEPARATOR . 'Encoder.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Exception'  . DIRECTORY_SEPARATOR . 'Exception.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Interface'  . DIRECTORY_SEPARATOR . 'Task.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'Task.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Tests'      . DIRECTORY_SEPARATOR . 'TestCase.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'Help.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'Options.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'Utils.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Abstract'   . DIRECTORY_SEPARATOR . 'AbstractTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'ControllerTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Encoder'    . DIRECTORY_SEPARATOR . 'EncoderTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'TaskTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Test.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'HelpTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'OptionsTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'UtilsTest.php'
         );
 
         $this->assertEquals($realfiles, $files);
@@ -428,7 +452,11 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testGetFileContentWithParamsNotReadableThrowException()
     {
-        $filename = tempnam('.', 'test_');
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '');
         chmod($filename, 0333); // -wx-wx-wx
 
@@ -456,7 +484,11 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testGetFileContentWithParamsNotWritableIsEmpty()
     {
-        $filename = tempnam('.', 'test_');
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '');
         chmod($filename, 0555); // r-xr-xr-x
 
@@ -484,7 +516,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testGetFileContentWithParamTemp()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '');
 
         try {
@@ -589,7 +621,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamEmptyString()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
@@ -610,7 +642,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamSpacedString()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
@@ -631,7 +663,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamFake()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
@@ -652,7 +684,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamNull()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
@@ -673,7 +705,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamEmptyArray()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
         $this->assertEmpty($this->object->checkFileValidity($filename));
@@ -694,7 +726,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamArray()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
         $this->assertEmpty($this->object->checkFileValidity($filename));

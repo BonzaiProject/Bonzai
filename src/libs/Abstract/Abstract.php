@@ -35,7 +35,7 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once __DIR__ . '/../Exception/Exception.php';
+require_once BONZAI_PATH_LIBS . 'Exception' . DIRECTORY_SEPARATOR . 'Exception.php';
 
 /**
  * Bonzai_Abstract

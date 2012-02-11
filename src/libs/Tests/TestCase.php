@@ -36,8 +36,8 @@
  **/
 
 require_once 'PHPUnit/Framework/TestCase.php';
-require_once __DIR__ . '/../Abstract/Abstract.php';
-require_once __DIR__ . '/../Utils/Utils.php';
+require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
 
 /**
  * Bonzai_TestCase
@@ -114,6 +114,19 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
         $method->setAccessible(true);
 
         return $method->invokeArgs($this->object, $parameters);
+    }
+    // }}}
+
+    // {{{ getTempDir
+    /**
+     * Get the system temporary directory
+     *
+     * @access public
+     * @return string
+     */
+    public function getTempDir()
+    {
+        return Bonzai_Abstract::getTempDir();
     }
     // }}}
 }

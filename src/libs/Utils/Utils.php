@@ -123,9 +123,9 @@ class Bonzai_Utils extends Bonzai_Abstract
         $array = array_diff(scandir($base), array('.', '..'));
 
         foreach ($array as $value) {
-            $path = $base . '/' . $value;
+            $path = $base . DIRECTORY_SEPARATOR . $value;
             if (is_dir($path)) {
-                $data[] = $path . '/';
+                $data[] = $path;
                 try {
                     $data = $this->rScanDir($path, $data);
                 } catch (Bonzai_Exception $e) {

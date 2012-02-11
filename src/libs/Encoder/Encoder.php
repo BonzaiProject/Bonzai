@@ -196,7 +196,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
         $this->getUtils()->checkFileValidity($filename);
 
         try {
-            $tempnam = tempnam('/tmp', 'BNZ');
+            $tempnam    = tempnam($this->getTempDir(), 'BNZ');
             $filehandle = fopen($tempnam, 'w');
 
             bcompiler_write_header($filehandle);
@@ -239,7 +239,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
 
         $cloned = $files;
         foreach ($cloned as $key => $path) {
-            $files[$key] = realpath(getcwd() . '/' . $path) ?: realpath($path);
+            $files[$key] = realpath(getcwd() . DIRECTORY_SEPARATOR . $path) ?: realpath($path);
 
             if ($files[$key] == false) {
                 unset($files[$key]);

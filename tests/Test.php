@@ -35,7 +35,11 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once __DIR__ . '/../src/cli/libs/Tests/TestCase.php';
+if (!defined('BONZAI_PATH_LIBS')) {
+    define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
+}
+
+require_once BONZAI_PATH_LIBS . 'Tests' . DIRECTORY_SEPARATOR . 'TestCase.php';
 
 /**
  * Bonzai_CLI_Test
@@ -72,7 +76,7 @@ class Bonzai_CLI_Test extends Bonzai_TestCase
      */
     public function testRunJustCoverage()
     {
-        include_once __DIR__ . '/../libs/Controller/Controller.php';
+        include_once BONZAI_PATH_LIBS . 'Controller' . DIRECTORY_SEPARATOR . 'Controller.php';
         $controller = new Bonzai_Controller();
         $controller->elaborate(array("--help"));
     }

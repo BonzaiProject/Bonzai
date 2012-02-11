@@ -35,7 +35,7 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once __DIR__ . '/../Abstract/Abstract.php';
+require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
 
 /**
  * Bonzai_Controller
@@ -69,7 +69,7 @@ class Bonzai_Controller extends Bonzai_Abstract
 
             $res = putenv('LC_ALL=' . $lang);
             $res = setlocale(LC_ALL, $lang);
-            $res = bindtextdomain($domain, __DIR__ . '/../../../locales/');
+            bindtextdomain($domain, BONZAI_PATH_LIBS . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'locales' . DIRECTORY_SEPARATOR);
             $res = bind_textdomain_codeset($domain, 'UTF-8');
             $res = textdomain($domain);
         }
@@ -127,53 +127,19 @@ class Bonzai_Controller extends Bonzai_Abstract
      */
     protected function autoload($name)
     {
-        $name = $this->getStrVal($name);
-
         if (strpos($name, 'Bonzai_') === 0) {
-            $filename = $this->getFileNameFromClassName($name);
+            $filename = preg_replace('/^Bonzai_(.+)_(.+)$/U', '\1/\2', $name);
+            $filename = preg_replace('/^Bonzai_(.+)$/U',      '\1/\1', $filename);
+            $filename = str_replace('/', DIRECTORY_SEPARATOR, $filename);
 
-            $this->raiseExceptionIf(
-                !$this->checkFile($filename),
-                array('The class `%s` cannot be loaded.', $name)
-            );
+            $filepath = BONZAI_PATH_LIBS . $filename . '.php';
 
-            include_once __DIR__ . '/../' . $filename . '.php';
+            if (!file_exists($filepath)) {
+                throw new Bonzai_Exception(sprintf(gettext('The class `%s` cannot be loaded.'), $name));
+            }
+
+            include_once $filepath;
         }
-    }
-    // }}}
-
-    // {{{ getFileNameFromClassName
-    /**
-     * Get the filename from the classname.
-     *
-     * @param string $name The classname that will be converted.
-     *
-     * @access protected
-     * @return string
-     */
-    protected function getFileNameFromClassName($name)
-    {
-        $name = $this->getStrVal($name);
-
-        $path = preg_replace(
-            '/^Bonzai_(.+?)(?:_(.+))?$/',
-            '\1' . DIRECTORY_SEPARATOR . '\2',
-            trim($name)
-        );
-
-        if (substr($path, -1, 1) == '/') {
-            $path = preg_replace(
-                '/(.+)\//',
-                '\1' . DIRECTORY_SEPARATOR . '\1',
-                $path
-            );
-        }
-
-        if ($this->checkFile($path)) {
-            return $path;
-        }
-
-        return null;
     }
     // }}}
 

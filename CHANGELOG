@@ -2,6 +2,7 @@ CHANGELOG
 ================================================================================
 
 v0.2        Bonzai                                                           [-]
+  * ADDED   - Support for Windows
   * FIXED   - Issue #1: Parameter was rejected by getopt
 
 v0.1        Bonzai                                             [01 January 2012]

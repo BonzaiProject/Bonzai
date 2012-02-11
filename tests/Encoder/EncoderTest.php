@@ -35,13 +35,16 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
-require_once __DIR__ . '/../../src/libs/Abstract/Abstract.php';
-require_once __DIR__ . '/../../src/libs/Interface/Task.php';
-require_once __DIR__ . '/../../src/libs/Exception/Exception.php';
-require_once __DIR__ . '/../../src/libs/Utils/Utils.php';
-require_once __DIR__ . '/../../src/libs/Utils/Options.php';
-require_once __DIR__ . '/../../src/libs/Encoder/Encoder.php';
+if (!defined('BONZAI_PATH_LIBS')) {
+    define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
+}
+
+require_once BONZAI_PATH_LIBS . 'Tests'     . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Abstract'  . DIRECTORY_SEPARATOR . 'Abstract.php';
+require_once BONZAI_PATH_LIBS . 'Interface' . DIRECTORY_SEPARATOR . 'Task.php';
+require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Utils.php';
+require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Options.php';
+require_once BONZAI_PATH_LIBS . 'Encoder'   . DIRECTORY_SEPARATOR . 'Encoder.php';
 
 /**
  * Bonzai_Encoder_Test
@@ -130,7 +133,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testProcessFileWithParamEmptyFileFileIsEmpty()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '');
 
         try {
@@ -141,7 +144,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is empty.'), '.+\/test_[a-zA-Z0-9]+') . '$/',
+                '/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/',
                 $e->getMessage()
             );
 
@@ -164,7 +167,11 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testProcessFileWithParamSizedFileFileIsNotReadable()
     {
-        $filename = tempnam('.', 'test_');
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'aaa');
         chmod($filename, 0333); // -wx-wx-wx
 
@@ -176,7 +183,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is not readable.'), '.+\/test_[a-zA-Z0-9]+') . '$/',
+                '/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/',
                 $e->getMessage()
             );
 
@@ -200,7 +207,11 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testProcessFileWithParamNotWritableSizedFileFileIsEmpty()
     {
-        $filename = tempnam('.', 'test_');
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'aaa');
         chmod($filename, 0555); // r-xr-xr-x
 
@@ -225,7 +236,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testProcessFileWithParamSizedFileFileIsEmpty()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
         $this->assertEmpty(
@@ -409,7 +420,11 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testGetByteCodeWithProviderIsEmpty($a)
     {
-        $filename = tempnam('.', 'test_');
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '');
         chmod($filename, $a);
 
@@ -418,7 +433,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is empty.'), '.+\/test_[a-zA-Z0-9]+') . '$/',
+                '/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/',
                 $e->getMessage()
             );
 
@@ -442,7 +457,11 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testGetByteCodeWithParamSizedFileFileIsNotReadable()
     {
-        $filename = tempnam('.', 'test_');
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '');
         chmod($filename, 0333); // -wx-wx-wx
 
@@ -451,7 +470,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->fail("The exception was not threw.");
         } catch(Exception $e) {
             $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is not readable.'), '.+\/test_[a-zA-Z0-9]+') . '$/',
+                '/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/',
                 $e->getMessage()
             );
 
@@ -475,7 +494,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testGetByteCodeWithParamSizedFileFileIsNotValid()
     {
-        $filename = tempnam('.', 'test_');
+        $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
         $bytecode = $this->callMethod('getByteCode', array($filename));
@@ -537,11 +556,11 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testExpandPathsToFilesWithParamArrayAreEquals2()
     {
-        $dirname = realpath(__DIR__ . '/../../');
+        $dirname = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 
         $files = $this->callMethod(
             'expandPathsToFiles',
-            array(array(__DIR__ . '/../'))
+            array(array(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR))
         );
         sort($files);
         $files = preg_grep(
@@ -551,17 +570,18 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         );
         $files = array_merge($files);
         foreach ($files as $i => $file) {
-            $files[$i] = str_replace(realpath("$dirname/"), "", $file);
+            $files[$i] = str_replace(realpath($dirname . DIRECTORY_SEPARATOR), '', $file);
         }
 
         $realfiles = array(
-            '/tests/Controller/ControllerTest.php',
-            '/tests/Encoder/EncoderTest.php',
-            '/tests/Task/TaskTest.php',
-            '/tests/Test.php',
-            '/tests/Utils/HelpTest.php',
-            '/tests/Utils/OptionsTest.php',
-            '/tests/Utils/UtilsTest.php'
+
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'ControllerTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Encoder'    . DIRECTORY_SEPARATOR . 'EncoderTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'TaskTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Test.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'HelpTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'OptionsTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'UtilsTest.php'
         );
 
         $this->assertEquals($realfiles, $files);
@@ -581,9 +601,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         $dirname = realpath(__DIR__ . '/../');
 
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
-        mkdir($dirname, 0777); // rwxrwxrwx
-        file_put_contents("$dirname/file.php", "test");
-        mkdir("$dirname/$dirname", 0222); // -w--w--w-
+        mkdir($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
+        file_put_contents($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . 'file.php', 'test');
+        mkdir($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname, 0222); // -w--w--w-
 
         $files = $this->callMethod(
             'expandPathsToFiles',
@@ -592,18 +612,18 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         sort($files);
 
         $realfiles = array(
-            getcwd() . '/' . $dirname . '/file.php'
+            getcwd() . DIRECTORY_SEPARATOR . $dirname . DIRECTORY_SEPARATOR . 'file.php'
         );
 
         $this->assertEquals($realfiles, $files);
 
-        chmod("$dirname/$dirname", 0777); // rwxrwxrwx
-        chmod($dirname, 0777); // rwxrwxrwx
-        if (is_string("$dirname/file.php") && is_file("$dirname/file.php")) {
-            unlink("$dirname/file.php");
+        chmod($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname, 0777); // rwxrwxrwx
+        chmod($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
+        if (is_string($dirname . DIRECTORY_SEPARATOR . 'file.php') && is_file($dirname . DIRECTORY_SEPARATOR . 'file.php')) {
+            unlink($dirname . DIRECTORY_SEPARATOR . 'file.php');
         }
-        rmdir("$dirname/$dirname");
-        rmdir($dirname);
+        rmdir($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname);
+        rmdir($this->getTempDir() . $dirname);
     }
     // }}}
     // }}}

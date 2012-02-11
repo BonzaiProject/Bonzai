@@ -35,9 +35,13 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once __DIR__ . '/../../src/libs/Tests/TestCase.php';
-require_once __DIR__ . '/../../src/libs/Abstract/Abstract.php';
-require_once __DIR__ . '/../../src/libs/Utils/Options.php';
+if (!defined('BONZAI_PATH_LIBS')) {
+    define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
+}
+
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php';
 
 /**
  * Bonzai_Utils_Options_Test
