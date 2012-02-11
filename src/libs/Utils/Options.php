@@ -54,7 +54,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      * The allowed script-parameters.
      *
      * @access protected
-     * @var    array $parameters
+     * @var    array
      */
     protected $parameters = array(
         'b'  => 'backup',
@@ -69,8 +69,9 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
     /**
      * The description of each parameter.
+     *
      * @access protected
-     * @var    array $labels
+     * @var    array
      */
     protected $labels = array(
         'backup'  => 'Backup the original file, generate a .bak file',
@@ -87,7 +88,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      * The container of script parameter called at runtime.
      *
      * @access protected
-     * @var    array $options
+     * @var    array
      */
     protected $options = array();
 
@@ -95,23 +96,27 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      * The container of script optional parameter called at runtime.
      *
      * @access protected
-     * @var    array $option_params
+     * @var    array
      */
     protected $option_params = array();
 
     /**
-     * ...
+     * The script's arguments.
      *
      * @access protected
-     * @var    array $arguments
+     * @var    array
      */
     protected $arguments = array();
     // }}}
 
     // {{{ __construct
     /**
+     * The class constructor.
      *
-     * @param array $arguments ...
+     * @param array $arguments The script's arguments.
+     *
+     * @access public
+     * @return void
      */
     public function __construct(array $arguments = array())
     {
@@ -129,24 +134,23 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      */
     public function init()
     {
-        $this->raiseExceptionIf(
-            empty($this->arguments) || !is_array($this->arguments),
-            'Missing the script arguments.'
-        );
+        if (empty($this->arguments)
+            || !is_array($this->arguments)
+        ) {
+            throw new Bonzai_Exception(gettext('Missing the script arguments.'));
+        }
 
         $this->parseOptions($this->arguments);
     }
     // }}}
 
     // {{{ parseOptions
-    // TODO: CALCULATE CYCLOMATIC COMPLEXITY
     /**
      * Parse the script-options to populate the array.
      *
      * @param array $arguments The array of script-parameter.
      *
      * @access protected
-     * @throws Bonzai_Exception
      * @return void
      */
     protected function parseOptions(array $arguments)
@@ -156,25 +160,26 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
         unset($arguments[0]);
         $parameters = array_merge(array_keys($this->parameters), array_values($this->parameters));
 
-        foreach($parameters as $option) {
+        foreach ($parameters as $option) {
             $has_value = substr($option, -1, 1) == ':';
-
-            $key = $option;
-            if ($has_value) {
-                $key = substr($option, 0, -1);
-            }
+            $key       = $has_value
+                         ? substr($option, 0, -1)
+                         : $option;
 
             $prefix   = '--';
             $long_key = $key;
             if (strlen($key) == 1) {
                 $prefix   = '-';
-                $long_key = array_key_exists($key, $this->parameters) ? $this->parameters[$key] : null;
+                $long_key = array_key_exists($key, $this->parameters)
+                            ? $this->parameters[$key]
+                            : null;
             }
 
             $exists = array_search("$prefix$key", $arguments, true);
 
             if ($exists) {
                 $this->options[$long_key] = true;
+
                 if ($has_value) {
                     $this->options[$long_key] = $arguments[$exists + 1];
                     unset($arguments[$exists + 1]);
@@ -182,6 +187,11 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
 
                 unset($arguments[$exists]);
             }
+        }
+
+        // Some limitations
+        if (isset($this->options['colors'])) {
+            $this->options['colors'] = $this->options['colors'] && strtolower(PHP_OS) == 'linux';
         }
 
         $this->option_params = $arguments;
@@ -226,8 +236,6 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      */
     public function getOption($key)
     {
-        $key = $this->getStrVal($key);
-
         if (isset($this->options[$key])) {
             return $this->options[$key];
         }
@@ -261,8 +269,6 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      */
     public function getLabelParameter($key)
     {
-        $key = $this->getStrVal($key);
-
         if (isset($this->labels[$key])) {
             return $this->labels[$key];
         }

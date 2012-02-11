@@ -39,15 +39,15 @@ if (!defined('BONZAI_PATH_LIBS')) {
     define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 }
 
-require_once BONZAI_PATH_LIBS . 'Tests'     . DIRECTORY_SEPARATOR . 'TestCase.php';
-require_once BONZAI_PATH_LIBS . 'Abstract'  . DIRECTORY_SEPARATOR . 'Abstract.php';
-require_once BONZAI_PATH_LIBS . 'Interface' . DIRECTORY_SEPARATOR . 'Task.php';
-require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Options.php';
-require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Utils.php';
-require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Help.php';
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
+require_once BONZAI_PATH_LIBS . 'Task'     . DIRECTORY_SEPARATOR . 'Interface.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Help.php';
 
 /**
- * Bonzai_Utils_Help_Test
+ * Bonzai_Utils_HelpTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -60,10 +60,43 @@ require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Help.php';
  **/
 class Bonzai_Utils_HelpTest extends Bonzai_TestCase
 {
+    // {{{ setUp
+    /**
+     * PHPUnit setUp: instance the class if needed.
+     *
+     * @access protected
+     * @return void
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->object->setOptions(new Bonzai_Utils_Options());
+    }
+    // }}}
+
+    // {{{ setOptions
+    // {{{ testSetOptionsJustCoverage
+    /**
+     * Only code-coverage of `setOptions` method.
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSetOptionsJustCoverage()
+    {
+        $this->expectOutputString('');
+
+        $this->object->setOptions(new Bonzai_Utils_Options());
+    }
+    // }}}
+    // }}}
+
     // {{{ elaborate
     // {{{ testElaborateJustCoverage
     /**
-     * testElaborateJustCoverage
+     * Only code-coverage of `elaborate` method.
      *
      * @ignore
      * @access public
@@ -71,7 +104,25 @@ class Bonzai_Utils_HelpTest extends Bonzai_TestCase
      */
     public function testElaborateJustCoverage()
     {
-        $this->assertEmpty($this->object->elaborate(new Bonzai_Utils_Options));
+        $this->expectOutputRegex('/^.*BONZAI +\(was phpGuardian\).*Usage:.*Options:.*$/s');
+
+        $this->object->elaborate();
+    }
+    // }}}
+    // }}}
+
+    // {{{ printAll
+    // {{{ testPrintAllJustCoverage
+    /**
+     * TODO: Add a comment to this method
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testPrintAllJustCoverage()
+    {
+        $this->markTestIncomplete('TBW');
     }
     // }}}
     // }}}

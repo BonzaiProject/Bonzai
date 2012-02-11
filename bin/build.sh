@@ -32,11 +32,6 @@ txtund=`tput sgr 0 1`
 txtbld=`tput bold`
 txtred=`tput setaf 1`
 txtgrn=`tput setaf 2`
-txtylw=`tput setaf 3`
-txtblu=`tput setaf 4`
-txtpur=`tput setaf 5`
-txtcyn=`tput setaf 6`
-txtwht=`tput setaf 7`
 txtrst=`tput sgr0`
 
 ### BUILDING ##################################################################
@@ -51,6 +46,7 @@ if [ "$CMD01" == "" ]; then
     echo "$txtgrn done$txtrst"
 else
     echo "$txtred fail$txtrst"
+    exit 1
 fi
 
 echo -en "Create structure .............................."
@@ -61,6 +57,7 @@ if [ "$CMD02" == "" -a "$CMD03" == "" -a "$CMD04" == "" ]; then
     echo "$txtgrn done$txtrst"
 else
     echo "$txtred fail$txtrst"
+    exit 1
 fi
 
 echo -en "Run phpunit ..................................."
@@ -72,6 +69,7 @@ if [ "$RES" == "1" ]; then
     echo "$txtgrn done$txtrst"
 else
     echo "$txtred fail$txtrst"
+    exit 1
 fi
 
 echo -en "Generate violations ..........................."
@@ -109,12 +107,12 @@ CMD13=`msgfmt "$FULL_PATH/locales/it_IT/LC_MESSAGES/messages.po" -o "$FULL_PATH/
 echo "$txtgrn done$txtrst"
 
 ### RELEASING #################################################################
-echo ""
-echo -e "${txtbld}RELEASING CLI --------------------------------------$txtrst"
-
-echo -en "Generate PEAR package ........................."
-CMD14=`pear package 2>&1`
-echo "$txtgrn done$txtrst"
+#echo ""
+#echo -e "${txtbld}RELEASING CLI --------------------------------------$txtrst"
+#
+#echo -en "Generate PEAR package ........................."
+#CMD14=`pear package 2>&1`
+#echo "$txtgrn done$txtrst"
 
 END_TIME=$(date +%s)
 echo ""

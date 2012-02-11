@@ -3,8 +3,8 @@
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME: phoenix
- * VERSION:   0.1
+ * CODENAME:  caffeine
+ * VERSION:   0.2
  *
  * URL:       http://www.bonzai-project.org
  * E-MAIL:    info@bonzai-project.org
@@ -49,4 +49,13 @@
  **/
 class Bonzai_Exception extends Exception
 {
+    // {{{ PROPERTIES
+    /**
+     * The Exception code
+     *
+     * @access protected
+     * @var    int
+     */
+    protected $code = 0x1986;
+    // }}}
 }

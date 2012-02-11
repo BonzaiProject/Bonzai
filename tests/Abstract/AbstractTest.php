@@ -27,7 +27,7 @@
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Core
+ * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
@@ -35,73 +35,95 @@
  * @link       http://www.bonzai-project.org
  **/
 
-require_once BONZAI_PATH_LIBS . 'Exception' . DIRECTORY_SEPARATOR . 'Exception.php';
+if (!defined('BONZAI_PATH_LIBS')) {
+    define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
+}
+
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
 
 /**
- * Bonzai_Abstract
+ * Abstract_Fake
+ *
+ * @category Optimization_And_Security
+ * @package  Bonzai
+ * @author   Fabio Cicerchia <info@fabiocicerchia.it>
+ * @license  http://www.opensource.org/licenses/mit-license.php MIT
+ *           http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
+ * @link     http://www.bonzai-project.org
+ **/
+class Abstract_Fake extends Bonzai_Abstract
+{
+}
+
+/**
+ * Bonzai_Abstract_AbstractTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Core
+ * @subpackage Tests
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
- * @abstract
  **/
-abstract class Bonzai_Abstract
+class Bonzai_Abstract_AbstractTest extends Bonzai_TestCase
 {
     // {{{ PROPERTIES
     /**
-     * The instance of Bonzai_Utils_Utils.
+     * Flag to decide whether instantiate automatically the class to be tested.
      *
-     * @static
      * @access protected
-     * @var    Bonzai_Utils_Utils
+     * @var    boolean
      */
-    protected static $utils = null;
+    protected $auto_instance = false;
+    // }}}
+
+    // {{{ setUp
+    /**
+     * PHPUnit setUp: instance the class if needed.
+     *
+     * @access protected
+     * @return void
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->object = new Abstract_Fake;
+    }
     // }}}
 
     // {{{ getUtils
+    // {{{ testGetUtilsReturnInstance
     /**
-     * The get method to retrieve the $utils protected properties.
+     * Test if `getUtils` method return a Bonzai_Utils_Options instance.
      *
-     * @param Bonzai_Utils_Options $options The script's options.
-     *
+     * @ignore
      * @access public
-     * @return Bonzai_Utils_Utils
+     * @return void
      */
-    public function getUtils(Bonzai_Utils_Options $options = null)
+    public function testGetUtilsReturnInstance()
     {
-        if (is_null(self::$utils)) {
-            self::$utils = new Bonzai_Utils_Utils($options);
-        }
-
-        return self::$utils;
+        $this->assertInstanceOf('Bonzai_Utils_Utils', $this->object->getUtils(new Bonzai_Utils_Options()));
     }
+    // }}}
     // }}}
 
     // {{{ getTempDir
+    // {{{ testGetTempDirJustCoverage
     /**
-     * Get the system temporary directory
+     * TODO: Add a comment to this method
      *
-     * @static
+     * @ignore
      * @access public
-     * @return string
+     * @return void
      */
-    public static function getTempDir()
+    public function testGetTempDirJustCoverage()
     {
-        switch(strtolower(PHP_OS))
-        {
-            case 'linux':
-                return "/tmp/";
-                break;
-            case 'winnt':
-            case 'win32':
-            default:
-                return DIRECTORY_SEPARATOR;
-        }
+        $this->markTestIncomplete('TBW');
     }
+    // }}}
     // }}}
 }

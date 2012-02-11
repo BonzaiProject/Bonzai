@@ -68,7 +68,7 @@ class Bonzai_CLI_Test extends Bonzai_TestCase
     // {{{ run
     // {{{ testRunJustCoverage
     /**
-     * Run the `bonzai-cli` script
+     * Run the `bonzai-cli` script.
      *
      * @ignore
      * @access public
@@ -77,7 +77,7 @@ class Bonzai_CLI_Test extends Bonzai_TestCase
     public function testRunJustCoverage()
     {
         include_once BONZAI_PATH_LIBS . 'Controller' . DIRECTORY_SEPARATOR . 'Controller.php';
-        $controller = new Bonzai_Controller();
+        $controller = new Bonzai_Controller_Controller();
         $controller->elaborate(array("--help"));
     }
     // }}}

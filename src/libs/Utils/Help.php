@@ -47,52 +47,65 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
+class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Task_Interface
 {
-    protected $options = null;
-
-    // {{{ elaborate
+    // {{{ setOptions
     /**
-     * Starts the main elaboration of task.
+     * Set the script's options.
      *
-     * @param Bonzai_Utils_Options $options The options of the script.
+     * @param Bonzai_Utils_Options $options The script's options.
      *
      * @access public
      * @return void
      */
-    public function elaborate(Bonzai_Utils_Options $options)
+    public function setOptions(Bonzai_Utils_Options $options)
     {
         $this->options = $options;
-        $this->getUtils($this->options)->printHeader($this->options, false);
+    }
+    // }}}
 
-        if ($this->options->getOption('quiet') == null && !Bonzai_Utils::$silenced) {
-            echo gettext('Version') . ': 0.1' . PHP_EOL;
+    // {{{ elaborate
+    /**
+     * Start the main elaboration of task.
+     *
+     * @access public
+     * @return void
+     */
+    public function elaborate()
+    {
+        $this->getUtils($this->options)->printHeader();
+
+        if (!Bonzai_Utils_Utils::$silenced) {
+            echo gettext('Version') . ': 0.2' . PHP_EOL;
             echo 'Copyright (C) 2006 - ' . date('Y');
             echo ' Bonzai (Fabio Cicerchia). ' . gettext('All rights reserved.');
             echo PHP_EOL . gettext('License MIT or GNU GPL 2') . PHP_EOL;
             echo str_repeat('-', 80) . PHP_EOL;
         }
 
-        if ($options->getOption('version') === null) {
-            $this->printAll($options);
+        if ($this->options->getOption('version') === null) {
+            $this->printAll($this->options);
         }
     }
     // }}}
 
     // {{{ printAll
-    // TODO: Write some test on this method for phpUnit.
     /**
-     * Print the whole informations.
+     * Print all informations.
      *
      * @access public
      * @return void
      */
     protected function printAll()
     {
-        if (!Bonzai_Utils::$silenced) {
+        if (!Bonzai_Utils_Utils::$silenced) {
             $use_colors  = ($this->options->getOption('colors') !== null);
-            $start_color = $use_colors ? "\033[1;37m" : '';
-            $end_color   = $use_colors ? "\033[0m"    : '';
+            $start_color = $use_colors
+                           ? "\033[1;37m"
+                           : '';
+            $end_color   = $use_colors
+                           ? "\033[0m"
+                           : '';
 
             echo PHP_EOL . $start_color . gettext('Usage') . ':' . $end_color;
             echo PHP_EOL . $_SERVER['argv'][0] . ' [' . strtoupper(gettext('Options'));
@@ -101,46 +114,31 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Interface_Task
             echo $start_color . gettext('Options') . ':' . $end_color . PHP_EOL;
 
             foreach ($this->options->getParameters() as $short => $long) {
-                $this->printOptionInfo($short, $long);
+                $has_value = strpos($long, ':') > 0;
+
+                $short_txt = $has_value
+                             ? substr($short, 0, -1)
+                             : $short;
+                $long_txt  = $has_value
+                             ? substr($long, 0, -1)
+                             : $long;
+
+                $info = is_int($short)
+                        ? '    '
+                        : "-$short_txt, ";
+                $info .= "--$long_txt";
+                if ($has_value) {
+                    $info .= '=<' . gettext('value') . '>';
+                }
+
+                $format = '    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL;
+                $row    = sprintf($format, gettext($this->options->getLabelParameter($long_txt)));
+
+                echo wordwrap($row, 80, PHP_EOL . str_repeat(' ', 25), true);
             }
 
-            echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org');
-            echo PHP_EOL;
+            echo PHP_EOL . gettext('Report bugs to info@bonzai-project.org') . PHP_EOL;
         }
-    }
-    // }}}
-
-    // {{{ printOptionInfo
-    // TODO: Write some test on this method for phpUnit.
-    /**
-     * Print the single line of "Usage" section.
-     *
-     * @param string $short The short version of parameter.
-     * @param string $long  The long version of parameter.
-     *
-     * @access public
-     * @return void
-     */
-    protected function printOptionInfo($short, $long)
-    {
-        $only_long = is_int($short);
-
-        $short = $this->getStrVal($short);
-        $long  = $this->getStrVal($long);
-
-        $has_value = strpos($long, ':') > 0;
-
-        $short = str_replace(':', '', $short);
-        $long  = str_replace(':', '', $long);
-
-        $info = ($only_long ? '    ' : "-$short, ") . "--$long";
-        if ($has_value) {
-            $info .= '=<' . gettext('value') . '>';
-        }
-
-        $format = '    ' . str_pad($info, 20, ' ') . ' %s' . PHP_EOL;
-        $row = sprintf($format, gettext($this->options->getLabelParameter($long)));
-        echo wordwrap($row, 80, PHP_EOL . str_repeat(' ', 25), true);
     }
     // }}}
 }

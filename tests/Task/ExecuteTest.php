@@ -39,13 +39,16 @@ if (!defined('BONZAI_PATH_LIBS')) {
     define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 }
 
-require_once BONZAI_PATH_LIBS . 'Tests'      . DIRECTORY_SEPARATOR . 'TestCase.php';
-require_once BONZAI_PATH_LIBS . 'Abstract'   . DIRECTORY_SEPARATOR . 'Abstract.php';
-require_once BONZAI_PATH_LIBS . 'Utils'      . DIRECTORY_SEPARATOR . 'Utils.php';
-require_once BONZAI_PATH_LIBS . 'Controller' . DIRECTORY_SEPARATOR . 'Controller.php';
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
+require_once BONZAI_PATH_LIBS . 'Task'     . DIRECTORY_SEPARATOR . 'Interface.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Help.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
+require_once BONZAI_PATH_LIBS . 'Task'     . DIRECTORY_SEPARATOR . 'Execute.php';
 
 /**
- * Bonzai_Controller_ControllerTest
+ * Bonzai_Task_ExecuteTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -56,89 +59,69 @@ require_once BONZAI_PATH_LIBS . 'Controller' . DIRECTORY_SEPARATOR . 'Controller
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Controller_ControllerTest extends Bonzai_TestCase
+class Bonzai_Task_ExecuteTest extends Bonzai_TestCase
 {
-    // {{{ __construct
-    // Skipped the testing of `__construct` method.
-    // }}}
-
-    // {{{ elaborate
-    // {{{ testElaborateJustCoverage
+    // {{{ loadAndExecute
+    // {{{ testLoadAndExecuteJustCoverage
     /**
-     * Only code-coverage of `elaborate` method.
+     * Only code-coverage of `loadAndExecute` method.
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testElaborateJustCoverage()
+    public function testLoadAndExecuteJustCoverage()
     {
         $this->expectOutputRegex('/^.*BONZAI +\(was phpGuardian\).*Usage:.*Options:.*$/s');
-        $this->object->elaborate(new Bonzai_Utils_Options());
+        $this->object->loadAndExecute(new Bonzai_Utils_Options());
     }
     // }}}
+    // }}}
 
-    // {{{ testElaborateJustCoverage2
+    // {{{ execute
+    // {{{ testExecuteJustCoverage
     /**
-     * Only code-coverage of `elaborate` method.
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testElaborateJustCoverage2()
+    public function testExecuteJustCoverage()
     {
-        $this->expectOutputString('');
-        $this->object->elaborate(new Bonzai_Utils_Options(array(__FILE__, '--quiet')));
+        $this->markTestIncomplete('TBW');
     }
     // }}}
     // }}}
 
-    // {{{ autoload
-    // {{{ testAutoloadWithParamInvalidClass
+    // {{{ saveReportFile
+    // {{{ testSaveReportFileJustCoverage
     /**
-     * Test if `autoload` method does nothing for a out-of-scope classname.
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testAutoloadWithParamInvalidClass()
+    public function testSaveReportFileJustCoverage()
     {
-        $this->callMethod('autoload', array('Bonzai'));
-        $this->assertFalse(class_exists('Bonzai'));
+        $this->markTestIncomplete('TBW');
     }
     // }}}
-
-    // {{{ testAutoloadWithParamFakeThrowException
-    /**
-     * Test if `autoload` method throw an exception for a not-existent classname.
-     *
-     * @ignore
-     * @access                   public
-     * @return                   void
-     * @expectedException        Bonzai_Exception
-     * @expectedExceptionCode    6534
-     * @expectedExceptionMessage The class `Bonzai_Fake` cannot be loaded.
-     */
-    public function testAutoloadWithParamFakeThrowException()
-    {
-        $this->callMethod('autoload', array('Bonzai_Fake'));
-    }
     // }}}
 
-    // {{{ testAutoloadWithParamLoadedClassReturnNothing
+    // {{{ generateReport
+    // {{{ testGenerateReportJustCoverage
     /**
-     * Test if `autoload` method doesn't throw an exception for an existent classname.
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testAutoloadWithParamLoadedClassReturnNothing()
+    public function testGenerateReportJustCoverage()
     {
-        $this->callMethod('autoload', array('Bonzai_Controller_Controller'));
-        $this->assertTrue(class_exists('Bonzai_Controller_Controller'));
+        $this->markTestIncomplete('TBW');
     }
     // }}}
     // }}}

@@ -47,37 +47,61 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
+class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
 {
-    protected $total_files = 0;
-    protected $skipped_files = array();
-    protected $options = null;
-
-    // {{{ elaborate
+    // {{{ PROPERTIES
     /**
-     * Starts the main elaboration of task.
+     * The counter of total parsed files.
      *
-     * @param Bonzai_Utils_Options $options The options of the script.
+     * @access protected
+     * @var    integer
+     */
+    protected $total_files = 0;
+
+    /**
+     * The counter of total skipped files.
+     *
+     * @access protected
+     * @var    array
+     */
+    protected $skipped_files = array();
+    // }}}
+
+    // {{{ setOptions
+    /**
+     * Set the script's options.
+     *
+     * @param Bonzai_Utils_Options $options The script's options.
      *
      * @access public
      * @return void
      */
-    public function elaborate(Bonzai_Utils_Options $options)
+    public function setOptions(Bonzai_Utils_Options $options)
     {
         $this->options = $options;
-        $this->getUtils($this->options)->printHeader($options, false);
+    }
+    // }}}
+
+    // {{{ elaborate
+    /**
+     * Start the main elaboration of task.
+     *
+     * @access public
+     * @return void
+     */
+    public function elaborate()
+    {
+        $this->getUtils($this->options)->printHeader();
 
         $files = $this->expandPathsToFiles($this->options->getOptionParams());
         $files = array_unique($files);
 
         $this->total_files = count($files);
-
         $this->processFileList($files);
     }
     // }}}
 
     // {{{ processFileList
-    // TODO: Write some test on this method for phpUnit.
     /**
      * Process the list of all files to be encoded.
      *
@@ -93,11 +117,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
                 $this->processFile($filename);
             } catch (Bonzai_Exception $e) {
                 array_push($this->skipped_files, $filename);
-                $this->getUtils()->error(
-                    'Cannot handle the file `%s`.', $filename
-                );
-
-                unset($e);
+                $this->getUtils()->error('Cannot handle the file `%s`.', $filename);
             }
         }
     }
@@ -115,30 +135,26 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
      */
     protected function processFile($filename)
     {
-        $filename = $this->getStrVal($filename);
-
-        $this->raiseExceptionIf(
-            !is_file($filename),
-            array('The file `%s` is invalid.', $filename)
-        );
+        if (!is_file($filename)) {
+            throw new Bonzai_Exception(sprintf(gettext('The file `%s` is invalid.'), $filename));
+        }
 
         $this->getUtils()->info('Start encoding file `%s\'.', $filename);
 
         $bytecode = $this->getByteCode($filename);
 
-        if ($this->options
-            && $this->options->getOption('backup') !== null
+        if ($this->options->getOption('backup') !== null
             && $this->options->getOption('dry') === null
         ) {
             $this->getUtils()->backupFile($filename);
         }
 
         if (!empty($bytecode)) {
-            $this->saveOutput($this->options, $filename, $bytecode);
+            $this->saveOutput($filename, $bytecode);
             $this->getUtils()->info('Saved encoded file to `%s`.', $filename);
         }
 
-        if ($this->options && $this->options->getOption('quiet') === null && !Bonzai_Utils::$silenced) {
+        if (!Bonzai_Utils_Utils::$silenced) {
             echo str_repeat('-', 80) . PHP_EOL;
         }
     }
@@ -152,30 +168,22 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
      * @param string $bytecode The content to be saved.
      *
      * @access protected
+     * @throws Bonzai_Exception
      * @return void
      */
     protected function saveOutput($filename, $bytecode)
     {
-        $filename = $this->getStrVal($filename);
-        $bytecode = $this->getStrVal($bytecode);
-
         try {
-            if ($this->options && $this->options->getOption('dry') === null) {
+            if ($this->options->getOption('dry') === null) {
                 $this->getUtils()->putFileContent($filename, $bytecode);
             } else {
-                $this->raiseExceptionIf(
-                    !is_writable($filename),
-                    array('The file `%s` cannot be written.', $filename)
-                );
+                if (!is_writable($filename)) {
+                    throw new Bonzai_Exception(sprintf(gettext('The file `%s` cannot be written.'), $filename));
+                }
             }
         } catch (Bonzai_Exception $e) {
             array_push($this->skipped_files, $filename);
-            $this->getUtils()->warn(
-                'The file `%s` was skipped because cannot be able to save it.',
-                $filename
-            );
-
-            unset($e);
+            $this->getUtils()->warn('The file `%s` was skipped because cannot be able to save it.', $filename);
         }
     }
     // }}}
@@ -199,6 +207,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
             $tempnam    = tempnam($this->getTempDir(), 'BNZ');
             $filehandle = fopen($tempnam, 'w');
 
+            bcompiler_set_filename_handler('basename');
             bcompiler_write_header($filehandle);
             bcompiler_write_file($filehandle, $filename);
             bcompiler_write_footer($filehandle);
@@ -209,12 +218,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
             unlink($tempnam);
         } catch (Bonzai_Exception $e) {
             array_push($this->skipped_files, $filename);
-            $this->getUtils()->error(
-                'Cannot handle the file `%s`.',
-                $filename
-            );
-
-            unset($e);
+            $this->getUtils()->error('Cannot handle the file `%s`.', $filename);
         }
 
         return $bytecode;
@@ -222,9 +226,8 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     // }}}
 
     // {{{ expandPathsToFiles
-    // TODO: Optimize Cyclomatic Complexity (7).
     /**
-     * Convert a mixed array of files and directories in only files.
+     * Convert a mixed array of files and directories in one with only files.
      *
      * @param array $files The array of mixed values to be converted.
      *
@@ -248,19 +251,14 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
 
             if (is_dir($files[$key])) {
                 try {
-                    $scandir   = $this->getUtils()->rScanDir($files[$key]);
+                    $scandir   = $this->getUtils()->recursiveScanDir($files[$key]);
                     $new_files = preg_grep('/\.php$/', $scandir);
 
                     unset($files[$key]);
 
                     $files = array_merge($files, $new_files);
                 } catch (Bonzai_Exception $e) {
-                    $this->getUtils()->warn(
-                        'The directory `%s` was skipped because not readable.',
-                        $files[$key]
-                    );
-
-                    unset($e);
+                    $this->getUtils()->warn('The directory `%s` was skipped because not readable.', $files[$key]);
                 }
             }
         }
@@ -269,13 +267,29 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Interface_Task
     }
     // }}}
 
+    // {{{ getTotalFiles
+    /**
+     * Get number of elaborated files.
+     *
+     * @access public
+     * @return integer
+     */
     public function getTotalFiles()
     {
         return $this->total_files;
     }
+    // }}}
 
+    // {{{ getSkippedFiles
+    /**
+     * Get number of skipped files.
+     *
+     * @access public
+     * @return integer
+     */
     public function getSkippedFiles()
     {
         return $this->skipped_files;
     }
+    // }}}
 }

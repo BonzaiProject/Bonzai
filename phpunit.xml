@@ -18,9 +18,10 @@
     verbose="false">
     <testsuites>
         <testsuite name="BonzaiCLI">
+            <file>tests/Abstract/AbstractTest.php</file>
             <file>tests/Controller/ControllerTest.php</file>
             <file>tests/Encoder/EncoderTest.php</file>
-            <file>tests/Task/TaskTest.php</file>
+            <file>tests/Task/ExecuteTest.php</file>
             <file>tests/Utils/HelpTest.php</file>
             <file>tests/Utils/OptionsTest.php</file>
             <file>tests/Utils/UtilsTest.php</file>

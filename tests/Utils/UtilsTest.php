@@ -45,7 +45,7 @@ require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php'
 require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
 
 /**
- * Bonzai_Utils_Test
+ * Bonzai_Utils_UtilsTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -58,10 +58,45 @@ require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
  **/
 class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 {
+    // {{{ PROPERTIES
+    /**
+     * Flag to decide whether instantiate automatically the class to be tested.
+     *
+     * @access protected
+     * @var    boolean
+     */
+    protected $auto_instance = false;
+    // }}}
+
+    // {{{ setUp
+    /**
+     * PHPUnit setUp: instance the class if needed.
+     *
+     * @access protected
+     * @return void
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $className = substr(get_class($this), 0, -4); // Strip 'Test'
+
+        if (!class_exists($className)) {
+            $className = preg_replace('/_[^_]+$/', '', $className);
+        }
+
+        $this->object = new $className(new Bonzai_Utils_Options());
+    }
+    // }}}
+
+    // {{{ __construct
+    // Skipped the testing of `__construct` method.
+    // }}}
+
     // {{{ backupFile
     // {{{ providerForBackupFile
     /**
-     * providerForBackupFile
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -69,42 +104,37 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function providerForBackupFile()
     {
-        return array(
-            array(' '),
-            array('a'),
-            array(array('a')),
-            array(array()),
-            array(null),
-        );
+        return $this->getFilledDataProvider(array(' ', 'a', array('a'), array(), null));
     }
     // }}}
 
     // {{{ testBackupFileWithProviderThrowException
     /**
-     * testBackupFileWithProviderThrowException
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
+     * @param mixed $filename The filename to be backup
      *
      * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     * @dataProvider providerForBackupFile
+     * @access                   public
+     * @return                   void
+     * @dataProvider             providerForBackupFile
+     * @expectedException        Bonzai_Exception
+     * @expectedExceptionCode    6534
      */
-    public function testBackupFileWithProviderThrowException($a)
+    public function testBackupFileWithProviderThrowException($filename)
     {
-        $this->object->backupFile($a);
+        $this->object->backupFile($filename);
 
-        $file = is_array($a) ? implode('', $a) : $a;
-        if (is_string($file) && is_file("$file.orig")) {
-            unlink("$file.orig");
-        }
+        $file = is_array($filename)
+                ? implode('', $filename)
+                : $filename;
+        $this->removeFile("$file.orig");
     }
     // }}}
 
     // {{{ testBackupFileParamExistentFileIsRenamed
     /**
-     * testBackupFileParamExistentFileIsRenamed
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -120,83 +150,75 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $this->assertFileExists("$filename.orig");
         $this->assertFileNotExists($filename);
 
-        if (is_string($filename) && is_file("$filename.orig")) {
-            unlink("$filename.orig");
-        }
+        $this->removeFile("$filename.orig");
     }
     // }}}
     // }}}
 
-    // {{{ rScanDir
-    // {{{ providerForRScanDir
+    // {{{ recursiveScanDir
+    // {{{ providerForRecursiveScanDir
     /**
-     * providerForRScanDir
+     * Data Provider.
      *
      * @ignore
      * @access public
      * @return array
      */
-    public function providerForRScanDir()
+    public function providerForRecursiveScanDir()
     {
-        return array(
-            array(' ', array('a')),
-            array(' ', array()),
-            array('', array('a')),
-            array('', array()),
-            array(null, array('a')),
-            array(null, array()),
+        return $this->getFilledDataProvider(
+            array(' ', '', null),
+            array(array('a'), array())
         );
     }
     // }}}
 
-    // {{{ testRScanDirWithProviderThrowException
+    // {{{ testRecursiveScanDirWithProviderThrowException
     /**
-     * Return the all directories & files into a directory
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
-     * @param mixed $b
+     * @param mixed $base The base path where to start.
+     * @param mixed $data The container of elements of scandir.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     * @dataProvider providerForRScanDir
+     * @access                   public
+     * @return                   void
+     * @dataProvider             providerForRecursiveScanDir
+     * @expectedException        Bonzai_Exception
+     * @expectedExceptionCode    6534
      */
-    public function testRScanDirWithProviderThrowException($a, $b)
+    public function testRecursiveScanDirWithProviderThrowException($base, $data)
     {
-        $this->object->rScanDir($a, $b);
+        $this->object->recursiveScanDir($base, $data);
     }
     // }}}
 
-    // {{{ providerForRScanDir2
+    // {{{ providerForRecursiveScanDir2
     /**
-     * providerForRScanDir2
+     * Data Provider.
      *
      * @ignore
      * @access public
      * @return array
      */
-    public function providerForRScanDir2()
+    public function providerForRecursiveScanDir2()
     {
-        return array(
-            array(array()),
-            array(array('a')),
-        );
+        return $this->getFilledDataProvider(array(array('a'), array()));
     }
     // }}}
 
-    // {{{ testRScanDirWithProviderThrowException2
+    // {{{ testRecursiveScanDirWithProviderThrowException2
     /**
-     * Return the all directories & files into a directory
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
+     * @param mixed $data The container of elements of scandir.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @dataProvider providerForRScanDir2
+     * @access       public
+     * @return       void
+     * @dataProvider providerForRecursiveScanDir2
      */
-    public function testRScanDirWithProviderThrowException2($a)
+    public function testRecursiveScanDirWithProviderThrowException2($data)
     {
         if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
@@ -206,9 +228,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         mkdir($this->getTempDir() . $dirname, 0222); // -w--w--w-
 
         try {
-            $this->object->rScanDir($dirname, $a);
+            $this->object->recursiveScanDir($dirname, $data);
             $this->fail("The exception was not threw.");
-        } catch (Exception $e) {
+        } catch (Bonzai_Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
@@ -217,99 +239,100 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ providerForRScanDir3
+    // {{{ providerForRecursiveScanDir3
     /**
-     * providerForRScanDir3
+     * Data Provider.
      *
      * @ignore
      * @access public
      * @return array
      */
-    public function providerForRScanDir3()
+    public function providerForRecursiveScanDir3()
     {
-        return array(
-            array(array()),
-        );
+        return $this->getFilledDataProvider(array(array()));
     }
     // }}}
 
-    // {{{ testRScanDirWithProviderIsEmpty
+    // {{{ testRecursiveScanDirWithProviderIsEmpty
     /**
-     * Return the all directories & files into a directory
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
+     * @param mixed $data The container of elements of scandir.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @dataProvider providerForRScanDir3
+     * @access       public
+     * @return       void
+     * @dataProvider providerForRecursiveScanDir3
      */
-    public function testRScanDirWithProviderIsEmpty($a)
+    public function testRecursiveScanDirWithProviderIsEmpty($data)
     {
         if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
+        $this->expectOutputString('');
+
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($this->getTempDir() . $dirname, 0555); // r-xr-xr-x
 
-        $this->assertEmpty($this->object->rScanDir($dirname, $a));
+        $this->object->recursiveScanDir($this->getTempDir() . $dirname, $data);
 
         chmod($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
         rmdir($this->getTempDir() . $dirname);
     }
     // }}}
 
-    // {{{ providerForRScanDir4
+    // {{{ providerForRecursiveScanDir4
     /**
-     * providerForRScanDir4
+     * Data Provider.
      *
      * @ignore
      * @access public
      * @return array
      */
-    public function providerForRScanDir4()
+    public function providerForRecursiveScanDir4()
     {
-        return array(
-            array(array()),
-        );
+        return $this->getFilledDataProvider(array(array()));
     }
     // }}}
 
-    // {{{ testRScanDirWithProviderIsEmpty2
+    // {{{ testRecursiveScanDirWithProviderIsEmpty2
     /**
-     * Return the all directories & files into a directory
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
+     * @param mixed $data The container of elements of scandir.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @dataProvider providerForRScanDir4
+     * @access       public
+     * @return       void
+     * @dataProvider providerForRecursiveScanDir4
      */
-    public function testRScanDirWithProviderIsEmpty2($a)
+    public function testRecursiveScanDirWithProviderIsEmpty2($data)
     {
         if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
+        $this->expectOutputString('');
+
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
 
-        $this->assertEmpty($this->object->rScanDir($dirname, $a));
+        $this->object->recursiveScanDir($this->getTempDir() . $dirname, $data);
+
         rmdir($this->getTempDir() . $dirname);
     }
     // }}}
 
-    // {{{ testRScanDirWithParamsWritableArrayAreEquals
+    // {{{ testRecursiveScanDirWithParamsWritableArrayAreEquals
     /**
-     * Return the all directories & files into a directory
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testRScanDirWithParamsWritableArrayAreEquals()
+    public function testRecursiveScanDirWithParamsWritableArrayAreEquals()
     {
         if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
@@ -319,27 +342,26 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         mkdir($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
 
         $value = array('a');
-        $this->assertEquals(
-            array('a'),
-            $this->object->rScanDir($dirname, $value)
-        );
+        $this->assertEquals(array('a'), $this->object->recursiveScanDir($this->getTempDir() . $dirname, $value));
         rmdir($this->getTempDir() . $dirname);
     }
     // }}}
 
-    // {{{ testRScanDirComplexCompareAreEquals
+    // {{{ testRecursiveScanDirComplexCompareAreEquals
     /**
-     * Return the all directories & files into a directory
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testRScanDirComplexCompareAreEquals()
+    public function testRecursiveScanDirComplexCompareAreEquals()
     {
         if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
+
+        $this->expectOutputRegex('/^\[\d{2}:\d{2}:\d{2}\] The directory .* was skipped because not readable/');
 
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
@@ -347,7 +369,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $dirname2 = 'test_dir_' . substr(md5(microtime()), 0, 5);
         mkdir($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname2, 0222); // -w--w--w-
 
-        $value = $this->object->rScanDir($this->getTempDir() . $dirname);
+        $value = $this->object->recursiveScanDir($this->getTempDir() . $dirname);
         $this->assertEquals(array($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname2), $value);
 
         chmod($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname2, 0777);
@@ -356,19 +378,19 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     }
     // }}}
 
-    // {{{ testRScanDirCurrentDirectoriesAreEquals
+    // {{{ testRecursiveScanDirCurrentDirectoriesAreEquals
     /**
-     * Return the all directories & files into a directory
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
      * @return void
      */
-    public function testRScanDirCurrentDirectoriesAreEquals()
+    public function testRecursiveScanDirCurrentDirectoriesAreEquals()
     {
         $dirname = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 
-        $files = $this->object->rScanDir($dirname);
+        $files = $this->object->recursiveScanDir($dirname);
         sort($files);
         $files = preg_grep('/\.(php|sh)$/', $files);
         foreach ($files as $i => $file) {
@@ -383,8 +405,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'Controller.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Encoder'    . DIRECTORY_SEPARATOR . 'Encoder.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Exception'  . DIRECTORY_SEPARATOR . 'Exception.php',
-            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Interface'  . DIRECTORY_SEPARATOR . 'Task.php',
-            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'Task.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'Abstract.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'Execute.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'Interface.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Tests'      . DIRECTORY_SEPARATOR . 'TestCase.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'Help.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'Options.php',
@@ -392,7 +415,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Abstract'   . DIRECTORY_SEPARATOR . 'AbstractTest.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'ControllerTest.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Encoder'    . DIRECTORY_SEPARATOR . 'EncoderTest.php',
-            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'TaskTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'ExecuteTest.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Test.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'HelpTest.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'OptionsTest.php',
@@ -407,7 +430,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     // {{{ getFileContent
     // {{{ providerForGetFileContent
     /**
-     * providerForGetFileContent
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -415,36 +438,32 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function providerForGetFileContent()
     {
-        return array(
-            array(null),
-            array(''),
-            array(' '),
-            array('a'),
-        );
+        return $this->getFilledDataProvider(array(null, '', ' ', 'a'));
     }
     // }}}
 
-    // {{{ testGetFileContentParamIsNullReturnsNull
+    // {{{ testGetFileContentWithProviderThrowException
     /**
-     * Get the file's content
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
+     * @param mixed $filename The file where read the content.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     * @dataProvider providerForGetFileContent
+     * @access                   public
+     * @return                   void
+     * @dataProvider             providerForGetFileContent
+     * @expectedException        Bonzai_Exception
+     * @expectedExceptionCode    6534
      */
-    public function testGetFileContentWithProviderThrowException($a)
+    public function testGetFileContentWithProviderThrowException($filename)
     {
-        $this->object->getFileContent($a);
+        $this->object->getFileContent($filename);
     }
     // }}}
 
     // {{{ testGetFileContentWithParamsNotReadableThrowException
     /**
-     * Get the file's content
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -463,20 +482,17 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         try {
             $this->object->getFileContent($filename);
             $this->fail("The exception was not threw.");
-        } catch (Exception $e) {
+        } catch (Bonzai_Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777); // rwxrwxrwx
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testGetFileContentWithParamsNotWritableIsEmpty
     /**
-     * Get the file's content
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -495,20 +511,17 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         try {
             $this->object->getFileContent($filename);
             $this->fail("The exception was not threw.");
-        } catch (Exception $e) {
+        } catch (Bonzai_Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777); // rwxrwxrwx
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testGetFileContentWithParamTemp
     /**
-     * Get the file's content
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -522,13 +535,27 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         try {
             $this->object->getFileContent($filename);
             $this->fail("The exception was not threw.");
-        } catch (Exception $e) {
+        } catch (Bonzai_Exception $e) {
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
+    }
+    // }}}
+    // }}}
+
+    // {{{ putFileContent
+    // {{{ testPutFileContentJustCoverage
+    /**
+     * TODO: Add a comment to this method
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testPutFileContentJustCoverage()
+    {
+        $this->markTestIncomplete('TBW');
     }
     // }}}
     // }}}
@@ -536,7 +563,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     // {{{ checkFileValidity
     // {{{ providerForCheckFileValidity
     /**
-     * providerForCheckFileValidity
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -544,76 +571,36 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function providerForCheckFileValidity()
     {
-        return array(
-            array(' ', ' '),
-            array(' ', ''),
-            array(' ', 'a'),
-            array(' ', array('a')),
-            array(' ', array()),
-            array(' ', false),
-            array(' ', null),
-            array(' ', true),
-            array('', ' '),
-            array('', 'a'),
-            array('', array('a')),
-            array('', array()),
-            array('', false),
-            array('', null),
-            array('', true),
-            array('a', ' '),
-            array('a', ''),
-            array('a', 'a'),
-            array('a', array('a')),
-            array('a', array()),
-            array('a', false),
-            array('a', null),
-            array('a', true),
-            array(array('a'), ' '),
-            array(array('a'), ''),
-            array(array('a'), 'a'),
-            array(array('a'), array('a')),
-            array(array('a'), array()),
-            array(array('a'), false),
-            array(array('a'), null),
-            array(array('a'), true),
-            array(array(), ' '),
-            array(array(), ''),
-            array(array(), 'a'),
-            array(array(), array('a')),
-            array(array(), array()),
-            array(array(), false),
-            array(array(), null),
-            array(array(), true),
-            array(null, ' '),
-            array(null, ''),
-            array(null, 'a'),
-            array(null, array('a')),
-            array(null, array()),
-            array(null, false),
-            array(null, null),
-            array(null, true),
+        return $this->getFilledDataProvider(
+            array(' ', '', 'a', array('a'), array(), null),
+            array(' ', '', 'a', array('a'), array(), true, null) // TODO: removed false
         );
     }
     // }}}
 
-    // {{{ testCheckFileValidityWithParamsEmptyStringEmptyStringThrowException
+    // {{{ testCheckFileValidityWithProviderThrowException
     /**
-     * testCheckFileValidityWithParamsEmptyStringEmptyStringThrowException
+     * TODO: Add a comment to this method
+     *
+     * @param mixed $filename    The filename to be checked.
+     * @param mixed $file_exists Flag to determine whether some check will be ignored.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
+     * @access                   public
+     * @return                   void
+     * @dataProvider             providerForCheckFileValidity
+     * @expectedException        Bonzai_Exception
+     * @expectedExceptionCode    6534
      */
-    public function testCheckFileValidityWithParamsEmptyStringEmptyStringThrowException()
+    public function testCheckFileValidityWithProviderThrowException($filename, $file_exists)
     {
-        $this->object->checkFileValidity('', '');
+        $this->object->checkFileValidity($filename, $file_exists);
     }
     // }}}
 
     // {{{ testCheckFileValidityParamEmptyString
     /**
-     * testCheckFileValidityParamEmptyString
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -621,20 +608,20 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamEmptyString()
     {
+        $this->expectOutputString('');
+
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty($this->object->checkFileValidity($filename));
+        $this->object->checkFileValidity($filename);
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testCheckFileValidityParamSpacedString
     /**
-     * testCheckFileValidityParamSpacedString
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -642,20 +629,20 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamSpacedString()
     {
+        $this->expectOutputString('');
+
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty($this->object->checkFileValidity($filename));
+        $this->object->checkFileValidity($filename);
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testCheckFileValidityParamFake
     /**
-     * testCheckFileValidityParamFake
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -663,20 +650,20 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamFake()
     {
+        $this->expectOutputString('');
+
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty($this->object->checkFileValidity($filename));
+        $this->object->checkFileValidity($filename);
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testCheckFileValidityParamNull
     /**
-     * testCheckFileValidityParamNull
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -684,20 +671,20 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamNull()
     {
+        $this->expectOutputString('');
+
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty($this->object->checkFileValidity($filename));
+        $this->object->checkFileValidity($filename);
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testCheckFileValidityParamEmptyArray
     /**
-     * testCheckFileValidityParamEmptyArray
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -705,20 +692,20 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamEmptyArray()
     {
+        $this->expectOutputString('');
+
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty($this->object->checkFileValidity($filename));
+        $this->object->checkFileValidity($filename);
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testCheckFileValidityParamArray
     /**
-     * testCheckFileValidityParamArray
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -726,25 +713,26 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testCheckFileValidityParamArray()
     {
+        $this->expectOutputString('');
+
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'a');
 
-        $this->assertEmpty($this->object->checkFileValidity($filename));
+        $this->object->checkFileValidity($filename);
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testCheckFileValidityParamCurrentFile
     /**
-     * testCheckFileValidityParamCurrentFile
+     * TODO: Add a comment to this method
      *
      * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
+     * @access                   public
+     * @return                   void
+     * @expectedException        Bonzai_Exception
+     * @expectedExceptionCode    6534
      */
     public function testCheckFileValidityParamCurrentFile()
     {
@@ -756,7 +744,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     // {{{ info
     // {{{ testInfoJustCoverage
     /**
-     * testInfoJustCoverage
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -764,7 +752,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testInfoJustCoverage()
     {
-        $this->assertEmpty($this->object->info(''));
+        $this->expectOutputString('');
+
+        $this->object->info('');
     }
     // }}}
     // }}}
@@ -772,7 +762,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     // {{{ message
     // {{{ providerForMessage
     /**
-     * providerForMessage
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -780,250 +770,43 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function providerForMessage()
     {
-        return array(
-            array(' ', '%s %d', ' '),
-            array(' ', '%s %d', ''),
-            array(' ', '%s %d', 'a'),
-            array(' ', '%s %d', 0),
-            array(' ', '%s %d', 1),
-            array(' ', '%s %d', array('a')),
-            array(' ', '%s %d', array()),
-            array(' ', '%s %d', null),
-            array(' ', array(), ' '),
-            array(' ', array(), ''),
-            array(' ', array(), 'a'),
-            array(' ', array(), 0),
-            array(' ', array(), 1),
-            array(' ', array(), array('a')),
-            array(' ', array(), array()),
-            array(' ', array(), null),
-            array(' ', null, ' '),
-            array(' ', null, ''),
-            array(' ', null, 'a'),
-            array(' ', null, 0),
-            array(' ', null, 1),
-            array(' ', null, array('a')),
-            array(' ', null, array()),
-            array(' ', null, null),
-            array('', '%s %d', ' '),
-            array('', '%s %d', ''),
-            array('', '%s %d', 'a'),
-            array('', '%s %d', 0),
-            array('', '%s %d', 1),
-            array('', '%s %d', array('a')),
-            array('', '%s %d', array()),
-            array('', '%s %d', null),
-            array('', array(), ' '),
-            array('', array(), ''),
-            array('', array(), 'a'),
-            array('', array(), 0),
-            array('', array(), 1),
-            array('', array(), array('a')),
-            array('', array(), array()),
-            array('', array(), null),
-            array('', null, ' '),
-            array('', null, ''),
-            array('', null, 'a'),
-            array('', null, 0),
-            array('', null, 1),
-            array('', null, array('a')),
-            array('', null, array()),
-            array('', null, null),
-            array('a', '%s %d', ' '),
-            array('a', '%s %d', ''),
-            array('a', '%s %d', 'a'),
-            array('a', '%s %d', 0),
-            array('a', '%s %d', 1),
-            array('a', '%s %d', array('a')),
-            array('a', '%s %d', array()),
-            array('a', '%s %d', null),
-            array('a', array(), ' '),
-            array('a', array(), ''),
-            array('a', array(), 'a'),
-            array('a', array(), 0),
-            array('a', array(), 1),
-            array('a', array(), array('a')),
-            array('a', array(), array()),
-            array('a', array(), null),
-            array('a', null, ' '),
-            array('a', null, ''),
-            array('a', null, 'a'),
-            array('a', null, 0),
-            array('a', null, 1),
-            array('a', null, array('a')),
-            array('a', null, array()),
-            array('a', null, null),
-            array('error', '%s %d', ' '),
-            array('error', '%s %d', ''),
-            array('error', '%s %d', 'a'),
-            array('error', '%s %d', 0),
-            array('error', '%s %d', 1),
-            array('error', '%s %d', array('a')),
-            array('error', '%s %d', array()),
-            array('error', '%s %d', null),
-            array('error', array(), ' '),
-            array('error', array(), ''),
-            array('error', array(), 'a'),
-            array('error', array(), 0),
-            array('error', array(), 1),
-            array('error', array(), array('a')),
-            array('error', array(), array()),
-            array('error', array(), null),
-            array('error', null, ' '),
-            array('error', null, ''),
-            array('error', null, 'a'),
-            array('error', null, 0),
-            array('error', null, 1),
-            array('error', null, array('a')),
-            array('error', null, array()),
-            array('error', null, null),
-            array('info', '%s %d', ' '),
-            array('info', '%s %d', ''),
-            array('info', '%s %d', 'a'),
-            array('info', '%s %d', 0),
-            array('info', '%s %d', 1),
-            array('info', '%s %d', array('a')),
-            array('info', '%s %d', array()),
-            array('info', '%s %d', null),
-            array('info', array(), ' '),
-            array('info', array(), ''),
-            array('info', array(), 'a'),
-            array('info', array(), 0),
-            array('info', array(), 1),
-            array('info', array(), array('a')),
-            array('info', array(), array()),
-            array('info', array(), null),
-            array('info', null, ' '),
-            array('info', null, ''),
-            array('info', null, 'a'),
-            array('info', null, 0),
-            array('info', null, 1),
-            array('info', null, array('a')),
-            array('info', null, array()),
-            array('info', null, null),
-            array('warn', '%s %d', ' '),
-            array('warn', '%s %d', ''),
-            array('warn', '%s %d', 'a'),
-            array('warn', '%s %d', 0),
-            array('warn', '%s %d', 1),
-            array('warn', '%s %d', array('a')),
-            array('warn', '%s %d', array()),
-            array('warn', '%s %d', null),
-            array('warn', array(), ' '),
-            array('warn', array(), ''),
-            array('warn', array(), 'a'),
-            array('warn', array(), 0),
-            array('warn', array(), 1),
-            array('warn', array(), array('a')),
-            array('warn', array(), array()),
-            array('warn', array(), null),
-            array('warn', null, ' '),
-            array('warn', null, ''),
-            array('warn', null, 'a'),
-            array('warn', null, 0),
-            array('warn', null, 1),
-            array('warn', null, array('a')),
-            array('warn', null, array()),
-            array('warn', null, null),
-            array(array('a'), '%s %d', ' '),
-            array(array('a'), '%s %d', ''),
-            array(array('a'), '%s %d', 'a'),
-            array(array('a'), '%s %d', 0),
-            array(array('a'), '%s %d', 1),
-            array(array('a'), '%s %d', array('a')),
-            array(array('a'), '%s %d', array()),
-            array(array('a'), '%s %d', null),
-            array(array('a'), array(), ' '),
-            array(array('a'), array(), ''),
-            array(array('a'), array(), 'a'),
-            array(array('a'), array(), 0),
-            array(array('a'), array(), 1),
-            array(array('a'), array(), array('a')),
-            array(array('a'), array(), array()),
-            array(array('a'), array(), null),
-            array(array('a'), null, ' '),
-            array(array('a'), null, ''),
-            array(array('a'), null, 'a'),
-            array(array('a'), null, 0),
-            array(array('a'), null, 1),
-            array(array('a'), null, array('a')),
-            array(array('a'), null, array()),
-            array(array('a'), null, null),
-            array(array(), '%s %d', ' '),
-            array(array(), '%s %d', ''),
-            array(array(), '%s %d', 'a'),
-            array(array(), '%s %d', 0),
-            array(array(), '%s %d', 1),
-            array(array(), '%s %d', array('a')),
-            array(array(), '%s %d', array()),
-            array(array(), '%s %d', null),
-            array(array(), array(), ' '),
-            array(array(), array(), ''),
-            array(array(), array(), 'a'),
-            array(array(), array(), 0),
-            array(array(), array(), 1),
-            array(array(), array(), array('a')),
-            array(array(), array(), array()),
-            array(array(), array(), null),
-            array(array(), null, ' '),
-            array(array(), null, ''),
-            array(array(), null, 'a'),
-            array(array(), null, 0),
-            array(array(), null, 1),
-            array(array(), null, array('a')),
-            array(array(), null, array()),
-            array(array(), null, null),
-            array(null, '%s %d', ' '),
-            array(null, '%s %d', ''),
-            array(null, '%s %d', 'a'),
-            array(null, '%s %d', 0),
-            array(null, '%s %d', 1),
-            array(null, '%s %d', array('a')),
-            array(null, '%s %d', array()),
-            array(null, '%s %d', null),
-            array(null, array(), ' '),
-            array(null, array(), ''),
-            array(null, array(), 'a'),
-            array(null, array(), 0),
-            array(null, array(), 1),
-            array(null, array(), array('a')),
-            array(null, array(), array()),
-            array(null, array(), null),
-            array(null, null, ' '),
-            array(null, null, ''),
-            array(null, null, 'a'),
-            array(null, null, 0),
-            array(null, null, 1),
-            array(null, null, array('a')),
-            array(null, null, array()),
-            array(null, null, null),
+        return $this->getFilledDataProvider(
+            array(' ', '', 'a', 'error', 'info', 'warn', array('a'), array(), null),
+            array('%s %d', array(), null),
+            array(' ', '', 'a', 0, 1, array('a'), array(), null)
         );
     }
     // }}}
 
     // {{{ testMessageWithProviderThrowException
     /**
-     * testMessageWithProviderThrowException
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
-     * @param mixed $b
-     * @param mixed $c
+     * @param mixed $type The type of message.
+     * @param mixed $text The text to be printed.
+     * @param mixed $args The any parameters to be replaced in the text.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     * @dataProvider providerForMessage
+     * @access                   public
+     * @return                   void
+     * @dataProvider             providerForMessage
+     * @expectedException        Bonzai_Exception
+     * @expectedExceptionCode    6534
      */
-    public function testMessageWithProviderThrowException($a, $b, $c)
+    public function testMessageWithProviderThrowException($type, $text, $args)
     {
-        $this->callMethod('message', array($a, $b, $c));
+        $this->expectOutputString('');
+        Bonzai_Utils_Utils::$silenced = true;
+
+        $this->callMethod('message', array($type, $text, $args));
+
+        Bonzai_Utils_Utils::$silenced = false;
     }
     // }}}
 
     // {{{ providerForMessage2
     /**
-     * providerForMessage2
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -1031,321 +814,41 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function providerForMessage2()
     {
-        return array(
-            array(' ', ' ', ' '),
-            array(' ', ' ', ''),
-            array(' ', ' ', 'a'),
-            array(' ', ' ', 0),
-            array(' ', ' ', 1),
-            array(' ', ' ', array('a')),
-            array(' ', ' ', array()),
-            array(' ', ' ', null),
-            array(' ', '%s', ' '),
-            array(' ', '%s', ''),
-            array(' ', '%s', 'a'),
-            array(' ', '%s', 0),
-            array(' ', '%s', 1),
-            array(' ', '%s', array('a')),
-            array(' ', '%s', array()),
-            array(' ', '%s', null),
-            array(' ', '', ' '),
-            array(' ', '', ''),
-            array(' ', '', 'a'),
-            array(' ', '', 0),
-            array(' ', '', 1),
-            array(' ', '', array('a')),
-            array(' ', '', array()),
-            array(' ', '', null),
-            array(' ', 'a', ' '),
-            array(' ', 'a', ''),
-            array(' ', 'a', 'a'),
-            array(' ', 'a', 0),
-            array(' ', 'a', 1),
-            array(' ', 'a', array('a')),
-            array(' ', 'a', array()),
-            array(' ', 'a', null),
-            array('', ' ', ' '),
-            array('', ' ', ''),
-            array('', ' ', 'a'),
-            array('', ' ', 0),
-            array('', ' ', 1),
-            array('', ' ', array('a')),
-            array('', ' ', array()),
-            array('', ' ', null),
-            array('', '%s', ' '),
-            array('', '%s', ''),
-            array('', '%s', 'a'),
-            array('', '%s', 0),
-            array('', '%s', 1),
-            array('', '%s', array('a')),
-            array('', '%s', array()),
-            array('', '%s', null),
-            array('', '', ' '),
-            array('', '', ''),
-            array('', '', 'a'),
-            array('', '', 0),
-            array('', '', 1),
-            array('', '', array('a')),
-            array('', '', array()),
-            array('', '', null),
-            array('', 'a', ' '),
-            array('', 'a', ''),
-            array('', 'a', 'a'),
-            array('', 'a', 0),
-            array('', 'a', 1),
-            array('', 'a', array('a')),
-            array('', 'a', array()),
-            array('', 'a', null),
-            array('a', ' ', ' '),
-            array('a', ' ', ''),
-            array('a', ' ', 'a'),
-            array('a', ' ', 0),
-            array('a', ' ', 1),
-            array('a', ' ', array('a')),
-            array('a', ' ', array()),
-            array('a', ' ', null),
-            array('a', '%s', ' '),
-            array('a', '%s', ''),
-            array('a', '%s', 'a'),
-            array('a', '%s', 0),
-            array('a', '%s', 1),
-            array('a', '%s', array('a')),
-            array('a', '%s', array()),
-            array('a', '%s', null),
-            array('a', '', ' '),
-            array('a', '', ''),
-            array('a', '', 'a'),
-            array('a', '', 0),
-            array('a', '', 1),
-            array('a', '', array('a')),
-            array('a', '', array()),
-            array('a', '', null),
-            array('a', 'a', ' '),
-            array('a', 'a', ''),
-            array('a', 'a', 'a'),
-            array('a', 'a', 0),
-            array('a', 'a', 1),
-            array('a', 'a', array('a')),
-            array('a', 'a', array()),
-            array('a', 'a', null),
-            array('error', ' ', ' '),
-            array('error', ' ', ''),
-            array('error', ' ', 'a'),
-            array('error', ' ', 0),
-            array('error', ' ', 1),
-            array('error', ' ', array('a')),
-            array('error', ' ', array()),
-            array('error', ' ', null),
-            array('error', '%s', ' '),
-            array('error', '%s', ''),
-            array('error', '%s', 'a'),
-            array('error', '%s', 0),
-            array('error', '%s', 1),
-            array('error', '%s', array('a')),
-            array('error', '%s', array()),
-            array('error', '%s', null),
-            array('error', '', ' '),
-            array('error', '', ''),
-            array('error', '', 'a'),
-            array('error', '', 0),
-            array('error', '', 1),
-            array('error', '', array('a')),
-            array('error', '', array()),
-            array('error', '', null),
-            array('error', 'a', ' '),
-            array('error', 'a', ''),
-            array('error', 'a', 'a'),
-            array('error', 'a', 0),
-            array('error', 'a', 1),
-            array('error', 'a', array('a')),
-            array('error', 'a', array()),
-            array('error', 'a', null),
-            array('info', ' ', ' '),
-            array('info', ' ', ''),
-            array('info', ' ', 'a'),
-            array('info', ' ', 0),
-            array('info', ' ', 1),
-            array('info', ' ', array('a')),
-            array('info', ' ', array()),
-            array('info', ' ', null),
-            array('info', '%s', ' '),
-            array('info', '%s', ''),
-            array('info', '%s', 'a'),
-            array('info', '%s', 0),
-            array('info', '%s', 1),
-            array('info', '%s', array('a')),
-            array('info', '%s', array()),
-            array('info', '%s', null),
-            array('info', '', ' '),
-            array('info', '', ''),
-            array('info', '', 'a'),
-            array('info', '', 0),
-            array('info', '', 1),
-            array('info', '', array('a')),
-            array('info', '', array()),
-            array('info', '', null),
-            array('info', 'a', ' '),
-            array('info', 'a', ''),
-            array('info', 'a', 'a'),
-            array('info', 'a', 0),
-            array('info', 'a', 1),
-            array('info', 'a', array('a')),
-            array('info', 'a', array()),
-            array('info', 'a', null),
-            array('warn', ' ', ' '),
-            array('warn', ' ', ''),
-            array('warn', ' ', 'a'),
-            array('warn', ' ', 0),
-            array('warn', ' ', 1),
-            array('warn', ' ', array('a')),
-            array('warn', ' ', array()),
-            array('warn', ' ', null),
-            array('warn', '%s', ' '),
-            array('warn', '%s', ''),
-            array('warn', '%s', 'a'),
-            array('warn', '%s', 0),
-            array('warn', '%s', 1),
-            array('warn', '%s', array('a')),
-            array('warn', '%s', array()),
-            array('warn', '%s', null),
-            array('warn', '', ' '),
-            array('warn', '', ''),
-            array('warn', '', 'a'),
-            array('warn', '', 0),
-            array('warn', '', 1),
-            array('warn', '', array('a')),
-            array('warn', '', array()),
-            array('warn', '', null),
-            array('warn', 'a', ' '),
-            array('warn', 'a', ''),
-            array('warn', 'a', 'a'),
-            array('warn', 'a', 0),
-            array('warn', 'a', 1),
-            array('warn', 'a', array('a')),
-            array('warn', 'a', array()),
-            array('warn', 'a', null),
-            array(array('a'), ' ', ' '),
-            array(array('a'), ' ', ''),
-            array(array('a'), ' ', 'a'),
-            array(array('a'), ' ', 0),
-            array(array('a'), ' ', 1),
-            array(array('a'), ' ', array('a')),
-            array(array('a'), ' ', array()),
-            array(array('a'), ' ', null),
-            array(array('a'), '%s', ' '),
-            array(array('a'), '%s', ''),
-            array(array('a'), '%s', 'a'),
-            array(array('a'), '%s', 0),
-            array(array('a'), '%s', 1),
-            array(array('a'), '%s', array('a')),
-            array(array('a'), '%s', array()),
-            array(array('a'), '%s', null),
-            array(array('a'), '', ' '),
-            array(array('a'), '', ''),
-            array(array('a'), '', 'a'),
-            array(array('a'), '', 0),
-            array(array('a'), '', 1),
-            array(array('a'), '', array('a')),
-            array(array('a'), '', array()),
-            array(array('a'), '', null),
-            array(array('a'), 'a', ' '),
-            array(array('a'), 'a', ''),
-            array(array('a'), 'a', 'a'),
-            array(array('a'), 'a', 0),
-            array(array('a'), 'a', 1),
-            array(array('a'), 'a', array('a')),
-            array(array('a'), 'a', array()),
-            array(array('a'), 'a', null),
-            array(array(), ' ', ' '),
-            array(array(), ' ', ''),
-            array(array(), ' ', 'a'),
-            array(array(), ' ', 0),
-            array(array(), ' ', 1),
-            array(array(), ' ', array('a')),
-            array(array(), ' ', array()),
-            array(array(), ' ', null),
-            array(array(), '%s', ' '),
-            array(array(), '%s', ''),
-            array(array(), '%s', 'a'),
-            array(array(), '%s', 0),
-            array(array(), '%s', 1),
-            array(array(), '%s', array('a')),
-            array(array(), '%s', array()),
-            array(array(), '%s', null),
-            array(array(), '', ' '),
-            array(array(), '', ''),
-            array(array(), '', 'a'),
-            array(array(), '', 0),
-            array(array(), '', 1),
-            array(array(), '', array('a')),
-            array(array(), '', array()),
-            array(array(), '', null),
-            array(array(), 'a', ' '),
-            array(array(), 'a', ''),
-            array(array(), 'a', 'a'),
-            array(array(), 'a', 0),
-            array(array(), 'a', 1),
-            array(array(), 'a', array('a')),
-            array(array(), 'a', array()),
-            array(array(), 'a', null),
-            array(null, ' ', ' '),
-            array(null, ' ', ''),
-            array(null, ' ', 'a'),
-            array(null, ' ', 0),
-            array(null, ' ', 1),
-            array(null, ' ', array('a')),
-            array(null, ' ', array()),
-            array(null, ' ', null),
-            array(null, '%s', ' '),
-            array(null, '%s', ''),
-            array(null, '%s', 'a'),
-            array(null, '%s', 0),
-            array(null, '%s', 1),
-            array(null, '%s', array('a')),
-            array(null, '%s', array()),
-            array(null, '%s', null),
-            array(null, '', ' '),
-            array(null, '', ''),
-            array(null, '', 'a'),
-            array(null, '', 0),
-            array(null, '', 1),
-            array(null, '', array('a')),
-            array(null, '', array()),
-            array(null, '', null),
-            array(null, 'a', ' '),
-            array(null, 'a', ''),
-            array(null, 'a', 'a'),
-            array(null, 'a', 0),
-            array(null, 'a', 1),
-            array(null, 'a', array('a')),
-            array(null, 'a', array()),
-            array(null, 'a', null),
+        return $this->getFilledDataProvider(
+            array(' ', '', 'a', 'error', 'info', 'warn', array('a'), array(), null),
+            array(' ', '%s', '', 'a'),
+            array(' ', '', 'a', 0, 1, array('a'), array(), null)
         );
     }
     // }}}
 
-    // {{{ testMessageInfoEmptyStringNull
+    // {{{ testMessageWithProvider
     /**
-     * testMessageInfoEmptyStringNull
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
-     * @param mixed $b
-     * @param mixed $c
+     * @param mixed $type The type of message.
+     * @param mixed $text The text to be printed.
+     * @param mixed $args The any parameters to be replaced in the text.
      *
      * @ignore
-     * @access public
-     * @return void
+     * @access       public
+     * @return       void
      * @dataProvider providerForMessage2
      */
-    public function testMessageWithProvider($a, $b, $c)
+    public function testMessageWithProvider($type, $text, $args)
     {
-        $this->assertEmpty($this->callMethod('message', array($a, $b, $c)));
+        $this->expectOutputString('');
+        Bonzai_Utils_Utils::$silenced = true;
+
+        $this->callMethod('message', array($type, $text, $args));
+
+        Bonzai_Utils_Utils::$silenced = false;
     }
     // }}}
 
     // {{{ testMessageRealUse
     /**
-     * testMessageRealUse
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -1353,12 +856,28 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testMessageRealUse()
     {
-        Bonzai_Utils::$silenced = false;
+        Bonzai_Utils_Utils::$silenced = false;
         ob_start();
           $this->callMethod('message', array('info', 'test'));
         $output = ob_get_clean();
-        $this->assertRegExp('/^\[\d{2}:\d{2}:\d{2}\] test\n$/', $output);
-        Bonzai_Utils::$silenced = true;
+        $this->assertRegExp('/^\[\d{2}:\d{2}:\d{2}\] test.*$/', $output);
+        Bonzai_Utils_Utils::$silenced = true;
+    }
+    // }}}
+    // }}}
+
+    // {{{ composeMessage
+    // {{{ testComposeMessageJustCoverage
+    /**
+     * TODO: Add a comment to this method
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testComposeMessageJustCoverage()
+    {
+        $this->markTestIncomplete('TBW');
     }
     // }}}
     // }}}
@@ -1366,7 +885,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     // {{{ warn
     // {{{ testWarnJustCoverage
     /**
-     * testWarnJustCoverage
+     * Only code-coverage of `warn` method.
      *
      * @ignore
      * @access public
@@ -1374,7 +893,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testWarnJustCoverage()
     {
-        $this->assertEmpty($this->object->warn(''));
+        $this->expectOutputString('');
+
+        $this->object->warn('');
     }
     // }}}
     // }}}
@@ -1382,7 +903,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     // {{{ error
     // {{{ testErrorJustCoverage
     /**
-     * testErrorJustCoverage
+     * Only code-coverage of `error` method.
      *
      * @ignore
      * @access public
@@ -1390,7 +911,25 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testErrorJustCoverage()
     {
-        $this->assertEmpty($this->object->error(''));
+        $this->expectOutputString('');
+
+        $this->object->error('');
+    }
+    // }}}
+    // }}}
+
+    // {{{ printHeader
+    // {{{ testPrintHeaderJustCoverage
+    /**
+     * TODO: Add a comment to this method
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testPrintHeaderJustCoverage()
+    {
+        $this->markTestIncomplete('TBW');
     }
     // }}}
     // }}}

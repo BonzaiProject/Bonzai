@@ -39,15 +39,15 @@ if (!defined('BONZAI_PATH_LIBS')) {
     define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 }
 
-require_once BONZAI_PATH_LIBS . 'Tests'     . DIRECTORY_SEPARATOR . 'TestCase.php';
-require_once BONZAI_PATH_LIBS . 'Abstract'  . DIRECTORY_SEPARATOR . 'Abstract.php';
-require_once BONZAI_PATH_LIBS . 'Interface' . DIRECTORY_SEPARATOR . 'Task.php';
-require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Utils.php';
-require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Options.php';
-require_once BONZAI_PATH_LIBS . 'Encoder'   . DIRECTORY_SEPARATOR . 'Encoder.php';
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
+require_once BONZAI_PATH_LIBS . 'Task'     . DIRECTORY_SEPARATOR . 'Interface.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
+require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php';
+require_once BONZAI_PATH_LIBS . 'Encoder'  . DIRECTORY_SEPARATOR . 'Encoder.php';
 
 /**
- * Bonzai_Encoder_Test
+ * Bonzai_Encoder_EncoderTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -60,10 +60,44 @@ require_once BONZAI_PATH_LIBS . 'Encoder'   . DIRECTORY_SEPARATOR . 'Encoder.php
  **/
 class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 {
+    // {{{ setUp
+    /**
+     * PHPUnit setUp: instance the class if needed.
+     *
+     * @access protected
+     * @return void
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $options = new Bonzai_Utils_Options();
+        $this->object->setOptions($options);
+        $utils = $this->object->getUtils($options);
+    }
+    // }}}
+
+    // {{{ setOptions
+    // {{{ testSetOptionsJustCoverage
+    /**
+     * Only code-coverage of `setOptions` method.
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testSetOptionsJustCoverage()
+    {
+        $this->expectOutputString('');
+        $this->object->setOptions(new Bonzai_Utils_Options());
+    }
+    // }}}
+    // }}}
+
     // {{{ elaborate
     // {{{ testElaborateJustCoverage
     /**
-     * testElaborateJustCoverage
+     * Only code-coverage of `elaborate` method.
      *
      * @ignore
      * @access public
@@ -71,9 +105,24 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testElaborateJustCoverage()
     {
-        $this->assertEmpty(
-            $this->object->elaborate(new Bonzai_Utils_Options())
-        );
+        $this->expectOutputRegex('/^.*BONZAI +\(was phpGuardian\).*$/s');
+        $this->object->elaborate();
+    }
+    // }}}
+    // }}}
+
+    // {{{ processFileList
+    // {{{ testProcessFileListJustCoverage
+    /**
+     * TODO: Add a comment to this method
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testProcessFileListJustCoverage()
+    {
+        $this->markTestIncomplete('TBW');
     }
     // }}}
     // }}}
@@ -81,7 +130,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     // {{{ processFile
     // {{{ providerForProcessFile
     /**
-     * providerForProcessFile
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -89,43 +138,33 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function providerForProcessFile()
     {
-        return array(
-            array(null),
-            array(''),
-            array('1'),
-            array(' '),
-        );
+        return $this->getFilledDataProvider(array(' ', '', '1', null));
     }
     // }}}
 
     // {{{ testProcessFileWithProviderThrowException
     /**
-     * Process a file
+     * Test if `processFile` method throw an exception for invalid files.
      *
-     * @param mixed $a
+     * @param mixed $file The file to be encoded.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
-     * @dataProvider providerForProcessFile
+     * @access                   public
+     * @return                   void
+     * @dataProvider             providerForProcessFile
+     * @expectedException        Bonzai_Exception
+     * @expectedExceptionCode    6534
      */
-    public function testProcessFileWithProviderThrowException($a)
+    public function testProcessFileWithProviderThrowException($file)
     {
-        $this->callMethod(
-            'processFile',
-            array($a)
-        );
-
-        if (is_string($a) && is_file($a)) {
-            unlink($a);
-        }
+        $this->callMethod('processFile', array($file));
+        $this->removeFile($file);
     }
     // }}}
 
     // {{{ testProcessFileWithParamEmptyFileFileIsEmpty
     /**
-     * Process a file
+     * Test if `processFile` method throw an exception for an empty file.
      *
      * @ignore
      * @access public
@@ -134,32 +173,27 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     public function testProcessFileWithParamEmptyFileFileIsEmpty()
     {
         $filename = tempnam($this->getTempDir(), 'test_');
+
         file_put_contents($filename, '');
 
+        $this->expectOutputRegex('/^\[\d{2}:\d{2}:\d{2}\] Start encoding file .*$/');
+
         try {
-            $this->callMethod(
-                'processFile',
-                array($filename)
-            );
+            $this->callMethod('processFile', array($filename));
             $this->fail("The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/',
-                $e->getMessage()
-            );
+        } catch(Bonzai_Exception $e) {
+            $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testProcessFileWithParamSizedFileFileIsNotReadable
     /**
-     * Process a file
+     * Test if `processFile` method throw an exception for a not-readable file.
      *
      * @ignore
      * @access public
@@ -175,31 +209,24 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         file_put_contents($filename, 'aaa');
         chmod($filename, 0333); // -wx-wx-wx
 
+        $this->expectOutputRegex('/^\[\d{2}:\d{2}:\d{2}\] Start encoding file .*$/');
+
         try {
-            $this->callMethod(
-                'processFile',
-                array($filename)
-            );
-            $this->fail("The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/',
-                $e->getMessage()
-            );
+            $this->callMethod('processFile', array($filename));
+            $this->fail("The exception was not threw. $filename");
+        } catch(Bonzai_Exception $e) {
+            $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777); // rwxrwxrwx
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testProcessFileWithParamNotWritableSizedFileFileIsEmpty
     /**
-     * Process a file
+     * Test if `processFile` method does nothing for a not-writable file.
      *
      * @ignore
      * @access public
@@ -211,24 +238,21 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
+        $this->expectOutputRegex('/^\[\d{2}:\d{2}:\d{2}\].*-+/s');
+
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, 'aaa');
         chmod($filename, 0555); // r-xr-xr-x
 
-        $this->assertEmpty(
-            $this->callMethod('processFile', array($filename))
-        );
+        $this->callMethod('processFile', array($filename));
 
-        chmod($filename, 0777); // rwxrwxrwx
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testProcessFileWithParamSizedFileFileIsEmpty
     /**
-     * Process a file
+     * Test if `processFile` method does nothing for a not-writable file.
      *
      * @ignore
      * @access public
@@ -236,19 +260,14 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testProcessFileWithParamSizedFileFileIsEmpty()
     {
+        $this->expectOutputRegex('/^\[\d{2}:\d{2}:\d{2}\].*-+/s');
+
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '<?php echo "aaa"; ?' . '>');
 
-        $this->assertEmpty(
-            $this->callMethod(
-                'processFile',
-                array($filename)
-            )
-        );
+        $this->callMethod('processFile', array($filename));
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
     // }}}
@@ -256,7 +275,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     // {{{ saveOutput
     // {{{ providerForSaveOutput
     /**
-     * providerForSaveOutput
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -264,78 +283,36 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function providerForSaveOutput()
     {
-        return array(
-            array(' ', ' '),
-            array(' ', ''),
-            array(' ', 'a'),
-            array(' ', array('a')),
-            array(' ', array()),
-            array(' ', null),
-            array('', ' '),
-            array('', ''),
-            array('', 'a'),
-            array('', array('a')),
-            array('', array()),
-            array('', null),
-            array('b', ' '),
-            array('c', ''),
-            array('d', 'a'),
-            array('e', array('a')),
-            array('f', array()),
-            array('g', null),
-            array(array('h'), ' '),
-            array(array('i'), ''),
-            array(array('j'), 'a'),
-            array(array('k'), array('a')),
-            array(array('l'), array()),
-            array(array('m'), null),
-            array(array(), ' '),
-            array(array(), ''),
-            array(array(), 'a'),
-            array(array(), array('a')),
-            array(array(), array()),
-            array(array(), null),
-            array(null, ' '),
-            array(null, ''),
-            array(null, 'a'),
-            array(null, array('a')),
-            array(null, array()),
-            array(null, null),
-            array(tempnam('.', 'test_'), ' '),
-            array(tempnam('.', 'test_'), ''),
-            array(tempnam('.', 'test_'), 'a'),
-            array(tempnam('.', 'test_'), array('a')),
-            array(tempnam('.', 'test_'), array()),
-            array(tempnam('.', 'test_'), null),
+        return $this->getFilledDataProvider(
+            array(' ', '', 'b', 'c', 'd', 'e', 'f', 'g', null, tempnam($this->getTempDir(), 'test_')),
+            array(' ', '', 'a', array('a'), array(), null)
         );
     }
     // }}}
 
-    // {{{ testSaveOutputWithProviderJustCoverage
+    // {{{ testSaveOutputWithProvider
     /**
-     * testSaveOutputWithProviderJustCoverage
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
-     * @param mixed $b
+     * @param mixed $filename The filename where save the output.
+     * @param mixed $bytecode The content to be saved.
      *
      * @ignore
-     * @access public
-     * @return void
+     * @access       public
+     * @return       void
      * @dataProvider providerForSaveOutput
      */
-    public function testSaveOutputWithProviderJustCoverage($a, $b)
+    public function testSaveOutputWithProvider($filename, $bytecode)
     {
-        $this->assertEmpty(
-            $this->callMethod(
-                'saveOutput',
-                array($a, $b)
-            )
-        );
+        $this->expectOutputString('');
 
-        $a = is_array($a) ? implode('', $a) : strval($a);
-        if (!empty($a) && is_file($a)) {
-            unlink($a);
-        }
+        Bonzai_Utils_Utils::$silenced = true;
+
+        $this->callMethod('saveOutput', array($filename, $bytecode));
+
+        $this->removeFile($filename);
+
+        Bonzai_Utils_Utils::$silenced = false;
     }
     // }}}
     // }}}
@@ -343,7 +320,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     // {{{ getByteCode
     // {{{ providerForGetByteCode
     /**
-     * providerForGetByteCode
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -351,48 +328,38 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function providerForGetByteCode()
     {
-        return array(
-            array(null),
-            array(''),
-            array(' '),
-            array('2'),
-        );
+        return $this->getFilledDataProvider(array(' ', '', '2', null));
     }
     // }}}
 
     // {{{ testGetByteCodeWithProviderIsInvalid
     /**
-     * Get the bytecode
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
+     * @param mixed $filename The filename where extract the byte-code.
      *
      * @ignore
-     * @access public
-     * @return void
+     * @access       public
+     * @return       void
      * @dataProvider providerForGetByteCode
      */
-    public function testGetByteCodeWithProviderIsInvalid($a)
+    public function testGetByteCodeWithProviderIsInvalid($filename)
     {
         try {
-            $this->callMethod('getByteCode', array($a));
+            $this->callMethod('getByteCode', array($filename));
             $this->fail("The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is invalid.'), strval($a)) . '$/',
-                $e->getMessage()
-            );
+        } catch(Bonzai_Exception $e) {
+            $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is invalid.'), strval($filename)) . '$/', $e->getMessage());
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        if (is_string($a) && is_file($a)) {
-            unlink($a);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ providerForGetByteCode2
     /**
-     * providerForGetByteCode2
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -400,25 +367,22 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function providerForGetByteCode2()
     {
-        return array(
-            array(0777), // rwxrwxrwx
-            array(0555), // r-xr-xr-x
-        );
+        return $this->getFilledDataProvider(array(0777, 0555)); // rwxrwxrwx, r-xr-xr-x
     }
     // }}}
 
-    // {{{ testGetByteCodeWithParamEmptyFileFileIsEmpty
+    // {{{ testGetByteCodeWithProviderIsEmpty
     /**
-     * Get the bytecode
+     * TODO: Add a comment to this method
      *
-     * @param mixed $a
+     * @param mixed $permission The permission mode
      *
      * @ignore
-     * @access public
-     * @return void
+     * @access       public
+     * @return       void
      * @dataProvider providerForGetByteCode2
      */
-    public function testGetByteCodeWithProviderIsEmpty($a)
+    public function testGetByteCodeWithProviderIsEmpty($permission)
     {
         if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
@@ -426,30 +390,24 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         $filename = tempnam($this->getTempDir(), 'test_');
         file_put_contents($filename, '');
-        chmod($filename, $a);
+        chmod($filename, $permission);
 
         try {
             $this->callMethod('getByteCode', array($filename));
             $this->fail("The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/',
-                $e->getMessage()
-            );
+        } catch(Bonzai_Exception $e) {
+            $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777); // rwxrwxrwx
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testGetByteCodeWithParamSizedFileFileIsNotReadable
     /**
-     * Get the bytecode
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -468,25 +426,19 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         try {
             $this->callMethod('getByteCode', array($filename));
             $this->fail("The exception was not threw.");
-        } catch(Exception $e) {
-            $this->assertRegExp(
-                '/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/',
-                $e->getMessage()
-            );
+        } catch(Bonzai_Exception $e) {
+            $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
             $this->assertInstanceOf('Bonzai_Exception', $e);
         }
 
-        chmod($filename, 0777); // rwxrwxrwx
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
 
     // {{{ testGetByteCodeWithParamSizedFileFileIsNotValid
     /**
-     * Get the bytecode
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -501,9 +453,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
         $this->assertRegExp('/bcompiler v/', $bytecode);
 
-        if (is_string($filename) && is_file($filename)) {
-            unlink($filename);
-        }
+        $this->removeFile($filename);
     }
     // }}}
     // }}}
@@ -511,7 +461,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     // {{{ expandPathsToFiles
     // {{{ providerForExpandPathsToFiles
     /**
-     * providerForExpandPathsToFiles
+     * Data Provider.
      *
      * @ignore
      * @access public
@@ -519,36 +469,35 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function providerForExpandPathsToFiles()
     {
-        return array(
-            array(''),
-            array(null),
-            array('3'),
-            array(' '),
-            array(array()),
-            array(array('4')),
-        );
+        return $this->getFilledDataProvider(array(' ', '', '3', array('4'), array(), null));
     }
     // }}}
 
     // {{{ testExpandPathsToFilesWithProviderAreEquals
     /**
-     * testExpandPathsToFilesWithProviderAreEquals
+     * TODO: Add a comment to this method
+     *
+     * @param mixed $files The array of mixed values to be converted.
      *
      * @ignore
-     * @access public
-     * @return void
+     * @access       public
+     * @return       void
      * @dataProvider providerForExpandPathsToFiles
      */
-    public function testExpandPathsToFilesWithProviderAreEquals()
+    public function testExpandPathsToFilesWithProviderAreEquals($files)
     {
-        $value = $this->callMethod('expandPathsToFiles', array(''));
+        Bonzai_Utils_Utils::$silenced = true;
+
+        $value = $this->callMethod('expandPathsToFiles', array($files));
         $this->assertEquals(array(), $value);
+
+        Bonzai_Utils_Utils::$silenced = false;
     }
     // }}}
 
     // {{{ testExpandPathsToFilesWithParamArrayAreEquals2
     /**
-     * testExpandPathsToFilesWithParamArrayAreEquals
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -558,26 +507,19 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     {
         $dirname = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 
-        $files = $this->callMethod(
-            'expandPathsToFiles',
-            array(array(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR))
-        );
+        $files = $this->callMethod('expandPathsToFiles', array(array(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR)));
         sort($files);
-        $files = preg_grep(
-            '#/test_.+$|\.swp$|\.git#',
-            $files,
-            PREG_GREP_INVERT
-        );
+        $files = preg_grep('#/test_.+$|\.swp$|\.git#', $files, PREG_GREP_INVERT);
         $files = array_merge($files);
         foreach ($files as $i => $file) {
             $files[$i] = str_replace(realpath($dirname . DIRECTORY_SEPARATOR), '', $file);
         }
 
         $realfiles = array(
-
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Abstract'   . DIRECTORY_SEPARATOR . 'AbstractTest.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'ControllerTest.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Encoder'    . DIRECTORY_SEPARATOR . 'EncoderTest.php',
-            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'TaskTest.php',
+            DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'ExecuteTest.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Test.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'HelpTest.php',
             DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'OptionsTest.php',
@@ -590,7 +532,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
 
     // {{{ testExpandPathsToFilesWithParamUnreadableAreEquals
     /**
-     * testExpandPathsToFilesWithParamUnreadableAreEquals
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -598,6 +540,12 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testExpandPathsToFilesWithParamUnreadableAreEquals()
     {
+        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+            $this->markTestSkipped('The chmod isn\'t available on Windows.');
+        }
+
+        $this->expectOutputRegex('/^\[\d{2}:\d{2}:\d{2}\] The directory .* was skipped because not readable/');
+
         $dirname = realpath(__DIR__ . '/../');
 
         $dirname = 'test_dir_' . substr(md5(microtime()), 0, 5);
@@ -605,25 +553,52 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         file_put_contents($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . 'file.php', 'test');
         mkdir($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname, 0222); // -w--w--w-
 
-        $files = $this->callMethod(
-            'expandPathsToFiles',
-            array(array($dirname))
-        );
+        $files = $this->callMethod('expandPathsToFiles', array(array($this->getTempDir() . $dirname)));
         sort($files);
 
-        $realfiles = array(
-            getcwd() . DIRECTORY_SEPARATOR . $dirname . DIRECTORY_SEPARATOR . 'file.php'
-        );
+        $realfiles = array($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . 'file.php');
 
         $this->assertEquals($realfiles, $files);
 
         chmod($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname, 0777); // rwxrwxrwx
         chmod($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
-        if (is_string($dirname . DIRECTORY_SEPARATOR . 'file.php') && is_file($dirname . DIRECTORY_SEPARATOR . 'file.php')) {
-            unlink($dirname . DIRECTORY_SEPARATOR . 'file.php');
-        }
+
+        $this->removeFile($this->getTempDir() . "$dirname/file.php");
+
         rmdir($this->getTempDir() . $dirname . DIRECTORY_SEPARATOR . $dirname);
         rmdir($this->getTempDir() . $dirname);
+    }
+    // }}}
+    // }}}
+
+    // {{{ getTotalFiles
+    // {{{ testGetTotalFilesJustCoverage
+    /**
+     * Only code-coverage of `getTotalFiles` method.
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testGetTotalFilesJustCoverage()
+    {
+        $this->assertEquals(0, $this->object->getTotalFiles());
+    }
+    // }}}
+    // }}}
+
+    // {{{ getSkippedFiles
+    // {{{ testGetSkippedFilesJustCoverage
+    /**
+     * Only code-coverage of `getSkippedFiles` method.
+     *
+     * @ignore
+     * @access public
+     * @return void
+     */
+    public function testGetSkippedFilesJustCoverage()
+    {
+        $this->assertEquals(array(), $this->object->getSkippedFiles());
     }
     // }}}
     // }}}

@@ -27,7 +27,7 @@
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Tests
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
@@ -35,45 +35,39 @@
  * @link       http://www.bonzai-project.org
  **/
 
-if (!defined('BONZAI_PATH_LIBS')) {
-    define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
-}
-
-require_once BONZAI_PATH_LIBS . 'Tests'     . DIRECTORY_SEPARATOR . 'TestCase.php';
-require_once BONZAI_PATH_LIBS . 'Abstract'  . DIRECTORY_SEPARATOR . 'Abstract.php';
-require_once BONZAI_PATH_LIBS . 'Interface' . DIRECTORY_SEPARATOR . 'Task.php';
-require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Options.php';
-require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Help.php';
-require_once BONZAI_PATH_LIBS . 'Utils'     . DIRECTORY_SEPARATOR . 'Utils.php';
-require_once BONZAI_PATH_LIBS . 'Task'      . DIRECTORY_SEPARATOR . 'Task.php';
-
 /**
- * Bonzai_Task_Test
+ * Bonzai_Task_Interface
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
- * @subpackage Tests
+ * @subpackage Core
  * @author     Fabio Cicerchia <info@fabiocicerchia.it>
  * @copyright  2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Task_TaskTest extends Bonzai_TestCase
+interface Bonzai_Task_Interface
 {
-    // {{{ loadAndExecute
-    // {{{ testLoadAndExecuteJustCoverage
+    // {{{ elaborate
     /**
-     * testLoadAndExecuteJustCoverage
+     * Start the main elaboration of task.
      *
-     * @ignore
      * @access public
      * @return void
      */
-    public function testLoadAndExecuteJustCoverage()
-    {
-        $this->assertEmpty($this->object->loadAndExecute(new Bonzai_Utils_Options()));
-    }
+    public function elaborate();
     // }}}
+
+    // {{{ setOptions
+    /**
+     * Set the script's options.
+     *
+     * @param Bonzai_Utils_Options $options The script's options.
+     *
+     * @access public
+     * @return void
+     */
+    public function setOptions(Bonzai_Utils_Options $options);
     // }}}
 }

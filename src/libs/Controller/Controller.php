@@ -38,7 +38,7 @@
 require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
 
 /**
- * Bonzai_Controller
+ * Bonzai_Controller_Controller
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -49,13 +49,11 @@ require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Controller extends Bonzai_Abstract
+class Bonzai_Controller_Controller extends Bonzai_Abstract
 {
-    protected $options = null;
-
     // {{{ __construct
     /**
-     * The __construct.
+     * The class constructor.
      *
      * @access public
      * @return void
@@ -67,22 +65,22 @@ class Bonzai_Controller extends Bonzai_Abstract
             $lang   = getenv('LANG');
             $domain = 'messages';
 
-            $res = putenv('LC_ALL=' . $lang);
-            $res = setlocale(LC_ALL, $lang);
+            putenv('LC_ALL=' . $lang);
+            setlocale(LC_ALL, $lang);
             bindtextdomain($domain, BONZAI_PATH_LIBS . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'locales' . DIRECTORY_SEPARATOR);
-            $res = bind_textdomain_codeset($domain, 'UTF-8');
-            $res = textdomain($domain);
+            bind_textdomain_codeset($domain, 'UTF-8');
+            textdomain($domain);
         }
 
-        spl_autoload_register('Bonzai_Controller::autoload');
+        spl_autoload_register('Bonzai_Controller_Controller::autoload');
     }
     // }}}
 
     // {{{ elaborate
     /**
-     * Starts the main elaboration of script.
+     * Start the main elaboration of script.
      *
-     * @param Bonzai_Utils_Options $options The options of the script.
+     * @param Bonzai_Utils_Options $options The script's options.
      *
      * @access public
      * @return void
@@ -90,28 +88,21 @@ class Bonzai_Controller extends Bonzai_Abstract
     public function elaborate(Bonzai_Utils_Options $options)
     {
         try {
-            $this->options = $options;
-            $this->options->init();
+            $options->init();
         } catch (Bonzai_Exception $e) {
             // Fallback behaviour: show the help
-            unset($e);
         }
 
-        $this->handleTask();
-    }
-    // }}}
+        if ($options->getOption('quiet')) {
+            ob_start();
+        }
 
-    // {{{ handleTask
-    /**
-     * Handle the right task based on options.
-     *
-     * @access protected
-     * @return void
-     */
-    protected function handleTask()
-    {
-        $task = new Bonzai_Task();
-        $task->loadAndExecute($this->options);
+        $task = new Bonzai_Task_Execute();
+        $task->loadAndExecute($options);
+
+        if ($options->getOption('quiet')) {
+            ob_end_clean();
+        }
     }
     // }}}
 
@@ -140,23 +131,6 @@ class Bonzai_Controller extends Bonzai_Abstract
 
             include_once $filepath;
         }
-    }
-    // }}}
-
-    // {{{ checkFile
-    /**
-     * Check if a file exists on filesystem.
-     *
-     * @param string $filename The filename to be checked.
-     *
-     * @access protected
-     * @return boolean
-     */
-    protected function checkFile($filename)
-    {
-        $filename = $this->getStrVal($filename);
-
-        return file_exists(__DIR__ . '/../' . $filename . '.php');
     }
     // }}}
 }

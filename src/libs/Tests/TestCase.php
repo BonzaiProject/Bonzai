@@ -50,6 +50,7 @@ require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
  * @license    http://www.opensource.org/licenses/mit-license.php MIT
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
+ * @abstract
  **/
 abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
 {
@@ -82,10 +83,11 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        Bonzai_Utils::$silenced = true;
+        //Bonzai_Utils_Utils::$silenced = true;
 
         if ($this->auto_instance) {
             $className = substr(get_class($this), 0, -4); // Strip 'Test'
+
             if (!class_exists($className)) {
                 $className = preg_replace('/_[^_]+$/', '', $className);
             }
@@ -95,25 +97,99 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
     }
     // }}}
 
+    // {{{ tearDown
+    /**
+     * PHPUnit tearDown: destroy the instance.
+     *
+     * @access protected
+     * @return void
+     */
+    protected function tearDown()
+    {
+        parent::tearDown();
+
+        $this->object = null;
+    }
+    // }}}
+
     // {{{ callMethod
     /**
-     * Workaround to test the protected methods.
+     * Workaround to test protected methods.
      *
      * @param string $name       The name of protected method.
      * @param array  $parameters The parameters to be passed to method.
      *
-     * @static
      * @access protected
-     * @return method
+     * @return mixed
      */
-    public function callMethod($name, array $parameters = array())
+    protected function callMethod($name, array $parameters = array())
     {
-        $name = strval($name);
-
         $method = new ReflectionMethod(get_class($this->object), $name);
         $method->setAccessible(true);
 
         return $method->invokeArgs($this->object, $parameters);
+    }
+    // }}}
+
+    // {{{ removeFile
+    /**
+     * Remove an existent file.
+     *
+     * @param string $file The name of file to remove.
+     *
+     * @access protected
+     * @return void
+     */
+    protected function removeFile($file)
+    {
+        $file = is_array($file)
+                ? implode('', $file)
+                : strval($file);
+
+        if (is_string($file) && is_file($file)) {
+            chmod($file, 0777); // rwxrwxrwx
+            unlink($file);
+        }
+    }
+    // }}}
+
+    // {{{ getFilledDataProvider
+    /**
+     * Create the array for the data provider
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getFilledDataProvider()
+    {
+        return $this->getMatrix(func_get_args());
+    }
+    // }}}
+
+    // {{{ getMatrix
+    /**
+     * Generate a matrix from multiple array
+     *
+     * @param array   $parameters The array to combine them
+     * @param integer $index      The primary array's index
+     * @param array   $elements   The partial matrix
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getMatrix($parameters, $index = 0, $elements = array())
+    {
+        $combined = array();
+        foreach ($parameters[$index] as $elem) {
+            $_elems = $elements;
+            array_push($_elems, $elem);
+            if (isset($parameters[$index + 1])) {
+                $combined = array_merge($combined, $this->getMatrix($parameters, $index + 1, $_elems));
+                continue;
+            }
+            array_push($combined, $_elems);
+        }
+        return $combined;
     }
     // }}}
 

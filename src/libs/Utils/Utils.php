@@ -36,7 +36,7 @@
  **/
 
 /**
- * Bonzai_Controller
+ * Bonzai_Utils_Utils
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -47,7 +47,7 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Utils extends Bonzai_Abstract
+class Bonzai_Utils_Utils extends Bonzai_Abstract
 {
     // {{{ PROPERTIES
     /**
@@ -67,13 +67,29 @@ class Bonzai_Utils extends Bonzai_Abstract
      */
     public $message_history = array();
 
+    /**
+     * The script's options.
+     *
+     * @access public
+     * @var    Bonzai_Utils_Options
+     */
     protected $options = null;
     // }}}
 
-    public function __construct(Bonzai_Utils_Options $options = null)
+    // {{{ __construct
+    /**
+     * The class constructor.
+     *
+     * @param Bonzai_Utils_Options $options The script's options.
+     *
+     * @access public
+     * @return void
+     */
+    public function __construct(Bonzai_Utils_Options $options)
     {
         $this->options = $options;
     }
+    // }}}
 
     // {{{ backupFile
     /**
@@ -86,17 +102,13 @@ class Bonzai_Utils extends Bonzai_Abstract
      */
     public function backupFile($filename)
     {
-        $filename = $this->getStrVal($filename);
-
-        $content = $this->getFileContent($filename);
-        $this->putFileContent($filename . '.orig', $content);
+        $this->putFileContent($filename . '.orig', $this->getFileContent($filename));
 
         unlink($filename);
     }
     // }}}
 
-    // {{{ rScanDir
-    // TODO: Optimize Cyclomatic Complexity (7).
+    // {{{ recursiveScanDir
     /**
      * Recursive scandir.
      *
@@ -107,14 +119,11 @@ class Bonzai_Utils extends Bonzai_Abstract
      * @throws Bonzai_Exception
      * @return array
      */
-    public function rScanDir($base = '', array &$data = array())
+    public function recursiveScanDir($base = '', array &$data = array())
     {
-        $base = $this->getStrVal($base);
-
-        $this->raiseExceptionIf(
-            !is_readable($base) && !is_executable($base),
-            array('The directory `%s` cannot be opened.', $base)
-        );
+        if (!is_readable($base) && !is_executable($base)) {
+            throw new Bonzai_Exception(sprintf(gettext('The directory `%s` cannot be opened.'), $base));
+        }
 
         if (!is_array($data)) {
             $data = array();
@@ -124,20 +133,14 @@ class Bonzai_Utils extends Bonzai_Abstract
 
         foreach ($array as $value) {
             $path = $base . DIRECTORY_SEPARATOR . $value;
-            if (is_dir($path)) {
-                $data[] = $path;
-                try {
-                    $data = $this->rScanDir($path, $data);
-                } catch (Bonzai_Exception $e) {
-                    $this->warn(
-                        'The directory `%s` was skipped because not readable.',
-                        $path
-                    );
+            array_push($data, $path);
 
-                    unset($e);
+            if (is_dir($path)) {
+                try {
+                    $data = $this->recursiveScanDir($path, $data);
+                } catch (Bonzai_Exception $e) {
+                    $this->warn('The directory `%s` was skipped because not readable.', $path);
                 }
-            } elseif (is_file($path)) {
-                $data[] = $path;
             }
         }
 
@@ -156,7 +159,6 @@ class Bonzai_Utils extends Bonzai_Abstract
      */
     public function getFileContent($filename)
     {
-        $filename = $this->getStrVal($filename);
         $this->checkFileValidity($filename);
 
         return file_get_contents($filename);
@@ -176,22 +178,19 @@ class Bonzai_Utils extends Bonzai_Abstract
      */
     public function putFileContent($filename, $content)
     {
-        $filename = $this->getStrVal($filename);
-        $content = $this->getStrVal($content);
-
         $this->checkFileValidity($filename, false);
 
-        $this->raiseExceptionIf(
-            file_exists($filename) && !is_writable($filename),
-            array('The file `%s` cannot be written.', $filename)
-        );
+        if (file_exists($filename)
+            && !is_writable($filename)
+        ) {
+            throw new Bonzai_Exception(sprintf(gettext('The file `%s` cannot be written.'), $filename));
+        }
 
         return file_put_contents($filename, $content);
     }
     // }}}
 
     // {{{ checkFileValidity
-    // TODO: Optimize Cyclomatic Complexity (9).
     /**
      * Check if a file is valid (validated, existent, readable, not-empty).
      *
@@ -204,31 +203,32 @@ class Bonzai_Utils extends Bonzai_Abstract
      */
     public function checkFileValidity($filename, $file_exists = true)
     {
-        $filename = $this->getStrVal($filename);
-        $file_exists = is_bool($file_exists) ? $file_exists : true;
+        if (empty($filename)
+            || !is_string($filename)
+            || trim($filename) == ''
+            || ($file_exists !== false && !file_exists($filename))
+        ) {
+            throw new Bonzai_Exception(sprintf(gettext('The file `%s` is invalid.'), $filename));
+        }
 
-        $this->raiseExceptionIf(
-            empty($filename) || !is_string($filename) || trim($filename) == ''
-            || ($file_exists && !file_exists($filename)),
-            array('The file `%s` is invalid.', $filename)
-        );
+        if ($file_exists !== false
+            && !is_readable($filename)
+        ) {
+            throw new Bonzai_Exception(sprintf(gettext('The file `%s` is not readable.'), $filename));
+        }
 
-        $this->raiseExceptionIf(
-            $file_exists && !is_readable($filename),
-            array('The file `%s` is not readable.', $filename)
-        );
+        if ($file_exists !== false
+            && filesize($filename) == 0
+        ) {
+            throw new Bonzai_Exception(sprintf(gettext('The file `%s` is empty.'), $filename));
+        }
 
-        $this->raiseExceptionIf(
-            $file_exists && filesize($filename) == 0,
-            array('The file `%s` is empty.', $filename)
-        );
-
-        if ($file_exists) {
+        if ($file_exists !== false) {
             $content = file_get_contents($filename);
-            $this->raiseExceptionIf(
-                strpos($content, 'class Bonzai_') !== false,
-                array('The file `%s` is not able to be parsed.', $filename)
-            );
+
+            if (strpos($content, 'class Bonzai_') !== false) {
+                throw new Bonzai_Exception(sprintf(gettext('The file `%s` is not able to be parsed.'), $filename));
+            }
         }
     }
     // }}}
@@ -250,43 +250,47 @@ class Bonzai_Utils extends Bonzai_Abstract
     // }}}
 
     // {{{ message
-    // TODO: Optimize Cyclomatic Complexity (9).
     /**
      * Send a message to output.
      *
+     * @param string $type The type of message (info, warn or error).
+     * @param string $text The text to be printed.
+     * @param array  $args The any parameters to be replaced in the text.
+     *
      * @access protected
+     * @throws Bonzai_Exception
      * @return void
      */
     protected function message()
     {
-        $quiet_mode = Bonzai_Utils::$silenced
-                      || ($this->options && $this->options->getOption('quiet') !== null);
-
         $args = func_get_args();
         $type = array_shift($args);
         $text = array_shift($args);
 
-        $this->raiseExceptionIf(!is_string($text), 'Invalid message format.');
+        if (!is_string($text)) {
+            throw new Bonzai_Exception(gettext('Invalid message format.'));
+        }
 
         if (!empty($text)) {
-            $text = gettext($text);
-
+            $text        = gettext($text);
             $occurrences = substr_count($text, '%');
+
             if ($occurrences > 0) {
-                $this->raiseExceptionIf(
-                    $occurrences != count($args),
-                    'Numbers of parameters doesn\'t match.'
-                );
+                if ($occurrences != count($args)) {
+                    throw new Bonzai_Exception(gettext('Numbers of parameters doesn\'t match.'));
+                }
 
                 $text = vsprintf($text, $args);
             }
 
             $message = $this->composeMessage($text, $type);
 
-            $use_stderr = ($this->options && $this->options->getOption('stderr') !== null);
+            $use_stderr = $this->options->getOption('stderr') !== null;
 
-            if (!$quiet_mode) {
-                if ($use_stderr && $type == 'error') {
+            if (!Bonzai_Utils_Utils::$silenced) {
+                if ($use_stderr
+                    && $type == 'error'
+                ) {
                     file_put_contents('php://stderr', $message);
                 } else {
                     echo $message;
@@ -297,8 +301,6 @@ class Bonzai_Utils extends Bonzai_Abstract
     // }}}
 
     // {{{ composeMessage
-    // TODO: Write some test on this method for phpUnit.
-    // TODO: Optimize Cyclomatic Complexity (7).
     /**
      * Compose the message.
      *
@@ -306,29 +308,36 @@ class Bonzai_Utils extends Bonzai_Abstract
      * @param string $type The type of message (info, warn or error).
      *
      * @access protected
-     * @return void
+     * @return string | null
      */
-    protected function composeMessage($text, $type) {
-        $prefix     = '[' . date('H:i:s') . '] ';
-        $prefix_len = strlen($prefix);
+    protected function composeMessage($text, $type)
+    {
+        $text = trim($text);
 
-        $string = PHP_EOL . str_repeat(' ', $prefix_len);
-        $text   = wordwrap($text, 80 - $prefix_len, $string, true);
+        if (!empty($text)) {
+            $prefix     = '[' . date('H:i:s') . '] ';
+            $prefix_len = strlen($prefix);
 
-        $message = $prefix . $text . PHP_EOL;
-        if ($this->options && $this->options->getOption('log') !== null) {
-            $this->message_history[] = $prefix . $text;
-        }
+            $string = PHP_EOL . str_repeat(' ', $prefix_len);
+            //$text   = wordwrap($text, 80 - $prefix_len, $string, true);
 
-        if ($this->options && $this->options->getOption('colors') !== null) {
-            if ($type == 'error') {
-                $message = "\033[0;37m\033[41m" . $message . "\033[0m";
-            } elseif ($type == 'warn') {
-                $message = "\033[0;30m\033[43m" . $message . "\033[0m";
+            $message = $prefix . $text . PHP_EOL;
+            if ($this->options->getOption('log') !== null) {
+                array_push($this->message_history, $prefix . $text);
             }
+
+            if ($this->options->getOption('colors') !== null) {
+                if ($type == 'error') {
+                    $message = "\033[0;37m\033[41m" . $message . "\033[0m";
+                } elseif ($type == 'warn') {
+                    $message = "\033[0;30m\033[43m" . $message . "\033[0m";
+                }
+            }
+
+            return $message;
         }
 
-        return $message;
+        return null;
     }
     // }}}
 
@@ -344,7 +353,7 @@ class Bonzai_Utils extends Bonzai_Abstract
         $parameters = func_get_args();
         array_unshift($parameters, 'warn');
 
-        return call_user_func_array(array('Bonzai_Utils', 'message'), $parameters);
+        return call_user_func_array(array('Bonzai_Utils_Utils', 'message'), $parameters);
     }
     // }}}
 
@@ -360,33 +369,28 @@ class Bonzai_Utils extends Bonzai_Abstract
         $parameters = func_get_args();
         array_unshift($parameters, 'error');
 
-        return call_user_func_array(array('Bonzai_Utils', 'message'), $parameters);
+        return call_user_func_array(array('Bonzai_Utils_Utils', 'message'), $parameters);
     }
     // }}}
 
     // {{{ printHeader
-    // TODO: Write some test on this method for phpUnit.
-    // TODO: Optimize Cyclomatic Complexity (5).
     /**
-     * Print the script header
-     *
-     * @param Bonzai_Utils_Options $options      The options of the script.
-     * @param boolean              $ignore_quiet Flag to decide wheter ignore the quiet mode.
+     * Print the script header.
      *
      * @access public
      * @return void
      */
-    public function printHeader(
-        Bonzai_Utils_Options $options,
-        $ignore_quiet = false
-    ) {
-        $ignore_quiet = (bool)$ignore_quiet;
+    public function printHeader()
+    {
+        if (!Bonzai_Utils_Utils::$silenced) {
+            $use_colors = ($this->options->getOption('colors') !== null);
 
-        $quiet_mode = ($options->getOption('quiet') !== null && !$ignore_quiet);
-        if (!$quiet_mode && !self::$silenced) {
-            $use_colors  = ($options->getOption('colors') !== null);
-            $start_color = $use_colors ? "\033[1;37m" : '';
-            $end_color   = $use_colors ? "\033[0m"    : '';
+            $start_color = $use_colors
+                           ? "\033[1;37m"
+                           : '';
+            $end_color   = $use_colors
+                           ? "\033[0m"
+                           : '';
 
             $previously = gettext('(was phpGuardian)');
 

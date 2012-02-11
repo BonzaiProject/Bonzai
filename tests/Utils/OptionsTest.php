@@ -44,7 +44,7 @@ require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php
 require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php';
 
 /**
- * Bonzai_Utils_Options_Test
+ * Bonzai_Utils_OptionsTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -60,16 +60,20 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
     // {{{ init
     // {{{ testInitJustCoverage
     /**
-     * testInitJustCoverage
+     * Only code-coverage of `init` method.
      *
      * @ignore
-     * @access public
-     * @return void
-     * @expectedException Bonzai_Exception
+     * @access                   public
+     * @return                   void
+     * @expectedException        Bonzai_Exception
+     * @expectedExceptionCode    6534
+     * @expectedExceptionMessage Missing the script arguments.
      */
     public function testInitJustCoverage()
     {
-        $this->assertEmpty($this->object->init());
+        $this->expectOutputString('');
+
+        $this->object->init();
     }
     // }}}
     // }}}
@@ -77,7 +81,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
     // {{{ parseOptions
     // {{{ testParseOptionsJustCoverage
     /**
-     * testParseOptionsJustCoverage
+     * Only code-coverage of `parseOptions` method.
      *
      * @ignore
      * @access public
@@ -85,13 +89,15 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testParseOptionsJustCoverage()
     {
-        $this->assertEmpty($this->callMethod('parseOptions', array(array())));
+        $this->expectOutputString('');
+
+        $this->callMethod('parseOptions', array(array()));
     }
     // }}}
 
     // {{{ testParseOptionsParamArray
     /**
-     * testParseOptionsParamArray
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -99,15 +105,15 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testParseOptionsParamArray()
     {
-        $this->assertEmpty(
-            $this->callMethod('parseOptions', array(array('a', 'b')))
-        );
+        $this->expectOutputString('');
+
+        $this->callMethod('parseOptions', array(array('a', 'b')));
     }
     // }}}
 
     // {{{ testParseOptionsParamFullOptions
     /**
-     * testParseOptionsParamFullOptions
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -115,7 +121,9 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testParseOptionsParamFullOptions()
     {
-        $this->assertEmpty($this->callMethod('parseOptions', array(array('-b', '--backup', '-d', '--dry', '--colors', '--stderr', '-q', '--quiet', '-h', '--help', '-v', '--version', '-r', 'report_file', '--report', 'report_file', '--log', 'log_file'))));
+        $this->expectOutputString('');
+
+        $this->callMethod('parseOptions', array(array('-b', '--backup', '-d', '--dry', '--colors', '--stderr', '-q', '--quiet', '-h', '--help', '-v', '--version', '-r', 'report_file', '--report', 'report_file', '--log', 'log_file')));
     }
     // }}}
     // }}}
@@ -123,7 +131,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
     // {{{ getOptionParams
     // {{{ testGetOptionParamsJustCoverage
     /**
-     * testGetOptionParamsJustCoverage
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -131,7 +139,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testGetOptionParamsJustCoverage()
     {
-        $this->assertEmpty($this->object->getOptionParams());
+        $this->assertEquals(array(), $this->object->getOptionParams());
     }
     // }}}
     // }}}
@@ -139,7 +147,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
     // {{{ getOptions
     // {{{ testGetOptionsJustCoverage
     /**
-     * testGetOptionsJustCoverage
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -147,7 +155,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testGetOptionsJustCoverage()
     {
-        $this->assertEmpty($this->object->getOptions());
+        $this->assertEquals(array(), $this->object->getOptions());
     }
     // }}}
     // }}}
@@ -155,7 +163,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
     // {{{ getOption
     // {{{ testGetOptionJustCoverage
     /**
-     * testGetOptionJustCoverage
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -163,7 +171,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
      */
     public function testGetOptionJustCoverage()
     {
-        $this->assertEmpty($this->object->getOption(null));
+        $this->assertNull($this->object->getOption(null));
     }
     // }}}
     // }}}
@@ -171,7 +179,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
     // {{{ getParameters
     // {{{ testGetParametersJustCoverage
     /**
-     * testGetParametersJustCoverage
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -187,7 +195,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
     // {{{ getLabelParameter
     // {{{ testGetLabelParameterWithParamExistentAreEquals
     /**
-     * testGetLabelParameterWithParam_ExistentAreEquals
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
@@ -202,7 +210,7 @@ class Bonzai_Utils_OptionsTest extends Bonzai_TestCase
 
     // {{{ testGetLabelParameterWithParamNotExistentIsNull
     /**
-     * testGetLabelParameterWithParamNotExistentIsNull
+     * TODO: Add a comment to this method
      *
      * @ignore
      * @access public
