@@ -71,7 +71,7 @@ msgstr ""
 msgid "Cannot launch the task `%s`."
 msgstr ""
 
-msgid "(previously phpGuardian)"
+msgid "(was phpGuardian)"
 msgstr ""
 
 msgid "Total time:            %0.2fs"

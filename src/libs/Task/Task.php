@@ -153,7 +153,7 @@ class Bonzai_Task extends Bonzai_Abstract
         if ($this->options->getOption('log') !== null && !empty($contents)) {
             $pre  = str_repeat('-', 80) . PHP_EOL;
             $pre .= 'BONZAI' . str_repeat(' ', 50);
-            $pre .= gettext('(previously phpGuardian)') . PHP_EOL;
+            $pre .= gettext('(was phpGuardian)') . PHP_EOL;
             $pre .= str_repeat('-', 80) . PHP_EOL;
 
             $this->getUtils()->putFileContent(

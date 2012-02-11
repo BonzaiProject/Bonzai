@@ -71,8 +71,8 @@ msgstr "Tipologia della chiave non valida."
 msgid "Cannot launch the task `%s`."
 msgstr "Impossibile lanciare l'attività `%s`."
 
-msgid "(previously phpGuardian)"
-msgstr "(in precedenza phpGuardian)"
+msgid "(was phpGuardian)"
+msgstr "(ex phpGuardian)"
 
 msgid "Total time:            %0.2fs"
 msgstr "Tempo totale:          %0.2fs"

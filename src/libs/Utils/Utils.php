@@ -388,7 +388,7 @@ class Bonzai_Utils extends Bonzai_Abstract
             $start_color = $use_colors ? "\033[1;37m" : '';
             $end_color   = $use_colors ? "\033[0m"    : '';
 
-            $previously = gettext('(previously phpGuardian)');
+            $previously = gettext('(was phpGuardian)');
 
             echo str_repeat('-', 80) . PHP_EOL;
             echo $start_color . 'BONZAI' . str_repeat(' ', 74 - strlen($previously));
