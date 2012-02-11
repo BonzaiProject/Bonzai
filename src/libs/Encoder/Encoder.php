@@ -242,7 +242,9 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
 
         $cloned = $files;
         foreach ($cloned as $key => $path) {
-            $files[$key] = realpath(getcwd() . DIRECTORY_SEPARATOR . $path) ?: realpath($path);
+            $files[$key] = realpath(getcwd() . DIRECTORY_SEPARATOR . $path)
+                           ? realpath(getcwd() . DIRECTORY_SEPARATOR . $path)
+                           : realpath($path);
 
             if ($files[$key] == false) {
                 unset($files[$key]);
