@@ -3,8 +3,8 @@
  * BONZAI
  * (was phpGuardian)
  *
- * CODE NAME: phoenix
- * VERSION:   0.1
+ * CODENAME:  caffeine
+ * VERSION:   0.2
  *
  * URL:       http://www.bonzai-project.org
  * E-MAIL:    info@bonzai-project.org

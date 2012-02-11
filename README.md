@@ -58,7 +58,7 @@ No configuration is needed.
 --------------------------------------------------------------------------------
 BONZAI                                                  (previously phpGuardian)
 --------------------------------------------------------------------------------
-Version: 0.1
+Version: 0.2
 Copyright (C) 2006 - 2012 Bonzai (Fabio Cicerchia). All rights reserved.
 License MIT or GNU GPL 2
 --------------------------------------------------------------------------------
