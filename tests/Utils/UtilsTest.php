@@ -812,6 +812,7 @@ class BonzaiUtilsTest extends BonzaiTestcase
     public function testMessageWithProviderThrowException($type, $text, $args)
     {
         $this->expectOutputString('');
+
         BonzaiUtils::$silenced = true;
 
         $this->callMethod('message', array($type, $text, $args));
@@ -854,6 +855,7 @@ class BonzaiUtilsTest extends BonzaiTestcase
     public function testMessageWithProvider($type, $text, $args)
     {
         $this->expectOutputString('');
+
         BonzaiUtils::$silenced = true;
 
         $this->callMethod('message', array($type, $text, $args));
@@ -872,12 +874,11 @@ class BonzaiUtilsTest extends BonzaiTestcase
      */
     public function testMessageRealUse()
     {
-        BonzaiUtils::$silenced = false;
         ob_start();
           $this->callMethod('message', array('info', 'test'));
         $output = ob_get_clean();
+
         $this->assertRegExp('/^\[\d{2}:\d{2}:\d{2}\] test.*$/', $output);
-        BonzaiUtils::$silenced = true;
     }
     // }}}
     // }}}

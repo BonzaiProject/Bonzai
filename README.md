@@ -43,11 +43,10 @@ generate the bytecode.
 
 No install process is needed. You can simply download the source code and run
 as-is.  
-You can also use PEAR to install the package, to install using [our PEAR
-repository](http://pear.bonzai-project.org)) follow these two steps:
+To install the application as system-binary simply launch the commad `sudo make install`.
 
-* `pear channel-discover pear.bonzai-project.org`
-* `pear install bonzai/Bonzai`
+**UNINSTALL**
+To uninstall the application launch the command `sudo make uninstall`.
 
 **CONFIGURATION**
 

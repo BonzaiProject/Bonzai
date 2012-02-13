@@ -41,11 +41,12 @@ INSTALL
 --------------------------------------------------------------------------------
 No install process is needed. You can simply download the source code and run
 as-is.
+To install the application as system-binary simply launch the commad `sudo make install`.
 
-You can also use PEAR to install the package, to install using our PEAR
-repository follow these two steps:
- * `pear channel-discover pear.bonzai-project.org`
- * `pear install bonzai/Bonzai`
+UNINSTALL
+--------------------------------------------------------------------------------
+To uninstall the application launch the command `sudo make uninstall`.
+
 
 CONFIGURATION
 --------------------------------------------------------------------------------
