@@ -36,7 +36,7 @@
  **/
 
 /**
- * Bonzai_Utils_Help
+ * BonzaiUtilsHelp
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -47,14 +47,14 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-abstract class Bonzai_Task_Abstract extends Bonzai_Abstract implements Bonzai_Task_Interface
+abstract class BonzaiTaskAbstract extends BonzaiAbstract implements BonzaiTaskInterface
 {
     // {{{ PROPERTIES
     /**
      * The script's options.
      *
      * @access protected
-     * @var    Bonzai_Utils_Options
+     * @var    BonzaiUtilsOptions
      */
     protected $options = null;
     // }}}
@@ -63,12 +63,12 @@ abstract class Bonzai_Task_Abstract extends Bonzai_Abstract implements Bonzai_Ta
     /**
      * Set the script's options.
      *
-     * @param Bonzai_Utils_Options $options The script's options.
+     * @param BonzaiUtilsOptions $options The script's options.
      *
      * @access public
      * @return void
      */
-    public function setOptions(Bonzai_Utils_Options $options)
+    public function setOptions(BonzaiUtilsOptions $options)
     {
         $this->options = $options;
     }

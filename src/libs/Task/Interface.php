@@ -36,7 +36,7 @@
  **/
 
 /**
- * Bonzai_Task_Interface
+ * BonzaiTaskInterface
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -47,7 +47,7 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-interface Bonzai_Task_Interface
+interface BonzaiTaskInterface
 {
     // {{{ elaborate
     /**
@@ -63,11 +63,11 @@ interface Bonzai_Task_Interface
     /**
      * Set the script's options.
      *
-     * @param Bonzai_Utils_Options $options The script's options.
+     * @param BonzaiUtilsOptions $options The script's options.
      *
      * @access public
      * @return void
      */
-    public function setOptions(Bonzai_Utils_Options $options);
+    public function setOptions(BonzaiUtilsOptions $options);
     // }}}
 }

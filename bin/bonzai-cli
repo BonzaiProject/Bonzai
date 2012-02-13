@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env php
+#!/usr/bin/env php
 <?php
 /**
  * BONZAI
@@ -39,5 +39,5 @@
 define('BONZAI_PATH_LIBS', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 
 require_once BONZAI_PATH_LIBS . 'Controller' . DIRECTORY_SEPARATOR . 'Controller.php';
-$controller = new Bonzai_Controller_Controller();
-$controller->elaborate(new Bonzai_Utils_Options($_SERVER['argv']));
+$controller = new BonzaiController();
+$controller->elaborate(new BonzaiUtilsOptions($_SERVER['argv']));

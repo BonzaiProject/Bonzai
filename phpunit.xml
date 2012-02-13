@@ -9,13 +9,13 @@
     convertWarningsToExceptions="true"
     forceCoversAnnotation="false"
     mapTestClassNameToCoveredClassName="false"
-    processIsolation="true"
+    processIsolation="false"
     stopOnError="false"
     stopOnFailure="false"
     stopOnIncomplete="false"
     stopOnSkipped="false"
     strict="true"
-    verbose="false">
+    verbose="true">
     <testsuites>
         <testsuite name="BonzaiCLI">
             <file>tests/Abstract/AbstractTest.php</file>

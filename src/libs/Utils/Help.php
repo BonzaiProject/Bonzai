@@ -36,7 +36,7 @@
  **/
 
 /**
- * Bonzai_Utils_Help
+ * BonzaiUtilsHelp
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -47,18 +47,18 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Task_Interface
+class BonzaiUtilsHelp extends BonzaiAbstract implements BonzaiTaskInterface
 {
     // {{{ setOptions
     /**
      * Set the script's options.
      *
-     * @param Bonzai_Utils_Options $options The script's options.
+     * @param BonzaiUtilsOptions $options The script's options.
      *
      * @access public
      * @return void
      */
-    public function setOptions(Bonzai_Utils_Options $options)
+    public function setOptions(BonzaiUtilsOptions $options)
     {
         $this->options = $options;
     }
@@ -75,7 +75,7 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Task_Interface
     {
         $this->getUtils($this->options)->printHeader();
 
-        if (!Bonzai_Utils_Utils::$silenced) {
+        if (BonzaiUtils::$silenced === false) {
             echo gettext('Version') . ': 0.2' . PHP_EOL;
             echo 'Copyright (C) 2006 - ' . date('Y');
             echo ' Bonzai (Fabio Cicerchia). ' . gettext('All rights reserved.');
@@ -98,12 +98,12 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Task_Interface
      */
     protected function printAll()
     {
-        if (!Bonzai_Utils_Utils::$silenced) {
+        if (BonzaiUtils::$silenced === false) {
             $use_colors  = ($this->options->getOption('colors') !== null);
-            $start_color = $use_colors
+            $start_color = $use_colors === true
                            ? "\033[1;37m"
                            : '';
-            $end_color   = $use_colors
+            $end_color   = $use_colors === true
                            ? "\033[0m"
                            : '';
 
@@ -116,18 +116,18 @@ class Bonzai_Utils_Help extends Bonzai_Abstract implements Bonzai_Task_Interface
             foreach ($this->options->getParameters() as $short => $long) {
                 $has_value = strpos($long, ':') > 0;
 
-                $short_txt = $has_value
+                $short_txt = $has_value === true
                              ? substr($short, 0, -1)
                              : $short;
-                $long_txt  = $has_value
+                $long_txt  = $has_value === true
                              ? substr($long, 0, -1)
                              : $long;
 
-                $info = is_int($short)
-                        ? '    '
-                        : "-$short_txt, ";
-                $info .= "--$long_txt";
-                if ($has_value) {
+                $info  = is_int($short) === true
+                         ? '    '
+                         : ('-' . $short_txt . ', ');
+                $info .= '--' . $long_txt;
+                if ($has_value === true) {
                     $info .= '=<' . gettext('value') . '>';
                 }
 

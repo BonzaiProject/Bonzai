@@ -35,15 +35,15 @@
  * @link       http://www.bonzai-project.org
  **/
 
-if (!defined('BONZAI_PATH_LIBS')) {
+if (defined('BONZAI_PATH_LIBS') === false) {
     define('BONZAI_PATH_LIBS', realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 }
 
-require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'Testcase.php';
 require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
 
 /**
- * Abstract_Fake
+ * AbstractFake
  *
  * @category Optimization_And_Security
  * @package  Bonzai
@@ -52,12 +52,12 @@ require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php
  *           http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link     http://www.bonzai-project.org
  **/
-class Abstract_Fake extends Bonzai_Abstract
+class AbstractFake extends BonzaiAbstract
 {
 }
 
 /**
- * Bonzai_Abstract_AbstractTest
+ * BonzaiAbstractAbstractTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -68,7 +68,7 @@ class Abstract_Fake extends Bonzai_Abstract
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Abstract_AbstractTest extends Bonzai_TestCase
+class BonzaiAbstractAbstractTest extends BonzaiTestcase
 {
     // {{{ PROPERTIES
     /**
@@ -91,14 +91,14 @@ class Bonzai_Abstract_AbstractTest extends Bonzai_TestCase
     {
         parent::setUp();
 
-        $this->object = new Abstract_Fake;
+        $this->object = new AbstractFake;
     }
     // }}}
 
     // {{{ getUtils
     // {{{ testGetUtilsReturnInstance
     /**
-     * Test if `getUtils` method return a Bonzai_Utils_Options instance.
+     * Test if `getUtils` method return a BonzaiUtilsOptions instance.
      *
      * @ignore
      * @access public
@@ -106,7 +106,8 @@ class Bonzai_Abstract_AbstractTest extends Bonzai_TestCase
      */
     public function testGetUtilsReturnInstance()
     {
-        $this->assertInstanceOf('Bonzai_Utils_Utils', $this->object->getUtils(new Bonzai_Utils_Options()));
+        $instance_BUO = new BonzaiUtilsOptions(array());
+        $this->assertInstanceOf('BonzaiUtils', $this->object->getUtils($instance_BUO));
     }
     // }}}
     // }}}

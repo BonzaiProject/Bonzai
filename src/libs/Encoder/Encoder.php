@@ -36,7 +36,7 @@
  **/
 
 /**
- * Bonzai_Encoder
+ * BonzaiEncoder
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -47,7 +47,7 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
+class BonzaiEncoder extends BonzaiAbstract implements BonzaiTaskInterface
 {
     // {{{ PROPERTIES
     /**
@@ -71,12 +71,12 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
     /**
      * Set the script's options.
      *
-     * @param Bonzai_Utils_Options $options The script's options.
+     * @param BonzaiUtilsOptions $options The script's options.
      *
      * @access public
      * @return void
      */
-    public function setOptions(Bonzai_Utils_Options $options)
+    public function setOptions(BonzaiUtilsOptions $options)
     {
         $this->options = $options;
     }
@@ -115,7 +115,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
         foreach ($files as $filename) {
             try {
                 $this->processFile($filename);
-            } catch (Bonzai_Exception $e) {
+            } catch (BonzaiException $e) {
                 array_push($this->skipped_files, $filename);
                 $this->getUtils()->error('Cannot handle the file `%s`.', $filename);
             }
@@ -130,13 +130,13 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
      * @param string $filename The file to be encoded.
      *
      * @access protected
-     * @throws Bonzai_Exception
+     * @throws BonzaiException
      * @return void
      */
     protected function processFile($filename)
     {
-        if (!is_file($filename)) {
-            throw new Bonzai_Exception(sprintf(gettext('The file `%s` is invalid.'), $filename));
+        if (is_file($filename) === false) {
+            throw new BonzaiException(sprintf(gettext('The file `%s` is invalid.'), $filename));
         }
 
         $this->getUtils()->info('Start encoding file `%s\'.', $filename);
@@ -149,12 +149,12 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
             $this->getUtils()->backupFile($filename);
         }
 
-        if (!empty($bytecode)) {
+        if (empty($bytecode) === false) {
             $this->saveOutput($filename, $bytecode);
             $this->getUtils()->info('Saved encoded file to `%s`.', $filename);
         }
 
-        if (!Bonzai_Utils_Utils::$silenced) {
+        if (BonzaiUtils::$silenced === false) {
             echo str_repeat('-', 80) . PHP_EOL;
         }
     }
@@ -168,7 +168,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
      * @param string $bytecode The content to be saved.
      *
      * @access protected
-     * @throws Bonzai_Exception
+     * @throws BonzaiException
      * @return void
      */
     protected function saveOutput($filename, $bytecode)
@@ -177,11 +177,11 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
             if ($this->options->getOption('dry') === null) {
                 $this->getUtils()->putFileContent($filename, $bytecode);
             } else {
-                if (!is_writable($filename)) {
-                    throw new Bonzai_Exception(sprintf(gettext('The file `%s` cannot be written.'), $filename));
+                if (is_writable($filename) === false) {
+                    throw new BonzaiException(sprintf(gettext('The file `%s` cannot be written.'), $filename));
                 }
             }
-        } catch (Bonzai_Exception $e) {
+        } catch (BonzaiException $e) {
             array_push($this->skipped_files, $filename);
             $this->getUtils()->warn('The file `%s` was skipped because cannot be able to save it.', $filename);
         }
@@ -212,14 +212,17 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
             bcompiler_write_file($filehandle, $filename);
             bcompiler_write_footer($filehandle);
 
-            fclose($filehandle);
-
             $bytecode = $this->getUtils()->getFileContent($tempnam);
-            unlink($tempnam);
-        } catch (Bonzai_Exception $e) {
+        } catch (BonzaiException $e) {
             array_push($this->skipped_files, $filename);
             $this->getUtils()->error('Cannot handle the file `%s`.', $filename);
         }
+
+        if ($filename !== null) {
+            fclose($filehandle);
+        }
+
+        unlink($tempnam);
 
         return $bytecode;
     }
@@ -236,22 +239,22 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
      */
     protected function expandPathsToFiles($files)
     {
-        if (!is_array($files)) {
+        if (is_array($files) === false) {
             return array();
         }
 
         $cloned = $files;
         foreach ($cloned as $key => $path) {
-            $files[$key] = realpath(getcwd() . DIRECTORY_SEPARATOR . $path)
+            $files[$key] = realpath(getcwd() . DIRECTORY_SEPARATOR . $path) === true
                            ? realpath(getcwd() . DIRECTORY_SEPARATOR . $path)
                            : realpath($path);
 
-            if ($files[$key] == false) {
+            if ($files[$key] === false) {
                 unset($files[$key]);
                 continue;
             }
 
-            if (is_dir($files[$key])) {
+            if (is_dir($files[$key]) === true) {
                 try {
                     $scandir   = $this->getUtils()->recursiveScanDir($files[$key]);
                     $new_files = preg_grep('/\.php$/', $scandir);
@@ -259,7 +262,7 @@ class Bonzai_Encoder extends Bonzai_Abstract implements Bonzai_Task_Interface
                     unset($files[$key]);
 
                     $files = array_merge($files, $new_files);
-                } catch (Bonzai_Exception $e) {
+                } catch (BonzaiException $e) {
                     $this->getUtils()->warn('The directory `%s` was skipped because not readable.', $files[$key]);
                 }
             }

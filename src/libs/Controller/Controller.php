@@ -38,7 +38,7 @@
 require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
 
 /**
- * Bonzai_Controller_Controller
+ * BonzaiController
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -49,7 +49,7 @@ require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Controller_Controller extends Bonzai_Abstract
+class BonzaiController extends BonzaiAbstract
 {
     // {{{ __construct
     /**
@@ -61,7 +61,7 @@ class Bonzai_Controller_Controller extends Bonzai_Abstract
     public function __construct()
     {
         // Init the gettext support with the current locale (in use)
-        if (getenv('LANG')) {
+        if (getenv('LANG') !== false) {
             $lang   = getenv('LANG');
             $domain = 'messages';
 
@@ -72,7 +72,7 @@ class Bonzai_Controller_Controller extends Bonzai_Abstract
             textdomain($domain);
         }
 
-        spl_autoload_register('Bonzai_Controller_Controller::autoload');
+        spl_autoload_register('BonzaiController::autoload');
     }
     // }}}
 
@@ -80,54 +80,63 @@ class Bonzai_Controller_Controller extends Bonzai_Abstract
     /**
      * Start the main elaboration of script.
      *
-     * @param Bonzai_Utils_Options $options The script's options.
+     * @param BonzaiUtilsOptions $options The script's options.
      *
      * @access public
      * @return void
      */
-    public function elaborate(Bonzai_Utils_Options $options)
+    public function elaborate(BonzaiUtilsOptions $options)
     {
         try {
-            $options->init();
-        } catch (Bonzai_Exception $e) {
-            // Fallback behaviour: show the help
-        }
+            try {
+                $options->init();
+            } catch (BonzaiException $e) {
+                // Fallback behaviour: show the help
+            }
 
-        if ($options->getOption('quiet')) {
-            ob_start();
-        }
+            if ($options->getOption('quiet') !== null) {
+                ob_start();
+            }
 
-        $task = new Bonzai_Task_Execute();
-        $task->loadAndExecute($options);
+            $task = new BonzaiTaskExecute();
+            $task->loadAndExecute($options);
 
-        if ($options->getOption('quiet')) {
-            ob_end_clean();
+            if ($options->getOption('quiet') !== null) {
+                ob_end_clean();
+            }
+        } catch (Exception $e) {
+            $code = wordwrap(base64_encode(serialize($e)), 80, PHP_EOL, true);
+
+            echo PHP_EOL . PHP_EOL . str_repeat('-', 80) . PHP_EOL;
+            echo strtoupper(gettext('An unexpected problem has occurred. Please contact us reporting this code:'));
+            echo PHP_EOL . str_repeat('-', 80) . PHP_EOL;
+            echo $code . PHP_EOL;
         }
     }
     // }}}
 
     // {{{ autoload
     /**
-     * Autoload "magically" each Bonzai_* class.
+     * Autoload "magically" each Bonzai* class.
      *
      * @param string $name The name of class to be autoloaded.
      *
      * @static
      * @access public
-     * @throws Bonzai_Exception
+     * @throws BonzaiException
      * @return void
      */
     public static function autoload($name)
     {
-        if (strpos($name, 'Bonzai_') === 0) {
-            $filename = preg_replace('/^Bonzai_(.+)_(.+)$/U', '\1/\2', $name);
-            $filename = preg_replace('/^Bonzai_(.+)$/U',      '\1/\1', $filename);
+        if (strpos($name, 'Bonzai') === 0) {
+            $filename = preg_replace('/^Bonzai([A-Z][a-z]+)([A-Z][a-z]+)$/', '\1/\2', $name);
+            $filename = preg_replace('/^Bonzai([A-Z][a-z]+)$/',            '\1/\1', $filename);
             $filename = str_replace('/', DIRECTORY_SEPARATOR, $filename);
 
             $filepath = BONZAI_PATH_LIBS . $filename . '.php';
 
-            if (!file_exists($filepath)) {
-                throw new Bonzai_Exception(sprintf(gettext('The class `%s` cannot be loaded.'), $name));
+            if (file_exists($filepath) === false) {
+                throw new BonzaiException(sprintf(gettext('The class `%s` cannot be loaded.'), $name));
             }
 
             include_once $filepath;

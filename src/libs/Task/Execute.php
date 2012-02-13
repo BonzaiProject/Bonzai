@@ -36,7 +36,7 @@
  **/
 
 /**
- * Bonzai_Task_Execute
+ * BonzaiTaskExecute
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -47,7 +47,7 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Task_Execute extends Bonzai_Abstract
+class BonzaiTaskExecute extends BonzaiAbstract
 {
     // {{{ PROPERTIES
     /**
@@ -56,13 +56,13 @@ class Bonzai_Task_Execute extends Bonzai_Abstract
      * @access protected
      * @var    string
      */
-    protected $task = 'Bonzai_Utils_Help';
+    protected $task = 'BonzaiUtilsHelp';
 
     /**
-     * Instance of Bonzai_*_Task
+     * Instance of Bonzai*Task
      *
      * @access protected
-     * @var    Bonzai_*_Task
+     * @var    Bonzai*Task
      */
     protected $instance = null;
 
@@ -79,18 +79,18 @@ class Bonzai_Task_Execute extends Bonzai_Abstract
     /**
      * Load and execute the task.
      *
-     * @param Bonzai_Utils_Options $options The script's options.
+     * @param BonzaiUtilsOptions $options The script's options.
      *
      * @access public
      * @return void
      */
-    public function loadAndExecute(Bonzai_Utils_Options $options)
+    public function loadAndExecute(BonzaiUtilsOptions $options)
     {
-        if ($options->getOptionParams()
+        if ($options->getOptionParams() !== array()
             && $options->getOption('help') === null
             && $options->getOption('version') === null
         ) {
-            $this->task = 'Bonzai_Encoder';
+            $this->task = 'BonzaiEncoder';
         }
 
         $this->options = $options;
@@ -104,7 +104,7 @@ class Bonzai_Task_Execute extends Bonzai_Abstract
      * Execute the task.
      *
      * @access protected
-     * @throws Bonzai_Exception
+     * @throws BonzaiException
      * @return void
      */
     protected function execute()
@@ -112,8 +112,8 @@ class Bonzai_Task_Execute extends Bonzai_Abstract
         $this->instance = new $this->task();
         $this->instance->setOptions($this->options);
 
-        if (!method_exists($this->instance, 'elaborate')) {
-            throw new Bonzai_Exception(sprintf(gettext('Cannot launch the task `%s`.'), $this->task));
+        if (method_exists($this->instance, 'elaborate') === false) {
+            throw new BonzaiException(sprintf(gettext('Cannot launch the task `%s`.'), $this->task));
         }
 
         $start = microtime(true);
@@ -135,7 +135,7 @@ class Bonzai_Task_Execute extends Bonzai_Abstract
     protected function saveReportFile()
     {
         if ($this->options->getOption('log') !== null
-            && !empty($contents)
+            && empty($contents) === false
         ) {
             $pre  = str_repeat('-', 80) . PHP_EOL . 'BONZAI' . str_repeat(' ', 50);
             $pre .= gettext('(was phpGuardian)') . PHP_EOL . str_repeat('-', 80) . PHP_EOL;
@@ -166,7 +166,7 @@ class Bonzai_Task_Execute extends Bonzai_Abstract
             $this->report .= gettext('Total files skipped:   %d') . PHP_EOL;
             $this->report  = sprintf($this->report, intval($time), $this->instance->getTotalFiles(), count($skipped_files));
 
-            if ($skipped_files) {
+            if ($skipped_files !== array()) {
                 $this->report .= "\t" . gettext('Skipped files:') . PHP_EOL;
                 foreach ($skipped_files as $file) {
                     $this->report .= "\t" . $file . PHP_EOL;

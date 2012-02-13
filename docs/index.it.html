@@ -33,13 +33,13 @@
             .hot_links a { width: 48%; display: inline-block; }
             a.donate { margin-top: 20px; display: block; text-align: center; }
 
-            #docs h1 { background: url(../media/logo_bonzai_trasparent.png); }
+            #docs h1 { background: url(../media/logo_bonzai_transparent.png); }
             #docs #content { padding-top: 20px; }
             #docs #content ul { margin-left: 110px; list-style-type: none; }
             #docs #content ul li:before { content: "- "; }
             code { border: 1px solid #888; padding: 3px; font-family: monospace; }
             pre { font-family: monospace; }
-            table { width: 100%; font-size: 10px; border-spacing: 0; border: 1px solid #888888; border-left: 0px; border-top: 0px; }
+            table { width: 80%; margin-left: 10%; margin-bottom: 5px; font-size: 10px; border-spacing: 0; border: 1px solid #888888; border-left: 0px; border-top: 0px; }
             th, td { text-align: center; width: 100px !important; border: 1px solid #888888; padding: 3px; border-bottom: 0px; border-right: 0px; }
             tr th:first-child { width: auto !important; }
             tr td:first-child { text-align: left; width: auto !important; }
@@ -121,12 +121,10 @@
                 <h3>Installazione</h3>
                 <p>Nessun processo di installazione &egrave; necessario. Si pu&ograve; semplicemente scaricare il codice sorgente ed eseguirlo
                 cos&igrave; com'&egrave;.</p>
-                <p>&egrave; inoltre possibile utilizzare PEAR per installare il pacchetto, per installare usando il
-                <a href="http://pear.bonzai-project.org" target="_blank">nostro repository PEAR</a> seguire questi due passi:</p>
-                <ul>
-                    <li><code>pear channel-discover pear.bonzai-project.org</code></li>
-                    <li><code>pear install bonzai/Bonzai</code></li>
-                </ul>
+                <p>Se volete installarlo come applicazione di sistema lanciate il comando <code>sudo make install</code>.</p>
+
+                <h3>Disinstallazione</h3>
+                <p>Per disinstallare l'applicazione lanciate il comando <code>sudo make uninstall</code>.</p>
 
                 <h3>Configurazione</h3>
                 <p>Non &egrave; necessaria alcuna configurazione.</p>
@@ -166,8 +164,9 @@
 
                 <h3>Collaborare allo sviluppo</h3>
                 <h4>Standard di Codifica</h4>
-                <p>Abbiamo adottato interamente gli <a href="http://pear.php.net/manual/en/standards.php" target="_blank">standard
-                di codifica PEAR</a>.</p>
+                <p>Abbiamo adottato prevalentemente gli <a href="http://pear.php.net/manual/en/standards.php" target="_blank">standard
+                di codifica PEAR</a> con una parte degli standard <a href="https://github.com/squizlabs/PHP_CodeSniffer" target="_blank">Squiz</a>.</p>
+                <p>Tutti gli standard utilizzati sono racchiusi in un set ad-hoc di validazione per PHP_CodeSniffer.</p>
 
                 <h4>Configurare l'ambiente di sviluppo</h4>
                 <p>Per essere pronti e pienamente operativa a questo progetto &egrave; necessario un software:</p>
@@ -218,6 +217,7 @@
                         <td><a href="https://github.com/Mayflower/PHP_CodeBrowser/blob/master/README.markdown" target="_blank">Documentazione</a></td>
                     </tr>
                 </table>
+                <p>Lanciando il comando <code>sudo make install-environment</code> verr&agrave; installato tutto l'ambiente di sviluppo necessario.</p>
 
                 <h4>Traduzioni</h4>
                 <p>Per tradurre la documentazione bisogna creare un nuovo file partendo da <code>docs/index.en.html</code> e traducendolo nel file

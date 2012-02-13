@@ -35,11 +35,11 @@
  * @link       http://www.bonzai-project.org
  **/
 
-if (!defined('BONZAI_PATH_LIBS')) {
+if (defined('BONZAI_PATH_LIBS') === false) {
     define('BONZAI_PATH_LIBS', realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 }
 
-require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'Testcase.php';
 require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
 require_once BONZAI_PATH_LIBS . 'Task'     . DIRECTORY_SEPARATOR . 'Interface.php';
 require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
@@ -47,7 +47,7 @@ require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php'
 require_once BONZAI_PATH_LIBS . 'Encoder'  . DIRECTORY_SEPARATOR . 'Encoder.php';
 
 /**
- * Bonzai_Encoder_EncoderTest
+ * BonzaiEncoderTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -58,7 +58,7 @@ require_once BONZAI_PATH_LIBS . 'Encoder'  . DIRECTORY_SEPARATOR . 'Encoder.php'
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
+class BonzaiEncoderTest extends BonzaiTestcase
 {
     // {{{ setUp
     /**
@@ -71,7 +71,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     {
         parent::setUp();
 
-        $options = new Bonzai_Utils_Options();
+        $options = new BonzaiUtilsOptions(array());
         $this->object->setOptions($options);
         $utils = $this->object->getUtils($options);
     }
@@ -89,7 +89,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     public function testSetOptionsJustCoverage()
     {
         $this->expectOutputString('');
-        $this->object->setOptions(new Bonzai_Utils_Options());
+
+        $instance_BUO = new BonzaiUtilsOptions(array());
+        $this->object->setOptions($instance_BUO);
     }
     // }}}
     // }}}
@@ -152,7 +154,7 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      * @access                   public
      * @return                   void
      * @dataProvider             providerForProcessFile
-     * @expectedException        Bonzai_Exception
+     * @expectedException        BonzaiException
      * @expectedExceptionCode    6534
      */
     public function testProcessFileWithProviderThrowException($file)
@@ -181,10 +183,10 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         try {
             $this->callMethod('processFile', array($filename));
             $this->fail('The exception was not threw.');
-        } catch(Bonzai_Exception $e) {
+        } catch (BonzaiException $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         $this->removeFile($filename);
@@ -201,7 +203,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testProcessFileWithParamSizedFileFileIsNotReadable()
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -214,10 +218,10 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         try {
             $this->callMethod('processFile', array($filename));
             $this->fail('The exception was not threw. ' . $filename);
-        } catch(Bonzai_Exception $e) {
+        } catch (BonzaiException $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         $this->removeFile($filename);
@@ -234,7 +238,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testProcessFileWithParamNotWritableSizedFileFileIsEmpty()
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -306,13 +312,13 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
     {
         $this->expectOutputString('');
 
-        Bonzai_Utils_Utils::$silenced = true;
+        BonzaiUtils::$silenced = true;
 
         $this->callMethod('saveOutput', array($filename, $bytecode));
 
         $this->removeFile($filename);
 
-        Bonzai_Utils_Utils::$silenced = false;
+        BonzaiUtils::$silenced = false;
     }
     // }}}
     // }}}
@@ -348,9 +354,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         try {
             $this->callMethod('getByteCode', array($filename));
             $this->fail('The exception was not threw.');
-        } catch(Bonzai_Exception $e) {
+        } catch (BonzaiException $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is invalid.'), strval($filename)) . '$/', $e->getMessage());
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         $this->removeFile($filename);
@@ -384,7 +390,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testGetByteCodeWithProviderIsEmpty($permission)
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -395,10 +403,10 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         try {
             $this->callMethod('getByteCode', array($filename));
             $this->fail('The exception was not threw.');
-        } catch(Bonzai_Exception $e) {
+        } catch (BonzaiException $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is empty.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         $this->removeFile($filename);
@@ -415,7 +423,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testGetByteCodeWithParamSizedFileFileIsNotReadable()
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -426,10 +436,10 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
         try {
             $this->callMethod('getByteCode', array($filename));
             $this->fail('The exception was not threw.');
-        } catch(Bonzai_Exception $e) {
+        } catch (BonzaiException $e) {
             $this->assertRegExp('/^' . sprintf(gettext('The file `%s` is not readable.'), '.+(\/test_[a-zA-Z0-9]+|\\\\tes[a-zA-Z0-9]+\.tmp)') . '$/', $e->getMessage());
 
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         $this->removeFile($filename);
@@ -486,12 +496,12 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testExpandPathsToFilesWithProviderAreEquals($files)
     {
-        Bonzai_Utils_Utils::$silenced = true;
+        BonzaiUtils::$silenced = true;
 
         $value = $this->callMethod('expandPathsToFiles', array($files));
         $this->assertEquals(array(), $value);
 
-        Bonzai_Utils_Utils::$silenced = false;
+        BonzaiUtils::$silenced = false;
     }
     // }}}
 
@@ -540,7 +550,9 @@ class Bonzai_Encoder_EncoderTest extends Bonzai_TestCase
      */
     public function testExpandPathsToFilesWithParamUnreadableAreEquals()
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 

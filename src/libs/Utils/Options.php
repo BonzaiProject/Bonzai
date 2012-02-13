@@ -36,7 +36,7 @@
  **/
 
 /**
- * Bonzai_Utils_Options
+ * BonzaiUtilsOptions
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -47,7 +47,7 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Utils_Options extends Bonzai_Abstract
+class BonzaiUtilsOptions extends BonzaiAbstract
 {
     // {{{ PROPERTIES
     /**
@@ -118,7 +118,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      * @access public
      * @return void
      */
-    public function __construct(array $arguments = array())
+    public function __construct(array $arguments)
     {
         $this->arguments = $arguments;
     }
@@ -129,15 +129,15 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      * Initialize the script-options.
      *
      * @access public
-     * @throws Bonzai_Exception
+     * @throws BonzaiException
      * @return void
      */
     public function init()
     {
-        if (empty($this->arguments)
-            || !is_array($this->arguments)
+        if (empty($this->arguments) === true
+            || is_array($this->arguments) === false
         ) {
-            throw new Bonzai_Exception(gettext('Missing the script arguments.'));
+            throw new BonzaiException(gettext('Missing the script arguments.'));
         }
 
         $this->parseOptions($this->arguments);
@@ -161,26 +161,26 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
         $parameters = array_merge(array_keys($this->parameters), array_values($this->parameters));
 
         foreach ($parameters as $option) {
-            $has_value = substr($option, -1, 1) == ':';
-            $key       = $has_value
+            $has_value = substr($option, -1, 1) === ':';
+            $key       = $has_value === true
                          ? substr($option, 0, -1)
                          : $option;
 
             $prefix   = '--';
             $long_key = $key;
-            if (strlen($key) == 1) {
+            if (strlen($key) === 1) {
                 $prefix   = '-';
-                $long_key = array_key_exists($key, $this->parameters)
+                $long_key = array_key_exists($key, $this->parameters) === true
                             ? $this->parameters[$key]
                             : null;
             }
 
             $exists = array_search($prefix . $key, $arguments, true);
 
-            if ($exists) {
+            if ($exists !== false) {
                 $this->options[$long_key] = true;
 
-                if ($has_value) {
+                if ($has_value === true) {
                     $this->options[$long_key] = $arguments[$exists + 1];
                     unset($arguments[$exists + 1]);
                 }
@@ -190,8 +190,8 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
         }
 
         // Some limitations
-        if (isset($this->options['colors'])) {
-            $this->options['colors'] = $this->options['colors'] && strtolower(PHP_OS) == 'linux';
+        if (isset($this->options['colors']) === true) {
+            $this->options['colors'] = $this->options['colors'] && strtolower(PHP_OS) === 'linux';
         }
 
         $this->option_params = $arguments;
@@ -236,7 +236,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      */
     public function getOption($key)
     {
-        if (isset($this->options[$key])) {
+        if (isset($this->options[$key]) === true) {
             return $this->options[$key];
         }
 
@@ -269,7 +269,7 @@ class Bonzai_Utils_Options extends Bonzai_Abstract
      */
     public function getLabelParameter($key)
     {
-        if (isset($this->labels[$key])) {
+        if (isset($this->labels[$key]) === true) {
             return $this->labels[$key];
         }
 

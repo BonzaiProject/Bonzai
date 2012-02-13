@@ -35,17 +35,17 @@
  * @link       http://www.bonzai-project.org
  **/
 
-if (!defined('BONZAI_PATH_LIBS')) {
+if (defined('BONZAI_PATH_LIBS') === false) {
     define('BONZAI_PATH_LIBS', realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 }
 
-require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'Testcase.php';
 require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
 require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php';
 require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
 
 /**
- * Bonzai_Utils_UtilsTest
+ * BonzaiUtilsTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -56,7 +56,7 @@ require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
+class BonzaiUtilsTest extends BonzaiTestcase
 {
     // {{{ PROPERTIES
     /**
@@ -81,11 +81,12 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
 
         $className = substr(get_class($this), 0, -4); // Strip 'Test'
 
-        if (!class_exists($className)) {
+        if (class_exists($className) === false) {
             $className = preg_replace('/_[^_]+$/', '', $className);
         }
 
-        $this->object = new $className(new Bonzai_Utils_Options());
+        $instance_BUO = new BonzaiUtilsOptions(array());
+        $this->object = new $className($instance_BUO);
     }
     // }}}
 
@@ -118,14 +119,14 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      * @access                   public
      * @return                   void
      * @dataProvider             providerForBackupFile
-     * @expectedException        Bonzai_Exception
+     * @expectedException        BonzaiException
      * @expectedExceptionCode    6534
      */
     public function testBackupFileWithProviderThrowException($filename)
     {
         $this->object->backupFile($filename);
 
-        $file = is_array($filename)
+        $file = is_array($filename) === true
                 ? implode('', $filename)
                 : $filename;
         $this->removeFile($file . '.orig');
@@ -184,7 +185,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      * @access                   public
      * @return                   void
      * @dataProvider             providerForRecursiveScanDir
-     * @expectedException        Bonzai_Exception
+     * @expectedException        BonzaiException
      * @expectedExceptionCode    6534
      */
     public function testRecursiveScanDirWithProviderThrowException($base, $data)
@@ -220,7 +221,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRecursiveScanDirWithProviderThrowException2($data)
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -230,8 +233,8 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         try {
             $this->object->recursiveScanDir($dirname, $data);
             $this->fail('The exception was not threw.');
-        } catch (Bonzai_Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+        } catch (BonzaiException $e) {
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         chmod($this->getTempDir() . $dirname, 0777); // rwxrwxrwx
@@ -266,7 +269,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRecursiveScanDirWithProviderIsEmpty($data)
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -309,7 +314,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRecursiveScanDirWithProviderIsEmpty2($data)
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -334,7 +341,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRecursiveScanDirWithParamsWritableArrayAreEquals()
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -357,7 +366,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testRecursiveScanDirComplexCompareAreEquals()
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -393,14 +404,15 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         $files = $this->object->recursiveScanDir($dirname);
         sort($files);
         $files = preg_grep('/\.(php|sh)$/', $files);
+
         foreach ($files as $i => $file) {
             $files[$i] = str_replace(realpath($dirname . DIRECTORY_SEPARATOR), '', $file);
         }
+
         $files = preg_grep('/^[\\\\\/](src|tests|bin)/', $files);
         $files = array_merge($files);
 
         $realfiles = array(
-            DIRECTORY_SEPARATOR . 'bin'   . DIRECTORY_SEPARATOR . 'build.sh',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Abstract'   . DIRECTORY_SEPARATOR . 'Abstract.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'Controller.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Encoder'    . DIRECTORY_SEPARATOR . 'Encoder.php',
@@ -408,7 +420,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'Abstract.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'Execute.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Task'       . DIRECTORY_SEPARATOR . 'Interface.php',
-            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Tests'      . DIRECTORY_SEPARATOR . 'TestCase.php',
+            DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Tests'      . DIRECTORY_SEPARATOR . 'Testcase.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'Help.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'Options.php',
             DIRECTORY_SEPARATOR . 'src'   . DIRECTORY_SEPARATOR . 'libs'       . DIRECTORY_SEPARATOR . 'Utils'      . DIRECTORY_SEPARATOR . 'Utils.php',
@@ -452,7 +464,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      * @access                   public
      * @return                   void
      * @dataProvider             providerForGetFileContent
-     * @expectedException        Bonzai_Exception
+     * @expectedException        BonzaiException
      * @expectedExceptionCode    6534
      */
     public function testGetFileContentWithProviderThrowException($filename)
@@ -471,7 +483,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testGetFileContentWithParamsNotReadableThrowException()
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -482,8 +496,8 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         try {
             $this->object->getFileContent($filename);
             $this->fail('The exception was not threw.');
-        } catch (Bonzai_Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+        } catch (BonzaiException $e) {
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         $this->removeFile($filename);
@@ -500,7 +514,9 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testGetFileContentWithParamsNotWritableIsEmpty()
     {
-        if (strtolower(PHP_OS) == 'winnt' || strtolower(PHP_OS) == 'win32') {
+        if (strtolower(PHP_OS) === 'winnt'
+            || strtolower(PHP_OS) === 'win32'
+        ) {
             $this->markTestSkipped('The chmod isn\'t available on Windows.');
         }
 
@@ -511,8 +527,8 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         try {
             $this->object->getFileContent($filename);
             $this->fail('The exception was not threw.');
-        } catch (Bonzai_Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+        } catch (BonzaiException $e) {
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         $this->removeFile($filename);
@@ -535,8 +551,8 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
         try {
             $this->object->getFileContent($filename);
             $this->fail('The exception was not threw.');
-        } catch (Bonzai_Exception $e) {
-            $this->assertInstanceOf('Bonzai_Exception', $e);
+        } catch (BonzaiException $e) {
+            $this->assertInstanceOf('BonzaiException', $e);
         }
 
         $this->removeFile($filename);
@@ -589,7 +605,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      * @access                   public
      * @return                   void
      * @dataProvider             providerForCheckFileValidity
-     * @expectedException        Bonzai_Exception
+     * @expectedException        BonzaiException
      * @expectedExceptionCode    6534
      */
     public function testCheckFileValidityWithProviderThrowException($filename, $file_exists)
@@ -731,7 +747,7 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      * @ignore
      * @access                   public
      * @return                   void
-     * @expectedException        Bonzai_Exception
+     * @expectedException        BonzaiException
      * @expectedExceptionCode    6534
      */
     public function testCheckFileValidityParamCurrentFile()
@@ -790,17 +806,17 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      * @access                   public
      * @return                   void
      * @dataProvider             providerForMessage
-     * @expectedException        Bonzai_Exception
+     * @expectedException        BonzaiException
      * @expectedExceptionCode    6534
      */
     public function testMessageWithProviderThrowException($type, $text, $args)
     {
         $this->expectOutputString('');
-        Bonzai_Utils_Utils::$silenced = true;
+        BonzaiUtils::$silenced = true;
 
         $this->callMethod('message', array($type, $text, $args));
 
-        Bonzai_Utils_Utils::$silenced = false;
+        BonzaiUtils::$silenced = false;
     }
     // }}}
 
@@ -838,11 +854,11 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
     public function testMessageWithProvider($type, $text, $args)
     {
         $this->expectOutputString('');
-        Bonzai_Utils_Utils::$silenced = true;
+        BonzaiUtils::$silenced = true;
 
         $this->callMethod('message', array($type, $text, $args));
 
-        Bonzai_Utils_Utils::$silenced = false;
+        BonzaiUtils::$silenced = false;
     }
     // }}}
 
@@ -856,12 +872,12 @@ class Bonzai_Utils_UtilsTest extends Bonzai_TestCase
      */
     public function testMessageRealUse()
     {
-        Bonzai_Utils_Utils::$silenced = false;
+        BonzaiUtils::$silenced = false;
         ob_start();
           $this->callMethod('message', array('info', 'test'));
         $output = ob_get_clean();
         $this->assertRegExp('/^\[\d{2}:\d{2}:\d{2}\] test.*$/', $output);
-        Bonzai_Utils_Utils::$silenced = true;
+        BonzaiUtils::$silenced = true;
     }
     // }}}
     // }}}

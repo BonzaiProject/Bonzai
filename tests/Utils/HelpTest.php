@@ -35,11 +35,11 @@
  * @link       http://www.bonzai-project.org
  **/
 
-if (!defined('BONZAI_PATH_LIBS')) {
+if (defined('BONZAI_PATH_LIBS') === false) {
     define('BONZAI_PATH_LIBS', realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'libs') . DIRECTORY_SEPARATOR);
 }
 
-require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'TestCase.php';
+require_once BONZAI_PATH_LIBS . 'Tests'    . DIRECTORY_SEPARATOR . 'Testcase.php';
 require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php';
 require_once BONZAI_PATH_LIBS . 'Task'     . DIRECTORY_SEPARATOR . 'Interface.php';
 require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Options.php';
@@ -47,7 +47,7 @@ require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
 require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Help.php';
 
 /**
- * Bonzai_Utils_HelpTest
+ * BonzaiUtilsHelpTest
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -58,7 +58,7 @@ require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Help.php';
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Utils_HelpTest extends Bonzai_TestCase
+class BonzaiUtilsHelpTest extends BonzaiTestcase
 {
     // {{{ setUp
     /**
@@ -71,7 +71,8 @@ class Bonzai_Utils_HelpTest extends Bonzai_TestCase
     {
         parent::setUp();
 
-        $this->object->setOptions(new Bonzai_Utils_Options());
+        $instance_BUO = new BonzaiUtilsOptions(array());
+        $this->object->setOptions($instance_BUO);
     }
     // }}}
 
@@ -88,7 +89,8 @@ class Bonzai_Utils_HelpTest extends Bonzai_TestCase
     {
         $this->expectOutputString('');
 
-        $this->object->setOptions(new Bonzai_Utils_Options());
+        $instance_BUO = new BonzaiUtilsOptions(array());
+        $this->object->setOptions($instance_BUO);
     }
     // }}}
     // }}}

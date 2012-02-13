@@ -38,7 +38,7 @@
 require_once BONZAI_PATH_LIBS . 'Exception' . DIRECTORY_SEPARATOR . 'Exception.php';
 
 /**
- * Bonzai_Abstract
+ * BonzaiAbstract
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -50,15 +50,15 @@ require_once BONZAI_PATH_LIBS . 'Exception' . DIRECTORY_SEPARATOR . 'Exception.p
  * @link       http://www.bonzai-project.org
  * @abstract
  **/
-abstract class Bonzai_Abstract
+abstract class BonzaiAbstract
 {
     // {{{ PROPERTIES
     /**
-     * The instance of Bonzai_Utils_Utils.
+     * The instance of BonzaiUtils.
      *
      * @static
      * @access protected
-     * @var    Bonzai_Utils_Utils
+     * @var    BonzaiUtils
      */
     protected static $utils = null;
     // }}}
@@ -67,15 +67,15 @@ abstract class Bonzai_Abstract
     /**
      * The get method to retrieve the $utils protected properties.
      *
-     * @param Bonzai_Utils_Options $options The script's options.
+     * @param BonzaiUtils_Options $options The script's options.
      *
      * @access public
-     * @return Bonzai_Utils_Utils
+     * @return BonzaiUtils
      */
-    public function getUtils(Bonzai_Utils_Options $options = null)
+    public function getUtils(BonzaiUtilsOptions $options = null)
     {
-        if (is_null(self::$utils)) {
-            self::$utils = new Bonzai_Utils_Utils($options);
+        if (self::$utils === null) {
+            self::$utils = new BonzaiUtils($options);
         }
 
         return self::$utils;

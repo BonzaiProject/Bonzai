@@ -40,7 +40,7 @@ require_once BONZAI_PATH_LIBS . 'Abstract' . DIRECTORY_SEPARATOR . 'Abstract.php
 require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
 
 /**
- * Bonzai_TestCase
+ * BonzaiTestcase
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -52,7 +52,7 @@ require_once BONZAI_PATH_LIBS . 'Utils'    . DIRECTORY_SEPARATOR . 'Utils.php';
  * @link       http://www.bonzai-project.org
  * @abstract
  **/
-abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
+abstract class BonzaiTestcase extends PHPUnit_Framework_TestCase
 {
     // {{{ PROPERTIES
     /**
@@ -83,12 +83,12 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        //Bonzai_Utils_Utils::$silenced = true;
+        //BonzaiUtils::$silenced = true;
 
-        if ($this->auto_instance) {
+        if ($this->auto_instance === true) {
             $className = substr(get_class($this), 0, -4); // Strip 'Test'
 
-            if (!class_exists($className)) {
+            if (class_exists($className) === false) {
                 $className = preg_replace('/_[^_]+$/', '', $className);
             }
 
@@ -147,11 +147,13 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
      */
     protected function removeFile($file)
     {
-        $file = is_array($file)
+        $file = is_array($file) === true
                 ? implode('', $file)
                 : strval($file);
 
-        if (is_string($file) && is_file($file)) {
+        if (is_string($file) === true
+            && is_file($file) === true
+        ) {
             chmod($file, 0777); // rwxrwxrwx
             unlink($file);
         }
@@ -185,15 +187,19 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
     protected function getMatrix($parameters, $index = 0, $elements = array())
     {
         $combined = array();
+
         foreach ($parameters[$index] as $elem) {
             $_elems = $elements;
             array_push($_elems, $elem);
-            if (isset($parameters[$index + 1])) {
+
+            if (isset($parameters[$index + 1]) === true) {
                 $combined = array_merge($combined, $this->getMatrix($parameters, $index + 1, $_elems));
                 continue;
             }
+
             array_push($combined, $_elems);
         }
+
         return $combined;
     }
     // }}}
@@ -207,7 +213,7 @@ abstract class Bonzai_TestCase extends PHPUnit_Framework_TestCase
      */
     public function getTempDir()
     {
-        return Bonzai_Abstract::getTempDir();
+        return BonzaiAbstract::getTempDir();
     }
     // }}}
 }

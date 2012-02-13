@@ -36,7 +36,7 @@
  **/
 
 /**
- * Bonzai_Exception
+ * BonzaiException
  *
  * @category   Optimization_And_Security
  * @package    Bonzai
@@ -47,7 +47,7 @@
  *             http://www.opensource.org/licenses/gpl-2.0.php     GNU GPL 2
  * @link       http://www.bonzai-project.org
  **/
-class Bonzai_Exception extends Exception
+class BonzaiException extends Exception
 {
     // {{{ PROPERTIES
     /**
